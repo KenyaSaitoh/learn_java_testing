@@ -1,4 +1,4 @@
-package pro.kensait.java.app.calc.case4;
+package pro.kensait.java.app.calc.case3;
 
 public class LimitOverException extends Exception {
 

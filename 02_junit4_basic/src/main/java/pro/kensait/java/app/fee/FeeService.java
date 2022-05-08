@@ -1,17 +1,21 @@
-package pro.kensait.java.app.calc.case3;
+package pro.kensait.java.app.fee;
 
-public class FeeCalculator {
+public class FeeService {
     private static final String OUR_BANK_CODE = "B001"; // 自行
 
     // 振込手数料の計算を行う
     public int calcFee(String bankCode, int amount) {
         if (OUR_BANK_CODE.equals(bankCode)) {
-            return 0;
+            if (amount < 50000) {
+                return 0;
+            } else {
+                return 100;
+            }
         } else {
             if (amount < 30000) {
-                return 110;
+                return 200;
             } else {
-                return 220;
+                return 300;
             }
         }
     }

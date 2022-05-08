@@ -1,5 +1,6 @@
 package pro.kensait.java.app.person;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -50,19 +51,19 @@ public class PersonService {
     // 簡易データベース
     static {
         // Alice
-        Person person1 = new Person(1, "Alice", 25, "female");
+        Person person1 = new Person(1, "Alice", 25, "female", LocalDateTime.now());
         personList.add(person1);
         // Bob
-        Person person2 = new Person(2, "Bob", 35, "male");
+        Person person2 = new Person(2, "Bob", 35, "male", LocalDateTime.now());
         personList.add(person2);
         // Carol
-        Person person3 = new Person(3, "Carol", 30, "female");
+        Person person3 = new Person(3, "Carol", 30, "female", LocalDateTime.now());
         personList.add(person3);
         // Dave
-        Person person4 = new Person(4, "Dave", 42, "male");
+        Person person4 = new Person(4, "Dave", 42, "male", LocalDateTime.now());
         personList.add(person4);
         // Ellen
-        Person person5 = new Person(5, "Ellen", 28, "male");
+        Person person5 = new Person(5, "Ellen", 28, "male", LocalDateTime.now());
         personList.add(person5);
     }
 

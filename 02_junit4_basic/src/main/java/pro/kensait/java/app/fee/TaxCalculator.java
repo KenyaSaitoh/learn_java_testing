@@ -1,4 +1,4 @@
-package pro.kensait.java.app.calc.case3;
+package pro.kensait.java.app.fee;
 
 public class TaxCalculator {
 
