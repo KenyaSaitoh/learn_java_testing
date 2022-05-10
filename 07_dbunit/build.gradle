@@ -1,3 +1,17 @@
+import groovy.io.FileType
+import groovy.sql.Sql
+
+// 初期化処理
+buildscript {
+    // リポジトリ設定
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.h2database:h2:2.1.212"
+    }
+}
+
 // リポジトリ設定
 repositories {
     mavenCentral()
@@ -15,8 +29,7 @@ tasks.withType(Copy).all { duplicatesStrategy 'exclude' }
 
 // 依存関係設定
 dependencies {
-    implementation 'javax:javaee-api:8.0'
-    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.29'
+    implementation 'com.h2database:h2:2.1.212'
 }
 
 // Javaプラグイン設定
@@ -42,3 +55,77 @@ sourceSets {
         }
     }
 }
+
+// 設定情報の読み込み
+def conf = {
+    def slurper = new ConfigSlurper()
+    slurper.binding = project.properties
+    def confLocation = System.properties["user.home"]
+    def file = new File(confLocation + "/db-conf.gradle")
+    if (!file.exists()) {
+        file = new File("$projectDir/db-conf.gradle")
+        if (!file.exists()) return null
+    }
+    return new ConfigSlurper().parse(file.toURL())
+}()
+
+// 設定情報を拡張プロパティにセット
+ext.conf = conf
+
+// SQLを発行するメソッド（ディレクトリ指定）
+def execSqlDir(dir, url, user, password, driverClass) {
+    new File(dir).listFiles().sort{a, b -> a.name <=> b.name}.each{ File f ->
+        ant.sql(url: url,
+            userid: user,
+            password: password,
+            driver: driverClass,
+            classpath: buildscript.configurations.classpath.asPath,
+            encoding: "UTF-8",
+            onerror: "continue") {
+                fileset(file: f)
+            }
+    }
+}
+
+// SQLを発行するメソッド（ファイル指定）
+def execSql(file, url, user, password, driverClass) {
+    ant.sql(
+        driver: driverClass,
+        url: url,
+        userid: user,
+        password: password,
+        classpath: buildscript.configurations.classpath.asPath,
+        encoding: "UTF-8",
+        onerror: "continue") {
+            fileset(file: file)
+        }
+}
+
+// H2DBを開始する
+task startH2DB(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = "org.h2.tools.Server"
+    args "-tcp", "-tcpAllowOthers"
+}
+
+// H2DBの初期データをセットアップする
+task setupH2DBData doLast {
+    execSqlDir("$projectDir/sql/h2db/company", conf.h2db.general.url,
+            conf.h2db.general.user, conf.h2db.general.password,
+            conf.h2db.driverClass)
+}
+
+// H2DBのプロパティを設定する
+task setupH2DBProps doLast {
+    new File("$projectDir/src/main/resources/db.properties").withWriter("UTF-8") { 
+        writer -> {
+            writer.writeLine "jdbc.url=${conf.h2db.general.url}"
+            writer.writeLine "jdbc.user=${conf.h2db.general.user}"
+            writer.writeLine "jdbc.password=${conf.h2db.general.password}"
+            writer.writeLine "jdbc.driver=${conf.h2db.driverClass}"
+        }
+    }
+}
+
+// H2DB関連タスクをグループ化する
+ [startH2DB, setupH2DBData, setupH2DBProps]*.group = "h2db"
