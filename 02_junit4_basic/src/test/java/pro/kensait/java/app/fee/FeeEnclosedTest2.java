@@ -23,13 +23,13 @@ public class FeeEnclosedTest2 {
         // 50000円から始まるメソッド名はNG
         public void 金額50000円未満を振り込む手数料を計算する() {
             int actual = feeService.calcFee("B001", 49999);
-            assertThat(0, is(actual));
+            assertThat(actual, is(0));
         }
 
         @Test
         public void 金額50000円以上を振り込む手数料を計算する() {
             int actual = feeService.calcFee("B001", 50000);
-            assertThat(100, is(actual));
+            assertThat(actual, is(100));
         }
 
     }
@@ -45,13 +45,13 @@ public class FeeEnclosedTest2 {
         @Test
         public void 金額30000円未満を振り込む手数料を計算する() {
             int actual = feeService.calcFee("B009", 29999);
-            assertThat(200, is(actual));
+            assertThat(actual, is(200));
         }
 
         @Test
         public void 金額30000円以上を振り込む手数料を計算する() {
             int actual = feeService.calcFee("B009", 30000);
-            assertThat(300, is(actual));
+            assertThat(actual, is(300));
         }
     }
 }

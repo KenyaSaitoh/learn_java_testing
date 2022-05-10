@@ -126,10 +126,10 @@ public class PersonMapper {
         Person person3 = new Person(3, "Carol", 30, "female");
         personList.add(person3);
         // Dave
-        Person person4 = new Person(4, "Dave", 42, "male");
+        Person person4 = new Person(4, "Dave", 23, "male");
         personList.add(person4);
         // Ellen
-        Person person5 = new Person(5, "Ellen", 28, "male");
+        Person person5 = new Person(5, "Ellen", 33, "male");
         personList.add(person5);
     }
 

@@ -19,13 +19,13 @@ public class CalculatorTest {
     public void testAdd() {
         calc.add();
         int actual = calc.getAnswer();
-        assertThat(40, is(actual));
+        assertThat(actual, is(40));
     }
 
     @Test
     public void testSubtract() {
         calc.subtract();
         int actual = calc.getAnswer();
-        assertThat(20, is(actual));
+        assertThat(actual, is(20));
     }
 }

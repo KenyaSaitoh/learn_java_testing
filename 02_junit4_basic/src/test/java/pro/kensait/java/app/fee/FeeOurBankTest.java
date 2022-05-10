@@ -18,12 +18,12 @@ public class FeeOurBankTest {
     @Test
     public void calcFee_ToOurBank_Under50000_ReturnsRightFee() {
         int actual = feeService.calcFee("B001", 49999);
-        assertThat(0, is(actual));
+        assertThat(actual, is(0));
     }
 
     @Test
     public void calcFee_ToOurBank_Over50000_ReturnsRightFee() {
         int actual = feeService.calcFee("B001", 50000);
-        assertThat(100, is(actual));
+        assertThat(actual, is(100));
     } 
 }

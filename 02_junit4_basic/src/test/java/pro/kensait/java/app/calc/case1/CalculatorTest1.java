@@ -14,14 +14,14 @@ public class CalculatorTest1 {
         int actual = calc.add(30, 10);
 
         // Assert.assertThatではなくorg.hamcrest.MatcherAssert.assertThatを使用する.
-        assertThat(40, is(actual));
+        assertThat(actual, is(40));
     }
 
     @Test
     public void testSubtract() {
         Calculator calc = new Calculator();
         int actual = calc.subtract(30, 10);
-        assertThat(20, is(actual));
+        assertThat(actual, is(20));
     }
 
     @Test

@@ -15,11 +15,11 @@ public class FeeParameterTest1 {
     FeeService feeService;
 
     @DataPoints
-    public static Parameter[] paramArray = {
-            new Parameter("B001", 49999, 0),
-            new Parameter("B001", 50000, 100),
-            new Parameter("B009", 29999, 200),
-            new Parameter("B009", 30000, 300)
+    public static Fixture[] fixtureArray = {
+            new Fixture("B001", 49999, 0),
+            new Fixture("B001", 50000, 100),
+            new Fixture("B009", 29999, 200),
+            new Fixture("B009", 30000, 300)
     };
     
     @Before
@@ -28,16 +28,16 @@ public class FeeParameterTest1 {
     }
 
     @Theory
-    public void calcFee(Parameter p) {
-        int actual = feeService.calcFee(p.bankCode, p.amount);
-        assertThat(actual, is(p.expectedFee));
+    public void calcFee(Fixture f) {
+        int actual = feeService.calcFee(f.bankCode, f.amount);
+        assertThat(actual, is(f.expectedFee));
     }
 
-    static class Parameter {
+    static class Fixture {
         String bankCode;
         int amount;
         int expectedFee;
-        public Parameter(String bankCode, int amount, int expectedFee) {
+        public Fixture(String bankCode, int amount, int expectedFee) {
             this.bankCode = bankCode;
             this.amount = amount;
             this.expectedFee = expectedFee;

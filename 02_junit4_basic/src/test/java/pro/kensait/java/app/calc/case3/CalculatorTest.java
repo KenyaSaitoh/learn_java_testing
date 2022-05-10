@@ -24,7 +24,7 @@ public class CalculatorTest {
     public void testMultiply() throws LimitOverException {
         try {
             int actual = calc.multiply(100_000, 5);
-            assertThat(500_000, is(actual));
+            assertThat(actual, is(500_000));
 
         } catch(LimitOverException loe) {
             fail("LimitOverException発生");

@@ -22,13 +22,13 @@ public class FeeEnclosedTest1 {
         @Test
         public void calcFee_ToOurBank_Under50000_ReturnsRightFee() {
             int actual = feeService.calcFee("B001", 49999);
-            assertThat(0, is(actual));
+            assertThat(actual, is(0));
         }
 
         @Test
         public void calcFee_ToOurBank_Over50000_ReturnsRightFee() {
             int actual = feeService.calcFee("B001", 50000);
-            assertThat(100, is(actual));
+            assertThat(actual, is(100));
         }
 
     }
@@ -44,13 +44,13 @@ public class FeeEnclosedTest1 {
         @Test
         public void calcFee_ToOtherBank_Under30000_ReturnsRightFee() {
             int actual = feeService.calcFee("B009", 29999);
-            assertThat(200, is(actual));
+            assertThat(actual, is(200));
         }
 
         @Test
         public void calcFee_ToOtherBank_Over30000_ReturnsRightFee() {
             int actual = feeService.calcFee("B009", 30000);
-            assertThat(300, is(actual));
+            assertThat(actual, is(300));
         }
     }
 }

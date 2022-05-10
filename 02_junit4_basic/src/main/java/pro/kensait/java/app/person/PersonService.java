@@ -3,7 +3,6 @@ package pro.kensait.java.app.person;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -20,7 +19,11 @@ public class PersonService {
 
     // 全件検索
     public List<Person> findAll() {
-        Collections.sort(personList, new PersonPersonIdComparator());
+        Collections.sort(personList, (p1, p2) -> {
+            if (p1.getPersonId() < p2.getPersonId()) return -1;
+            if (p1.getPersonId() > p2.getPersonId()) return 1;
+            return 0;
+        });
         return personList;
     }
 
@@ -28,9 +31,17 @@ public class PersonService {
     public List<Person> findAllSortByAge(boolean isAsc) {
         List<Person> pList = new ArrayList<Person>(personList);
         if (isAsc) {
-            Collections.sort(pList, new PersonAgeAscComparator());
+            Collections.sort(pList, (p1, p2) -> {
+                if (p1.getAge() < p2.getAge()) return -1;
+                if (p1.getAge() > p2.getAge()) return 1;
+                return 0;
+            });
         } else {
-            Collections.sort(pList, new PersonAgeDescComparator());
+            Collections.sort(pList, (p1, p2) -> {
+                if (p1.getAge() < p2.getAge()) return 1;
+                if (p1.getAge() > p2.getAge()) return -1;
+                return 0;
+            });
         }
         return pList;
     }
@@ -50,6 +61,12 @@ public class PersonService {
 
     // 簡易データベース
     static {
+        // Dave
+        Person person4 = new Person(4, "Dave", 23, "male", LocalDateTime.now());
+        personList.add(person4);
+        // Ellen
+        Person person5 = new Person(5, "Ellen", 33, "male", LocalDateTime.now());
+        personList.add(person5);
         // Alice
         Person person1 = new Person(1, "Alice", 25, "female", LocalDateTime.now());
         personList.add(person1);
@@ -59,44 +76,5 @@ public class PersonService {
         // Carol
         Person person3 = new Person(3, "Carol", 30, "female", LocalDateTime.now());
         personList.add(person3);
-        // Dave
-        Person person4 = new Person(4, "Dave", 42, "male", LocalDateTime.now());
-        personList.add(person4);
-        // Ellen
-        Person person5 = new Person(5, "Ellen", 28, "male", LocalDateTime.now());
-        personList.add(person5);
-    }
-
-    static class PersonPersonIdComparator implements Comparator<Person> {
-        @Override
-        public int compare(Person p1, Person p2) {
-            if (p1.getPersonId() < p2.getPersonId())
-                return -1;
-            if (p1.getPersonId() > p2.getPersonId())
-                return 1;
-            return 0;
-        }
-    }
-
-    static class PersonAgeAscComparator implements Comparator<Person> {
-        @Override
-        public int compare(Person p1, Person p2) {
-            if (p1.getAge() < p2.getAge())
-                return 1;
-            if (p1.getAge() > p2.getAge())
-                return -1;
-            return 0;
-        }
-    }
-
-    static class PersonAgeDescComparator implements Comparator<Person> {
-        @Override
-        public int compare(Person p1, Person p2) {
-            if (p1.getAge() < p2.getAge())
-                return -1;
-            if (p1.getAge() > p2.getAge())
-                return 1;
-            return 0;
-        }
     }
 }

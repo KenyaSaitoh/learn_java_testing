@@ -28,16 +28,16 @@ public class FeeParameterTest2 {
     }
 
     @Theory
-    public void calcFee(Parameter p) {
-        int actual = feeService.calcFee(p.bankCode, p.amount);
-        assertThat(actual, is(p.expectedFee));
+    public void calcFee(Fixture f) {
+        int actual = feeService.calcFee(f.bankCode, f.amount);
+        assertThat(actual, is(f.expectedFee));
     }
 
-    static class Parameter {
+    static class Fixture {
         String bankCode;
         int amount;
         int expectedFee;
-        public Parameter(String bankCode, int amount, int expectedFee) {
+        public Fixture(String bankCode, int amount, int expectedFee) {
             this.bankCode = bankCode;
             this.amount = amount;
             this.expectedFee = expectedFee;
@@ -45,16 +45,16 @@ public class FeeParameterTest2 {
     }
 
     @DataPoints
-    public static List<Parameter> getParamListFromCSV() {
+    public static List<Fixture> getParamListFromCSV() {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         try (
                 InputStream is = classLoader.getResourceAsStream("parameter.csv");
                 BufferedReader br = new BufferedReader(
                         new InputStreamReader(is, "UTF-8"))) {
-            List<Parameter> paramList = new ArrayList<>();
+            List<Fixture> paramList = new ArrayList<>();
             String line;
             while ((line = br.readLine()) != null) {
-                Parameter p = createParameterFromLine(line);
+                Fixture p = createFixtureFromLine(line);
                 paramList.add(p);
             }
             return paramList;
@@ -63,12 +63,12 @@ public class FeeParameterTest2 {
         }
     }
 
-    public static Parameter createParameterFromLine(String line) {
+    public static Fixture createFixtureFromLine(String line) {
         StringTokenizer st = new StringTokenizer(line, ",");
         String bankCode = st.nextToken();
         int amount = Integer.parseInt(st.nextToken());
         int expectedFee = Integer.parseInt(st.nextToken());
-        Parameter p = new Parameter(bankCode, amount, expectedFee);
+        Fixture p = new Fixture(bankCode, amount, expectedFee);
         return p;
     }
 }

@@ -18,12 +18,12 @@ public class CalculatorTest2 {
     @Test
     public void testAdd() {
         int actual = calc.add(30, 10);
-        assertThat(40, is(actual));
+        assertThat(actual, is(40));
     }
 
     @Test
     public void testSubtract() {
         int actual = calc.subtract(30, 10);
-        assertThat(20, is(actual));
+        assertThat(actual, is(20));
     }
 }
