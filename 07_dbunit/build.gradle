@@ -1,15 +1,9 @@
 import groovy.io.FileType
 import groovy.sql.Sql
 
-// 初期化処理
-buildscript {
-    // リポジトリ設定
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "com.h2database:h2:2.1.212"
-    }
+// プロジェクトのコンフィギュレーション
+configurations {
+    jdbc.extendsFrom implementation
 }
 
 // リポジトリ設定
@@ -18,18 +12,18 @@ repositories {
 }
 
 // プラグイン読み込み
-apply plugin: 'java'
+apply plugin: "java"
 
 // 文字コード設定
-def defaultEncoding = 'UTF-8'
+def defaultEncoding = "UTF-8"
 tasks.withType(AbstractCompile).each { it.options.encoding = defaultEncoding }
 
 // コピー時の競合設定
-tasks.withType(Copy).all { duplicatesStrategy 'exclude' }
+tasks.withType(Copy).all { duplicatesStrategy "exclude" }
 
 // 依存関係設定
 dependencies {
-    implementation 'com.h2database:h2:2.1.212'
+    jdbc "com.h2database:h2:2.1.212"
 }
 
 // Javaプラグイン設定
@@ -40,18 +34,18 @@ targetCompatibility = 17
 sourceSets {
     main {
         java {
-            srcDir 'src/main/java'
+            srcDir "src/main/java"
         }
         resources {
-            srcDir 'src/main/resources'
+            srcDir "src/main/resources"
         }
     }
     test {
         java {
-            srcDir 'src/test/java'
+            srcDir "src/test/java"
         }
         resources {
-            srcDir 'src/test/resources'
+            srcDir "src/test/resources"
         }
     }
 }
@@ -79,7 +73,7 @@ def execSqlDir(dir, url, user, password, driverClass) {
             userid: user,
             password: password,
             driver: driverClass,
-            classpath: buildscript.configurations.classpath.asPath,
+            classpath: configurations.jdbc.asPath,
             encoding: "UTF-8",
             onerror: "continue") {
                 fileset(file: f)
@@ -94,7 +88,7 @@ def execSql(file, url, user, password, driverClass) {
         url: url,
         userid: user,
         password: password,
-        classpath: buildscript.configurations.classpath.asPath,
+        classpath: configurations.jdbc.asPath,
         encoding: "UTF-8",
         onerror: "continue") {
             fileset(file: file)
