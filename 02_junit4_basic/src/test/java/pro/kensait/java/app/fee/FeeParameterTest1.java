@@ -18,8 +18,8 @@ public class FeeParameterTest1 {
     public static Fixture[] fixtureArray = {
             new Fixture("B001", 49999, 0),
             new Fixture("B001", 50000, 100),
-            new Fixture("B009", 29999, 200),
-            new Fixture("B009", 30000, 300)
+            new Fixture("B999", 29999, 200),
+            new Fixture("B999", 30000, 300)
     };
     
     @Before

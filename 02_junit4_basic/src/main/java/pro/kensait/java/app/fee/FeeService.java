@@ -6,7 +6,7 @@ public class FeeService {
     // 振込手数料の計算を行う
     public int calcFee(String bankCode, int amount) {
         if (OUR_BANK_CODE.equals(bankCode)) {
-            if (amount < 50000) {
+            if (amount < 50000) { // あれ、これ間違ってないか？「30000円以上」というのが必要では？
                 return 0;
             } else {
                 return 100;

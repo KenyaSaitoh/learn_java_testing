@@ -17,13 +17,13 @@ public class FeeOtherBankTest {
 
     @Test
     public void calcFee_ToOtherBank_Under30000_ReturnsRightFee() {
-        int actual = feeService.calcFee("B009", 29999);
+        int actual = feeService.calcFee("B999", 29999);
         assertThat(actual, is(200));
     }
 
     @Test
     public void calcFee_ToOtherBank_Over30000_ReturnsRightFee() {
-        int actual = feeService.calcFee("B009", 30000);
+        int actual = feeService.calcFee("B999", 30000);
         assertThat(actual, is(300));
     }
 }

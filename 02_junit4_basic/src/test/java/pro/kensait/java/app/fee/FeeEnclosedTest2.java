@@ -44,13 +44,13 @@ public class FeeEnclosedTest2 {
 
         @Test
         public void 金額30000円未満を振り込む手数料を計算する() {
-            int actual = feeService.calcFee("B009", 29999);
+            int actual = feeService.calcFee("B999", 29999);
             assertThat(actual, is(200));
         }
 
         @Test
         public void 金額30000円以上を振り込む手数料を計算する() {
-            int actual = feeService.calcFee("B009", 30000);
+            int actual = feeService.calcFee("B999", 30000);
             assertThat(actual, is(300));
         }
     }
