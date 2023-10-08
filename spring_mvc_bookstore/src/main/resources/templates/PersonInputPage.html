@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>PersonInputPage</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+  <h2>PersonInputPage</h2>
+  <hr />
+  <form id="form1" th:action="@{/confirm}" th:object="${personForm}"
+    method="POST">
+    <div th:if="*{personId} != null">
+      <span th:text="|ID : *{personId}|"></span>
+    </div>
+    <table border="0">
+      <tr>
+        <td>名前</td>
+        <td><input type="text" th:field="*{personName}" /></td>
+        <td>
+        <span th:if="${#fields.hasErrors('personName')}"
+              th:errors="*{personName}" style="color: red">Name error</span>
+        </td>
+      </tr>
+      <tr>
+        <td>年齢</td>
+        <td><input type="text" th:field="*{age}" /></td>
+        <td>
+        <span th:if="${#fields.hasErrors('age')}"
+              th:errors="*{age}" style="color: red">Age error</span>
+        </td>
+      </tr>
+      <tr>
+        <td>性別</td>
+        <td>
+          <input type="radio" th:field="*{gender}" th:value="male"
+                th:checked="*{gender} == 'male'">男性</input>
+          <input type="radio" th:field="*{gender}" th:value="female"
+                th:checked="*{gender} == 'female'">女性</input>
+        </td>
+        <td>
+        <span th:if="${#fields.hasErrors('gender')}"
+              th:errors="*{gender}" style="color: red">Gender error</span>
+        </td>
+      </tr>
+    </table>
+    <div>
+      <input type="submit" value="確認画面へ" />
+    </div>
+    <input type="hidden" th:field="*{personId}" th:value="*{personId}" />
+  </form>
+</body>
+</html>

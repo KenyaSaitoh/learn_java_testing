@@ -1,29 +1,38 @@
+// 初期化処理
+buildscript {
+    ext {
+        junitVersion = "4.12"
+        hamcrestVersion = "1.3"
+        assertjVersion = "3.22.0"
+    }
+}
+
 // リポジトリ設定
 repositories {
     mavenCentral()
 }
 
 // プラグイン読み込み
-apply plugin: 'java'
+apply plugin: "java"
 
 // 文字コード設定
-def defaultEncoding = 'UTF-8'
+def defaultEncoding = "UTF-8"
 tasks.withType(AbstractCompile).each { it.options.encoding = defaultEncoding }
 
 // コピー時の競合設定
-tasks.withType(Copy).all { duplicatesStrategy 'exclude' }
+tasks.withType(Copy).all { duplicatesStrategy "exclude" }
 
 // 依存関係設定
 dependencies {
     // JUnit4.12は2014年にリリースされた安定板
     // JUnit4.13は2019年にリリースされているが、これを使うのであれば、JUnit5の方がよい
-    testImplementation 'junit:junit:4.12'
+    testImplementation "junit:junit:${junitVersion}"
 
 	// https://mvnrepository.com/artifact/org.hamcrest/hamcrest-library
-	testImplementation 'org.hamcrest:hamcrest-library:1.3'
+	testImplementation "org.hamcrest:hamcrest-library:${hamcrestVersion}"
 
     // https://mvnrepository.com/artifact/org.assertj/assertj-core
-    testImplementation 'org.assertj:assertj-core:3.22.0'
+    testImplementation "org.assertj:assertj-core:${assertjVersion}"
 }
 
 // Javaプラグイン設定
@@ -34,18 +43,18 @@ targetCompatibility = 17
 sourceSets {
     main {
         java {
-            srcDir 'src/main/java'
+            srcDir "src/main/java"
         }
         resources {
-            srcDir 'src/main/resources'
+            srcDir "src/main/resources"
         }
     }
     test {
         java {
-            srcDir 'src/test/java'
+            srcDir "src/test/java"
         }
         resources {
-            srcDir 'src/test/resources'
+            srcDir "src/test/resources"
         }
     }
 }

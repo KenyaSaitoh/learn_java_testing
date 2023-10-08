@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+	http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="direct_rest_api">
+    <class>org.study.ee7.bookstore.entity.Book</class>
+    <class>org.study.ee7.bookstore.entity.Category</class>
+    <class>org.study.ee7.bookstore.entity.Customer</class>
+    <class>org.study.ee7.bookstore.entity.OrderContent</class>
+    <class>org.study.ee7.bookstore.entity.OrderLine</class>
+    <class>org.study.ee7.bookstore.entity.Publisher</class>
+  </persistence-unit>
+</persistence>

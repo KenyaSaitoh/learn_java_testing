@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>TopPage</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<f:view>
+  <h2>ようこそ！ITブックストアへ</h2><hr />
+  登録済みのお客様<br /> 
+  <h:form>
+    <h:panelGrid columns="3">
+      <h:outputText value="Eメールアドレス" />
+      <h:inputText id="email" value="#{customer.email}" />
+      <h:message for="email" />
+      <h:outputText value="パスワード" />
+      <h:inputSecret id="password" value="#{customer.password}" />
+      <h:message for="password" />
+    </h:panelGrid>
+    <h:commandButton action="#{customer.login}" value="ログイン" />
+    <h:messages globalOnly="true" errorStyle="color: red" />
+  </h:form>
+  <hr />
+  新規のお客様<br />
+  <h:outputLink value="./CustomerRegisterInputPage.jsp">
+    <h:outputText value="お客様のご登録" />
+  </h:outputLink>
+</f:view>
+</body>
+</html>

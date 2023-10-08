@@ -1,21 +1,43 @@
+// 初期化処理
+buildscript {
+    ext {
+        junitVersion = "5.9.3"
+    }
+}
+
 // リポジトリ設定
 repositories {
     mavenCentral()
 }
 
 // プラグイン読み込み
-apply plugin: 'java'
+apply plugin: "java"
 
 // 文字コード設定
-def defaultEncoding = 'UTF-8'
+def defaultEncoding = "UTF-8"
 tasks.withType(AbstractCompile).each { it.options.encoding = defaultEncoding }
 
 // コピー時の競合設定
-tasks.withType(Copy).all { duplicatesStrategy 'exclude' }
+tasks.withType(Copy).all { duplicatesStrategy "exclude" }
 
 // 依存関係設定
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testImplementation "org.junit.platform:junit-platform-launcher"
+}
+
+test {
+    // JUnit platform を使う設定
+    useJUnitPlatform()
+
+    testLogging {
+        // テスト時の標準出力と標準エラー出力を表示する
+        showStandardStreams true
+        // イベントを出力する (TestLogEvent)
+        events "started", "skipped", "passed", "failed"
+        // 例外発生時の出力設定 (TestExceptionFormat)
+        exceptionFormat "full"
+    }
 }
 
 // Javaプラグイン設定
@@ -26,18 +48,18 @@ targetCompatibility = 17
 sourceSets {
     main {
         java {
-            srcDir 'src/main/java'
+            srcDir "src/main/java"
         }
         resources {
-            srcDir 'src/main/resources'
+            srcDir "src/main/resources"
         }
     }
     test {
         java {
-            srcDir 'src/test/java'
+            srcDir "src/test/java"
         }
         resources {
-            srcDir 'src/test/resources'
+            srcDir "src/test/resources"
         }
     }
 }

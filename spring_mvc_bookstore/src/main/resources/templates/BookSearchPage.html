@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>BookSearchPage</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<f:view>
+  <h2>条件を入力して書籍を検索してください</h2><hr />
+  <h:form>
+    <h:panelGrid border="0" columns="2">
+      <%-- カテゴリ --%>
+      <h:outputText value="カテゴリ" />
+      <h:selectOneMenu id="category" value="#{bookOrder.categoryId}">
+        <f:selectItems value="#{bookOrder.categoryList}" />
+      </h:selectOneMenu>
+      <%-- 検索キーワード --%>
+      <h:outputText value="検索キーワード" />
+      <h:inputText id="keyword" value="#{bookOrder.keyword}" />
+    </h:panelGrid>
+    <h:commandButton action="#{bookOrder.search}" value="検索実行" />
+  </h:form>
+</f:view>
+</body>
+</html>

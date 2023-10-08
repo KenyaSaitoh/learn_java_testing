@@ -1,0 +1,17 @@
+// MySQL
+mysql {
+    driverClass = "com.mysql.cj.jdbc.Driver"
+    datasourceClass = "com.mysql.cj.jdbc.MysqlDataSource"
+    hostName = "localhost"
+    port = "3306"
+    rootPassword = "rootroot"
+    general {
+        user = "TESTUSER"
+        password = "PASSWORD"
+        db = "TESTDB"
+        baseUrl = "jdbc:mysql://localhost:${port}"
+        url = "${baseUrl}/${general.db}"
+        connPoolName = "MySQLPool"
+        datasourceJndiName = "jdbc/MySQLDS"
+    }
+}
