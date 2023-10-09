@@ -21,33 +21,33 @@ public class PersonService {
     @Autowired
     private PersonRepository personRepository;
 
-    // 人員を取得する
+    // 人物を取得する
     public Person getPerson(Integer personId) {
         logger.info("[ PersonService#getPerson ]");
          Optional<Person> result = personRepository.findById(personId);
          return result.get();
     }
 
-    // 全人員を取得する
+    // 全人物を取得する
     public List<Person> getPersonsAll() {
         logger.info("[ PersonService#getPersonsAll ]");
         return personRepository.findAll();
     }
 
-    // 人員を検索する（年齢下限をキーに）
+    // 人物を検索する（年齢下限をキーに）
     public List<Person> getPersonsByLowerAge(int lowerAge) {
         logger.info("[ PersonService#getPersonsByLowerAge ]");
         List<Person> personList = personRepository.selectByLowerAge(lowerAge);
         return personList;
     }
 
-    // 人員を保存する
+    // 人物を保存する
     public Person savePerson(Person person) {
         logger.info("[ PersonService#savePerson ]");
         return personRepository.save(person);
     }
 
-    // 人員を削除する
+    // 人物を削除する
     public int removePerson(Integer personId) {
         logger.info("[ PersonService#removePerson ]");
         Optional<Person> person = personRepository.findById(personId);

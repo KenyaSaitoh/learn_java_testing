@@ -16,4 +16,4 @@ logging:
   level:
     root: INFO
     org.hibernate: ERROR
-    jp.mufg.it.spring.rs.person: DEBUG
+    pro.kensait.spring.rs.person: DEBUG
