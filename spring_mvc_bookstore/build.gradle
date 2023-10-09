@@ -53,8 +53,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     compileOnly "javax:javaee-api:${jeeVersion}"
     runtimeOnly "mysql:mysql-connector-java:${mySqlConnectorVersion}"
-    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
-    testImplementation "org.junit.platform:junit-platform-launcher:${junitPlatformVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
     testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
 }
 
