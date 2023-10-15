@@ -1,18 +1,22 @@
 // 初期化処理
 buildscript {
     ext {
-        junitVersion = "5.9.3"
+        junitVersion = "4.12"
+        hamcrestVersion = "1.3"
+        assertjVersion = "3.22.0"
         slf4jVersion = "1.7.36"
     }
+}
+
+// プラグイン読み込み
+plugins {
+    id "java"
 }
 
 // リポジトリ設定
 repositories {
     mavenCentral()
 }
-
-// プラグイン読み込み
-apply plugin: "java"
 
 // 文字コード設定
 def defaultEncoding = "UTF-8"
@@ -25,6 +29,16 @@ tasks.withType(Copy).all { duplicatesStrategy "exclude" }
 dependencies {
     implementation "org.slf4j:slf4j-api:${slf4jVersion}"
     implementation "org.slf4j:slf4j-log4j12:${slf4jVersion}"
+
+    // JUnit4.12は2014年にリリースされた安定板
+    // JUnit4.13は2019年にリリースされているが、これを使うのであれば、JUnit5の方がよい
+    testImplementation "junit:junit:${junitVersion}"
+
+	// https://mvnrepository.com/artifact/org.hamcrest/hamcrest-library
+	testImplementation "org.hamcrest:hamcrest-library:${hamcrestVersion}"
+
+    // https://mvnrepository.com/artifact/org.assertj/assertj-core
+    testImplementation "org.assertj:assertj-core:${assertjVersion}"
 }
 
 // Javaプラグイン設定

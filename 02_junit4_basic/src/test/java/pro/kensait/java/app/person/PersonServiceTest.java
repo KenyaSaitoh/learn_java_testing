@@ -25,22 +25,22 @@ public class PersonServiceTest {
     }
 
     @Test
-    public void find_ReturnsPerson() {
-        Person actual = personService.find(1);
+    public void getPerson_ReturnsPerson() {
+        Person actual = personService.getPerson(1);
         Person expected = ALICE;
         assertThat(actual, is(expected));
     }
 
     @Test
-    public void findAll_ReturnsPersonsAll() {
-        List<Person> actual = personService.findAll();
+    public void getPersonsAll_ReturnsPersonsAll() {
+        List<Person> actual = personService.getPersonsAll();
         List<Person> expected = List.of(ALICE, BOB, CAROL, DAVE, ELLEN);
         assertThat(actual, containsInAnyOrder(expected.toArray()));
     }
 
     @Test
-    public void findPersonByLowerAge_ReturnsPersons() {
-        List<Person> actual = personService.findPersonByLowerAge(30);
+    public void getPersonsByLowerAge_ReturnsPersons() {
+        List<Person> actual = personService.getPersonsByLowerAge(30);
         List<Person> expected = List.of(BOB, CAROL, ELLEN);
         // 以下はエラー
         // assertThat(actual, contains(expected.toArray()));
@@ -49,8 +49,8 @@ public class PersonServiceTest {
     }
 
     @Test
-    public void findAllSortByAge_ReturnsPersons() {
-        List<Person> actual = personService.findAllSortByAge(true);
+    public void getPersonsAllSortByAge_ReturnsSortedPersons() {
+        List<Person> actual = personService.getPersonsAllSortByAge(true);
         List<Person> expected = List.of(DAVE, ALICE, CAROL, ELLEN, BOB);
         // ソートまで一致を確認
         assertThat(actual, contains(expected.toArray()));

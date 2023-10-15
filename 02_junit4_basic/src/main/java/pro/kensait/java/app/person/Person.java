@@ -32,6 +32,15 @@ public class Person {
         this.lastUpdateTime = lastUpdateTime;
     }
 
+    // コンストラクタ
+    public Person(String personName, Integer age,
+            String gender, LocalDateTime lastUpdateTime) {
+        this.personName = personName;
+        this.age = age;
+        this.gender = gender;
+        this.lastUpdateTime = lastUpdateTime;
+    }
+
     // IDへのアクセサメソッド
     public Integer getPersonId() {
         return personId;

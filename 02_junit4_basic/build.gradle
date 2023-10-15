@@ -7,13 +7,15 @@ buildscript {
     }
 }
 
+// プラグイン読み込み
+plugins {
+    id "java"
+}
+
 // リポジトリ設定
 repositories {
     mavenCentral()
 }
-
-// プラグイン読み込み
-apply plugin: "java"
 
 // 文字コード設定
 def defaultEncoding = "UTF-8"
