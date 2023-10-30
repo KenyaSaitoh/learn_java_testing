@@ -1,12 +1,10 @@
-package pro.kensait.java.app.fee;
+package pro.kensait.java.app.tax;
 
 public class TaxCalculator {
-
     private int value;
     private int year;
 
     public TaxCalculator(int value, int year) {
-        super();
         this.value = value;
         this.year = year;
     }
