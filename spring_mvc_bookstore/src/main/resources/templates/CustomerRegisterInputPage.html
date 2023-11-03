@@ -5,44 +5,38 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<f:view>
-  <h2>お客様の情報を登録します</h2><hr />
-  <h:form>
-    <h:panelGrid border="0" columns="3">
-      <%-- 顧客名 --%>
-      <h:outputText value="顧客名（必須）" />
-      <h:inputText id="customerName" value="#{customerRegister.customerName}" 
+  <h2>お客様の情報を登録します</h2>
+  <hr />
+  <form id="form1" th:action="@{/confirm}" th:object="${personSession}" method="POST">
+  <table border="0">
+    <h:outputText value="顧客名（必須）" />
+    <h:inputText id="customerName" value="#{customerRegister.customerName}" 
         required="true">
-        <f:validateLength maximum="30" />
-      </h:inputText>
-      <h:message for="customerName" errorStyle="color: red" />
-      <%-- 電子メール --%>
-      <h:outputText value="電子メールアドレス（必須）" />
-      <h:inputText id="email" value="#{customerRegister.email}"
-        required="true">
-        <f:validateLength maximum="40" />
-      </h:inputText>
-      <h:message for="email" errorStyle="color: red" />
-      <%-- パスワード --%>
-      <h:outputText value="パスワード（必須）" />
-      <h:inputSecret id="password" value="#{customerRegister.password}"
-        required="true">
-        <f:validateLength maximum="20" />
-      </h:inputSecret>
-      <h:message for="password" errorStyle="color: red" />
-      <%-- 生年月日 --%>
-      <h:outputText value="生年月日（任意）" />
-      <h:inputText id="birthday" value="#{customerRegister.birthday}">
-        <f:convertDateTime pattern="yyyy/MM/dd" />
-      </h:inputText>
-      <h:message for="birthday" errorStyle="color: red" />
-      <%-- 住所 --%>
-      <h:outputText value="住所（任意）" />
-      <h:inputText id="address" value="#{customerRegister.address}" size="40">
-        <f:validateLength maximum="40" />
-      </h:inputText>
-      <h:message for="address" errorStyle="color: red" />
-    </h:panelGrid><br />
+    <f:validateLength maximum="30" />
+    </h:inputText>
+    <h:message for="customerName" errorStyle="color: red" />
+    <h:outputText value="電子メールアドレス（必須）" />
+    <h:inputText id="email" value="#{customerRegister.email}"
+      required="true">
+      <f:validateLength maximum="40" />
+    </h:inputText>
+    <h:message for="email" errorStyle="color: red" />
+    <h:outputText value="パスワード（必須）" />
+    <h:inputSecret id="password" value="#{customerRegister.password}"
+      required="true">
+      <f:validateLength maximum="20" />
+    </h:inputSecret>
+    <h:message for="password" errorStyle="color: red" />
+    <h:outputText value="生年月日（任意）" />
+    <h:inputText id="birthday" value="#{customerRegister.birthday}">
+      <f:convertDateTime pattern="yyyy/MM/dd" />
+    </h:inputText>
+    <h:message for="birthday" errorStyle="color: red" />
+    <h:outputText value="住所（任意）" />
+    <h:inputText id="address" value="#{customerRegister.address}" size="40">
+      <f:validateLength maximum="40" />
+    </h:inputText>
+    <h:message for="address" errorStyle="color: red" />
     <h:commandButton action="#{customerRegister.register}" 
       value="お客様の情報を登録する" /><br /><br />
     <h:outputLink value="./TopPage.jsp">
@@ -50,6 +44,5 @@
     </h:outputLink><br /><br />
     <h:messages globalOnly="true" errorStyle="color: red" /><br />
   </h:form>
-</f:view>
 </body>
 </html>

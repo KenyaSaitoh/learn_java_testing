@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "BOOK")
 public class Book {
-    // 書籍番号
+    // 書籍ID
     @Id
     @Column(name = "BOOK_ID")
     private Integer bookId;

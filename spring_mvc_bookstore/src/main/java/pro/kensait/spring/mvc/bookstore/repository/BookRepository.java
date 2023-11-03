@@ -11,6 +11,14 @@ import pro.kensait.spring.mvc.bookstore.entity.Book;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Integer> {
-    @Query("SELECT b FROM Book AS b WHERE b.bookName like :keyword")
+    @Query("SELECT b FROM Book b WHERE b.category.categoryId = :categoryId")
+    List<Book> searchBook(@Param("categoryId") Integer categoryId);
+
+    @Query("SELECT b FROM Book b WHERE b.bookName like :keyword")
     List<Book> searchBook(@Param("keyword") String keyword);
+
+    @Query("SELECT b FROM Book b WHERE b.category.categoryId = :categoryId "
+            + "AND b.bookName like :keyword")
+    List<Book> searchBook(@Param("categoryId") Integer categoryId,
+            @Param("keyword") String keyword);
 }

@@ -1,6 +1,12 @@
 package pro.kensait.spring.mvc.bookstore.web.login;
 
+import javax.validation.constraints.NotNull;
+
 public record LoginParam(
-    String email,
-    String password) {
+        // メールアドレス
+        @NotNull
+        String email,
+        // パスワード
+        @NotNull
+        String password) {
 }

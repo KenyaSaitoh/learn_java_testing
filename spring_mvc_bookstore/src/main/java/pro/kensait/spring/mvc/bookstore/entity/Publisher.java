@@ -8,7 +8,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "PUBLISHER")
 public class Publisher {
-    // 出版社番号
+    // 出版社ID
     @Id
     @Column(name = "PUBLISHER_ID")
     private int publisherId;

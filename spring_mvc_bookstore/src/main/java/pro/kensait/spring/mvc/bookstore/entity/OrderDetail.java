@@ -12,13 +12,13 @@ import javax.persistence.Table;
 @Table(name = "ORDER_DETAIL")
 @IdClass(OrderDetailPK.class)
 public class OrderDetail {
-    // 注文取引番号
+    // 注文取引ID
     @Id
     @Column(name = "ORDER_TRAN_ID",
             nullable = false, insertable = false, updatable = false)
     private Integer orderTranId;
 
-    // 注文明細番号
+    // 注文明細ID
     @Id
     @Column(name = "ORDER_DETAIL_ID",
             nullable = false)
@@ -45,11 +45,10 @@ public class OrderDetail {
     }
 
     // コンストラクタ
-    public OrderDetail(OrderTran orderTran, Integer orderDetailId, Book book, 
+    public OrderDetail(Integer orderTranId, Integer orderDetailId, Book book, 
             Integer count) {
-        this.orderTranId = orderTran.getOrderTranId();
+        this.orderTranId = orderTranId;
         this.orderDetailId = orderDetailId;
-        this.orderTran = orderTran;
         this.book = book;
         this.count = count;
     }

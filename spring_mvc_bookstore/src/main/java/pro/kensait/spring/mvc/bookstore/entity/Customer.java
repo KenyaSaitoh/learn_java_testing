@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "CUSTOMER")
 public class Customer {
-    // 顧客番号
+    // 顧客ID
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CUSTOMER_ID")

@@ -11,6 +11,6 @@ import pro.kensait.spring.mvc.bookstore.entity.Customer;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
-    @Query("SELECT c FROM Customer AS c WHERE c.email = :email")
+    @Query("SELECT c FROM Customer c WHERE c.email = :email")
     Optional<Customer> findCustomerByEmail(@Param("email") String email);
 }

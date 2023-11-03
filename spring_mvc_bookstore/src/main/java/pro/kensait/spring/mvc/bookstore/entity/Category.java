@@ -8,7 +8,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "CATEGORY")
 public class Category {
-    // カテゴリ番号
+    // カテゴリID
     @Id
     @Column(name = "CATEGORY_ID")
     private Integer categoryId;

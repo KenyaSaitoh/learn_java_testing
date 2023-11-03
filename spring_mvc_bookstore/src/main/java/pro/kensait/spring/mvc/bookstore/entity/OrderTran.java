@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ORDER_TRAN")
 public class OrderTran {
-    // オーダー番号
+    // オーダーID
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "ORDER_TRAN_ID")

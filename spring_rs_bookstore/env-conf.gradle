@@ -4,7 +4,7 @@ mysql {
     datasourceClass = "com.mysql.cj.jdbc.MysqlDataSource"
     hostName = "localhost"
     port = "3306"
-    rootPassword = "rootroot"
+    rootPassword = ""
     general {
         user = "TESTUSER"
         password = "PASSWORD"
