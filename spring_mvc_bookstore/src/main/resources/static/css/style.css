@@ -1,0 +1,169 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	color: #333;
+	background-color: #f4f4f4;
+	line-height: 1.6;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+h2 {
+	color: #35424a;
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+hr {
+	margin-bottom: 10px;
+}
+
+form.login {
+    width: 500px;
+    margin: 20px auto;
+}
+
+form.customer {
+	width: 500px;
+	margin: 20px auto;
+}
+
+form.book {
+    margin: 20px auto;
+}
+
+table {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+td {
+    padding: 5px;
+}
+
+.book-table, .cart-table {
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse; /* Collapse borders */
+    background-color: #ffffff; /* Table background */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow for 3D effect */
+}
+
+.book-table th, .book-table td, .cart-table th, .cart-table td {
+    padding: 10px;
+    border: 1px solid #dddddd; /* Light grey border */
+    text-align: left;
+}
+
+.book-table th, .cart-table th {
+    background-color: #35424a;
+    color: white;
+}
+
+.book-table tr:nth-child(odd), .cart-table tr:nth-child(odd){
+    background-color: #f9f9f9; /* Zebra striping */
+}
+
+.book-table tr:hover, .cart-table tr:hover {
+    background-color: #f1f1f1; /* Hover effect */
+}
+
+.book-table th, .cart-table th {
+    font-size: 1.1em;
+}
+
+input[type="text"], input[type="password"], input[type="email"], select {
+	width: 100%;
+	margin-bottom: 10px;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+button {
+	background-color: #35424a;
+	color: white;
+	padding: 10px 15px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #e8491d;
+}
+
+a {
+	color: #e8491d;
+	text-decoration: none;
+	display: inline-block;
+	margin-top: 20px;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+input[type="checkbox"] {
+    margin: 4px 10px 0;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #35424a;
+}
+
+.custom-checkbox {
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 20px;
+}
+
+.custom-checkbox:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.custom-checkbox:after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: #35424a;
+    opacity: 0;
+    transition: all 0.2s;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .custom-checkbox:after {
+    opacity: 1;
+}
+
+input[type="checkbox"]:focus {
+    outline: none;
+    border-color: #e8491d;
+}
+
+input[type="checkbox"]:hover:before {
+    border-color: #e8491d;
+}
+
+.error {
+	color: red;
+}

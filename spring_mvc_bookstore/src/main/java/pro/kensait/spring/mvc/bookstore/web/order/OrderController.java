@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -24,6 +25,7 @@ public class OrderController {
     private OrderServiceIF orderService;
 
     // アクションメソッド（買い物カゴに入れた書籍を注文する）
+    @PostMapping("/order")
     public String order(CartSession cartSession, SessionStatus sessionStatus) {
         // セッションマップからCustomerBeanオブジェクトを取得する
         Customer customer = (Customer) session.getAttribute("customer");
@@ -44,6 +46,6 @@ public class OrderController {
         // セッションマップからカートを削除する
         sessionStatus.setComplete();
 
-        return "success";
+        return "FinishPage";
     }
 }

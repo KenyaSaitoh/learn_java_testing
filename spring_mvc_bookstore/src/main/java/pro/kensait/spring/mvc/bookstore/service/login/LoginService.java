@@ -23,15 +23,15 @@ public class LoginService {
     // ログイン
     public Customer login(LoginTO loginTO) {
         // 入力された電子メールをキーにデータベースから顧客を検索する
-        Optional<Customer> optional = customerRepos.findCustomerByEmail(loginTO.email());
-        Customer customer = optional.get();
+        Optional<Customer> customerOpt = customerRepos.findCustomerByEmail(loginTO.email());
 
         // 顧客の存在チェックおよびパスワードの一致チェックを行う
-        if (customer != null
-                && loginTO.password().equals(customer.getPassword())) {
-            return customer;
-        } else {
-            throw new RuntimeException("");
+        if (customerOpt.isPresent()) {
+            Customer customer = customerOpt.get();
+            if (loginTO.password().equals(customer.getPassword())) {
+                return customer;
+            }
         }
+        throw new RuntimeException("顧客が存在しません");
     }
 }

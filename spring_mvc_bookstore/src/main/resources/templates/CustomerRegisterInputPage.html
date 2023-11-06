@@ -1,48 +1,60 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>CustomerRegisterPage</title>
+<title>CustomerRegisterInputPage</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
   <h2>お客様の情報を登録します</h2>
   <hr />
-  <form id="form1" th:action="@{/confirm}" th:object="${personSession}" method="POST">
-  <table border="0">
-    <h:outputText value="顧客名（必須）" />
-    <h:inputText id="customerName" value="#{customerRegister.customerName}" 
-        required="true">
-    <f:validateLength maximum="30" />
-    </h:inputText>
-    <h:message for="customerName" errorStyle="color: red" />
-    <h:outputText value="電子メールアドレス（必須）" />
-    <h:inputText id="email" value="#{customerRegister.email}"
-      required="true">
-      <f:validateLength maximum="40" />
-    </h:inputText>
-    <h:message for="email" errorStyle="color: red" />
-    <h:outputText value="パスワード（必須）" />
-    <h:inputSecret id="password" value="#{customerRegister.password}"
-      required="true">
-      <f:validateLength maximum="20" />
-    </h:inputSecret>
-    <h:message for="password" errorStyle="color: red" />
-    <h:outputText value="生年月日（任意）" />
-    <h:inputText id="birthday" value="#{customerRegister.birthday}">
-      <f:convertDateTime pattern="yyyy/MM/dd" />
-    </h:inputText>
-    <h:message for="birthday" errorStyle="color: red" />
-    <h:outputText value="住所（任意）" />
-    <h:inputText id="address" value="#{customerRegister.address}" size="40">
-      <f:validateLength maximum="40" />
-    </h:inputText>
-    <h:message for="address" errorStyle="color: red" />
-    <h:commandButton action="#{customerRegister.register}" 
-      value="お客様の情報を登録する" /><br /><br />
-    <h:outputLink value="./TopPage.jsp">
-      <h:outputText value="トップページへ戻る" />
-    </h:outputLink><br /><br />
-    <h:messages globalOnly="true" errorStyle="color: red" /><br />
-  </h:form>
+  <form th:action="@{/register}" th:object="${customerParam}"
+    method="POST" class="customer">
+    <table>
+      <tr>
+        <td>顧客名（必須）</td>
+        <td><input type="text" id="customerName" th:field="*{customerName}"
+                   maxlength="30" required /></td>
+        <td><span th:if="${#fields.hasErrors('customerName')}"
+          th:errors="*{customerName}" class="error"></span></td>
+      </tr>
+      <tr>
+        <td>電子メールアドレス（必須）</td>
+        <td><input type="email" id="email" th:field="*{email}"
+                   maxlength="40" required /></td>
+        <td><span th:if="${#fields.hasErrors('email')}"
+          th:errors="*{email}" class="error"></span></td>
+      </tr>
+      <tr>
+        <td>パスワード（必須）</td>
+        <td><input type="password" id="password" th:field="*{password}"
+                   maxlength="20" required /></td>
+        <td><span th:if="${#fields.hasErrors('password')}"
+                  th:errors="*{password}" class="error"></span></td>
+      </tr>
+      <tr>
+        <td>生年月日（任意）</td>
+        <td><input type="text" id="birthday" th:field="*{birthday}"
+                   pattern="\d{4}/\d{2}/\d{2}" /></td>
+        <td><span th:if="${#fields.hasErrors('birthday')}"
+                  th:errors="*{birthday}" class="error"></span></td>
+      </tr>
+      <tr>
+        <td>住所（任意）</td>
+        <td><input type="text" id="address" th:field="*{address}"
+                   size="40" maxlength="100" /></td>
+        <td><span th:if="${#fields.hasErrors('address')}"
+                  th:errors="*{address}" class="error"></span></td>
+      </tr>
+    </table>
+    <button type="submit">お客様の情報を登録する</button>
+    <br />
+    <br />
+    <a th:href="@{/TopPage}">トップページへ戻る</a>
+    <br />
+    <br />
+    <span th:if="${#fields.hasGlobalErrors()}"
+          th:errors="*{globalErrors}" class="error"></span><br />
+  </form>
 </body>
 </html>

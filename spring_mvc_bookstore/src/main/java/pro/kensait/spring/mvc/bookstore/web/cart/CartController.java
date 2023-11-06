@@ -3,6 +3,7 @@ package pro.kensait.spring.mvc.bookstore.web.cart;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,9 +11,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 
 import pro.kensait.spring.mvc.bookstore.entity.Book;
 import pro.kensait.spring.mvc.bookstore.entity.Customer;
@@ -27,14 +30,20 @@ public class CartController implements Serializable {
     @ModelAttribute("cartSession")
     public CartSession initSession(){
         logger.info("[ CartController#initSession ]");
-        return new CartSession();
+        return new CartSession(new CopyOnWriteArrayList<>(),
+                BigDecimal.valueOf(0),
+                BigDecimal.valueOf(0),
+                null,
+                null);
     }
 
     @Autowired
     private BookService bookService;
-    
+
     // アクションメソッド（書籍をカートに追加する）
-    public String addBook(Integer bookId, CartSession cartSession) {
+    @PostMapping("/addBook")
+    public String addBook(@RequestParam("bookId") Integer bookId,
+            CartSession cartSession) {
 
         Book book = bookService.find(bookId);
 
@@ -42,7 +51,7 @@ public class CartController implements Serializable {
         boolean isExists = false;
         List<CartItem> cartItems = cartSession.getCartItems();
         for (CartItem cartItem : cartItems) {
-            if (bookId == cartItem.getBookId()) {
+            if (bookId.equals(cartItem.getBookId())) {
                 cartItem.setCount(cartItem.getCount() + 1);
                 isExists = true;
                 break;
@@ -61,41 +70,53 @@ public class CartController implements Serializable {
             cartItems.add(cartItem);
         }
 
-        // 合計金額を加算する
-        BigDecimal totalPrice = cartSession.getDeliveryPrice();
-        cartSession.setDeliveryPrice(totalPrice.add(book.getPrice()));
+        cartSession.setCartItems(cartItems);
 
-        return "success";
+        // 合計金額を加算する
+        BigDecimal totalPrice = cartSession.getTotalPrice();
+        cartSession.setTotalPrice(totalPrice.add(book.getPrice()));
+
+        return "CartViewPage";
     }
 
     // アクションメソッド（選択された書籍をカートから削除する）
-    public String remove(CartSession cartSession) {
+    @PostMapping("/removeBook")
+    public String removeBook(@RequestParam List<Integer> removeBookIdList,
+            CartSession cartSession) {
         List<CartItem> cartItems = cartSession.getCartItems();
-        for (CartItem cartItem :  cartItems) {
-            if (cartItem.isRemove()) {
-                cartItems.remove(cartItem);
-                // 合計金額を減算する
-                BigDecimal totalPrice = cartSession.getDeliveryPrice();
-                BigDecimal count = BigDecimal.valueOf(cartItem.getCount());
-                cartSession.setDeliveryPrice(
-                        totalPrice.subtract(
-                                cartItem.getPrice().multiply(count)));
+        BigDecimal totalPrice = cartSession.getDeliveryPrice();
+        for (CartItem cartItem : cartItems) {
+            LOOP : for (Integer bookId :  removeBookIdList) {
+                if (cartItem.getBookId().equals(bookId)) {
+                    // 合計金額を減算する
+                    cartSession.setTotalPrice(totalPrice.subtract(cartItem.getPrice()));
+                    removeBookIdList.remove(bookId);
+                    // カートから削除する
+                    cartItems.remove(cartItem);
+                    break LOOP;
+                }
             }
         }
 
-        return "success";
+        // TODO 配送料を再計算する
+
+        return "CartViewPage";
     }
 
     // アクションメソッド（カートをクリアする）
-    public String clear(SessionStatus sessionStatus) {
-        sessionStatus.setComplete(); // cartSessionのみが削除されるらしい
-        return "success";
+    @PostMapping("/clear")
+    public String clear(HttpSession session) {
+        session.removeAttribute("cartSession");
+        return "CartViewPage";
     }
 
     // アクションメソッド（カートの内容を確定する）
-    public String fix(HttpSession httpSession, CartSession cartSession) {
+    @PostMapping("/fix")
+    public String fix(HttpSession httpSession, CartSession cartSession,
+            Model model) {
 
         Customer customer = (Customer) httpSession.getAttribute("customer");
+        model.addAttribute("customer", customer);
 
         // デフォルトの配送先住所として、CustomerBeanオブジェクトの住所を設定する
         cartSession.setDeliveryAddress(customer.getAddress());
@@ -104,6 +125,6 @@ public class CartController implements Serializable {
         int totalCount = cartSession.getCartItems().size();
         cartSession.setDeliveryPrice(BigDecimal.valueOf(totalCount * 250));
 
-        return "success";
+        return "BookOrderPage";
     }
 }

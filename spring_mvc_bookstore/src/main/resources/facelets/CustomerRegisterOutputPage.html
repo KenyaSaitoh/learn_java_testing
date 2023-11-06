@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>CustomerRegisterPage</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<f:view>
+  <h2>以下の内容で登録が完了しました</h2><hr />
+  <h:panelGrid border="0" columns="2">
+    <%-- 顧客ID --%>
+    <h:outputText value="顧客ID" />
+    <h:outputText value="#{customerRegister.customerId}" /> 
+    <%-- 顧客名 --%>
+    <h:outputText value="顧客名" />
+    <h:outputText value="#{customerRegister.customerName}" />
+    <%-- 電子メール --%>
+    <h:outputText value="電子メール" />
+    <h:outputText value="#{customerRegister.email}" />
+    <%-- 生年月日 --%>
+    <h:outputText value="生年月日" />
+    <h:outputText value="#{customerRegister.birthday}">
+      <f:convertDateTime pattern="yyyy年MM月dd日" />
+    </h:outputText>
+    <%-- 住所 --%>
+    <h:outputText value="住所" />
+    <h:outputText value="#{customerRegister.address}" />
+  </h:panelGrid><br />
+  <h:outputLink value="./BookSearchPage.jsp">
+    <h:outputText value="書籍の検索ページへ" />
+  </h:outputLink>
+</f:view>
+</body>
+</html>

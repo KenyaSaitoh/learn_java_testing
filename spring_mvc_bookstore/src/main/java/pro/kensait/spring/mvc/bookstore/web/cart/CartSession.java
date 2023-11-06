@@ -69,4 +69,11 @@ public class CartSession {
     public void setSettlementType(Integer settlementType) {
         this.settlementType = settlementType;
     }
+
+    @Override
+    public String toString() {
+        return "CartSession [cartItems=" + cartItems + ", totalPrice=" + totalPrice
+                + ", deliveryPrice=" + deliveryPrice + ", deliveryAddress="
+                + deliveryAddress + ", settlementType=" + settlementType + "]";
+    }
 }

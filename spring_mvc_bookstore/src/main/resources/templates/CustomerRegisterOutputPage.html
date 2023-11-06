@@ -1,34 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>CustomerRegisterPage</title>
+<title>CustomerRegisterOutputPage</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<f:view>
-  <h2>以下の内容で登録が完了しました</h2><hr />
-  <h:panelGrid border="0" columns="2">
-    <%-- 顧客ID --%>
-    <h:outputText value="顧客ID" />
-    <h:outputText value="#{customerRegister.customerId}" /> 
-    <%-- 顧客名 --%>
-    <h:outputText value="顧客名" />
-    <h:outputText value="#{customerRegister.customerName}" />
-    <%-- 電子メール --%>
-    <h:outputText value="電子メール" />
-    <h:outputText value="#{customerRegister.email}" />
-    <%-- 生年月日 --%>
-    <h:outputText value="生年月日" />
-    <h:outputText value="#{customerRegister.birthday}">
-      <f:convertDateTime pattern="yyyy年MM月dd日" />
-    </h:outputText>
-    <%-- 住所 --%>
-    <h:outputText value="住所" />
-    <h:outputText value="#{customerRegister.address}" />
-  </h:panelGrid><br />
-  <h:outputLink value="./BookSearchPage.jsp">
-    <h:outputText value="書籍の検索ページへ" />
-  </h:outputLink>
-</f:view>
+  <h2>以下の内容で登録が完了しました</h2>
+  <hr />
+  <table>
+    <!-- 顧客ID -->
+    <tr>
+      <td>顧客ID</td>
+      <td th:text="${customerId}"></td>
+    </tr>
+    <!-- 顧客名 -->
+    <tr>
+      <td>顧客名</td>
+      <td th:text="${customer.customerName}"></td>
+    </tr>
+    <!-- 電子メール -->
+    <tr>
+      <td>電子メール</td>
+      <td th:text="${customer.email}"></td>
+    </tr>
+    <!-- 生年月日 -->
+    <tr>
+      <td>生年月日</td>
+      <td
+        th:text="${#dates.format(customer.birthday, 'yyyy年MM月dd日')}"></td>
+    </tr>
+    <!-- 住所 -->
+    <tr>
+      <td>住所</td>
+      <td th:text="${customer.address}"></td>
+    </tr>
+  </table>
+  <br />
+  <a th:href="@{/toSelect}">書籍の検索ページへ</a>
 </body>
 </html>

@@ -3,8 +3,6 @@ package pro.kensait.spring.mvc.bookstore.web.customer;
 import java.time.LocalDate;
 
 public record CustomerParam(
-        // 顧客ID
-        Integer customerId,
         // 顧客名
         String customerName,
         // メールアドレス
