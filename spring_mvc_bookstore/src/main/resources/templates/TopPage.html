@@ -10,7 +10,7 @@
   <hr />
   <div>登録済みのお客様</div> 
   <form th:action="@{/login}" th:object="${loginParam}"
-    method="POST" class="login">
+        method="POST" class="login">
     <table>
       <tr>
         <td>Eメールアドレス</td>
@@ -24,10 +24,12 @@
         <td><input type="password" th:field="*{password}" required /></td>
         <td><span th:if="${#fields.hasErrors('password')}"
                   th:errors="*{password}" class="error"></span></td>
-    </tr>
+      </tr>
     </table>
         <button type="submit">ログイン</button>
-    </form>
+    <div th:if="${#fields.hasGlobalErrors()}" th:errors="*{globalErrors}"
+         class="error"></div>
+  </form>
   <hr />
   <div>新規のお客様</div>
     <a th:href="@{/toRegister}">お客様のご登録</a>

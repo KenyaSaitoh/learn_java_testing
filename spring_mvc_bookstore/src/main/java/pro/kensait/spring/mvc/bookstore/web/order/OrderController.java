@@ -46,6 +46,6 @@ public class OrderController {
         // セッションマップからカートを削除する
         sessionStatus.setComplete();
 
-        return "FinishPage";
+        return "ThankYouPage";
     }
 }

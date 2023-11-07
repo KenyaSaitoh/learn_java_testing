@@ -13,36 +13,31 @@
     <table>
       <tr>
         <td>顧客名（必須）</td>
-        <td><input type="text" id="customerName" th:field="*{customerName}"
-                   maxlength="30" required /></td>
+        <td><input type="text" id="customerName" th:field="*{customerName}" /></td>
         <td><span th:if="${#fields.hasErrors('customerName')}"
           th:errors="*{customerName}" class="error"></span></td>
       </tr>
       <tr>
         <td>電子メールアドレス（必須）</td>
-        <td><input type="email" id="email" th:field="*{email}"
-                   maxlength="40" required /></td>
+        <td><input type="email" id="email" th:field="*{email}" /></td>
         <td><span th:if="${#fields.hasErrors('email')}"
           th:errors="*{email}" class="error"></span></td>
       </tr>
       <tr>
         <td>パスワード（必須）</td>
-        <td><input type="password" id="password" th:field="*{password}"
-                   maxlength="20" required /></td>
+        <td><input type="password" id="password" th:field="*{password}" /></td>
         <td><span th:if="${#fields.hasErrors('password')}"
                   th:errors="*{password}" class="error"></span></td>
       </tr>
       <tr>
         <td>生年月日（任意）</td>
-        <td><input type="text" id="birthday" th:field="*{birthday}"
-                   pattern="\d{4}/\d{2}/\d{2}" /></td>
+        <td><input type="text" id="birthday" th:field="*{birthday}" /></td>
         <td><span th:if="${#fields.hasErrors('birthday')}"
                   th:errors="*{birthday}" class="error"></span></td>
       </tr>
       <tr>
         <td>住所（任意）</td>
-        <td><input type="text" id="address" th:field="*{address}"
-                   size="40" maxlength="100" /></td>
+        <td><input type="text" id="address" th:field="*{address}" /></td>
         <td><span th:if="${#fields.hasErrors('address')}"
                   th:errors="*{address}" class="error"></span></td>
       </tr>
@@ -50,7 +45,7 @@
     <button type="submit">お客様の情報を登録する</button>
     <br />
     <br />
-    <a th:href="@{/TopPage}">トップページへ戻る</a>
+    <a th:href="@{/}">トップページへ戻る</a>
     <br />
     <br />
     <span th:if="${#fields.hasGlobalErrors()}"

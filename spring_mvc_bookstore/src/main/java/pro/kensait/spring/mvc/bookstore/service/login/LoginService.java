@@ -21,7 +21,7 @@ public class LoginService {
     private CustomerRepository customerRepos;
 
     // ログイン
-    public Customer login(LoginTO loginTO) {
+    public Customer login(LoginTO loginTO) throws CustomerNotFoundException {
         // 入力された電子メールをキーにデータベースから顧客を検索する
         Optional<Customer> customerOpt = customerRepos.findCustomerByEmail(loginTO.email());
 
@@ -32,6 +32,6 @@ public class LoginService {
                 return customer;
             }
         }
-        throw new RuntimeException("顧客が存在しません");
+        throw new CustomerNotFoundException("顧客が存在しません");
     }
 }

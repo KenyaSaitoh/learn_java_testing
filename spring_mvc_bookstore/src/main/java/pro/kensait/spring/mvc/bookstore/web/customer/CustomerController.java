@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -36,7 +37,11 @@ public class CustomerController {
 
     // 顧客を登録する
     @PostMapping("/register")
-    public String register(@Validated CustomerParam customerParam, Model model) {
+    public String register(@Validated CustomerParam customerParam, BindingResult errors,
+            Model model) {
+        if (errors.hasErrors()) {
+            return "CustomerRegisterInputPage";
+        }
 
         Customer customer = new Customer(
                 customerParam.customerName(),
@@ -47,7 +52,6 @@ public class CustomerController {
 
         try {
             customerService.register(customer);
-            System.out.println(customer);
         } catch(CustomerExistsException cee) {
 
         }
