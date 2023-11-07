@@ -53,6 +53,8 @@ public class OrderService implements OrderServiceIF {
         // 生成したOrderTranインスタンスをpersist操作により永続化する
         orderTranRepos.save(orderTran);
 
+        System.out.println("###" + orderTran);
+
         // カートアイテム（個々の注文明細）のイテレータを取得する
         List<CartItem> cartItems = orderTO.cartItems();
 
@@ -72,6 +74,7 @@ public class OrderService implements OrderServiceIF {
                     book,
                     cartItem.getCount());
 
+            System.out.println("$$$" + orderDetail);
             orderDetailRepos.save(orderDetail);
         }
     }

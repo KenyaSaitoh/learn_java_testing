@@ -13,7 +13,7 @@
       <!-- 顧客名 -->
       <tr>
         <td>顧客名</td>
-        <td th:text="${customer.customerName} + ' 様'"></td>
+        <td th:text="${session.customer.customerName} + ' 様'"></td>
       </tr>
       <!-- 注文内容 -->
       <tr>
@@ -72,7 +72,7 @@
       </tr>
     </table>
     <br />
-    <a href="#" th:href="@{/order}">注文する</a>
+    <button type="submit" th:text="注文する"></button>
     <br />
     <a th:href="@{/toSelect}">買い物を続ける</a>
   </form>

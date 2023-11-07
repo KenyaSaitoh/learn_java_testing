@@ -6,6 +6,10 @@ public class OrderDetailPK implements Serializable {
     private Integer orderTranId;
     private Integer orderDetailId;
 
+    // 引数なしのコンストラクタ
+    public OrderDetailPK() {
+    }
+
     // コンストラクタ
     public OrderDetailPK(int orderTranId, int orderDetailId) {
         this.orderTranId = orderTranId;

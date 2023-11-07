@@ -15,7 +15,7 @@ public class OrderDetail {
     // 注文取引ID
     @Id
     @Column(name = "ORDER_TRAN_ID",
-            nullable = false, insertable = false, updatable = false)
+            nullable = false)
     private Integer orderTranId;
 
     // 注文明細ID
@@ -27,7 +27,8 @@ public class OrderDetail {
     // 注文明細
     @ManyToOne(targetEntity = OrderTran.class)
     @JoinColumn(name = "ORDER_TRAN_ID",
-            referencedColumnName = "ORDER_TRAN_ID")
+            referencedColumnName = "ORDER_TRAN_ID",
+            insertable = false, updatable = false) // ここがポイント！JPA教材でもちゃんと説明する
     private OrderTran orderTran;
 
     // 書籍

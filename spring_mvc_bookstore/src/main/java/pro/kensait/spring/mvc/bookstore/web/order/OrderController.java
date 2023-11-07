@@ -6,6 +6,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -19,16 +21,23 @@ import pro.kensait.spring.mvc.bookstore.web.cart.CartSession;
 @SessionAttributes("cartSession")
 public class OrderController {
     @Autowired
-    private HttpSession session;
-
-    @Autowired
     private OrderServiceIF orderService;
 
     // アクションメソッド（買い物カゴに入れた書籍を注文する）
     @PostMapping("/order")
-    public String order(CartSession cartSession, SessionStatus sessionStatus) {
+    public String order(@Validated CartSession cartSession, BindingResult errors,
+            HttpSession session,
+            SessionStatus sessionStatus,
+            Customer customer2) {
+
+        System.out.println(customer2 + "GGGG");
+        
         // セッションマップからCustomerBeanオブジェクトを取得する
         Customer customer = (Customer) session.getAttribute("customer");
+
+        if (errors.hasErrors()) {
+            return "BookOrderPage";
+        }
 
         // トランスファーオブジェクトを生成する
         OrderTO orderTO = new OrderTO(
@@ -40,11 +49,16 @@ public class OrderController {
                 cartSession.getDeliveryAddress(),
                 cartSession.getSettlementType());
 
-        // セッションBeanのビジネスメソッド（注文処理）を呼び出す
+        System.out.println("%%%%%%" + orderTO);
+
+        // サービスのビジネスメソッド（注文処理）を呼び出す
         orderService.orderBooks(orderTO);
 
         // セッションマップからカートを削除する
-        sessionStatus.setComplete();
+        session.removeAttribute("cartSession");
+
+        // これだとログアウトしちゃう
+        // sessionStatus.setComplete();
 
         return "ThankYouPage";
     }

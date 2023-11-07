@@ -3,6 +3,10 @@ package pro.kensait.spring.mvc.bookstore.web.cart;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class CartSession {
     // カートアイテムのリスト
     private List<CartItem> cartItems;
@@ -11,8 +15,11 @@ public class CartSession {
     // 配送料金
     private BigDecimal deliveryPrice;
     // 配送先住所
+    @NotEmpty
+    @Size(min = 1, max = 40)
     private String deliveryAddress;
     // 決済方法
+    @NotNull
     private Integer settlementType;
 
     // 引数の無いコンストラクタ
