@@ -2,7 +2,7 @@ package pro.kensait.spring.mvc.bookstore.web.order;
 
 import java.util.List;
 
-import javax.faces.model.SelectItem;
+import jakarta.faces.model.SelectItem;
 
 import pro.kensait.spring.mvc.bookstore.web.cart.CartParam;
 

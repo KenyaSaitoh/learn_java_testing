@@ -21,7 +21,7 @@
       </tr>
       <tr>
         <td>パスワード</td>
-        <td><input type="password" th:field="*{password}" required /></td>
+        <td><input type="password" th:field="*{password}" /></td>
         <td><span th:if="${#fields.hasErrors('password')}"
                   th:errors="*{password}" class="error"></span></td>
       </tr>

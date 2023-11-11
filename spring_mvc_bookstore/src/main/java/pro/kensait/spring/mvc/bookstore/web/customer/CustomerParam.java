@@ -2,8 +2,8 @@ package pro.kensait.spring.mvc.bookstore.web.customer;
 
 import java.time.LocalDate;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 public record CustomerParam(
         // 顧客名
@@ -15,6 +15,7 @@ public record CustomerParam(
         String email,
         // パスワード
         @NotEmpty
+        @Size(min = 4, max = 10)
         String password,
         // 生年月日
         LocalDate birthday,

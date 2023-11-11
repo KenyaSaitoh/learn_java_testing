@@ -61,12 +61,16 @@
       <tr>
         <td>決済方法</td>
         <td>
-            <label for="bankTransfer">銀行振り込み</label>
-            <input type="radio" id="bankTransfer" name="settlementType"
-                   th:field="${cartSession.settlementType}" th:value="1" />
-            <label for="cashOnDelivery">着払い</label>
-            <input type="radio" id="cashOnDelivery" name="settlementType"
-                   th:field="${cartSession.settlementType}" th:value="2" />
+            <label class="custom-radio">
+              <input type="radio" id="bankTransfer" name="settlementType"
+                     th:field="${cartSession.settlementType}" th:value="1" />
+              <span>銀行振り込み</span>
+            </label>
+            <label class="custom-radio">
+              <input type="radio" id="cashOnDelivery" name="settlementType"
+                     th:field="${cartSession.settlementType}" th:value="2" />
+              <span>着払い</span>
+            </label>
           <div th:if="${#fields.hasErrors('cartSession.settlementType')}"
                th:errors="${cartSession.settlementType}" style="color: red;"></div></td>
       </tr>

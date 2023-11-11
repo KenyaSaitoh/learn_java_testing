@@ -11,7 +11,7 @@ import pro.kensait.spring.mvc.bookstore.repository.CustomerRepository;
 
 @Service
 @Transactional
-public class CustomerService {
+public class CustomerService  {
     private static final Logger logger = LoggerFactory.getLogger(
             CustomerService.class);
 
@@ -30,4 +30,6 @@ public class CustomerService {
 
         return customer;
     }
+
+
 }

@@ -210,3 +210,13 @@ input[type="checkbox"]:hover:before {
 .login table td:nth-child(3), .customer table td:nth-child(3) {
   width: 30%; /* 3列目の幅。エラーメッセージ用にスペースを確保 */
 }
+
+/* ラジオボタンのカスタムスタイル */
+.custom-radio {
+  position: relative;
+  padding-left: 30px; /* ラベルのテキストとラジオボタンの間隔 */
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 1em;
+  user-select: none; /* テキスト選択を防止 */
+}

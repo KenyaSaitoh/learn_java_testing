@@ -1,5 +1,6 @@
 package pro.kensait.spring.mvc.bookstore.web.book;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +33,9 @@ public class BookController {
     @GetMapping("/toSearch")
     public String toSearch(@ModelAttribute("searchParam") SearchParam searchParam,
             Model model) {
-        Map<String, Integer> categoryMap = categoryService.getCategoryMap();
+        Map<String, Integer> categoryMap = new HashMap<>();
+        categoryMap.put("", null);
+        categoryMap.putAll(categoryService.getCategoryMap());
         model.addAttribute("categoryMap", categoryMap);
         return "BookSearchPage";
     }

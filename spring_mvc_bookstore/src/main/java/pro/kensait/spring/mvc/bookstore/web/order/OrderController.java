@@ -2,7 +2,7 @@ package pro.kensait.spring.mvc.bookstore.web.order;
 
 import java.time.LocalDate;
 
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,8 +30,6 @@ public class OrderController {
             SessionStatus sessionStatus,
             Customer customer2) {
 
-        System.out.println(customer2 + "GGGG");
-        
         // セッションマップからCustomerBeanオブジェクトを取得する
         Customer customer = (Customer) session.getAttribute("customer");
 
@@ -48,8 +46,6 @@ public class OrderController {
                 cartSession.getDeliveryPrice(),
                 cartSession.getDeliveryAddress(),
                 cartSession.getSettlementType());
-
-        System.out.println("%%%%%%" + orderTO);
 
         // サービスのビジネスメソッド（注文処理）を呼び出す
         orderService.orderBooks(orderTO);

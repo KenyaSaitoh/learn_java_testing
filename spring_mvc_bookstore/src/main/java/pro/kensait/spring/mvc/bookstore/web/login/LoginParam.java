@@ -1,6 +1,6 @@
 package pro.kensait.spring.mvc.bookstore.web.login;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 public record LoginParam(
         // メールアドレス

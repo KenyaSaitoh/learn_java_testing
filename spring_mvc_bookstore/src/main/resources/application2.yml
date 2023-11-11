@@ -13,16 +13,18 @@ spring:
     username: TESTUSER
     password: PASSWORD
     driver-class-name: com.mysql.cj.jdbc.Driver
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 614504679861-k787kpnc6ts6408pabh583dfjbg3khr0.apps.googleusercontent.com
+            client-secret: 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
+
 # Spring Data JPA
-# これがないと、以下の例外が出てしまう
-# Unable to determine Dialect without JDBC metadata
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
+spring.jpa.database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
 # これがないとテーブル名が小文字になってしまい、RDSでエラーになる
-        naming:
-          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+spring.jpa.hibernate.naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 
 logging:
   level:
