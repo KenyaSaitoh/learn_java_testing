@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>TopPage</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+  <h2>ようこそ！テックブックストアへ</h2>
+  <hr />
+  <div>登録済みのお客様</div> 
+  <form th:action="@{/login}" method="POST" class="login">
+    <table>
+      <tr>
+        <td>Eメールアドレス</td>
+        <td><input type="text" name="email" /></td>
+      </tr>
+      <tr>
+        <td>パスワード</td>
+        <td><input type="password" name="password" /></td>
+      </tr>
+    </table>
+    <button type="submit">ログイン</button>
+    <div th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']} != null"
+            th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"
+            class="error">
+            ログインエラーメッセージ
+    </div>
+  </form>
+  <hr />
+  <div>新規のお客様</div>
+    <a th:href="@{/toRegister}">お客様のご登録</a>
+</body>
+</html>

@@ -5,8 +5,6 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import jakarta.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +16,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import jakarta.servlet.http.HttpSession;
 import pro.kensait.spring.mvc.bookstore.entity.Book;
 import pro.kensait.spring.mvc.bookstore.entity.Customer;
 import pro.kensait.spring.mvc.bookstore.service.book.BookService;
 
 @Controller
-@SessionAttributes("cartSession")
+@SessionAttributes(types = {CartSession.class})
 public class CartController implements Serializable {
     private static final Logger logger = LoggerFactory.getLogger(
             CartController.class);
@@ -45,7 +44,6 @@ public class CartController implements Serializable {
     @PostMapping("/addBook")
     public String addBook(@RequestParam("bookId") Integer bookId,
             CartSession cartSession) {
-
         Book book = bookService.find(bookId);
 
         // 選択された書籍がカートに存在している場合は、注文数と金額を加算する
@@ -111,7 +109,7 @@ public class CartController implements Serializable {
         return "CartClearPage";
     }
 
-    // アクションメソッド（カートをクリアする）
+    // アクションメソッド（カートを参照する）
     @GetMapping("/viewCart")
     public String viewCart() {
         return "CartViewPage";

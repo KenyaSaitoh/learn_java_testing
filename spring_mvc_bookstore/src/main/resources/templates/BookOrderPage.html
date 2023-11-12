@@ -79,6 +79,7 @@
     <button type="submit" th:text="注文する"></button>
     <br />
     <a th:href="@{/toSelect}">買い物を続ける</a>
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
   </form>
 </body>
 </html>

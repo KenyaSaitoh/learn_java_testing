@@ -2,6 +2,8 @@ server:
   port: 8080
 
 spring:
+  session:
+    timeout: 3600
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html

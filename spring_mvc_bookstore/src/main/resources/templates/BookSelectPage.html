@@ -30,12 +30,13 @@
           <td>
             <button type="submit"
                     th:formaction="@{/addBook}"
-                    name="bookId"
+                    th:name="bookId"
                     th:value="*{bookId}">買い物カゴへ</button>
           </td>
         </tr>
       </tbody>
     </table>
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
   </form>
   <a th:href="@{/toSearch}">書籍の検索ページへ</a>
   <br />

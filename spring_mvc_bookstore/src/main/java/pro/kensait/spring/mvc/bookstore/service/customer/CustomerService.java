@@ -1,5 +1,7 @@
 package pro.kensait.spring.mvc.bookstore.service.customer;
 
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +20,6 @@ public class CustomerService  {
     @Autowired
     private CustomerRepository customerRepos;
 
-
-
     // 顧客を登録する
     public Customer register(Customer customer) throws CustomerExistsException { 
         // 生成したCustomerオブジェクトを保存する
@@ -28,8 +28,12 @@ public class CustomerService  {
         //TODO
         // 重複チェックは？
 
+        System.out.println(customer + "%%%%%%%");
+        
         return customer;
     }
 
-
+    public Optional<Customer> findCustomer(String email) {
+        return customerRepos.findCustomerByEmail(email);
+    }
 }

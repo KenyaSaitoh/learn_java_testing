@@ -14,7 +14,7 @@
     <table>
       <tr>
         <td>Eメールアドレス</td>
-        <td><input type="text" th:field="*{email}" required /></td>
+        <td><input type="text" th:field="*{email}" /></td>
         <td><span th:if="${#fields.hasErrors('email')}"
                   th:errors="*{email}" class="error"></span>
         </td>

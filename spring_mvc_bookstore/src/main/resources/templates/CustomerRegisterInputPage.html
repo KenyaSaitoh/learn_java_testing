@@ -9,7 +9,7 @@
   <h2>お客様の情報を登録します</h2>
   <hr />
   <form th:action="@{/register}" th:object="${customerParam}"
-    method="POST" class="customer">
+        method="POST" class="customer">
     <table>
       <tr>
         <td>顧客名（必須）</td>
@@ -50,6 +50,7 @@
     <br />
     <span th:if="${#fields.hasGlobalErrors()}"
           th:errors="*{globalErrors}" class="error"></span><br />
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
   </form>
 </body>
 </html>
