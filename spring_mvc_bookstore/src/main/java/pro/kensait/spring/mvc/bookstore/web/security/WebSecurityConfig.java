@@ -59,7 +59,7 @@ public class WebSecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/register").permitAll()
                 .requestMatchers(HttpMethod.GET, "/register").denyAll() // GETの直接アクセスは禁止
                 .anyRequest().authenticated());
-        
+
         // denyとpermitの順序関係を確認する!
 
         return http.build();

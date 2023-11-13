@@ -1,9 +1,7 @@
 package pro.kensait.spring.mvc.bookstore.web.login;
 
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +10,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
@@ -33,7 +32,7 @@ public class LoginController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-    
+
     @Autowired
     private HttpSession session;
 
@@ -55,34 +54,33 @@ public class LoginController {
         return "TopPage";
         */
 
-        Optional<Customer> customerOpt = customerService.findCustomer(loginParam.email());
+        Customer customer = null;
+        try {
+            customer = customerService.findCustomer(loginParam.email());
+        } catch (UsernameNotFoundException unfe) {
+            return "TopPage";
+        }
 
         // 顧客の存在チェックおよびパスワードの一致チェックを行う
-        if (customerOpt.isPresent()) {
-            Customer customer = customerOpt.get();
-                
-            boolean isMatch = passwordEncoder.matches(loginParam.password(),
-                    customer.getPassword());
-            if (isMatch) {
-                session.setAttribute("customer", customer);
 
-                List<GrantedAuthority> authorities = new ArrayList<>();
+        boolean isMatch = passwordEncoder.matches(loginParam.password(),
+                customer.getPassword());
+        if (! isMatch) return "TopPage";
 
-                Authentication authentication =
-                        UsernamePasswordAuthenticationToken
-                            .authenticated(customer.getEmail(),
-                                    customer.getPassword(),
-                                    authorities);
+        session.setAttribute("customer", customer);
 
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+        List<GrantedAuthority> authorities = new ArrayList<>();
 
-                session.setAttribute(
-                        HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
-                        SecurityContextHolder.getContext());
+        Authentication authentication = UsernamePasswordAuthenticationToken
+                .authenticated(customer.getEmail(),
+                        customer.getPassword(),
+                        authorities);
 
-                return "redirect:/toSelect"; // アクションからアクションを呼び出いのでリダイレクトする
-            } 
-        }
-        return "TopPage";
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        session.setAttribute(
+                HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
+                SecurityContextHolder.getContext());
+
+        return "redirect:/toSelect"; // アクションからアクションを呼び出いのでリダイレクトする
     }
 }

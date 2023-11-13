@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import jakarta.servlet.http.HttpSession;
 import pro.kensait.spring.mvc.bookstore.entity.Book;
@@ -104,8 +105,8 @@ public class CartController implements Serializable {
 
     // アクションメソッド（カートをクリアする）
     @PostMapping("/clear")
-    public String clear(HttpSession session) {
-        session.removeAttribute("cartSession");
+    public String clear(SessionStatus status) {
+        status.setComplete(); // ログアウトはしないでCartSessionを削除することができる
         return "CartClearPage";
     }
 

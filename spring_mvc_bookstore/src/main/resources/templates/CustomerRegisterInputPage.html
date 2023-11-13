@@ -48,8 +48,9 @@
     <a th:href="@{/}">トップページへ戻る</a>
     <br />
     <br />
-    <span th:if="${#fields.hasGlobalErrors()}"
-          th:errors="*{globalErrors}" class="error"></span><br />
+    <div th:if="${#fields.hasGlobalErrors()}">
+      <div th:each="err : ${#fields.globalErrors()}" th:text="${err}" class="error"></div>
+    </div>
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
   </form>
 </body>

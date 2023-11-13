@@ -28,7 +28,7 @@
     <tr>
       <td>生年月日</td>
       <td
-        th:text="${#dates.format(customer.birthday, 'yyyy年MM月dd日')}"></td>
+        th:text="${#temporals.format(customer.birthday, 'yyyy年M月d日')}"></td>
     </tr>
     <!-- 住所 -->
     <tr>

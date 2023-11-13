@@ -1,10 +1,10 @@
 package pro.kensait.spring.mvc.bookstore.service.customer;
 
-import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,17 +23,21 @@ public class CustomerService  {
     // 顧客を登録する
     public Customer register(Customer customer) throws CustomerExistsException { 
         // 生成したCustomerオブジェクトを保存する
-        customerRepos.save(customer);
+        try {
+            customerRepos.save(customer);
+        } catch (DataIntegrityViolationException dve) {
 
-        //TODO
-        // 重複チェックは？
-
-        System.out.println(customer + "%%%%%%%");
-        
+            // CustomerExistsExceptionがチェック例外だと、ロールバックマークが付いて、
+            // 違う例外（org.springframework.transaction.UnexpectedRollbackException）が送出される
+            throw new CustomerExistsException("The customer already exists.", dve);
+        }
         return customer;
     }
 
-    public Optional<Customer> findCustomer(String email) {
-        return customerRepos.findCustomerByEmail(email);
+    public Customer findCustomer(String email) {
+        Customer customer = customerRepos.findCustomerByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException(
+                        "No user found with this email address."));
+        return customer;
     }
 }

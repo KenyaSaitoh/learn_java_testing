@@ -15,6 +15,7 @@ import org.springframework.security.web.context.HttpSessionSecurityContextReposi
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -49,7 +50,8 @@ public class CustomerController {
     @PostMapping("/register")
     public String register(@Validated CustomerParam customerParam, BindingResult errors,
             Model model) {
-        System.out.println("RRRRRRRRRRR");
+        System.out.println(errors);
+        
         if (errors.hasErrors()) {
             return "CustomerRegisterInputPage";
         }
@@ -64,7 +66,9 @@ public class CustomerController {
         try {
             customerService.register(customer);
         } catch(CustomerExistsException cee) {
-
+            ObjectError error = new ObjectError("顧客重複", "すでに顧客は登録されています");
+            errors.addError(error);
+            return "CustomerRegisterInputPage";
         }
 
         logger.info(customer.toString());

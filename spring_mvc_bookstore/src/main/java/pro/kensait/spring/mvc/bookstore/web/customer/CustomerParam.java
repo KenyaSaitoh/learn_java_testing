@@ -2,6 +2,8 @@ package pro.kensait.spring.mvc.bookstore.web.customer;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
@@ -18,8 +20,9 @@ public record CustomerParam(
         @Size(min = 4, max = 10)
         String password,
         // 生年月日
+        @DateTimeFormat(pattern = "yyyy/M/d")
         LocalDate birthday,
         // 住所
-        @Size(min = 1, max = 40)
+        @Size(min = 0, max = 40)
         String address) {
 }
