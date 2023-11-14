@@ -11,9 +11,9 @@ import pro.kensait.spring.mvc.bookstore.web.login.LoginParam;
 
 @Controller
 @Configuration
-public class RootController {
+public class IndexController {
     private static final Logger logger = LoggerFactory.getLogger(
-            RootController.class);
+            IndexController.class);
 
     // トップ画面に遷移する
     @GetMapping("/")

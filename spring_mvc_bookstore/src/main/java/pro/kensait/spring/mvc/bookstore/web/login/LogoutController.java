@@ -9,16 +9,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class LogutController {
+public class LogoutController {
     private static final Logger logger = LoggerFactory.getLogger(
-            LogutController.class);
+            LogoutController.class);
 
     @Autowired
     private HttpSession session;
 
     // ログアウト
-    @PostMapping("/logout")
+    @PostMapping("/logout2")
     public String logout() {
+        System.out.println("########## logout");
         session.invalidate();
         return "FinishPage";
     }

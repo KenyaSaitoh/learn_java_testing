@@ -40,7 +40,6 @@ public class LoginController {
     @PostMapping("/login")
     public String login(@Validated LoginParam loginParam, BindingResult errors) {
         if (errors.hasErrors()) {
-            System.out.println("############ hasErrors");
             return "TopPage";
         }
 

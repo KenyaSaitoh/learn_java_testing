@@ -2,8 +2,6 @@ package pro.kensait.spring.mvc.bookstore.web.order;
 
 import java.time.LocalDate;
 
-import jakarta.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import jakarta.servlet.http.HttpSession;
 import pro.kensait.spring.mvc.bookstore.entity.Customer;
 import pro.kensait.spring.mvc.bookstore.service.order.OrderServiceIF;
 import pro.kensait.spring.mvc.bookstore.service.order.OrderTO;
@@ -53,7 +52,7 @@ public class OrderController {
         // セッションマップからカートを削除する
         session.removeAttribute("cartSession");
 
-        // これだとログアウトしちゃう
+        // これだとログアウトしちゃう?
         // sessionStatus.setComplete();
 
         return "ThankYouPage";

@@ -43,7 +43,7 @@ public class CustomerController {
     @GetMapping("/toRegister")
     public String toRegister(@ModelAttribute("customerParam")
             CustomerParam customerParam) {
-        return "CustomerRegisterInputPage";
+        return "CustomerInputPage";
     }
 
     // 顧客を登録する
@@ -53,7 +53,7 @@ public class CustomerController {
         System.out.println(errors);
         
         if (errors.hasErrors()) {
-            return "CustomerRegisterInputPage";
+            return "CustomerInputPage";
         }
 
         Customer customer = new Customer(
@@ -68,7 +68,7 @@ public class CustomerController {
         } catch(CustomerExistsException cee) {
             ObjectError error = new ObjectError("顧客重複", "すでに顧客は登録されています");
             errors.addError(error);
-            return "CustomerRegisterInputPage";
+            return "CustomerInputPage";
         }
 
         logger.info(customer.toString());
@@ -116,6 +116,6 @@ public class CustomerController {
         System.out.println("EEEE" + principal);
         */
 
-        return "CustomerRegisterOutputPage";
+        return "CustomerOutputPage";
     }
 }
