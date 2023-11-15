@@ -50,9 +50,10 @@ public class CustomerController {
     @PostMapping("/register")
     public String register(@Validated CustomerParam customerParam, BindingResult errors,
             Model model) {
-        System.out.println(errors);
-        
+        logger.info("[ CustomerController#register ]");
+
         if (errors.hasErrors()) {
+            logger.info("[ CustomerController#register ] 入力エラー");
             return "CustomerInputPage";
         }
 
@@ -66,6 +67,7 @@ public class CustomerController {
         try {
             customerService.register(customer);
         } catch(CustomerExistsException cee) {
+            logger.info("[ CustomerController#register ] 顧客重複エラー");
             ObjectError error = new ObjectError("顧客重複", "すでに顧客は登録されています");
             errors.addError(error);
             return "CustomerInputPage";

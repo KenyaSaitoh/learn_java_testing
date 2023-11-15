@@ -43,11 +43,9 @@
       </tr>
     </table>
     <button type="submit">お客様の情報を登録する</button>
-    <br />
-    <br />
+    <br /><br />
     <a th:href="@{/}">トップページへ戻る</a>
-    <br />
-    <br />
+    <br /><br />
     <div th:if="${#fields.hasGlobalErrors()}">
       <div th:each="err : ${#fields.globalErrors()}" th:text="${err}" class="error"></div>
     </div>

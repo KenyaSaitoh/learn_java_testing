@@ -25,8 +25,8 @@ INSERT INTO BOOK VALUES(4, 'Javaアーキテクトのための設計原理', '�
 INSERT INTO BOOK VALUES(5, 'コンカレントプログラミング in Java SE', 'ウィリアムミラー', 1, 1, 3500);
 INSERT INTO BOOK VALUES(6, 'Javaでのエレガントなコード設計', 'ジョセフデイビス', 1, 3, 2800);
 INSERT INTO BOOK VALUES(7, 'Java SEクックブック', 'チャールズガルシア', 1, 5, 3800);
-INSERT INTO BOOK VALUES(8, 'Jakarta EE究極ガイド', 'トーマスロドリゲス', 1, 4, 5200);
-INSERT INTO BOOK VALUES(9, 'Jakarta EEによるマイクロサービス設計', 'クリスウィルソン', 1, 3, 3200);
+INSERT INTO BOOK VALUES(8, 'Jakarta EE究極テストガイド', 'トーマスロドリゲス', 1, 4, 5200);
+INSERT INTO BOOK VALUES(9, 'Jakarta EEによるアーキテクチャ設計', 'クリスウィルソン', 1, 3, 3200);
 INSERT INTO BOOK VALUES(10, 'Jakarta EEパターンライブラリ', 'ダニエルホール', 1, 1, 4000);
 INSERT INTO BOOK VALUES(11, 'SpringBootによるエンタープライズ開発', 'マシューブラウン', 2, 2, 3900);
 INSERT INTO BOOK VALUES(12, 'SpringBoot魔法のレシピ', 'ティムテイラー', 2, 4, 4500);
@@ -47,8 +47,8 @@ INSERT INTO BOOK VALUES(26, 'JavaScriptマジック', 'アダムライト', 5, 4
 INSERT INTO BOOK VALUES(27, 'ES6＋完全ガイド', 'ライアンヒル', 5, 5, 3000);
 INSERT INTO BOOK VALUES(28, 'JavaScriptアルゴリズム実践集', 'アーロンスコット', 5, 1, 3500);
 INSERT INTO BOOK VALUES(29, '非同期JS：PromiseからAsync/Await', 'ジェフグリーン', 5, 3, 3300);
-INSERT INTO BOOK VALUES(30, 'JSデザインパターンの探求', 'マークジャクソン', 5, 4, 4200);
+INSERT INTO BOOK VALUES(30, 'JSアーキテクチャパターンの探求', 'マークジャクソン', 5, 4, 4200);
 INSERT INTO BOOK VALUES(31, 'Vue/React/Angular徹底比較入門', 'アマンダブラウン', 5, 5, 3800);
 INSERT INTO BOOK VALUES(32, 'Node.jsによるサーバーサイド開発', 'サラジョーンズ', 5, 1, 3500);
-INSERT INTO BOOK VALUES(33, '実践TypeScript & JavaScript', 'ゲイリーホール', 5, 2, 4500);
+INSERT INTO BOOK VALUES(33, '実践TypeScript in Cloud', 'ゲイリーホール', 5, 2, 4500);
 INSERT INTO BOOK VALUES(34, 'フロントエンドのためのテスト入門', 'ジョンスミス', 5, 3, 2800);

@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -41,7 +42,9 @@ public class LoginController {
     public String login(@Validated LoginParam loginParam, BindingResult errors) {
         logger.info("[ LoginController#login ]");
 
+        // 入力チェックエラーがあった場合、TopPageに遷移する
         if (errors.hasErrors()) {
+            logger.info("[ LoginController#login ] 入力エラー");
             return "TopPage";
         }
 
@@ -55,17 +58,25 @@ public class LoginController {
         return "TopPage";
         */
 
+        // 顧客を取得し、存在しなかった場合の例外処理を行う
         Customer customer = null;
         try {
             customer = customerService.findCustomer(loginParam.email());
         } catch (UsernameNotFoundException unfe) {
+            logger.info("[ LoginController#login ] 顧客存在せずエラー");
+            ObjectError error = new ObjectError("顧客存在せず", "指定されたメールアドレスは存在しません");
+            errors.addError(error);
             return "TopPage";
         }
 
-        // 顧客の存在チェックおよびパスワードの一致チェックを行う
-        boolean isMatch = passwordEncoder.matches(loginParam.password(),
-                customer.getPassword());
-        if (! isMatch) return "TopPage";
+        // 顧客のパスワード一致チェックを行う
+        boolean isMatch = passwordEncoder.matches(loginParam.password(), customer.getPassword());
+        if (! isMatch) {
+            logger.info("[ LoginController#login ] パスワード不一致エラー");
+            ObjectError error = new ObjectError("パスワード不一致", "指定されたパスワードが間違っているようです");
+            errors.addError(error);
+            return "TopPage";        
+        }
 
         session.setAttribute("customer", customer);
 
