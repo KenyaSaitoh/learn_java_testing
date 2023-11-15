@@ -20,8 +20,10 @@ public class CustomerService  {
     @Autowired
     private CustomerRepository customerRepos;
 
-    // 顧客を登録する
+    // サービスメソッド： 顧客を登録する
     public Customer register(Customer customer) throws CustomerExistsException { 
+        logger.info("[ CustomerService#register ]");
+
         // 生成したCustomerオブジェクトを保存する
         try {
             customerRepos.save(customer);
@@ -34,7 +36,10 @@ public class CustomerService  {
         return customer;
     }
 
+    // サービスメソッド： 顧客を検索する（主キー検索）
     public Customer findCustomer(String email) {
+        logger.info("[ CustomerService#findCustomer ]");
+
         Customer customer = customerRepos.findCustomerByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException(
                         "No user found with this email address."));

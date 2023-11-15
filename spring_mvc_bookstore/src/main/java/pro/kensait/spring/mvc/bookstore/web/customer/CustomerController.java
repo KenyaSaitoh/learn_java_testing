@@ -46,7 +46,7 @@ public class CustomerController {
         return "CustomerInputPage";
     }
 
-    // 顧客を登録する
+    // アクションメソッド： 顧客を登録する
     @PostMapping("/register")
     public String register(@Validated CustomerParam customerParam, BindingResult errors,
             Model model) {

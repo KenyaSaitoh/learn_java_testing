@@ -21,34 +21,44 @@ public class BookService {
     @Autowired
     private BookRepository bookRepos;
 
-    // ビジネスメソッド
+    // サービスメソッド： 書籍検索（主キー検索）
     public Book find(Integer bookId) {
+        logger.info("[ BookService#find ]");
+
         Optional<Book> bookOpt = bookRepos.findById(bookId);
         Book book = bookOpt.orElseThrow(() -> new RuntimeException("存在せず"));
         return book;
     }
 
-    // ビジネスメソッド（書籍検索処理）
+    // サービスメソッド： 書籍検索（全件検索）
     public List<Book> findAll() {
+        logger.info("[ BookService#findAll ]");
+
         // データベースから全書籍を抽出する
         return bookRepos.findAll();
         // TODO ソートする
     }
 
-    // ビジネスメソッド（書籍検索処理）
+    // サービスメソッド： 書籍検索（カテゴリIDとキーワードによる条件検索）
     public List<Book> searchBook(Integer categoryId, String keyword) {
+        logger.info("[ BookService#searchBook ]");
+
         // カテゴリとキーワードをキーにデータベースから書籍を検索する
         return bookRepos.searchBook(toLikeWord(keyword));
     }
 
-    // ビジネスメソッド（書籍検索処理）
+    // サービスメソッド： 書籍検索（カテゴリIDによる条件検索）
     public List<Book> searchBook(Integer categoryId) {
+        logger.info("[ BookService#searchBook ]");
+
         // キーワードをキーにデータベースから書籍を検索する
         return bookRepos.searchBook(categoryId);
     }
 
-    // ビジネスメソッド（書籍検索処理）
+    // サービスメソッド： 書籍検索（キーワードによる条件検索）
     public List<Book> searchBook(String keyword) {
+        logger.info("[ BookService#searchBook ]");
+
         // キーワードをキーにデータベースから書籍を検索する
         return bookRepos.searchBook(toLikeWord(keyword));
     }

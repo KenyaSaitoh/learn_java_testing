@@ -20,7 +20,10 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepos;
 
+    // サービスメソッド：
     public Map<String, Integer> getCategoryMap() {
+        logger.info("[ CategoryService#getCategoryMap ]");
+
         List<Category> categoryList = categoryRepos.findAll();
         Map<String, Integer> categoryMap = new HashMap<String, Integer>();
         for (Category category : categoryList) {

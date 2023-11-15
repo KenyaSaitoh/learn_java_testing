@@ -24,9 +24,13 @@ public class UserService implements UserDetailsService {
     @Autowired
     private CustomerRepository customerRepos;
 
+    // サービスメソッド： ユーザーを検索する
+    // （SpringSecurityのAuthenticationManagerBuilderに登録する）
     @Override
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
+        logger.info("[ UserService#loadUserByUsername ]");
+
         Customer customer = customerRepos.findCustomerByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException(
                         "No user found with this email address."));

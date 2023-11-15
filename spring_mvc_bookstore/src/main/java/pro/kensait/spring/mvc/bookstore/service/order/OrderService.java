@@ -36,8 +36,10 @@ public class OrderService implements OrderServiceIF {
     @Autowired
     private CustomerRepository customerRepos;
 
-    // ビジネスメソッド（注文処理）
+    // サービスメソッド： 注文する
     public void orderBooks(OrderTO orderTO) {
+        logger.info("[ OrderService#orderBooks ]");
+
         // 顧客IDをキーにデータベースから顧客を検索する
         Customer customer = customerRepos.findById(orderTO.customerId()).get();
 

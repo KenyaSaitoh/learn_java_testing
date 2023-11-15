@@ -36,9 +36,11 @@ public class LoginController {
     @Autowired
     private HttpSession session;
 
-    // ログイン
+    // アクションメソッド： ログイン
     @PostMapping("/login")
     public String login(@Validated LoginParam loginParam, BindingResult errors) {
+        logger.info("[ LoginController#login ]");
+
         if (errors.hasErrors()) {
             return "TopPage";
         }
@@ -61,7 +63,6 @@ public class LoginController {
         }
 
         // 顧客の存在チェックおよびパスワードの一致チェックを行う
-
         boolean isMatch = passwordEncoder.matches(loginParam.password(),
                 customer.getPassword());
         if (! isMatch) return "TopPage";

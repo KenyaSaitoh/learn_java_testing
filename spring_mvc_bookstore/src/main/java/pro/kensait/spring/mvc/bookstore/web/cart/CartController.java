@@ -31,6 +31,7 @@ public class CartController implements Serializable {
     @ModelAttribute("cartSession")
     public CartSession initSession(){
         logger.info("[ CartController#initSession ]");
+
         return new CartSession(new CopyOnWriteArrayList<>(),
                 BigDecimal.valueOf(0),
                 BigDecimal.valueOf(0),
@@ -41,10 +42,12 @@ public class CartController implements Serializable {
     @Autowired
     private BookService bookService;
 
-    // アクションメソッド（書籍をカートに追加する）
+    // アクションメソッド： 書籍をカートに追加する
     @PostMapping("/addBook")
     public String addBook(@RequestParam("bookId") Integer bookId,
             CartSession cartSession) {
+        logger.info("[ CartController#addBook ]");
+
         Book book = bookService.find(bookId);
 
         // 選択された書籍がカートに存在している場合は、注文数と金額を加算する
@@ -80,10 +83,12 @@ public class CartController implements Serializable {
         return "CartViewPage";
     }
 
-    // アクションメソッド（選択された書籍をカートから削除する）
+    // アクションメソッド： 選択された書籍をカートから削除する
     @PostMapping("/removeBook")
     public String removeBook(@RequestParam List<Integer> removeBookIdList,
             CartSession cartSession) {
+        logger.info("[ CartController#removeBook ]");
+
         List<CartItem> cartItems = cartSession.getCartItems();
         BigDecimal totalPrice = cartSession.getTotalPrice();
         for (CartItem cartItem : cartItems) {
@@ -103,23 +108,28 @@ public class CartController implements Serializable {
         return "CartViewPage";
     }
 
-    // アクションメソッド（カートをクリアする）
+    // アクションメソッド： カートをクリアする
     @PostMapping("/clear")
     public String clear(SessionStatus status) {
+        logger.info("[ CartController#clear ]");
+
         status.setComplete(); // ログアウトはしないでCartSessionを削除することができる
         return "CartClearPage";
     }
 
-    // アクションメソッド（カートを参照する）
+    // アクションメソッド： カートを参照する
     @GetMapping("/viewCart")
     public String viewCart() {
+        logger.info("[ CartController#viewCart ]");
+
         return "CartViewPage";
     }
 
-    // アクションメソッド（カートの内容を確定する）
+    // アクションメソッド： カートの内容を確定する
     @PostMapping("/fix")
     public String fix(HttpSession httpSession, CartSession cartSession,
             Model model) {
+        logger.info("[ CartController#fix ]");
 
         Customer customer = (Customer) httpSession.getAttribute("customer");
 

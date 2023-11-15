@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,8 @@ import pro.kensait.spring.mvc.bookstore.service.category.CategoryService;
 
 @Controller
 public class BookController {
+    private static final Logger logger = LoggerFactory.getLogger(
+            BookController.class);
 
     @Autowired
     private BookService bookService;
@@ -25,6 +29,8 @@ public class BookController {
 
     @GetMapping("/toSelect")
     public String toSelect(Model model) {
+        logger.info("[ BookController#toSelect ]");
+
         List<Book> bookList = bookService.findAll();
         model.addAttribute("bookList", bookList);
         return "BookSelectPage";
@@ -33,6 +39,8 @@ public class BookController {
     @GetMapping("/toSearch")
     public String toSearch(@ModelAttribute("searchParam") SearchParam searchParam,
             Model model) {
+        logger.info("[ BookController#toSearch ]");
+
         Map<String, Integer> categoryMap = new HashMap<>();
         categoryMap.put("", null);
         categoryMap.putAll(categoryService.getCategoryMap());
@@ -40,9 +48,11 @@ public class BookController {
         return "BookSearchPage";
     }
 
-    @GetMapping("/search")
     // アクションメソッド（書籍を検索する） 
+    @GetMapping("/search")
     public String search(SearchParam searchParam, Model model) {
+        logger.info("[ BookController#toSearch ]");
+
         // BookBeanオブジェクトを格納するリストを生成する
         List<Book> bookList;
 
