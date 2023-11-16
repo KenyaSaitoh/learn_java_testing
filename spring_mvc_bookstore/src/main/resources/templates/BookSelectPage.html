@@ -6,10 +6,12 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+  <a th:href="@{/viewHistory}">注文履歴を表示する</a>
+  <hr />
   <h2>書籍を買い物カゴに入れてください</h2>
   <hr />
   <form method="POST" class="book">
-    <table class="book-table">
+    <table class="bookstore-table">
       <thead>
         <tr>
           <th>書籍名</th>
@@ -42,5 +44,4 @@
   <br />
   <a th:href="@{/viewCart}">現在の買い物カゴの内容を表示する</a>
 </body>
-
 </html>

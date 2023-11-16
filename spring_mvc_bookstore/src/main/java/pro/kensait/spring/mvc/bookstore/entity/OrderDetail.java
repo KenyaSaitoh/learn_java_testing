@@ -1,5 +1,7 @@
 package pro.kensait.spring.mvc.bookstore.entity;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -12,7 +14,7 @@ import jakarta.persistence.Table;
 @Table(name = "ORDER_DETAIL")
 @IdClass(OrderDetailPK.class)
 public class OrderDetail {
-    // 注文取引ID
+    // 注文ID
     @Id
     @Column(name = "ORDER_TRAN_ID",
             nullable = false)
@@ -24,7 +26,7 @@ public class OrderDetail {
             nullable = false)
     private Integer orderDetailId;
 
-    // 注文明細
+    // 注文
     @ManyToOne(targetEntity = OrderTran.class)
     @JoinColumn(name = "ORDER_TRAN_ID",
             referencedColumnName = "ORDER_TRAN_ID",
@@ -36,6 +38,11 @@ public class OrderDetail {
     @JoinColumn(name = "BOOK_ID",
             referencedColumnName = "BOOK_ID")
     private Book book;
+
+    // 価格
+    // 購入時点の価格を履歴に記録するため、あえて関連は使わず独立したフィールドにする
+    @Column(name = "PRICE")
+    private BigDecimal price;
 
     // 注文数
     @Column(name = "COUNT")
@@ -51,6 +58,7 @@ public class OrderDetail {
         this.orderTranId = orderTranId;
         this.orderDetailId = orderDetailId;
         this.book = book;
+        this.price = book.getPrice();
         this.count = count;
     }
 
@@ -78,6 +86,14 @@ public class OrderDetail {
         this.book = book;
     }
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
     public int getCount() {
         return count;
     }
@@ -88,7 +104,8 @@ public class OrderDetail {
 
     @Override
     public String toString() {
-        return "OrderDetail [orderDetailId=" + orderDetailId + ", orderTran=" + orderTran
-                + ", book=" + book + ", count=" + count + "]";
+        return "OrderDetail [orderTranId=" + orderTranId + ", orderDetailId="
+                + orderDetailId + ", orderTran=" + orderTran + ", book=" + book
+                + ", price=" + price + ", count=" + count + "]";
     }
 }

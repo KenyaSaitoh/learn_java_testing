@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>OrderDetailPage</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+  <h2>注文した書籍の詳細情報</h2>
+  <hr />
+  <table th:object="${orderDetail}">
+    <tr>
+      <td>注文日</td>
+      <td th:text="*{orderTran.orderDate}"></td>
+    </tr>
+    <tr>
+      <td>書籍名</td>
+      <td th:text="*{book.bookName}"></td>
+    </tr>
+    <tr>
+      <td>出版社</td>
+      <td th:text="*{book.publisher.publisherName}"></td>
+    </tr>
+    <tr>
+      <td>カテゴリ</td>
+      <td th:text="*{book.category.categoryName}"></td>
+    </tr>
+    <tr>
+      <td>価格</td>
+      <td th:text="${price}"></td>
+    </tr>
+  </table>
+  <br />
+  <a th:href="@{/toSelect}">書籍の選択ページへ</a>
+  <br />
+  <a th:href="@{/toSearch}">書籍の検索ページへ</a>
+</body>
+</html>

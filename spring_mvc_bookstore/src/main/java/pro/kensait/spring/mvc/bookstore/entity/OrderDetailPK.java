@@ -3,7 +3,10 @@ package pro.kensait.spring.mvc.bookstore.entity;
 import java.io.Serializable;
 
 public class OrderDetailPK implements Serializable {
+    // 注文ID
     private Integer orderTranId;
+
+    // 注文明細ID
     private Integer orderDetailId;
 
     // 引数なしのコンストラクタ
@@ -16,7 +19,7 @@ public class OrderDetailPK implements Serializable {
         this.orderDetailId = orderDetailId;
     }
 
-    // 注文取引IDへのアクセサメソッド（ゲッタのみ）
+    // 注文IDへのアクセサメソッド（ゲッタのみ）
     public Integer getOrderTranId() {
         return orderTranId;
     }

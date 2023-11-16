@@ -7,7 +7,7 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
-  background-color: #f4f4f4;
+  background-color: #f0f0f0;
   line-height: 1.6;
   padding-left: 20px;
   padding-right: 20px;
@@ -46,7 +46,7 @@ td {
   padding: 5px;
 }
 
-.book-table, .cart-table {
+.bookstore-table {
   width: 100%;
   margin-bottom: 20px;
   border-collapse: collapse; /* Collapse borders */
@@ -54,26 +54,26 @@ td {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow for 3D effect */
 }
 
-.book-table th, .book-table td, .cart-table th, .cart-table td {
+.bookstore-table th, .bookstore-table td {
   padding: 10px;
   border: 1px solid #dddddd; /* Light grey border */
   text-align: left;
 }
 
-.book-table th, .cart-table th {
+.bookstore-table th {
   background-color: #35424a;
   color: white;
 }
 
-.book-table tr:nth-child(odd), .cart-table tr:nth-child(odd) {
+.bookstore-table tr:nth-child(odd) {
   background-color: #f9f9f9; /* Zebra striping */
 }
 
-.book-table tr:hover, .cart-table tr:hover {
+.bookstore-table tr:hover {
   background-color: #f1f1f1; /* Hover effect */
 }
 
-.book-table th, .cart-table th {
+.bookstore-table th {
   font-size: 1.1em;
 }
 
@@ -103,7 +103,6 @@ a {
   color: #e8491d;
   text-decoration: none;
   display: inline-block;
-  margin-top: 20px;
 }
 
 a:hover {

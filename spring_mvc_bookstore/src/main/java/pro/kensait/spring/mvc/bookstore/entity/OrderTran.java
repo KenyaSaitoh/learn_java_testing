@@ -17,13 +17,13 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "ORDER_TRAN")
 public class OrderTran {
-    // オーダーID
+    // 注文ID
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "ORDER_TRAN_ID")
     private Integer orderTranId;
 
-    // オーダー日付
+    // 注文日付
     @Column(name = "ORDER_DATE")
     private LocalDate orderDate;
 

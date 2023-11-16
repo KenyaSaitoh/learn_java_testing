@@ -1,6 +1,7 @@
 package pro.kensait.spring.mvc.bookstore.service.order;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pro.kensait.spring.mvc.bookstore.entity.Book;
 import pro.kensait.spring.mvc.bookstore.entity.Customer;
 import pro.kensait.spring.mvc.bookstore.entity.OrderDetail;
+import pro.kensait.spring.mvc.bookstore.entity.OrderDetailPK;
 import pro.kensait.spring.mvc.bookstore.entity.OrderTran;
 import pro.kensait.spring.mvc.bookstore.repository.BookRepository;
 import pro.kensait.spring.mvc.bookstore.repository.CustomerRepository;
@@ -36,7 +38,29 @@ public class OrderService implements OrderServiceIF {
     @Autowired
     private CustomerRepository customerRepos;
 
+    // サービスメソッド： 注文エンティティのリストを取得する
+    @Override
+    public List<OrderTran> getOrderHistory(Integer customerId) {
+        logger.info("[ OrderService#findOrderHistory ]");
+
+        // 顧客IDから注文エンティティのリストを取得し、返す
+        List<OrderTran> orderTranList =
+                orderTranRepos.findOrderTranByCustomer(customerId);
+        return orderTranList;
+    }
+
+    // サービスメソッド： 注文明細エンティティを取得する
+    @Override
+    public OrderDetail getOrderDetail(OrderDetailPK pk) {
+        logger.info("[ OrderService#getOrderTran ]");
+
+        // 複合主キー（注文IDと注文明細ID）から注文明細エンティティを取得し、返す
+        Optional<OrderDetail> orderDetailOpt = orderDetailRepos.findById(pk);
+        return orderDetailOpt.orElseThrow();
+    }
+
     // サービスメソッド： 注文する
+    @Override
     public void orderBooks(OrderTO orderTO) {
         logger.info("[ OrderService#orderBooks ]");
 
@@ -64,7 +88,7 @@ public class OrderService implements OrderServiceIF {
         for (CartItem cartItem : cartItems) {
             Book book = bookRepos.findById(cartItem.getBookId()).get();
 
-            // OrderDetailインスタンスの主キー値（注文明細ID）をカウントアップ
+            // OrderDetailインスタンスの主キー値（注文明細ID）をカウントアップする
             orderDetailId = orderDetailId + 1;
 
             // 新しいOrderDetailインスタンスを生成する
@@ -74,6 +98,7 @@ public class OrderService implements OrderServiceIF {
                     book,
                     cartItem.getCount());
 
+            // OrderDetailインスタンスを保存する
             orderDetailRepos.save(orderDetail);
         }
     }
