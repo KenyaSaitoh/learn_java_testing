@@ -7,8 +7,9 @@
 </head>
 <body>
 <h2>お買い上げありがとうございました</h2><hr />
+<a th:href="@{/viewHistory}">注文履歴を表示する</a><br /><br />
+<a th:href="@{/toSelect}">書籍の検索ページへ</a><br /><br />
 <form method="POST">
-  <a th:href="@{/toSelect}">書籍の検索ページへ</a><br /><br />
   <button type="submit" th:formaction="@{/processLogout}" th:text="ログアウト"></button>
   <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 </form>

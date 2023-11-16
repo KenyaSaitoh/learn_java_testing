@@ -27,9 +27,10 @@
     </tr>
     <tr>
       <td>価格</td>
-      <td th:text="${price}"></td>
+      <td th:text="*{#numbers.formatCurrency(price)}"></td>
     </tr>
   </table>
+  <hr />
   <br />
   <a th:href="@{/toSelect}">書籍の選択ページへ</a>
   <br />
