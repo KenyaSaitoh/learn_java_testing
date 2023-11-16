@@ -8,6 +8,7 @@ import pro.kensait.spring.mvc.bookstore.entity.OrderTran;
 
 public interface OrderServiceIF {
     List<OrderTran> getOrderHistory(Integer customerId);
+    List<OrderHistoryTO> getOrderHistory2(Integer customerId);
     OrderDetail getOrderDetail(OrderDetailPK pk);
     void orderBooks(OrderTO orderTO);
 }

@@ -10,12 +10,10 @@
   <hr />
   <form th:action="@{/order}" method="POST">
     <table>
-      <!-- 顧客名 -->
       <tr>
         <td>顧客名</td>
         <td th:text="${session.customer.customerName} + ' 様'"></td>
       </tr>
-      <!-- 注文内容 -->
       <tr>
         <td>注文内容</td>
         <td>
@@ -37,19 +35,16 @@
           </table>
         </td>
       </tr>
-      <!-- 注文金額合計 -->
       <tr>
         <td>注文金額合計</td>
         <td
           th:text="${#numbers.formatCurrency(cartSession.totalPrice)}"></td>
       </tr>
-      <!-- 配送料金 -->
       <tr>
         <td>配送料金</td>
         <td
           th:text="${#numbers.formatCurrency(cartSession.deliveryPrice)}"></td>
       </tr>
-      <!-- 配送先住所 -->
       <tr>
         <td>配送先住所</td>
         <td><input type="text" th:field="${cartSession.deliveryAddress}"
@@ -57,7 +52,6 @@
           <div th:if="${#fields.hasErrors('cartSession.deliveryAddress')}"
                th:errors="${cartSession.deliveryAddress}" class="error"></div></td>
       </tr>
-      <!-- 決済方法 -->
       <tr>
         <td>決済方法</td>
         <td>

@@ -27,7 +27,6 @@
       </tr>
     </table>
     <button type="submit">ログイン</button>
-    <br /><br />
     <div th:if="${#fields.hasGlobalErrors()}">
       <div th:each="err : ${#fields.globalErrors()}" th:text="${err}" class="error"></div>
     </div>

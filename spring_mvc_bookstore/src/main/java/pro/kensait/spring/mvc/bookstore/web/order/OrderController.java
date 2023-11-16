@@ -73,6 +73,25 @@ public class OrderController {
         return "OrderHistoryPage";
     }
 
+    // アクションメソッド： 注文履歴を表示する
+    @GetMapping("/viewHistory2")
+    public String viewHistory2(Model model) {
+        logger.info("[ OrderController#viewHistory2 ]");
+
+        // HTTPセッションからCustomerBeanオブジェクトを取得する
+        Customer customer = (Customer) session.getAttribute("customer");
+
+        // OrderServiceを呼び出して、注文エンティティのリスト（履歴）を取得する
+        List<OrderHistoryTO> orderHistoryList =
+                orderService.getOrderHistory2(customer.getCustomerId());
+
+        // 取得した注文エンティティリストをモデルに追加する
+        model.addAttribute("orderHistoryList", orderHistoryList);
+
+        // OrderHistoryPageに遷移する
+        return "OrderHistoryPage";
+    }
+
     // アクションメソッド： 注文明細を表示する
     @GetMapping("/viewOrderDetail")
     public String viewOrderDetail(

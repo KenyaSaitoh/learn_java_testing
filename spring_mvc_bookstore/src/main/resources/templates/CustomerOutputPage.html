@@ -9,28 +9,23 @@
   <h2>以下の内容で登録が完了しました</h2>
   <hr />
   <table>
-    <!-- 顧客ID -->
     <tr>
       <td>顧客ID</td>
       <td th:text="${customerId}"></td>
     </tr>
-    <!-- 顧客名 -->
     <tr>
       <td>顧客名</td>
       <td th:text="${customer.customerName}"></td>
     </tr>
-    <!-- 電子メール -->
     <tr>
       <td>電子メール</td>
       <td th:text="${customer.email}"></td>
     </tr>
-    <!-- 生年月日 -->
     <tr>
       <td>生年月日</td>
       <td
         th:text="${#temporals.format(customer.birthday, 'yyyy年M月d日')}"></td>
     </tr>
-    <!-- 住所 -->
     <tr>
       <td>住所</td>
       <td th:text="${customer.address}"></td>

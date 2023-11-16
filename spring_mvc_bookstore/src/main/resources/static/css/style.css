@@ -103,6 +103,11 @@ a {
   color: #e8491d;
   text-decoration: none;
   display: inline-block;
+  margin-top: 20px;
+}
+
+a.order-link {
+  margin-top: 0px;
 }
 
 a:hover {

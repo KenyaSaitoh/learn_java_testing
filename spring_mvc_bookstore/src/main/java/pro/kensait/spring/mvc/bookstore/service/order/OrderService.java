@@ -49,6 +49,17 @@ public class OrderService implements OrderServiceIF {
         return orderTranList;
     }
 
+    // サービスメソッド： 注文エンティティのリストを取得する
+    @Override
+    public List<OrderHistoryTO> getOrderHistory2(Integer customerId) {
+        logger.info("[ OrderService#findOrderHistory2 ]");
+
+        // 顧客IDから注文エンティティのリストを取得し、返す
+        List<OrderHistoryTO> orderHistoryList =
+                orderTranRepos.findOrderHistoryTOByCustomer(customerId);
+        return orderHistoryList;
+    }
+
     // サービスメソッド： 注文明細エンティティを取得する
     @Override
     public OrderDetail getOrderDetail(OrderDetailPK pk) {

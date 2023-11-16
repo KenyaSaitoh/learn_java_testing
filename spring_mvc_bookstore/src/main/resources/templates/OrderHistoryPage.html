@@ -29,7 +29,9 @@
         <td th:text="*{#numbers.formatCurrency(price)}"></td>
         <td th:text="*{count}"></td>
         <td>
-          <a th:href="@{/viewOrderDetail(tranId=*{tranId},detailId=*{detailId})}">注文内容</a>
+          <a th:href="@{/viewOrderDetail(tranId=*{tranId},detailId=*{detailId})}" class="order-link">
+             注文内容
+          </a>
         </td>
       </tr>
     </tbody>

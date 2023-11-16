@@ -10,7 +10,6 @@
   <hr />
   <form th:action="@{/search}" th:object="${searchParam}" method="GET">
     <table>
-      <!-- カテゴリ -->
       <tr>
         <td>カテゴリ</td>
         <td>
@@ -22,7 +21,6 @@
           </select>
         </td>
       </tr>
-      <!-- 検索キーワード -->
       <tr>
         <td>検索キーワード</td>
         <td><input type="text" th:field="*{keyword}" /></td>
