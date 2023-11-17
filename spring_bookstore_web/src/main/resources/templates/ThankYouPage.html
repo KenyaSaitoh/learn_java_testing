@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>ThankYouPage</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+<h2>お買い上げありがとうございました</h2><hr />
+<a th:href="@{/viewHistory}">注文履歴を表示する</a>
+<br />
+<a th:href="@{/toSelect}">書籍の選択ページへ</a>
+<br />
+<hr />
+<br />
+<form method="POST">
+  <button type="submit" th:formaction="@{/processLogout}" th:text="ログアウト"></button>
+  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+</form>
+</body>
+</html>

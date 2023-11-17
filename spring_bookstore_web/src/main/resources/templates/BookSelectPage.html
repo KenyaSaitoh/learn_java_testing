@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>BookSelectPage</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+  <a th:href="@{/viewHistory}">注文履歴を表示する（方式1）</a>
+  <br />
+  <a th:href="@{/viewHistory2}">注文履歴を表示する（方式2）</a>
+  <hr />
+  <h2>書籍を買い物カゴに入れてください</h2>
+  <hr />
+  <form method="POST" class="book">
+    <table class="bookstore-table">
+      <thead>
+        <tr>
+          <th>書籍名</th>
+          <th>著者</th>
+          <th>カテゴリ</th>
+          <th>出版社</th>
+          <th>価格</th>
+          <th>在庫数</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody th:each="book : ${bookList}" th:object="${book}">
+        <tr>
+          <td th:text="*{bookName}"></td>
+          <td th:text="*{author}"></td>
+          <td th:text="*{category.categoryName}"></td>
+          <td th:text="*{publisher.publisherName}"></td>
+          <td th:text="*{#numbers.formatCurrency(price)}"></td>
+          <td th:text="*{quantity}"></td>
+          <td>
+            <button type="submit"
+                    th:formaction="@{/addBook}"
+                    th:name="bookId"
+                    th:value="*{bookId}">買い物カゴへ</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+  </form>
+  <a th:href="@{/toSearch}">書籍の検索ページへ</a>
+  <br />
+  <a th:href="@{/viewCart}">現在の買い物カゴの内容を表示する</a>
+</body>
+</html>
