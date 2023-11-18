@@ -31,8 +31,8 @@ public class BookService {
     private EntityManager entityManager;
 
     // サービスメソッド： 書籍検索（主キー検索）
-    public Book find(Integer bookId) {
-        logger.info("[ BookService#find ]");
+    public Book getBook(Integer bookId) {
+        logger.info("[ BookService#getBook ]");
 
         Optional<Book> bookOpt = bookRepos.findById(bookId);
         Book book = bookOpt.orElseThrow(() -> new RuntimeException("存在せず"));
@@ -45,7 +45,6 @@ public class BookService {
 
         // データベースから全書籍を抽出する
         return bookRepos.findAll();
-        // TODO ソートする
     }
 
     // サービスメソッド： 書籍検索（カテゴリIDとキーワードによる条件検索）
@@ -97,7 +96,7 @@ public class BookService {
         List<Book> resultList = entityManager.createQuery(cq).getResultList();
         return resultList;
     }
-    
+
     private String toLikeWord(String keyword) {
         return "%" + keyword + "%";
     }

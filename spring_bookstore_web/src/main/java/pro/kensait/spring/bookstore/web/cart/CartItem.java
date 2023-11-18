@@ -16,7 +16,7 @@ public class CartItem {
     // 削除フラグ
     private boolean remove;
 
-    // 引数の無いコンストラクタ
+    // 引数のないコンストラクタ
     public CartItem() {
     }
 

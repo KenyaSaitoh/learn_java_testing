@@ -3,7 +3,6 @@ package pro.kensait.spring.bookstore.web.login;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -12,8 +11,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.servlet.http.HttpSession;
-import pro.kensait.spring.bookstore.apiclient.CustomerTO;
 import pro.kensait.spring.bookstore.apiclient.CustomerApiClient;
+import pro.kensait.spring.bookstore.apiclient.CustomerNotFoundException;
+import pro.kensait.spring.bookstore.apiclient.CustomerTO;
 
 @Controller
 public class LoginController {
@@ -58,7 +58,7 @@ public class LoginController {
         CustomerTO customer = null;
         try {
             customer = customerApiClient.queryCustomerByEmail(loginParam.email());
-        } catch (UsernameNotFoundException unfe) {
+        } catch (CustomerNotFoundException cnfe) {
             logger.info("[ LoginController#processLogin ] 顧客存在せずエラー");
             ObjectError error = new ObjectError("globarError",
                     new String[]{"error.email.not-exist"}, null, null);

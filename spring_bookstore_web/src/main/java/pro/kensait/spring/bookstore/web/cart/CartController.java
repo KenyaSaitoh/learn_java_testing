@@ -49,7 +49,7 @@ public class CartController implements Serializable {
         logger.info("[ CartController#addBook ]");
 
         // サービスを呼び出して、選択されたIDから書籍エンティティを取得する
-        Book book = bookService.find(bookId);
+        Book book = bookService.getBook(bookId);
 
         // 選択された書籍がカートに存在している場合は、注文数と金額を加算する
         boolean isExists = false;
@@ -76,7 +76,7 @@ public class CartController implements Serializable {
         }
         cartSession.setCartItems(cartItems);
 
-        // 合計金額を加算する
+        // 合計金額を加算し、HTTPセッションに追加する
         BigDecimal totalPrice = cartSession.getTotalPrice();
         cartSession.setTotalPrice(totalPrice.add(book.getPrice()));
 
@@ -90,7 +90,9 @@ public class CartController implements Serializable {
             CartSession cartSession) {
         logger.info("[ CartController#removeBook ]");
 
+        // 選択された書籍があったかどうかを判定
         if (removeBookIdList != null) {
+            // カート内の書籍と選択された書籍を、二重ループによってマッチングする
             List<CartItem> cartItems = cartSession.getCartItems();
             BigDecimal totalPrice = cartSession.getTotalPrice();
             for (CartItem cartItem : cartItems) {
@@ -106,7 +108,6 @@ public class CartController implements Serializable {
                 }
             }
         }
-        // TODO 配送料を再計算する
 
         // CartViewPageにフォワードする
         return "CartViewPage";
@@ -117,7 +118,10 @@ public class CartController implements Serializable {
     public String clear(SessionStatus status) {
         logger.info("[ CartController#clear ]");
 
-        status.setComplete(); // ログアウトはしないでCartSessionを削除することができる
+        // HTTPセッションからCartSessionを削除する
+        status.setComplete();
+
+        // CartClearPageにフォワードする
         return "CartClearPage";
     }
 
@@ -138,18 +142,16 @@ public class CartController implements Serializable {
 
         CustomerTO customer = (CustomerTO) httpSession.getAttribute("customer");
 
-        // TODO これいる？
-        // →@ModelAttributeで指定されたCartSessionはaddAttributeメソッド不要だが、
-        // HttpSessionに自分で名前を付けて格納したオブジェクトはaddAttributeが必要！
-        // → だが、Thymeleafで${session}使えばModelにわざわざ格納しなくても大丈夫
-        //model.addAttribute("customer", customer);
-
-        // デフォルトの配送先住所として、CustomerBeanオブジェクトの住所を設定する
+        // デフォルトの配送先住所として、CartSessionに住所を設定する
         cartSession.setDeliveryAddress(customer.address());
 
-        // 配送料金を計算し、CartBeanオブジェクトに設定する 
+        // 配送料金を計算し、CartSessionに設定する 
+        // ※1個につき250円、4個以上は一律1000円
         int totalCount = cartSession.getCartItems().size();
-        cartSession.setDeliveryPrice(BigDecimal.valueOf(totalCount * 250));
+        BigDecimal deliveryPrice = totalCount < 4 ?
+                BigDecimal.valueOf(totalCount * 250) : 
+                    BigDecimal.valueOf(1000);
+        cartSession.setDeliveryPrice(deliveryPrice);
 
         // BookOrderPageにフォワードする
         return "BookOrderPage";

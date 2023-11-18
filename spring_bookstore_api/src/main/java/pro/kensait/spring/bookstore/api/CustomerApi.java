@@ -145,7 +145,7 @@ public class CustomerApi  {
     private CustomerTO toCustomerTO(Customer customer) {
         return new CustomerTO(customer.getCustomerId(),
                 customer.getCustomerName(),
-                null, // パスワードは詰め替えない
+                customer.getPassword(),
                 customer.getEmail(),
                 customer.getBirthday(),
                 customer.getAddress());

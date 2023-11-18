@@ -27,16 +27,6 @@ QUANTITY     INT    NOT NULL,    -- 在庫数
 VERSION      BIGINT NOT NULL     -- バージョン番号
 );
 
-CREATE TABLE CUSTOMER (
-CUSTOMER_ID   INT AUTO_INCREMENT PRIMARY KEY, -- 顧客ID
-CUSTOMER_NAME VARCHAR(30) NOT NULL,           -- 顧客名
-PASSWORD      VARCHAR(60) NOT NULL,           -- パスワード
-EMAIL         VARCHAR(30) NOT NULL,           -- Eメールアドレス
-BIRTHDAY      DATE,                           -- 生年月日
-ADDRESS       VARCHAR(120),                   -- 住所（UTF-8で40文字）
-CONSTRAINT EMAIL_UNIQUE UNIQUE(EMAIL)
-);
-
 CREATE TABLE ORDER_TRAN (
 ORDER_TRAN_ID    INT AUTO_INCREMENT PRIMARY KEY, -- 注文取引ID
 ORDER_DATE       DATE NOT NULL,                  -- 注文日
@@ -44,9 +34,7 @@ CUSTOMER_ID      INT NOT NULL,                   -- 顧客ID
 TOTAL_PRICE      INT NOT NULL,                   -- 注文金額合計
 DELIVERY_PRICE   INT NOT NULL,                   -- 配送料金
 DELIVERY_ADDRESS VARCHAR(30) NOT NULL,           -- 配送先住所
-SETTLEMENT_TYPE  INT NOT NULL,                   -- 決済方法
-CONSTRAINT FK_CUSTOMER_ID FOREIGN KEY(CUSTOMER_ID)
-    REFERENCES CUSTOMER(CUSTOMER_ID)
+SETTLEMENT_TYPE  INT NOT NULL                   -- 決済方法
 );
 
 CREATE TABLE ORDER_DETAIL (
