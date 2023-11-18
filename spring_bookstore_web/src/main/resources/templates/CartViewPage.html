@@ -34,15 +34,12 @@
     <div th:text="${#numbers.formatCurrency(cartSession.totalPrice)}"></div>
     <br />
     <a th:href="@{/toSelect}">買い物を続ける</a>
-    <br /><br />
-    <button type="submit" th:formaction="@{/removeBook}"
-            th:text="選択した書籍をカートから削除する"></button>
-    <br /><br />
-    <button type="submit" th:formaction="@{/clear}"
-            th:text="買い物カゴをクリアする"></button>
-    <br /><br />
-    <button type="submit" th:formaction="@{/fix}"
-            th:text="買い物を終了し注文する"></button>
+    <br />
+    <button type="submit" th:formaction="@{/removeBook}">選択した書籍をカートから削除する</button>
+    <br />
+    <button type="submit" th:formaction="@{/clear}">買い物カゴをクリアする</button>
+    <br />
+    <button type="submit" th:formaction="@{/fix}">買い物を終了し注文する</button>
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
   </form>
   <br />

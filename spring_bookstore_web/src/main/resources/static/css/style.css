@@ -96,11 +96,11 @@ button {
 }
 
 button:hover {
-  background-color: #e8491d;
+  background-color: #1d9ee8;
 }
 
 a {
-  color: #e8491d;
+  color: #1d9ee8;
   text-decoration: none;
   display: inline-block;
   margin-top: 20px;
@@ -162,11 +162,11 @@ input[type="checkbox"]:checked {
 
 input[type="checkbox"]:focus {
   outline: none;
-  border-color: #e8491d;
+  border-color: #1d9ee8;
 }
 
 input[type="checkbox"]:hover:before {
-  border-color: #e8491d;
+  border-color: #1d9ee8;
 }
 
 .error {

@@ -37,7 +37,7 @@ public class LoginController {
     public String login(@Validated LoginParam loginParam, BindingResult errors) {
         logger.info("[ LoginController#login ]");
 
-        // 入力チェックを行い、エラーがあった場合はTopPageに遷移する
+        // 入力チェックを行い、エラーがあった場合はTopPageにフォワードする
         if (errors.hasErrors()) {
             logger.info("[ LoginController#login ] 入力エラー");
             return "TopPage";
@@ -54,22 +54,23 @@ public class LoginController {
         */
 
         // サービスを呼び出し、顧客エンティティを取得する
-        // 存在していなかった場合は、エラー処理を行う
+        // → 存在していなかった場合はグローバルエラーを追加し、TopPageにフォワードする
         Customer customer = null;
         try {
             customer = customerService.findCustomer(loginParam.email());
         } catch (UsernameNotFoundException unfe) {
             logger.info("[ LoginController#login ] 顧客存在せずエラー");
-            ObjectError error = new ObjectError("顧客存在せず", "指定されたメールアドレスは存在しません");
+            ObjectError error = new ObjectError("globarError", "指定されたメールアドレスは存在しません");
             errors.addError(error);
             return "TopPage";
         }
 
         // 顧客のパスワード一致チェックを行う
+        // → 不一致だった場合はグローバルエラーを追加し、TopPageにフォワードする
         boolean isMatch = passwordEncoder.matches(loginParam.password(), customer.getPassword());
         if (! isMatch) {
             logger.info("[ LoginController#login ] パスワード不一致エラー");
-            ObjectError error = new ObjectError("パスワード不一致", "指定されたパスワードが間違っているようです");
+            ObjectError error = new ObjectError("globarError", "指定されたパスワードが間違っているようです");
             errors.addError(error);
             return "TopPage";        
         }
@@ -81,7 +82,7 @@ public class LoginController {
         tokenProcessor.setUp(customer.getEmail(), customer.getPassword());
 
         // BookSelectPageにリダイレクトする
-        // アクションを呼び出した上で画面遷移したいため、リダイレクトする
+        // ※アクションを呼び出した上で画面フォワードしたいため、リダイレクトする
         return "redirect:/toSelect";
     }
 }

@@ -14,7 +14,9 @@
 <hr />
 <br />
 <form method="POST">
-  <button type="submit" th:formaction="@{/processLogout}" th:text="ログアウト"></button>
+  <button type="submit" th:formaction="@{/processLogout}">
+    ログアウト
+  </button>
   <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 </form>
 </body>

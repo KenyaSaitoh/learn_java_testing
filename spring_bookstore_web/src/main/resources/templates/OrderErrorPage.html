@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>OutOfStockPage</title>
+<title>OrderErrorPage</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<h2>在庫不足です</h2>
+<h2>注文処理でエラーが発生しました</h2>
 <hr />
-<div th:if="${#fields.hasErrors('outOfStockBookId')}" th:errors="*{outOfStockBookId}"
-     class="error"></div>
-<br />
+<div th:text="${errorMessage}" class="error"></div>
 <hr />
 <a th:href="@{/viewCart}">現在の買い物カゴの内容を表示する</a>
 </body>

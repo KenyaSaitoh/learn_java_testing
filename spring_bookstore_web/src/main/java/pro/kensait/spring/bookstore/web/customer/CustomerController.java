@@ -40,6 +40,8 @@ public class CustomerController {
     public String toRegister(@ModelAttribute("customerParam")
             CustomerParam customerParam) {
         logger.info("[ CustomerController#toRegister ]");
+
+        // CustomerInputPageにフォワードする
         return "CustomerInputPage";
     }
 
@@ -49,7 +51,7 @@ public class CustomerController {
             Model model) {
         logger.info("[ CustomerController#register ]");
 
-        // 入力チェックを行い、エラーがあった場合はCustomerInputPageに遷移する
+        // 入力チェックを行い、エラーがあった場合は元のCustomerInputPageにフォワードする
         if (errors.hasErrors()) {
             logger.info("[ CustomerController#register ] 入力エラー");
             return "CustomerInputPage";
@@ -64,14 +66,13 @@ public class CustomerController {
                 customerParam.address());
 
         // サービスを呼び出し、顧客エンティティを登録する
-        // 指定されたメールアドレスを持つ顧客が既に存在する場合は、エラー処理を行う
+        // → 指定されたメールアドレスを持つ顧客が既に存在する場合は、グローバルエラーを追加し、
+        // 元のCustomerInputPageにフォワードする
         try {
             customerService.register(customer);
         } catch(CustomerExistsException cee) {
             logger.info("[ CustomerController#register ] 顧客重複エラー");
-
-            // TODO
-            ObjectError error = new ObjectError("顧客重複", "すでに顧客は登録されています");
+            ObjectError error = new ObjectError("globarError", "すでに顧客は登録されています");
             errors.addError(error);
             return "CustomerInputPage";
         }
@@ -126,6 +127,7 @@ public class CustomerController {
         System.out.println("EEEE" + principal);
         */
 
+        // CustomerOutputPageにフォワードする
         return "CustomerOutputPage";
     }
 }

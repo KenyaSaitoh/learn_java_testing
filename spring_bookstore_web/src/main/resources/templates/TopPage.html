@@ -13,7 +13,7 @@
         method="POST" class="login">
     <table>
       <tr>
-        <td>Eメールアドレス</td>
+        <td>メールアドレス</td>
         <td><input type="text" th:field="*{email}" /></td>
         <td><span th:if="${#fields.hasErrors('email')}"
                   th:errors="*{email}" class="error"></span>
@@ -33,6 +33,6 @@
   </form>
   <hr />
   <div>新規のお客様</div>
-    <a th:href="@{/toRegister}">お客様のご登録</a>
+  <a th:href="@{/toRegister}">お客様のご登録</a>
 </body>
 </html>

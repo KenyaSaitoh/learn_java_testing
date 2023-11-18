@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -72,7 +71,7 @@ public class OrderController {
         // 取得した注文エンティティリストをモデルに追加する
         model.addAttribute("orderHistoryList", orderHistoryList);
 
-        // OrderHistoryPageに遷移する
+        // OrderHistoryPageにフォワードする
         return "OrderHistoryPage";
     }
 
@@ -91,8 +90,27 @@ public class OrderController {
         // 取得した注文エンティティリストをモデルに追加する
         model.addAttribute("orderHistoryList", orderHistoryList);
 
-        // OrderHistoryPageに遷移する
+        // OrderHistoryPageにフォワードする
         return "OrderHistoryPage";
+    }
+
+    // アクションメソッド： 注文履歴を表示する
+    @GetMapping("/viewHistory3")
+    public String viewHistory3(Model model) {
+        logger.info("[ OrderController#viewHistory3 ]");
+
+        // HTTPセッションからCustomerBeanオブジェクトを取得する
+        Customer customer = (Customer) session.getAttribute("customer");
+
+        // OrderServiceを呼び出して、注文エンティティのリスト（履歴）を取得する
+        List<OrderTran> orderList =
+                orderService.getOrderHistory(customer.getCustomerId());
+
+        // 取得した注文エンティティリストをモデルに追加する
+        model.addAttribute("orderList", orderList);
+
+        // OrderHistoryPage3にフォワードする
+        return "OrderHistoryPage3";
     }
 
     // アクションメソッド： 注文明細を表示する
@@ -110,17 +128,17 @@ public class OrderController {
         // 取得した注文明細エンティティをモデルに追加する
         model.addAttribute("orderDetail", orderDetail);
 
-        // OrderDetailPageに遷移する
+        // OrderDetailPageにフォワードする
         return "OrderDetailPage";
     }
 
     // アクションメソッド： 買い物カゴに入れた書籍を注文する
     @PostMapping("/order")
     public String order(@Validated CartSession cartSession, BindingResult errors,
-            SessionStatus sessionStatus) {
+            Model model, SessionStatus sessionStatus) {
         logger.info("[ OrderController#order ]");
 
-        // 入力エラーがあったら、BookOrderPageに遷移する
+        // 入力エラーがあったら、BookOrderPageにフォワードする
         if (errors.hasErrors()) {
             return "BookOrderPage";
         }
@@ -141,28 +159,28 @@ public class OrderController {
         // OrderServiceを呼び出し、注文処理を実行する
         try {
             orderService.orderBooks(orderTO);
+
+        // 在庫不足があった場合はエラーメッセージをモデルに追加し、OrderErrorPageにフォワードする
         } catch(OutOfStockException oe) {
-            // 在庫不足があった場合は、元のCartViewPageに遷移する
             logger.info("[ OrderController#order ] 在庫不足エラー");
-//            ObjectError error = new ObjectError("outOfStockBookId",
-//                    "注文された" + oe.getBookName() + "は、指定された個数、在庫に存在しません");
-            errors.reject("outOfStockBookId",
-                    "注文された" + oe.getBookName() + "は、指定された個数、在庫に存在しません");
-            return "OutOfStockPage";
+
+            model.addAttribute("errorMessage",
+                    "注文された「" + oe.getBookName() + "」は、指定された個数、在庫に存在しません");
+            return "OrderErrorPage";
+
+        // 他の顧客による更新があった場合（楽観ロックエラー）はエラーメッセージをモデルに追加し、
+        // OrderErrorPageにフォワードする
         } catch(OptimisticLockException oe) {
-            // 他の顧客による更新があった場合は、元のCartViewPageに遷移する
             logger.info("[ OrderController#order ] 楽観ロックエラー");
-            
-            // globalエラーにするには？
-            ObjectError error = new ObjectError("楽観ロックエラー", "他の顧客によって更新されています");
-            errors.addError(error);
-            return "CartViewPage";
+
+            model.addAttribute("errorMessage","他の顧客によって更新されています");
+            return "OrderErrorPage";
         }
 
         // HTTPセッションからカートを削除する
         sessionStatus.setComplete();
 
-        // ThankYouPageに遷移する
+        // ThankYouPageにフォワードする
         return "ThankYouPage";
     }
 }

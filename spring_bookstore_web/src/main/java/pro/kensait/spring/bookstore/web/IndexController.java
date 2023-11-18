@@ -15,7 +15,7 @@ public class IndexController {
     private static final Logger logger = LoggerFactory.getLogger(
             IndexController.class);
 
-    // アクションメソッド： トップ画面に遷移する
+    // アクションメソッド： トップ画面にフォワードする
     @GetMapping("/")
     public String index(@ModelAttribute("loginParam") LoginParam loginParam) {
         logger.info("[ IndexController#index ]");

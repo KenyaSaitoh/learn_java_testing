@@ -80,7 +80,7 @@ public class CartController implements Serializable {
         BigDecimal totalPrice = cartSession.getTotalPrice();
         cartSession.setTotalPrice(totalPrice.add(book.getPrice()));
 
-        // CartViewPageに遷移する
+        // CartViewPageにフォワードする
         return "CartViewPage";
     }
 
@@ -108,7 +108,7 @@ public class CartController implements Serializable {
         }
         // TODO 配送料を再計算する
 
-        // CartViewPageに遷移する
+        // CartViewPageにフォワードする
         return "CartViewPage";
     }
 
@@ -126,7 +126,7 @@ public class CartController implements Serializable {
     public String viewCart() {
         logger.info("[ CartController#viewCart ]");
 
-        // CartViewPageに遷移する
+        // CartViewPageにフォワードする
         return "CartViewPage";
     }
 
@@ -151,7 +151,7 @@ public class CartController implements Serializable {
         int totalCount = cartSession.getCartItems().size();
         cartSession.setDeliveryPrice(BigDecimal.valueOf(totalCount * 250));
 
-        // BookOrderPageに遷移する
+        // BookOrderPageにフォワードする
         return "BookOrderPage";
     }
 }
