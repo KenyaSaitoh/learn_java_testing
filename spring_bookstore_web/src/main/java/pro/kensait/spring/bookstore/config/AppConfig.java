@@ -1,4 +1,4 @@
-package pro.kensait.spring.bookstore;
+package pro.kensait.spring.bookstore.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

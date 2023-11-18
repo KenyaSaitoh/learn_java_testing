@@ -9,8 +9,7 @@
   <h2>ようこそ！テックブックストアへ</h2>
   <hr />
   <div>登録済みのお客様</div> 
-  <form th:action="@{/processLogin}" th:object="${loginParam}"
-        method="POST" class="login">
+  <form method="POST" th:object="${loginParam}" class="login">
     <table>
       <tr>
         <td>メールアドレス</td>
@@ -26,7 +25,7 @@
                   th:errors="*{password}" class="error"></span></td>
       </tr>
     </table>
-    <button type="submit">ログイン</button>
+    <button type="submit" th:formaction="@{/processLogin}">ログイン</button>
     <div th:if="${#fields.hasGlobalErrors()}">
       <div th:each="err : ${#fields.globalErrors()}" th:text="${err}" class="error"></div>
     </div>
