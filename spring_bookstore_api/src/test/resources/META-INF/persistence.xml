@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+             version="2.2">
+
+  <persistence-unit name="TestPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <class>pro.kensait.spring.mvc.bookstore.entity.Publisher</class>
+    <class>pro.kensait.spring.mvc.bookstore.entity.Category</class>
+    <class>pro.kensait.spring.mvc.bookstore.entity.Book</class>
+    <class>pro.kensait.spring.mvc.bookstore.entity.Customer</class>
+    <class>pro.kensait.spring.mvc.bookstore.entity.OrderTran</class>
+    <class>pro.kensait.spring.mvc.bookstore.entity.OrderDetail</class>
+    <properties>
+      <property name="javax.persistence.jdbc.driver"
+                value="com.mysql.cj.jdbc.Driver" />
+      <property name="javax.persistence.jdbc.url"
+                value="jdbc:mysql://localhost:3306/TESTDB" />
+      <property name="javax.persistence.jdbc.user"
+                value="TESTUSER" />
+      <property name="javax.persistence.jdbc.password"
+                value="PASSWORD" />
+      <property name="hibernate.show_sql"
+                value="true" />
+      <property name="hibernate.format_sql"
+                value="true" />
+    </properties>
+  </persistence-unit>
+
+</persistence>

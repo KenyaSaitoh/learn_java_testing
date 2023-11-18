@@ -12,8 +12,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.servlet.http.HttpSession;
+import pro.kensait.spring.bookstore.apiclient.CustomerTO;
 import pro.kensait.spring.bookstore.apiclient.CustomerApiClient;
-import pro.kensait.spring.bookstore.entity.Customer;
 
 @Controller
 public class LoginController {
@@ -55,7 +55,7 @@ public class LoginController {
 
         // サービスを呼び出し、顧客エンティティを取得する
         // → 存在していなかった場合はグローバルエラーを追加し、TopPageにフォワードする
-        Customer customer = null;
+        CustomerTO customer = null;
         try {
             customer = customerApiClient.queryCustomerByEmail(loginParam.email());
         } catch (UsernameNotFoundException unfe) {
@@ -68,7 +68,9 @@ public class LoginController {
 
         // 顧客のパスワード一致チェックを行う
         // → 不一致だった場合はグローバルエラーを追加し、TopPageにフォワードする
-        boolean isMatch = passwordEncoder.matches(loginParam.password(), customer.getPassword());
+        boolean isMatch = passwordEncoder.matches(
+                loginParam.password(),
+                customer.password());
         if (! isMatch) {
             logger.info("[ LoginController#processLogin ] パスワード不一致エラー");
             ObjectError error = new ObjectError("globarError",
@@ -81,7 +83,7 @@ public class LoginController {
         session.setAttribute("customer", customer);
 
         // 認証済みトークンを生成し、SpringSecurityに対して明示的にログインを行う
-        tokenProcessor.setUp(customer.getEmail(), customer.getPassword());
+        tokenProcessor.setUp(customer.email(), customer.password());
 
         // BookSelectPageにリダイレクトする
         // ※アクションを呼び出した上で画面フォワードしたいため、リダイレクトする

@@ -20,7 +20,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import jakarta.persistence.OptimisticLockException;
 import jakarta.servlet.http.HttpSession;
-import pro.kensait.spring.bookstore.entity.Customer;
+import pro.kensait.spring.bookstore.apiclient.CustomerTO;
 import pro.kensait.spring.bookstore.entity.OrderDetail;
 import pro.kensait.spring.bookstore.entity.OrderDetailPK;
 import pro.kensait.spring.bookstore.entity.OrderTran;
@@ -51,11 +51,11 @@ public class OrderController {
         logger.info("[ OrderController#viewHistory ]");
 
         // HTTPセッションからCustomerBeanオブジェクトを取得する
-        Customer customer = (Customer) session.getAttribute("customer");
+        CustomerTO customer = (CustomerTO) session.getAttribute("customer");
 
         // OrderServiceを呼び出して、注文エンティティのリスト（履歴）を取得する
         List<OrderTran> orderList =
-                orderService.getOrderHistory(customer.getCustomerId());
+                orderService.getOrderHistory(customer.customerId());
 
         // 取得した注文エンティティリストをフラットな構造に変換する
         List<OrderHistoryTO> orderHistoryList = new ArrayList<>(); 
@@ -85,11 +85,11 @@ public class OrderController {
         logger.info("[ OrderController#viewHistory2 ]");
 
         // HTTPセッションからCustomerBeanオブジェクトを取得する
-        Customer customer = (Customer) session.getAttribute("customer");
+        CustomerTO customer = (CustomerTO) session.getAttribute("customer");
 
         // OrderServiceを呼び出して、注文エンティティのリスト（履歴）を取得する
         List<OrderHistoryTO> orderHistoryList =
-                orderService.getOrderHistory2(customer.getCustomerId());
+                orderService.getOrderHistory2(customer.customerId());
 
         // 取得した注文エンティティリストをモデルに追加する
         model.addAttribute("orderHistoryList", orderHistoryList);
@@ -104,11 +104,11 @@ public class OrderController {
         logger.info("[ OrderController#viewHistory3 ]");
 
         // HTTPセッションからCustomerBeanオブジェクトを取得する
-        Customer customer = (Customer) session.getAttribute("customer");
+        CustomerTO customer = (CustomerTO) session.getAttribute("customer");
 
         // OrderServiceを呼び出して、注文エンティティのリスト（履歴）を取得する
         List<OrderTran> orderList =
-                orderService.getOrderHistory(customer.getCustomerId());
+                orderService.getOrderHistory(customer.customerId());
 
         // 取得した注文エンティティリストをモデルに追加する
         model.addAttribute("orderList", orderList);
@@ -148,11 +148,11 @@ public class OrderController {
         }
 
         // HTTPセッションからCustomerBeanオブジェクトを取得する
-        Customer customer = (Customer) session.getAttribute("customer");
+        CustomerTO customer = (CustomerTO) session.getAttribute("customer");
 
         // トランスファーオブジェクトを生成する
         OrderTO orderTO = new OrderTO(
-                customer.getCustomerId(),
+                customer.customerId(),
                 LocalDate.now(),
                 cartSession.getCartItems(),
                 cartSession.getTotalPrice(),

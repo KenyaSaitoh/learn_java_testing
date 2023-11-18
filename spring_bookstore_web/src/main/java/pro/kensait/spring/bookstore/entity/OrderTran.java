@@ -9,8 +9,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -28,10 +26,8 @@ public class OrderTran {
     private LocalDate orderDate;
 
     // 顧客
-    @ManyToOne(targetEntity = Customer.class)
-    @JoinColumn(name = "CUSTOMER_ID",
-            referencedColumnName = "CUSTOMER_ID")
-    private Customer customer;
+    @Column(name = "CUSTOMER_ID")
+    private Integer customerId;
 
     // 注文明細
     @OneToMany(targetEntity = OrderDetail.class,
@@ -59,10 +55,10 @@ public class OrderTran {
     }
 
     // コンストラクタ
-    public OrderTran(LocalDate orderDate, Customer customer, BigDecimal totalPrice, 
+    public OrderTran(LocalDate orderDate, Integer customerId, BigDecimal totalPrice, 
             BigDecimal deliveryPrice, String deliveryAddress, Integer settlementType) {
         this.orderDate = orderDate;
-        this.customer = customer;
+        this.customerId = customerId;
         this.totalPrice = totalPrice;
         this.deliveryPrice = deliveryPrice;
         this.deliveryAddress = deliveryAddress;
@@ -85,12 +81,12 @@ public class OrderTran {
         this.orderDate = orderDate;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Integer getCustomer() {
+        return customerId;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomer(Integer customerId) {
+        this.customerId = customerId;
     }
 
     public List<OrderDetail> getOrderDetails() {
@@ -136,7 +132,7 @@ public class OrderTran {
     @Override
     public String toString() {
         return "OrderTran [orderTranId=" + orderTranId + ", orderDate=" + orderDate
-                + ", customer=" + customer + ", orderDetails=" + orderDetails
+                + ", customerId=" + customerId + ", orderDetails=" + orderDetails
                 + ", totalPrice=" + totalPrice + ", deliveryPrice=" + deliveryPrice
                 + ", deliveryAddress=" + deliveryAddress + ", settlementType="
                 + settlementType + "]";

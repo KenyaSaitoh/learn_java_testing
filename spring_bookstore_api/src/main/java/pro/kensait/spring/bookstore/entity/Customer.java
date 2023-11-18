@@ -26,7 +26,7 @@ public class Customer {
     @Column(name = "PASSWORD")
     private String password;
 
-    // Eメールアドレス
+    // メールアドレス
     @Column(name = "EMAIL")
     private String email;
 

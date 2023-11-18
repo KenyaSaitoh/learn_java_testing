@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import jakarta.servlet.http.HttpSession;
+import pro.kensait.spring.bookstore.apiclient.CustomerTO;
 import pro.kensait.spring.bookstore.entity.Book;
-import pro.kensait.spring.bookstore.entity.Customer;
 import pro.kensait.spring.bookstore.service.book.BookService;
 
 @Controller
@@ -136,7 +136,7 @@ public class CartController implements Serializable {
             Model model) {
         logger.info("[ CartController#fix ]");
 
-        Customer customer = (Customer) httpSession.getAttribute("customer");
+        CustomerTO customer = (CustomerTO) httpSession.getAttribute("customer");
 
         // TODO これいる？
         // →@ModelAttributeで指定されたCartSessionはaddAttributeメソッド不要だが、
@@ -145,7 +145,7 @@ public class CartController implements Serializable {
         //model.addAttribute("customer", customer);
 
         // デフォルトの配送先住所として、CustomerBeanオブジェクトの住所を設定する
-        cartSession.setDeliveryAddress(customer.getAddress());
+        cartSession.setDeliveryAddress(customer.address());
 
         // 配送料金を計算し、CartBeanオブジェクトに設定する 
         int totalCount = cartSession.getCartItems().size();

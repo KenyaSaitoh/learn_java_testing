@@ -11,13 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.persistence.OptimisticLockException;
 import pro.kensait.spring.bookstore.entity.Book;
-import pro.kensait.spring.bookstore.entity.Customer;
 import pro.kensait.spring.bookstore.entity.OrderDetail;
 import pro.kensait.spring.bookstore.entity.OrderDetailPK;
 import pro.kensait.spring.bookstore.entity.OrderTran;
 import pro.kensait.spring.bookstore.entity.Stock;
 import pro.kensait.spring.bookstore.repos.BookRepository;
-import pro.kensait.spring.bookstore.repos.CustomerRepository;
 import pro.kensait.spring.bookstore.repos.OrderDetailRepository;
 import pro.kensait.spring.bookstore.repos.OrderTranRepository;
 import pro.kensait.spring.bookstore.repos.StockRepository;
@@ -34,9 +32,6 @@ public class OrderService implements OrderServiceIF {
 
     @Autowired
     private OrderDetailRepository orderDetailRepos;
-
-    @Autowired
-    private CustomerRepository customerRepos;
 
     @Autowired
     private BookRepository bookRepos;
@@ -106,13 +101,10 @@ public class OrderService implements OrderServiceIF {
             }
         }
 
-        // 顧客IDをキーにデータベースから顧客を検索する
-        Customer customer = customerRepos.findById(orderTO.customerId()).get();
-
         // 新しいOrderTranインスタンスを生成する
         OrderTran orderTran = new OrderTran(
                 orderTO.orderDate(),
-                customer,
+                orderTO.customerId(),
                 orderTO.totalPrice(),
                 orderTO.deliveryPrice(),
                 orderTO.deliveryAddress(),
