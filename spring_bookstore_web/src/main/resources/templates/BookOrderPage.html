@@ -8,7 +8,7 @@
 <body>
   <h2>以下の内容で注文します</h2>
   <hr />
-  <form th:action="@{/order}" method="POST">
+  <form method="POST">
     <table>
       <tr>
         <td>顧客名</td>
@@ -70,7 +70,7 @@
       </tr>
     </table>
     <br />
-    <button type="submit">注文する</button>
+    <button type="submit" th:formaction="@{/order}">注文する</button>
     <br />
     <a th:href="@{/toSelect}">買い物を続ける</a>
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>

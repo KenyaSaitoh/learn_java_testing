@@ -20,8 +20,8 @@
         <th></th>
       </tr>
     </thead>
-    <tbody th:each="orderDetail : ${orderList.orderDetails}" th:object="${orderDetail}">
-      <tr>
+    <tbody th:each="orderTran : ${orderList}" th:object="${orderTran}">
+      <tr th:each="orderDetail : *{orderDetails}" th:object="${orderDetail}">
         <td th:text="*{orderTran.orderDate}"></td>
         <td th:text="*{orderTran.orderTranId}"></td>
         <td th:text="*{book.bookName}"></td>

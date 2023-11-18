@@ -7,6 +7,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,6 +41,9 @@ public class OrderController {
 
     @Autowired
     private HttpSession session;
+
+    @Autowired
+    private MessageSource messageSource;
 
     // アクションメソッド： 注文履歴を表示する
     @GetMapping("/viewHistory")
@@ -164,8 +168,10 @@ public class OrderController {
         } catch(OutOfStockException oe) {
             logger.info("[ OrderController#order ] 在庫不足エラー");
 
-            model.addAttribute("errorMessage",
-                    "注文された「" + oe.getBookName() + "」は、指定された個数、在庫に存在しません");
+            String errorMessage = messageSource.getMessage("error.order.outof-stock",
+                    new Object[]{oe.getBookName()}, null);
+
+            model.addAttribute("errorMessage",errorMessage);
             return "OrderErrorPage";
 
         // 他の顧客による更新があった場合（楽観ロックエラー）はエラーメッセージをモデルに追加し、
@@ -173,7 +179,10 @@ public class OrderController {
         } catch(OptimisticLockException oe) {
             logger.info("[ OrderController#order ] 楽観ロックエラー");
 
-            model.addAttribute("errorMessage","他の顧客によって更新されています");
+            String errorMessage = messageSource.getMessage("error.order.optimistic-lock",
+                    null, null);
+
+            model.addAttribute("errorMessage",errorMessage);
             return "OrderErrorPage";
         }
 

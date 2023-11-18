@@ -8,8 +8,7 @@
 <body>
   <h2>お客様の情報を登録します</h2>
   <hr />
-  <form th:action="@{/register}" th:object="${customerParam}"
-        method="POST" class="customer">
+  <form method="POST" th:object="${customerParam}" class="customer">
     <table>
       <tr>
         <td>顧客名（必須）</td>
@@ -42,7 +41,7 @@
                   th:errors="*{address}" class="error"></span></td>
       </tr>
     </table>
-    <button type="submit">お客様の情報を登録する</button>
+    <button type="submit" th:formaction="@{/register}">お客様の情報を登録する</button>
     <br />
     <a th:href="@{/}">トップページへ戻る</a>
     <br />

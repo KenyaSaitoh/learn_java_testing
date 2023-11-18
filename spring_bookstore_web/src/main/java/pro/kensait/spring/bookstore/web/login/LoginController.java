@@ -12,8 +12,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.servlet.http.HttpSession;
+import pro.kensait.spring.bookstore.apiclient.CustomerApiClient;
 import pro.kensait.spring.bookstore.entity.Customer;
-import pro.kensait.spring.bookstore.service.customer.CustomerService;
 
 @Controller
 public class LoginController {
@@ -21,7 +21,7 @@ public class LoginController {
             LoginController.class);
 
     @Autowired
-    private CustomerService customerService;
+    private CustomerApiClient customerApiClient;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -33,13 +33,13 @@ public class LoginController {
     private HttpSession session;
 
     // アクションメソッド： ログイン
-    @PostMapping("/login")
+    @PostMapping("/processLogin")
     public String login(@Validated LoginParam loginParam, BindingResult errors) {
-        logger.info("[ LoginController#login ]");
+        logger.info("[ LoginController#processLogin ]");
 
         // 入力チェックを行い、エラーがあった場合はTopPageにフォワードする
         if (errors.hasErrors()) {
-            logger.info("[ LoginController#login ] 入力エラー");
+            logger.info("[ LoginController#processLogin ] 入力エラー");
             return "TopPage";
         }
 
@@ -57,10 +57,11 @@ public class LoginController {
         // → 存在していなかった場合はグローバルエラーを追加し、TopPageにフォワードする
         Customer customer = null;
         try {
-            customer = customerService.findCustomer(loginParam.email());
+            customer = customerApiClient.queryCustomerByEmail(loginParam.email());
         } catch (UsernameNotFoundException unfe) {
-            logger.info("[ LoginController#login ] 顧客存在せずエラー");
-            ObjectError error = new ObjectError("globarError", "指定されたメールアドレスは存在しません");
+            logger.info("[ LoginController#processLogin ] 顧客存在せずエラー");
+            ObjectError error = new ObjectError("globarError",
+                    new String[]{"error.email.not-exist"}, null, null);
             errors.addError(error);
             return "TopPage";
         }
@@ -69,8 +70,9 @@ public class LoginController {
         // → 不一致だった場合はグローバルエラーを追加し、TopPageにフォワードする
         boolean isMatch = passwordEncoder.matches(loginParam.password(), customer.getPassword());
         if (! isMatch) {
-            logger.info("[ LoginController#login ] パスワード不一致エラー");
-            ObjectError error = new ObjectError("globarError", "指定されたパスワードが間違っているようです");
+            logger.info("[ LoginController#processLogin ] パスワード不一致エラー");
+            ObjectError error = new ObjectError("globarError",
+                    new String[]{"error.password.unmatch"}, null, null);
             errors.addError(error);
             return "TopPage";        
         }

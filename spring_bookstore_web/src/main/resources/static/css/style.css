@@ -23,7 +23,7 @@ hr {
   margin-bottom: 10px;
 }
 
-form.login {
+form.login, form.search {
   width: 700px;
   margin: 20px auto;
 }
@@ -93,6 +93,11 @@ button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin-top: 20px;
+}
+
+button.cart-button {
+  margin-top: 0px;
 }
 
 button:hover {
@@ -112,6 +117,16 @@ a.order-link {
 
 a:hover {
   text-decoration: underline;
+}
+
+a.links {
+    display: inline-block; /* リンクをインラインブロック要素として表示 */
+    margin-right: 15px;   /* 右側のマージンを設定してリンク間のスペースを作成 */
+}
+
+/* 最後のリンクのマージンを除去 */
+.links a:last-child {
+    margin-right: 0;
 }
 
 input[type="checkbox"] {

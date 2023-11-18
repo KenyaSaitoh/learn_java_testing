@@ -7,6 +7,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -53,13 +55,16 @@ public class WebSecurityConfig {
     */
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .requestMatchers("/").permitAll()
-                .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                .requestMatchers(HttpMethod.GET, "/login").denyAll()
+                .requestMatchers(HttpMethod.POST, "/processLogin").permitAll()
+                .requestMatchers(HttpMethod.GET, "/processLogin").denyAll()
                 .requestMatchers("/toRegister").permitAll()
                 .requestMatchers(HttpMethod.POST, "/register").permitAll()
                 .requestMatchers(HttpMethod.GET, "/register").denyAll() // GETの直接アクセスは禁止
                 .anyRequest().authenticated());
+
+        http.formLogin(formLogin ->
+                formLogin.loginPage("/").permitAll());
+
         http.logout((logout) -> logout
             .logoutRequestMatcher(new AntPathRequestMatcher("/processLogout"))// デフォルトは"logout"
             .logoutSuccessUrl("/logoutSuccess") // デフォルトは"login?logout"
@@ -68,6 +73,11 @@ public class WebSecurityConfig {
         // denyとpermitの順序関係を確認する!
 
         return http.build();
+    }
+
+    @Bean(name = "passwordEncoder")
+    public PasswordEncoder BCPasswordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 
     /*

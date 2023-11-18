@@ -8,15 +8,14 @@
 <body>
   <h2>条件を入力して書籍を検索してください</h2>
   <hr />
-  <form th:action="@{/search}" th:object="${searchParam}" method="GET">
+  <form method="GET" th:object="${searchParam}" class="search">
     <table>
       <tr>
         <td>カテゴリ</td>
         <td>
           <select th:field="*{categoryId}">
             <option th:each="category : ${categoryMap}"
-                    th:text="${category.key}"
-                    th:value="${category.value}">
+                    th:text="${category.key}" th:value="${category.value}">
             </option>
           </select>
         </td>
@@ -26,7 +25,9 @@
         <td><input type="text" th:field="*{keyword}" /></td>
       </tr>
     </table>
-    <button type="submit">検索実行</button>
+    <button type="submit" th:formaction="@{/search}">検索実行（静的クエリ）</button>
+    <br />
+    <button type="submit" th:formaction="@{/search2}">検索実行（動的クエリ）</button>
   </form>
   <br />
   <hr />

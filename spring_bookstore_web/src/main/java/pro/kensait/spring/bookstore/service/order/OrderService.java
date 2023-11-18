@@ -85,7 +85,7 @@ public class OrderService implements OrderServiceIF {
         for (CartItem cartItem : orderTO.cartItems()) {
 
             // 書籍IDをキーに在庫テーブルから在庫エンティティを取得する
-            Stock stock = stockRepository.findById(cartItem.getBookId()).get();
+            Stock stock = stockRepository.findByIdWithLock(cartItem.getBookId());
 
             // 在庫が0未満になる場合は、例外を送出する
             int remaining = stock.getQuantity() - cartItem.getCount();

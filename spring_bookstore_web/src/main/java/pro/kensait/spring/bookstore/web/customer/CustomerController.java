@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.servlet.http.HttpSession;
+import pro.kensait.spring.bookstore.apiclient.CustomerApiClient;
 import pro.kensait.spring.bookstore.entity.Customer;
 import pro.kensait.spring.bookstore.service.customer.CustomerExistsException;
-import pro.kensait.spring.bookstore.service.customer.CustomerService;
 import pro.kensait.spring.bookstore.web.login.TokenProcessor;
 
 @Controller
@@ -31,7 +31,7 @@ public class CustomerController {
     private TokenProcessor tokenProcessor;
 
     @Autowired
-    private CustomerService customerService;
+    private CustomerApiClient customerApiClient;
 
     @Autowired
     private HttpSession session;
@@ -51,7 +51,16 @@ public class CustomerController {
             Model model) {
         logger.info("[ CustomerController#register ]");
 
-        // 入力チェックを行い、エラーがあった場合は元のCustomerInputPageにフォワードする
+        // 住所に対する入力チェック（正しい都道府県名で始まっているか）を行い、
+        // エラーがあった場合はBindingResultに追加する
+        // ※他のエラーメッセージと一括して表示するため、画面遷移はしない
+        if (! customerParam.address().isBlank() &&
+                ! checkAddressPrefectures(customerParam.address())) {
+            logger.info("[ CustomerController#register ] 住所入力エラー");
+            errors.rejectValue("address", "error.address.prefecture");
+        }
+
+        // 入力チェックエラーがあった場合は元のCustomerInputPageにフォワードする
         if (errors.hasErrors()) {
             logger.info("[ CustomerController#register ] 入力エラー");
             return "CustomerInputPage";
@@ -66,13 +75,15 @@ public class CustomerController {
                 customerParam.address());
 
         // サービスを呼び出し、顧客エンティティを登録する
-        // → 指定されたメールアドレスを持つ顧客が既に存在する場合は、グローバルエラーを追加し、
-        // 元のCustomerInputPageにフォワードする
         try {
-            customerService.register(customer);
+            customerApiClient.createCustomer(customer);
+
+        // 指定されたメールアドレスを持つ顧客がすでに存在する場合は、グローバルエラーを追加し、
+        // 元のCustomerInputPageにフォワードする
         } catch(CustomerExistsException cee) {
             logger.info("[ CustomerController#register ] 顧客重複エラー");
-            ObjectError error = new ObjectError("globarError", "すでに顧客は登録されています");
+            ObjectError error = new ObjectError("globarError",
+                    new String[]{"error.customer.exists"}, null, null);
             errors.addError(error);
             return "CustomerInputPage";
         }
@@ -130,4 +141,26 @@ public class CustomerController {
         // CustomerOutputPageにフォワードする
         return "CustomerOutputPage";
     }
+
+    private boolean checkAddressPrefectures(String address) {
+        for (String prefecture : PREFECTURES) {
+            if (address.startsWith(prefecture)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private static final String[] PREFECTURES = {
+            "北海道", "青森県", "岩手県", "宮城県", "秋田県", 
+            "山形県", "福島県", "茨城県", "栃木県", "群馬県", 
+            "埼玉県", "千葉県", "東京都", "神奈川県", "新潟県", 
+            "富山県", "石川県", "福井県", "山梨県", "長野県", 
+            "岐阜県", "静岡県", "愛知県", "三重県", "滋賀県", 
+            "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県", 
+            "鳥取県", "島根県", "岡山県", "広島県", "山口県", 
+            "徳島県", "香川県", "愛媛県", "高知県", "福岡県", 
+            "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", 
+            "鹿児島県", "沖縄県"
+        };
 }

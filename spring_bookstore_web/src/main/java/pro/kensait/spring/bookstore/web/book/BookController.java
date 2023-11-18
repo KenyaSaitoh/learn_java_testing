@@ -27,36 +27,42 @@ public class BookController {
     @Autowired
     private CategoryService categoryService;
 
+    // アクションメソッド： BookSelectPageにフォワードする
     @GetMapping("/toSelect")
     public String toSelect(Model model) {
         logger.info("[ BookController#toSelect ]");
 
-        List<Book> bookList = bookService.findAll();
+        // 書籍エンティティのリストを取得し、モデルに追加する
+        List<Book> bookList = bookService.getAll();
         model.addAttribute("bookList", bookList);
+
+        // BookSelectPageにフォワードする
         return "BookSelectPage";
     }
 
+    // アクションメソッド： BookSearchPageにフォワードする
     @GetMapping("/toSearch")
     public String toSearch(@ModelAttribute("searchParam") SearchParam searchParam,
             Model model) {
         logger.info("[ BookController#toSearch ]");
 
+        // カテゴリを表すマップ（セレクトボックス用）を取得し、モデルに追加する
         Map<String, Integer> categoryMap = new HashMap<>();
         categoryMap.put("", null);
         categoryMap.putAll(categoryService.getCategoryMap());
         model.addAttribute("categoryMap", categoryMap);
+
+        // BookSearchPageにフォワードする
         return "BookSearchPage";
     }
 
-    // アクションメソッド（書籍を検索する） 
+    // アクションメソッド： 書籍を検索する（静的なクエリを使用する）
     @GetMapping("/search")
     public String search(SearchParam searchParam, Model model) {
-        logger.info("[ BookController#toSearch ]");
+        logger.info("[ BookController#search ]");
 
-        // BookBeanオブジェクトを格納するリストを生成する
+        // サービスを呼び出し、入力された検索条件から書籍エンティティを検索する
         List<Book> bookList;
-
-        // 入力された検索条件から書籍を検索する
         if (searchParam.categoryId() != null) {
             if (searchParam.keyword() != null && ! searchParam.keyword().isEmpty()) {
                 bookList = bookService.searchBook(searchParam.categoryId(),
@@ -68,12 +74,30 @@ public class BookController {
             if (searchParam.keyword() != null && ! searchParam.keyword().isEmpty()) {
                 bookList = bookService.searchBook(searchParam.keyword());
             } else {
-                bookList = bookService.findAll();
+                bookList = bookService.getAll();
             }
         }
 
+        // 取得した書籍エンティティのリストを、モデルに追加する
         model.addAttribute("bookList", bookList);
 
+        // BookSearchPageにフォワードする
+        return "BookSelectPage";
+    }
+
+    // アクションメソッド： 書籍を検索する（動的なクエリを使用する）
+    @GetMapping("/search2")
+    public String search2(SearchParam searchParam, Model model) {
+        logger.info("[ BookController#search2 ]");
+
+        // 入力された検索条件から動的にクエリを構築し、書籍を検索する
+        List<Book> bookList = bookService.searchBookWithCriteria(
+                searchParam.categoryId(), searchParam.keyword());
+
+        // 取得した書籍エンティティのリストを、モデルに追加する
+        model.addAttribute("bookList", bookList);
+
+        // BookSearchPageにフォワードする
         return "BookSelectPage";
     }
 }
