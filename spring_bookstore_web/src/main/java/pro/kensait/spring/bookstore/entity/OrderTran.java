@@ -132,9 +132,8 @@ public class OrderTran {
     @Override
     public String toString() {
         return "OrderTran [orderTranId=" + orderTranId + ", orderDate=" + orderDate
-                + ", customerId=" + customerId + ", orderDetails=" + orderDetails
-                + ", totalPrice=" + totalPrice + ", deliveryPrice=" + deliveryPrice
-                + ", deliveryAddress=" + deliveryAddress + ", settlementType="
-                + settlementType + "]";
+                + ", customerId=" + customerId + ", totalPrice=" + totalPrice
+                + ", deliveryPrice=" + deliveryPrice + ", deliveryAddress="
+                + deliveryAddress + ", settlementType=" + settlementType + "]";
     }
 }

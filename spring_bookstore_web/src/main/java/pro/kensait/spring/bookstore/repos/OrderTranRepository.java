@@ -15,7 +15,7 @@ import pro.kensait.spring.bookstore.service.order.OrderHistoryTO;
 public interface OrderTranRepository extends JpaRepository<OrderTran, Integer> {
     @Query("SELECT ot FROM OrderTran ot INNER JOIN ot.orderDetails od "
             + "WHERE ot.customerId = :customerId "
-            + "ORDER BY ot.orderDate, od.orderDetailId DESC")
+            + "ORDER BY ot.orderDate DESC, ot.orderTranId DESC, od.orderDetailId")
     List<OrderTran> findOrderTranByCustomer(@Param("customerId") Integer customerId);
 
     @Query("SELECT new pro.kensait.spring.bookstore.service.order.OrderHistoryTO "
@@ -23,7 +23,7 @@ public interface OrderTranRepository extends JpaRepository<OrderTran, Integer> {
             + "od.book.publisher.publisherName, od.price, od.count) "
             + "FROM OrderTran ot INNER JOIN ot.orderDetails od "
             + "WHERE ot.customerId = :customerId "
-            + "ORDER BY ot.orderDate, od.orderDetailId DESC")
+            + "ORDER BY ot.orderDate DESC, ot.orderTranId DESC, od.orderDetailId")
     List<OrderHistoryTO> findOrderHistoryTOByCustomer(
             @Param("customerId") Integer customerId);
 }
