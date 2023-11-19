@@ -39,7 +39,7 @@ public class OrderService implements OrderServiceIF {
     @Autowired
     private StockRepository stockRepository;
 
-    // サービスメソッド：注文エンティティのリストを取得する
+    // サービスメソッド：注文エンティティのリストを取得する（方式1）
     @Override
     public List<OrderTran> getOrderHistory(Integer customerId) {
         logger.info("[ OrderService#findOrderHistory ]");
@@ -50,7 +50,7 @@ public class OrderService implements OrderServiceIF {
         return orderTranList;
     }
 
-    // サービスメソッド：注文エンティティのリストを取得する
+    // サービスメソッド：注文エンティティのリストを取得する（方式1）
     @Override
     public List<OrderHistoryTO> getOrderHistory2(Integer customerId) {
         logger.info("[ OrderService#findOrderHistory2 ]");
@@ -61,7 +61,7 @@ public class OrderService implements OrderServiceIF {
         return orderHistoryList;
     }
 
-    // サービスメソッド：注文明細エンティティを取得する
+    // サービスメソッド：注文エンティティを取得する
     @Override
     public OrderTran getOrderTran(Integer orderTranId) {
         logger.info("[ OrderService#getOrderTran ]");

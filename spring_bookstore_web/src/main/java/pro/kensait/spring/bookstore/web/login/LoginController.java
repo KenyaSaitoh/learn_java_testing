@@ -95,6 +95,10 @@ public class LoginController {
             String redirectUrl = savedRequest.getRedirectUrl();
             try {
                 response.sendRedirect(redirectUrl);
+                // ・null値を返してメソッドを抜ける
+                // ・レスポンスがコミットされた状態で別のリダイレクトが呼ばれてしまうため
+                // ・else句を書いても結局"return null"は必要
+                return null;
             } catch (IOException ioe) {
                 throw new RuntimeException(ioe);
             }
