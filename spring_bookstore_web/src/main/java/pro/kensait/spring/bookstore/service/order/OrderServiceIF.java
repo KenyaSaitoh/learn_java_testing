@@ -9,6 +9,7 @@ import pro.kensait.spring.bookstore.entity.OrderTran;
 public interface OrderServiceIF {
     List<OrderTran> getOrderHistory(Integer customerId);
     List<OrderHistoryTO> getOrderHistory2(Integer customerId);
+    OrderTran getOrderTran(Integer tranId);
     OrderDetail getOrderDetail(OrderDetailPK pk);
-    void orderBooks(OrderTO orderTO);
+    OrderTran orderBooks(OrderTO orderTO);
 }

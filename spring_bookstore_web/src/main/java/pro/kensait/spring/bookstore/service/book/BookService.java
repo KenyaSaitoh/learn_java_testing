@@ -30,7 +30,7 @@ public class BookService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    // サービスメソッド： 書籍検索（主キー検索）
+    // サービスメソッド：書籍検索（主キー検索）
     public Book getBook(Integer bookId) {
         logger.info("[ BookService#getBook ]");
 
@@ -39,7 +39,7 @@ public class BookService {
         return book;
     }
 
-    // サービスメソッド： 書籍検索（全件検索）
+    // サービスメソッド：書籍検索（全件検索）
     public List<Book> getAll() {
         logger.info("[ BookService#getAll ]");
 
@@ -47,7 +47,7 @@ public class BookService {
         return bookRepos.findAll();
     }
 
-    // サービスメソッド： 書籍検索（カテゴリIDとキーワードによる条件検索）
+    // サービスメソッド：書籍検索（カテゴリIDとキーワードによる条件検索）
     public List<Book> searchBook(Integer categoryId, String keyword) {
         logger.info("[ BookService#searchBook ]");
 
@@ -55,7 +55,7 @@ public class BookService {
         return bookRepos.searchBook(toLikeWord(keyword));
     }
 
-    // サービスメソッド： 書籍検索（カテゴリIDによる条件検索）
+    // サービスメソッド：書籍検索（カテゴリIDによる条件検索）
     public List<Book> searchBook(Integer categoryId) {
         logger.info("[ BookService#searchBook ]");
 
@@ -63,7 +63,7 @@ public class BookService {
         return bookRepos.searchBook(categoryId);
     }
 
-    // サービスメソッド： 書籍検索（キーワードによる条件検索）
+    // サービスメソッド：書籍検索（キーワードによる条件検索）
     public List<Book> searchBook(String keyword) {
         logger.info("[ BookService#searchBook ]");
 
@@ -71,7 +71,7 @@ public class BookService {
         return bookRepos.searchBook(toLikeWord(keyword));
     }
 
-    // サービスメソッド： 書籍検索（動的クエリの構築）
+    // サービスメソッド：書籍検索（動的クエリの構築）
     public List<Book> searchBookWithCriteria(Integer categoryId, String keyword) {
         logger.info("[ BookService#searchBookWithCriteria ]");
 

@@ -24,7 +24,7 @@ public class UserService implements UserDetailsService {
     @Autowired
     private CustomerRepository customerRepos;
 
-    // サービスメソッド： ユーザーを検索する
+    // サービスメソッド：ユーザーを検索する
     // （SpringSecurityのAuthenticationManagerBuilderに登録する）
     @Override
     public UserDetails loadUserByUsername(String email)

@@ -27,7 +27,7 @@ public class BookController {
     @Autowired
     private CategoryService categoryService;
 
-    // アクションメソッド： BookSelectPageにフォワードする
+    // アクションメソッド：BookSelectPageにフォワードする
     @GetMapping("/toSelect")
     public String toSelect(Model model) {
         logger.info("[ BookController#toSelect ]");
@@ -40,7 +40,7 @@ public class BookController {
         return "BookSelectPage";
     }
 
-    // アクションメソッド： BookSearchPageにフォワードする
+    // アクションメソッド：BookSearchPageにフォワードする
     @GetMapping("/toSearch")
     public String toSearch(@ModelAttribute("searchParam") SearchParam searchParam,
             Model model) {
@@ -56,7 +56,7 @@ public class BookController {
         return "BookSearchPage";
     }
 
-    // アクションメソッド： 書籍を検索する（静的なクエリを使用する）
+    // アクションメソッド：書籍を検索する（静的なクエリを使用する）
     @GetMapping("/search")
     public String search(SearchParam searchParam, Model model) {
         logger.info("[ BookController#search ]");
@@ -85,7 +85,7 @@ public class BookController {
         return "BookSelectPage";
     }
 
-    // アクションメソッド： 書籍を検索する（動的なクエリを使用する）
+    // アクションメソッド：書籍を検索する（動的なクエリを使用する）
     @GetMapping("/search2")
     public String search2(SearchParam searchParam, Model model) {
         logger.info("[ BookController#search2 ]");

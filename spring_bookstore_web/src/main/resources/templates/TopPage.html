@@ -29,6 +29,7 @@
     <div th:if="${#fields.hasGlobalErrors()}">
       <div th:each="err : ${#fields.globalErrors()}" th:text="${err}" class="error"></div>
     </div>
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
   </form>
   <hr />
   <div>新規のお客様</div>

@@ -1,15 +1,21 @@
 package pro.kensait.spring.bookstore.web.login;
 
+import java.io.IOException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.savedrequest.RequestCache;
+import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import pro.kensait.spring.bookstore.apiclient.CustomerApiClient;
 import pro.kensait.spring.bookstore.apiclient.CustomerNotFoundException;
@@ -30,11 +36,18 @@ public class LoginController {
     private TokenProcessor tokenProcessor;
 
     @Autowired
+    private RequestCache requestCache;
+
+    @Autowired
     private HttpSession session;
 
-    // アクションメソッド： ログイン
+    // アクションメソッド：ログイン
     @PostMapping("/processLogin")
-    public String login(@Validated LoginParam loginParam, BindingResult errors) {
+    public String processLogin(
+            @Validated LoginParam loginParam,
+            BindingResult errors,
+            HttpServletRequest request,
+            HttpServletResponse response) {
         logger.info("[ LoginController#processLogin ]");
 
         // 入力チェックを行い、エラーがあった場合はTopPageにフォワードする
@@ -42,16 +55,6 @@ public class LoginController {
             logger.info("[ LoginController#processLogin ] 入力エラー");
             return "TopPage";
         }
-
-        /*
-        UserDetails customer = loginService.loadUserByUsername(loginParam.email());
-        if (loginParam.password().equals(customer.getPassword())) {
-            session.setAttribute("customer", customer);
-            System.out.println("############ redirect:/toSelect");
-            return "redirect:/toSelect"; // アクションからアクションを呼び出いのでリダイレクトする
-        }
-        return "TopPage";
-        */
 
         // サービスを呼び出し、顧客エンティティを取得する
         // → 存在していなかった場合はグローバルエラーを追加し、TopPageにフォワードする
@@ -85,8 +88,20 @@ public class LoginController {
         // 認証済みトークンを生成し、SpringSecurityに対して明示的にログインを行う
         tokenProcessor.setUp(customer.email(), customer.password());
 
-        // BookSelectPageにリダイレクトする
-        // ※アクションを呼び出した上で画面フォワードしたいため、リダイレクトする
+        // SavedRequestを取得し、ログイン前アクセスURLがあるかチェックする
+        SavedRequest savedRequest = requestCache.getRequest(request, response);
+        if (savedRequest != null) {
+            // SavedRequestからログイン前アクセスURLを取り出し、リダイレクトする
+            String redirectUrl = savedRequest.getRedirectUrl();
+            try {
+                response.sendRedirect(redirectUrl);
+            } catch (IOException ioe) {
+                throw new RuntimeException(ioe);
+            }
+        }
+
+        // ログイン前アクセスがなかった場合は、BookSelectPageにリダイレクトする
+        // ※アクションを呼び出した上で画面遷移したいため、リダイレクトする
         return "redirect:/toSelect";
     }
 }

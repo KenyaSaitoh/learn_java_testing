@@ -39,7 +39,7 @@ public class OrderService implements OrderServiceIF {
     @Autowired
     private StockRepository stockRepository;
 
-    // サービスメソッド： 注文エンティティのリストを取得する
+    // サービスメソッド：注文エンティティのリストを取得する
     @Override
     public List<OrderTran> getOrderHistory(Integer customerId) {
         logger.info("[ OrderService#findOrderHistory ]");
@@ -50,7 +50,7 @@ public class OrderService implements OrderServiceIF {
         return orderTranList;
     }
 
-    // サービスメソッド： 注文エンティティのリストを取得する
+    // サービスメソッド：注文エンティティのリストを取得する
     @Override
     public List<OrderHistoryTO> getOrderHistory2(Integer customerId) {
         logger.info("[ OrderService#findOrderHistory2 ]");
@@ -61,19 +61,29 @@ public class OrderService implements OrderServiceIF {
         return orderHistoryList;
     }
 
-    // サービスメソッド： 注文明細エンティティを取得する
+    // サービスメソッド：注文明細エンティティを取得する
+    @Override
+    public OrderTran getOrderTran(Integer orderTranId) {
+        logger.info("[ OrderService#getOrderTran ]");
+
+        // 主キー（注文ID）から注文エンティティを取得し、返す
+        Optional<OrderTran> orderTranOpt = orderTranRepos.findById(orderTranId);
+        return orderTranOpt.orElseThrow();
+    }
+
+    // サービスメソッド：注文明細エンティティを取得する
     @Override
     public OrderDetail getOrderDetail(OrderDetailPK pk) {
-        logger.info("[ OrderService#getOrderTran ]");
+        logger.info("[ OrderService#getOrderDetail ]");
 
         // 複合主キー（注文IDと注文明細ID）から注文明細エンティティを取得し、返す
         Optional<OrderDetail> orderDetailOpt = orderDetailRepos.findById(pk);
         return orderDetailOpt.orElseThrow();
     }
 
-    // サービスメソッド： 注文する
+    // サービスメソッド：注文する
     @Override
-    public void orderBooks(OrderTO orderTO) {
+    public OrderTran orderBooks(OrderTO orderTO) {
         logger.info("[ OrderService#orderBooks ]");
 
         // カートに追加された書籍毎に、在庫の残り個数をチェックする
@@ -135,5 +145,8 @@ public class OrderService implements OrderServiceIF {
             // OrderDetailインスタンスを保存する
             orderDetailRepos.save(orderDetail);
         }
+
+        // 更新済みのOrderTranを返す
+        return orderTran;
     }
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.persistence.OptimisticLockException;
 import jakarta.servlet.http.HttpSession;
@@ -45,12 +46,12 @@ public class OrderController {
     @Autowired
     private MessageSource messageSource;
 
-    // アクションメソッド： 注文履歴を表示する
+    // アクションメソッド：注文履歴を表示する（方式1）
     @GetMapping("/viewHistory")
     public String viewHistory(Model model) {
         logger.info("[ OrderController#viewHistory ]");
 
-        // HTTPセッションからCustomerBeanオブジェクトを取得する
+        // HTTPセッションからCustomerTOを取得する
         CustomerTO customer = (CustomerTO) session.getAttribute("customer");
 
         // OrderServiceを呼び出して、注文エンティティのリスト（履歴）を取得する
@@ -79,12 +80,12 @@ public class OrderController {
         return "OrderHistoryPage";
     }
 
-    // アクションメソッド： 注文履歴を表示する
+    // アクションメソッド：注文履歴を表示する（方式2）
     @GetMapping("/viewHistory2")
     public String viewHistory2(Model model) {
         logger.info("[ OrderController#viewHistory2 ]");
 
-        // HTTPセッションからCustomerBeanオブジェクトを取得する
+        // HTTPセッションからCustomerTOを取得する
         CustomerTO customer = (CustomerTO) session.getAttribute("customer");
 
         // OrderServiceを呼び出して、注文エンティティのリスト（履歴）を取得する
@@ -98,12 +99,12 @@ public class OrderController {
         return "OrderHistoryPage";
     }
 
-    // アクションメソッド： 注文履歴を表示する
+    // アクションメソッド：注文履歴を表示する（方式3）
     @GetMapping("/viewHistory3")
     public String viewHistory3(Model model) {
         logger.info("[ OrderController#viewHistory3 ]");
 
-        // HTTPセッションからCustomerBeanオブジェクトを取得する
+        // HTTPセッションからCustomerTOを取得する
         CustomerTO customer = (CustomerTO) session.getAttribute("customer");
 
         // OrderServiceを呼び出して、注文エンティティのリスト（履歴）を取得する
@@ -117,7 +118,7 @@ public class OrderController {
         return "OrderHistoryPage3";
     }
 
-    // アクションメソッド： 注文明細を表示する
+    // アクションメソッド：注文明細を表示する
     @GetMapping("/viewOrderDetail")
     public String viewOrderDetail(
             @RequestParam("tranId") Integer tranId,
@@ -136,10 +137,13 @@ public class OrderController {
         return "OrderDetailPage";
     }
 
-    // アクションメソッド： 買い物カゴに入れた書籍を注文する
+    // アクションメソッド：買い物カゴに入れた書籍を注文する
     @PostMapping("/order")
-    public String order(@Validated CartSession cartSession, BindingResult errors,
-            Model model, SessionStatus sessionStatus) {
+    public String order(@Validated CartSession cartSession,
+            BindingResult errors,
+            Model model,
+            RedirectAttributes redirectAttributes,
+            SessionStatus sessionStatus) {
         logger.info("[ OrderController#order ]");
 
         // 入力エラーがあったら、BookOrderPageにフォワードする
@@ -147,7 +151,7 @@ public class OrderController {
             return "BookOrderPage";
         }
 
-        // HTTPセッションからCustomerBeanオブジェクトを取得する
+        // HTTPセッションからCustomerTOを取得する
         CustomerTO customer = (CustomerTO) session.getAttribute("customer");
 
         // トランスファーオブジェクトを生成する
@@ -161,8 +165,9 @@ public class OrderController {
                 cartSession.getSettlementType());
 
         // OrderServiceを呼び出し、注文処理を実行する
+        OrderTran orderTran = null;
         try {
-            orderService.orderBooks(orderTO);
+            orderTran = orderService.orderBooks(orderTO);
 
         // 在庫不足があった場合はエラーメッセージをモデルに追加し、OrderErrorPageにフォワードする
         } catch(OutOfStockException oe) {
@@ -186,10 +191,30 @@ public class OrderController {
             return "OrderErrorPage";
         }
 
+        // 注文IDをRedirectAttributesに格納する（引き回し用）
+        redirectAttributes.addAttribute("orderTranId", orderTran.getOrderTranId());
+
         // HTTPセッションからカートを削除する
         sessionStatus.setComplete();
 
-        // ThankYouPageにフォワードする
-        return "ThankYouPage";
+        // OrderSuccessPageにリダイレクトする
+        return "redirect:/viewOrderSuccess";
+    }
+
+    // アクションメソッド：注文に成功した内容を表示する
+    @GetMapping("/viewOrderSuccess")
+    public String viewOrderSuccess(
+            @RequestParam("orderTranId") Integer orderTranId,
+            Model model) {
+        logger.info("[ OrderController#viewOrderSuccess ]");
+
+        // OrderServiceを呼び出し、指定された注文エンティティを取得する
+        OrderTran orderTran = orderService.getOrderTran(orderTranId);
+
+        // 取得した注文明細エンティティをモデルに追加する
+        model.addAttribute("orderTran", orderTran);
+
+        // OrderSuccessPageにフォワードする
+        return "OrderSuccessPage";
     }
 }

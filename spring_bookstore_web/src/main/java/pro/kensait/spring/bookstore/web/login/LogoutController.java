@@ -16,7 +16,7 @@ public class LogoutController {
     @Autowired
     private HttpSession session;
 
-    // アクションメソッド： ログアウト
+    // アクションメソッド：ログアウト
     @GetMapping("/logoutSuccess")  // このURLにリダイレクトされるのでGET
     public String logoutSuccess() {
         logger.info("LogoutController#logoutSuccess");

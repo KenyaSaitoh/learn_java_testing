@@ -42,7 +42,7 @@ public class CartController implements Serializable {
     @Autowired
     private BookService bookService;
 
-    // アクションメソッド： 書籍をカートに追加する
+    // アクションメソッド：書籍をカートに追加する
     @PostMapping("/addBook")
     public String addBook(@RequestParam("bookId") Integer bookId,
             CartSession cartSession) {
@@ -84,7 +84,7 @@ public class CartController implements Serializable {
         return "CartViewPage";
     }
 
-    // アクションメソッド： 選択された書籍をカートから削除する
+    // アクションメソッド：選択された書籍をカートから削除する
     @PostMapping("/removeBook")
     public String removeBook(@RequestParam List<Integer> removeBookIdList,
             CartSession cartSession) {
@@ -113,7 +113,7 @@ public class CartController implements Serializable {
         return "CartViewPage";
     }
 
-    // アクションメソッド： カートをクリアする
+    // アクションメソッド：カートをクリアする
     @PostMapping("/clear")
     public String clear(SessionStatus status) {
         logger.info("[ CartController#clear ]");
@@ -125,7 +125,7 @@ public class CartController implements Serializable {
         return "CartClearPage";
     }
 
-    // アクションメソッド： カートを参照する
+    // アクションメソッド：カートを参照する
     @GetMapping("/viewCart")
     public String viewCart() {
         logger.info("[ CartController#viewCart ]");
@@ -134,7 +134,7 @@ public class CartController implements Serializable {
         return "CartViewPage";
     }
 
-    // アクションメソッド： カートの内容を確定する
+    // アクションメソッド：カートの内容を確定する
     @PostMapping("/fix")
     public String fix(HttpSession httpSession, CartSession cartSession,
             Model model) {
