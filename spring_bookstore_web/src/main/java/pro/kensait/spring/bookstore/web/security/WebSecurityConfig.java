@@ -51,6 +51,7 @@ public class WebSecurityConfig {
         http.logout((logout) -> logout
             .logoutRequestMatcher(new AntPathRequestMatcher("/processLogout"))// デフォルトは"logout"
             .logoutSuccessUrl("/logoutSuccess") // デフォルトは"login?logout"
+            .invalidateHttpSession(true)
             .permitAll());
 
         return http.build();
