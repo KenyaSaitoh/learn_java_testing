@@ -1,0 +1,180 @@
+import groovy.io.FileType
+import groovy.sql.Sql
+
+// 初期化処理
+buildscript {
+    ext {
+        springBootVer = "3.2.0"
+        thymeleafJava8timeVer = "3.0.4.RELEASE"
+        thymeleafSpringSec6Ver = "3.1.2.RELEASE"
+        springSecOauth2Ver = "6.1.5"
+        springTxVer = "6.0.11"
+        jeeVer = "10.0.0"
+        jeeTxVer = "2.0.1"
+        mybatisStarterVer = "3.0.2"
+        mySqlConnectorVer = "8.0.33"
+        junitVer = "5.10.1"
+        junitPlatformVer = "1.10.1"
+        mockitoVer = "5.7.0"
+        mockitoInlineVer = "5.2.0"
+        dbunitVer = "2.7.3"
+        restAssuredVer = "5.3.2"
+        wireMockVer = "3.0.1"
+        selenideVer = "7.0.2"
+    }
+    // リポジトリ設定
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "mysql:mysql-connector-java:${mySqlConnectorVer}"
+    }
+}
+
+subprojects {
+    // プラグイン読み込み
+    apply plugin: "java"
+    apply plugin: "eclipse"
+    apply plugin: "jacoco"
+
+    // リポジトリ設定
+    repositories {
+        mavenCentral()
+    }
+
+    // 文字コード設定
+    def defaultEncoding = "UTF-8"
+    tasks.withType(AbstractCompile).each { it.options.encoding = defaultEncoding }
+
+    // Gradle7.x対応
+    processResources {
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    }
+
+    // 依存関係設定
+    dependencies {
+        testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVer}"
+        testImplementation "org.junit.jupiter:junit-jupiter-params:${junitVer}"
+        testImplementation "org.junit.platform:junit-platform-launcher:${junitPlatformVer}"
+        testImplementation "org.junit.platform:junit-platform-suite-api:${junitPlatformVer}"
+        testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVer}"
+        testImplementation "org.mockito:mockito-inline:${mockitoInlineVer}"
+        testImplementation "org.dbunit:dbunit:${dbunitVer}"
+        testImplementation "io.rest-assured:rest-assured:${restAssuredVer}"
+        testImplementation "com.github.tomakehurst:wiremock:${wireMockVer}"
+        testImplementation "com.codeborne:selenide:${selenideVer}"
+    }
+
+    // JUnit5設定
+    test {
+        // JUnit platform を使う設定
+        useJUnitPlatform()
+
+        testLogging {
+            // テスト時の標準出力と標準エラー出力を表示する
+            showStandardStreams true
+            // イベントを出力する
+            events "started", "skipped", "passed", "failed"
+            // 例外発生時の出力設定
+            exceptionFormat "full"
+        }
+    }
+
+    // Javaプラグイン設定
+    sourceCompatibility = 17
+    targetCompatibility = 17
+
+    // ソースフォルダの設定
+    sourceSets {
+        main {
+            java {
+                srcDir "src/main/java"
+            }
+            resources {
+                srcDir "src/main/resources"
+            }
+        }
+        test {
+            java {
+                srcDir "src/test/java"
+            }
+            resources {
+                srcDir "src/test/resources"
+            }
+        }
+    }
+
+    // 初期データをセットアップする（MySQL）
+    task setupMySQL doLast {
+        execSqlDir("$projectDir/sql/mysql", envconf.mysql.general.url,
+                envconf.mysql.general.user, envconf.mysql.general.password,
+                envconf.mysql.driverClass)
+    }
+
+    // タスクをグループ化する
+    [setupMySQL]*.group = "setup-init-data"
+}
+
+// 設定情報の読み込み
+def envconf = {
+    def slurper = new ConfigSlurper()
+    slurper.binding = project.properties
+    def confLocation = System.properties["user.home"]
+    def file = new File(confLocation + "/env-conf.gradle")
+    if (!file.exists()) {
+        file = new File("$projectDir/env-conf.gradle")
+        if (!file.exists()) return null
+    }
+    return new ConfigSlurper().parse(file.toURL())
+}()
+
+// 設定情報を拡張プロパティにセット
+ext.envconf = envconf
+
+// SQLを発行するメソッド
+def execSqlDir(dir, url, user, password, driverClass) {
+    new File(dir).listFiles().sort{a, b -> a.name <=> b.name}.each{ File f ->
+        ant.sql(url: url,
+            userid: user,
+            password: password,
+            driver: driverClass,
+            classpath: buildscript.configurations.classpath.asPath,
+            encoding: "UTF-8",
+            onerror: "continue") {
+                fileset(file: f)
+            }
+    }
+}
+
+// SQLを発行するメソッド（ファイル指定）
+def execSql(file, url, user, password, driverClass) {
+    ant.sql(
+        driver: driverClass,
+        url: url,
+        userid: user,
+        password: password,
+        classpath: buildscript.configurations.classpath.asPath,
+        encoding: "UTF-8",
+        onerror: "continue") {
+            fileset(file: file)
+        }
+}
+
+// MySQLを初期化する
+task initMySQL doLast {
+    println envconf
+    execSql("$projectDir/sql/mysql/DROP_MYSQL_USER.sql",
+            envconf.mysql.general.baseUrl, "root", envconf.mysql.rootPassword,
+            envconf.mysql.driverClass)
+    execSql("$projectDir/sql/mysql/DROP_MYSQL_DATABASE.sql",
+            envconf.mysql.general.baseUrl, "root", envconf.mysql.rootPassword,
+            envconf.mysql.driverClass)
+    execSql("$projectDir/sql/mysql/CREATE_MYSQL_USER.sql",
+            envconf.mysql.general.baseUrl, "root", envconf.mysql.rootPassword,
+            envconf.mysql.driverClass)
+    execSql("$projectDir/sql/mysql/CREATE_MYSQL_DATABASE.sql",
+            envconf.mysql.general.baseUrl, "root", envconf.mysql.rootPassword,
+            envconf.mysql.driverClass)
+}
+
+[initMySQL]*.group = "init-database"
