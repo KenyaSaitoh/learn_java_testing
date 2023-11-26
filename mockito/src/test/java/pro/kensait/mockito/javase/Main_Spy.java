@@ -3,17 +3,17 @@ package pro.kensait.mockito.javase;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Main_1 {
+public class Main_Spy {
 
     @SuppressWarnings("unchecked")
     public static void main(String[] args) {
         {
             System.out.println("***** snippet_1 *****");
-            Map<Integer, String> mock = mock(Map.class);
+            Map<Integer, String> mock = spy(Map.class);
 
             when(mock.get(0)).thenReturn("foo");
             when(mock.get(1)).thenReturn("bar");
@@ -24,22 +24,22 @@ public class Main_1 {
                 String value = mock.get(key);
                 System.out.println(key + " => " + value);
             }
-            System.out.println("-- end --");
+            System.out.println("");
         }
         {
             System.out.println("***** snippet_2 *****");
-            Map<Date, String> mock = mock(Map.class);
+            Map<String, String> mock = spy(Map.class);
 
-            Date now = new Date();
-            when(mock.get(now)).thenReturn("2023年12月1日");
+            when(mock.get(new String("1"))).thenReturn("one");
 
-            String value = mock.get(new Date());
-            System.out.println("one => " + value);
-            System.out.println("-- end --");
+            // インスタンスが別でも等価であれば同じ引数と見なされる
+            String value = mock.get(new String("1"));
+            System.out.println(value);
+            System.out.println("");
         }
         {
             System.out.println("***** snippet_3 *****");
-            Map<Integer, String> mock = mock(Map.class);
+            Map<Integer, String> mock = spy(Map.class);
 
             when(mock.get(0)).thenReturn("foo");
             when(mock.get(1)).thenReturn("bar");
@@ -51,12 +51,11 @@ public class Main_1 {
                 String value = mock.get(key);
                 System.out.println(key + " => " + value);
             }
-            System.out.println("-- end --");
+            System.out.println("");
         }
-
         {
             System.out.println("***** snippet_4 *****");
-            Map<Integer, String> mock = mock(Map.class);
+            Map<Integer, String> mock = spy(Map.class);
 
             when(mock.get(anyInt())).thenReturn("foo");
 
@@ -65,7 +64,23 @@ public class Main_1 {
                 String value = mock.get(key);
                 System.out.println(key + " => " + value);
             }
-            System.out.println("-- end --");
+            System.out.println("");
+        }
+        {
+            System.out.println("***** snippet_5 *****");
+            Map<Integer, String> mock = spy(HashMap.class);
+
+            mock.put(0, "foo");
+            mock.put(1, "bar");
+            mock.put(2, "baz");
+            when(mock.get(2)).thenReturn("bazbaz");
+
+            List<Integer> keyList = List.of(0, 1, 2);
+            for (Integer key : keyList) {
+                String value = mock.get(key);
+                System.out.println(key + " => " + value);
+            }
+            System.out.println("");
         }
     }
 }

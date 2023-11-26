@@ -1,11 +1,11 @@
 package pro.kensait.java.calc;
 
-public class Calc_4 {
+public class CalcStateful {
     private int x;
     private int y;
     private int z;
 
-    public Calc_4(int x, int y, int z) {
+    public CalcStateful(int x, int y, int z) {
         this.x = x;
         this.y = y;
         this.z = z;

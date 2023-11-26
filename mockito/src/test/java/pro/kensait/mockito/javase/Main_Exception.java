@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-public class Main_2 {
+public class Main_Exception {
 
     @SuppressWarnings("unchecked")
     public static void main(String[] args) {
@@ -27,7 +27,7 @@ public class Main_2 {
                     System.out.println(ex);
                 }
             }
-            System.out.println("-- end --");
+            System.out.println("");
         }
         {
             System.out.println("***** snippet_2 *****");
@@ -47,7 +47,7 @@ public class Main_2 {
                     System.out.println(ex);
                 }
             }
-            System.out.println("-- end --");
+            System.out.println("");
         }
     }
 }

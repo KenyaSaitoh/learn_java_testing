@@ -8,9 +8,10 @@ public class ShippingService {
     private static final float DIAMOND_NET_RATE = 0.75F;
     private static final int GOLD_COST_LIMIT = 4000;
     private static final float GOLD_NET_RATE = 0.9F;
-    private CostCalculator costCalculator;
 
-    public ShippingService(CostCalculator costCalculator) {
+    private CostCalculatorIF costCalculator;
+
+    public ShippingService(CostCalculatorIF costCalculator) {
         this.costCalculator = costCalculator;
     }
 

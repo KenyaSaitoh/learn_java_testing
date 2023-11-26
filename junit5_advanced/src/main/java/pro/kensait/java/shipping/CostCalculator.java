@@ -1,6 +1,6 @@
 package pro.kensait.java.shipping;
 
-public class CostCalculator {
+public class CostCalculator implements CostCalculatorIF {
     private Integer basePrice;
 
     public CostCalculator(Integer basePrice) {
@@ -8,14 +8,17 @@ public class CostCalculator {
         this.basePrice = basePrice;
     }
 
+    @Override
     public Integer getBasePrice() {
         return basePrice;
     }
 
+    @Override
     public void setBasePrice(Integer basePrice) {
         this.basePrice = basePrice;
     }
 
+    @Override
     public Integer calcShippingCost(BaggageType baggageType,
             RegionType regionType) {
         // 金額計算なので、本質的にはBigDecimal型を使うべきだが、テスト技法を学ぶ上では

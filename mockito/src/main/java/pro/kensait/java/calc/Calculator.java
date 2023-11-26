@@ -1,6 +1,6 @@
 package pro.kensait.java.calc;
 
-public class Calc_2 {
+public class Calculator {
     public int compute(int x, int y, int z) {
         int answer = (x + y) * z;
         if (answer < 0) {

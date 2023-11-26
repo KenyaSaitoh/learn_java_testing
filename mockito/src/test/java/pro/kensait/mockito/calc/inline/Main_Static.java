@@ -1,29 +1,30 @@
-package pro.kensait.mockito.calc.basic;
+package pro.kensait.mockito.calc.inline;
 
 import static org.mockito.Mockito.*;
 
-import pro.kensait.java.calc.Calc_4;
+import org.mockito.MockedStatic;
 
-public class Main_4 {
+import pro.kensait.java.calc.CalcStatic;
+
+public class Main_Static {
 
     public static void main(String[] args) {
-        // Calc_4クラスのモックを振る舞い毎に生成する
-        Calc_4 calc1 = new Calc_4(5, 10, 8);
-        Calc_4 mock1 = spy(calc1);
-        Calc_4 calc2 = new Calc_4(5, 10, 3);
-        Calc_4 mock2 = spy(calc2);
-        Calc_4 calc3 = new Calc_4(5, 10, -1);
-        Calc_4 mock3 = spy(calc3);
+        // CalcStaticクラスのスタティックモックを生成する
+        MockedStatic<CalcStatic> mock = mockStatic(CalcStatic.class);
 
         // モックの振る舞いを定義する
-        when(mock1.compute()).thenReturn(100); // ケース1
-        when(mock2.compute()).thenReturn(50); // ケース2
-        when(mock3.compute()).thenThrow(new IllegalArgumentException()); // ケース3
+        // ケース1
+        mock.when(() -> CalcStatic.compute(5, 10, 3)).thenReturn(50);
+        // ケース2
+        mock.when(() -> CalcStatic.compute(5, 10, 8)).thenReturn(100);
+        // ケース3
+        mock.when(() -> CalcStatic.compute(5, 10, -1))
+                .thenThrow(new IllegalArgumentException("エラー"));
 
         // モックを呼び出す
         try {
             // ケース1の挙動を確認する
-            int answer1 = mock1.compute();
+            int answer1 = CalcStatic.compute(5, 10, 3);
             System.out.println("answer1 => " + answer1);
         } catch (RuntimeException re) {
             System.out.println(re);
@@ -31,7 +32,7 @@ public class Main_4 {
 
         try {
             // ケース2の挙動を確認する
-            int answer2 = mock2.compute();
+            int answer2 = CalcStatic.compute(5, 10, 8);
             System.out.println("answer2 => " + answer2);
         } catch (RuntimeException re) {
             System.out.println(re);
@@ -39,7 +40,7 @@ public class Main_4 {
 
         try {
             // ケース3の挙動を確認する
-            int answer3 = mock3.compute();
+            int answer3 = CalcStatic.compute(5, 10, -1);
             System.out.println("answer3 => " + answer3);
         } catch (RuntimeException re) {
             System.out.println(re);
