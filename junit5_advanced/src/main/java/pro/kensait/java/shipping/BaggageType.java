@@ -1,5 +1,8 @@
 package pro.kensait.java.shipping;
 
+/*
+ * 荷物種別
+ */
 public enum BaggageType {
     SMALL(1.0F),
     MIDDLE(1.5F),

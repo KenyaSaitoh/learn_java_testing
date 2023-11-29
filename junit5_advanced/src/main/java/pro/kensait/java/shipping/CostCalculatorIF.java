@@ -1,5 +1,8 @@
 package pro.kensait.java.shipping;
 
+/*
+ * 配送料計算ロジックを表すインタフェース
+ */
 public interface CostCalculatorIF {
     // ベースプライスを取得するメソッド
     Integer getBasePrice();

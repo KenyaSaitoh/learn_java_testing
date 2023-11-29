@@ -2,7 +2,11 @@ package pro.kensait.java.timeofday;
 
 import java.time.LocalTime;
 
-public class TimeManager {
+/*
+ * 時間管理のためのビジネスロジック（モック対象）
+ */
+public class TimeManager implements TimeManagerIF {
+    // 現在時刻から、朝、午後、夜のいずれかの時間帯なのかを判定して、返す
     public TimeOfDay getCurrent() {
         LocalTime now = LocalTime.now();
         int hour = now.getHour();
@@ -15,6 +19,7 @@ public class TimeManager {
         }
     }
 
+    // getCurrent()メソッドと同様の処理（スタティックメソッド）
     public static TimeOfDay getStaticCurrent() {
         LocalTime now = LocalTime.now();
         int hour = now.getHour();

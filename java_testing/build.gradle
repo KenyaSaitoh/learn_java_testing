@@ -21,7 +21,9 @@ buildscript {
         restAssuredVer = "5.3.2"
         wireMockVer = "3.0.1"
         selenideVer = "7.0.2"
+        findbugsVer = "3.0.2"
     }
+
     // リポジトリ設定
     repositories {
         mavenCentral()
@@ -47,7 +49,7 @@ subprojects {
     tasks.withType(AbstractCompile).each { it.options.encoding = defaultEncoding }
 
     // Gradle7.x対応
-    processResources {
+    tasks.withType(ProcessResources) {
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
     }
 
@@ -55,6 +57,7 @@ subprojects {
     dependencies {
         testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVer}"
         testImplementation "org.junit.jupiter:junit-jupiter-params:${junitVer}"
+        testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVer}"
         testImplementation "org.junit.platform:junit-platform-launcher:${junitPlatformVer}"
         testImplementation "org.junit.platform:junit-platform-suite-api:${junitPlatformVer}"
         testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVer}"
@@ -63,6 +66,7 @@ subprojects {
         testImplementation "io.rest-assured:rest-assured:${restAssuredVer}"
         testImplementation "com.github.tomakehurst:wiremock:${wireMockVer}"
         testImplementation "com.codeborne:selenide:${selenideVer}"
+        testImplementation "com.google.code.findbugs:jsr305:${findbugsVer}"
     }
 
     // JUnit5設定
@@ -77,6 +81,8 @@ subprojects {
             events "started", "skipped", "passed", "failed"
             // 例外発生時の出力設定
             exceptionFormat "full"
+            // テスト完了後にレポートを生成
+            finalizedBy jacocoTestReport
         }
     }
 

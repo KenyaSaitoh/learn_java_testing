@@ -1,5 +1,8 @@
 package pro.kensait.java.timeofday;
 
+/*
+ * 現在時刻を表すメッセージを生成するビジネスロジック（テスト対象）
+ */
 public class MessageCreator {
     private TimeManager timeService;
 
