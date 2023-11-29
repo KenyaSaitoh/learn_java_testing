@@ -20,8 +20,8 @@ rootProject.name = 'java_testing'
 rootProject.projectDir = new File(settingsDir, 'java_testing')
 
 includeFlat \
-'junit5_basic',
-'junit5_advanced',
+'junit5',
+'junit5_dependency',
 'mockito',
 'mockito_junit5',
 'dbunit',

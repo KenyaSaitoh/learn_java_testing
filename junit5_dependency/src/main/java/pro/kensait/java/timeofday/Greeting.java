@@ -4,7 +4,7 @@ package pro.kensait.java.timeofday;
  * 挨拶メッセージを生成するビジネスロジック（テスト対象）
  */
 public class Greeting {
-    // 時間管理のためのビジネスロジック
+    // 時間管理のためのビジネスロジック（依存性注入対象）
     private TimeManagerIF timeManager;
 
     // コンストラクタ
@@ -19,7 +19,7 @@ public class Greeting {
         return message;
     }
 
-    // 現在時刻から挨拶のメッセージを取得し返す（new演算子で取得）
+    // 現在時刻から挨拶のメッセージを取得し返す（new演算子で生成）
     public String getMessage_2() {
         TimeManager timeManager = new TimeManager();
         TimeOfDay timeOfDay = timeManager.getCurrent();
