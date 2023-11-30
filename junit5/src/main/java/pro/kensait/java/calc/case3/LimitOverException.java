@@ -1,6 +1,9 @@
 package pro.kensait.java.calc.case3;
 
-public class LimitOverException extends Exception {
+/*
+ * 極度オーバー時に発生する例外
+ */
+public class LimitOverException extends RuntimeException {
 
     public LimitOverException() {
         super();

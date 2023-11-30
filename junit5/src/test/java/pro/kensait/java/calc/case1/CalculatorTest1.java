@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+/*
+ * ステートを保持しない計算機（Calculatorクラス）をテストする
+ * テストメソッド内で、テスト対象クラスのインスタンスを生成する
+ */
 public class CalculatorTest1 {
 
     @Test
@@ -22,6 +26,6 @@ public class CalculatorTest1 {
     
     @Test
     public void testFail() {
-        fail("意図的に失敗させる");
+        // fail("意図的に失敗させる");
     }
 }

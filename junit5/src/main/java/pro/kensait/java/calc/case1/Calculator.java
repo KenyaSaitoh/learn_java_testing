@@ -1,5 +1,8 @@
 package pro.kensait.java.calc.case1;
 
+/*
+ * ステートを保持しない（ステートレスな）計算機
+ */
 public class Calculator {
 
     // 足し算を実行する
