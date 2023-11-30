@@ -1,5 +1,8 @@
 package pro.kensait.java.shipping;
 
+/*
+ * CostCalculatorIFをimplementsしたモック
+ */
 public class MockCostCalculator implements CostCalculatorIF {
 
     @Override
