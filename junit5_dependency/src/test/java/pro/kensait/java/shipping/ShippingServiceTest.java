@@ -13,12 +13,20 @@ import org.junit.jupiter.api.Test;
  * ShippingServiceを対象にしたテストクラス
  */
 public class ShippingServiceTest {
-    // すべてのテストメソッド共通の変数はここに宣言する
-    private ShippingService shippingService;
-    private MockCostCalculator mockCostCalculator;
+    /*
+     *  すべてのテストメソッドに共通的な変数はフィールドとして宣言する
+     */
+
+    // テスト対象クラス
+    ShippingService shippingService;
+
+    // 共通的な変数
+    LocalDate receiveDate;
     Client diamondClient;
     Client goldClient;
-    LocalDate receiveDate;
+
+    // 共通的な変数のうち、モック対象
+    MockCostCalculator mockCostCalculator;
 
     // 変数を初期化する
     @BeforeEach

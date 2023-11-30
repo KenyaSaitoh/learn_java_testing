@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -16,18 +15,28 @@ import org.mockito.MockitoAnnotations;
  * ShippingServiceを対象にしたテストクラス
  */
 public class ShippingServiceTest {
-    // すべてのテストメソッド共通の変数はここに宣言する
-    @Mock ShippingService shippingService;
-    @Mock CostCalculatorIF costCalculator;
-    @Mock Client client;
+    /*
+     *  すべてのテストメソッドに共通的な変数はフィールドとして宣言する
+     */
+
+    // テスト対象クラス
+    ShippingService shippingService;
+
+    // 共通的な変数
     LocalDate receiveDate;
+
+    // 共通的な変数のうち、モック対象（@Mockを付与）
+    @Mock CostCalculatorIF costCalculator;
+    @Mock Client client; // ???
 
     // 変数を初期化する
     @BeforeEach
     void setUp() {
+        // モックを初期化する（@Mockが付与されたフィールドにモックを割り当てる）
         MockitoAnnotations.openMocks(this);
-        shippingService = new ShippingService(costCalculator);
 
+
+        shippingService = new ShippingService(costCalculator);
         receiveDate = LocalDate.of(2023, 11, 30);
 
         // リポジトリをクリアする → これはデータベース初期化に相当する
@@ -36,12 +45,16 @@ public class ShippingServiceTest {
 
     @Test
     void testOrderShipping_DiamondCustomer_NoDiscount() {
-        when(client.ClientType()).thenReturn(ClientType.DIAMOND);
-        when(client.originRegion()).thenReturn(RegionType.KANSAI);
+        // モック化されたcostCalculatorの振る舞いを決める
         when(costCalculator.calcShippingCost(
                 BaggageType.MIDDLE, RegionType.KANSAI)).thenReturn(1600);
 
-        List<Baggage> baggageList = Arrays.asList(new Baggage(BaggageType.MIDDLE, false));
+        // モック化されたclientの振る舞いを決める
+        // 引数なのでモックか不要かも！
+        when(client.ClientType()).thenReturn(ClientType.DIAMOND);
+        when(client.originRegion()).thenReturn(RegionType.KANSAI);
+
+        List<Baggage> baggageList = List.of(new Baggage(BaggageType.MIDDLE, false));
 
         // テスト実行
         shippingService.orderShipping(client, receiveDate, baggageList);
