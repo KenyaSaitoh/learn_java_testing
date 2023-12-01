@@ -25,7 +25,7 @@ public class ShippingServiceTest {
     Client diamondClient;
     Client goldClient;
 
-    // 共通的な変数のうち、モック対象
+    // テスト対象クラスが依存しているクラス（モック対象）
     MockCostCalculator costCalculator;
 
     // 変数を初期化する

@@ -28,7 +28,7 @@ public class ShippingServiceTest {
     Client diamondClient;
     Client goldClient;
 
-    // 共通的な変数のうち、モック対象（@Mockを付与）
+    // テスト対象クラスが依存しているクラス（@Mockを付与してモック化）
     @Mock CostCalculatorIF costCalculator;
 
     // 変数を初期化する
@@ -57,7 +57,7 @@ public class ShippingServiceTest {
      */
     @Test
     void testOrderShipping_GoldCustomer_NoDiscount() {
-        // モック化されたcostCalculatorの振る舞いを決める
+        // モック化されたCostCalculatorの振る舞いを決める
         when(costCalculator.calcShippingCost(
                 BaggageType.MIDDLE, RegionType.KANSAI)).thenReturn(1600);
 
@@ -83,7 +83,7 @@ public class ShippingServiceTest {
      */
     @Test
     void testOrderShipping_GoldCustomer_Discount_ReachLimit() {
-        // モック化されたcostCalculatorの振る舞いを決める
+        // モック化されたCostCalculatorの振る舞いを決める
         when(costCalculator.calcShippingCost(
                 BaggageType.MIDDLE, RegionType.KANSAI)).thenReturn(1600);
 
@@ -111,7 +111,7 @@ public class ShippingServiceTest {
      */
     @Test
     void testOrderShipping_GoldCustomer_Discount_NoLimit() {
-        // モック化されたcostCalculatorの振る舞いを決める
+        // モック化されたCostCalculatorの振る舞いを決める
         when(costCalculator.calcShippingCost(
                 BaggageType.MIDDLE, RegionType.KANSAI)).thenReturn(1600);
 
@@ -140,7 +140,7 @@ public class ShippingServiceTest {
      */
     @Test
     void testOrderShipping_DiamondCustomer_NoDiscount() {
-        // モック化されたcostCalculatorの振る舞いを決める
+        // モック化されたCostCalculatorの振る舞いを決める
         when(costCalculator.calcShippingCost(
                 BaggageType.MIDDLE, RegionType.KANSAI)).thenReturn(1600);
 
@@ -166,7 +166,7 @@ public class ShippingServiceTest {
      */
     @Test
     void testOrderShipping_DiamondCustomer_Discount_ReachLimit() {
-        // モック化されたcostCalculatorの振る舞いを決める
+        // モック化されたCostCalculatorの振る舞いを決める
         when(costCalculator.calcShippingCost(
                 BaggageType.MIDDLE, RegionType.KANSAI)).thenReturn(1600);
 
@@ -194,7 +194,7 @@ public class ShippingServiceTest {
      */
     @Test
     void testOrderShipping_DiamondCustomer_Discount_NoLimit() {
-        // モック化されたcostCalculatorの振る舞いを決める
+        // モック化されたCostCalculatorの振る舞いを決める
         when(costCalculator.calcShippingCost(
                 BaggageType.MIDDLE, RegionType.KANSAI)).thenReturn(1600);
 

@@ -12,6 +12,9 @@ public class Greeting {
         this.timeManager = timeManager;
     }
 
+    public Greeting() {
+    }
+
     // 現在時刻から挨拶のメッセージを取得し返す（依存性注入で取得）
     public String getMessage_1() {
         TimeOfDay timeOfDay = timeManager.getCurrent();

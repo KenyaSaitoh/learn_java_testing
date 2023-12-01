@@ -1,9 +1,12 @@
 package pro.kensait.java.timeofday;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 /*
  * Greetingを対象にしたテストクラス
@@ -17,21 +20,23 @@ public class GreetingTest {
     Greeting greeting;
 
     // テスト対象クラスが依存しているクラス（モック対象）
+    @Mock
     TimeManagerIF mock;
 
     // 変数を初期化する
     @BeforeEach
     void setUp() {
-
+        // モックを初期化する（@Mockが付与されたフィールドにモックを割り当てる）
+        MockitoAnnotations.openMocks(this);
     }
 
     /*
      * 時間帯が朝の場合、返されるメッセージをテストする
      */
     @Test
-    public void testGetMessage_ReturnMorningMessage() {
-        // モックを生成する
-        mock = new MockTimeManager(TimeOfDay.MORNING);
+    public void testGetMessage_1_ReturnMorningMessage() {
+        // モック化されたTimeManagerの振る舞いを決める
+        when(mock.getCurrent()).thenReturn(TimeOfDay.MORNING);
 
         // モックをテスト対象クラスに注入する（依存性注入）
         greeting = new Greeting(mock);
@@ -44,9 +49,9 @@ public class GreetingTest {
      * 時間帯が昼の場合、返されるメッセージをテストする
      */
     @Test
-    public void testGetMessage_ReturnAfternoonMessage() {
-        // モックを生成する
-        mock = new MockTimeManager(TimeOfDay.AFTERNOON);
+    public void testGetMessage_1_ReturnAfternoonMessage() {
+        // モック化されたTimeManagerの振る舞いを決める
+        when(mock.getCurrent()).thenReturn(TimeOfDay.AFTERNOON);
 
         // モックをテスト対象クラスに注入する（依存性注入）
         greeting = new Greeting(mock);
@@ -59,9 +64,9 @@ public class GreetingTest {
      * 時間帯が夜の場合、返されるメッセージをテストする
      */
     @Test
-    public void testGetMessage_ReturnEveningMessage() {
-        // モックを生成する
-        mock = new MockTimeManager(TimeOfDay.EVENING);
+    public void testGetMessage_1_ReturnEveningMessage() {
+        // モック化されたTimeManagerの振る舞いを決める
+        when(mock.getCurrent()).thenReturn(TimeOfDay.EVENING);
 
         // モックをテスト対象クラスに注入する（依存性注入）
         greeting = new Greeting(mock);
