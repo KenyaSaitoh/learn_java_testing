@@ -1,6 +1,7 @@
 package pro.kensait.java.shipping;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /*
@@ -39,7 +40,7 @@ public class ShippingService {
 
         // ダイヤモンド会員の場合は、ダイヤモンド会員用の割引率を適用する
         // → ただし定義された「割引後の下限金額」を下回ることは許容されない
-        if (client.ClientType() == ClientType.DIAMOND) {
+        if (client.clientType() == ClientType.DIAMOND) {
             if (DIAMOND_COST_LIMIT < totalCost) {
                 Integer discountedPrice = Integer.class.cast(
                         Math.round(totalCost * DIAMOND_NET_RATE));
@@ -50,7 +51,7 @@ public class ShippingService {
 
         // ゴールド会員の場合は、ゴールド会員用の割引率を適用する
         // → ただし定義された「割引後の下限金額」を下回ることは許容されない
-        } else if (client.ClientType() == ClientType.GOLD) {
+        } else if (client.clientType() == ClientType.GOLD) {
             if (GOLD_COST_LIMIT < totalCost) {
                 Integer discountedPrice = Integer.class.cast(
                         Math.round(totalCost * GOLD_NET_RATE));
@@ -61,11 +62,7 @@ public class ShippingService {
         }
 
         // 配送を表すレコードを生成する
-        Shipping shipping = new Shipping(
-                LocalDate.now(),
-                client,
-                receiveDate,
-                baggageList,
+        Shipping shipping = new Shipping(LocalDateTime.now(), client, receiveDate, baggageList,
                 totalCost);
 
         // 配送リポジトリに配送レコードを保存する

@@ -40,7 +40,7 @@ public class ShippingService {
 
         // ダイヤモンド会員の場合は、ダイヤモンド会員用の割引率を適用する
         // → ただし定義された「割引後の下限金額」を下回ることは許容されない
-        if (client.ClientType() == ClientType.DIAMOND) {
+        if (client.clientType() == ClientType.DIAMOND) {
             if (DIAMOND_COST_LIMIT < totalCost) {
                 Integer discountedPrice = Integer.class.cast(
                         Math.round(totalCost * DIAMOND_NET_RATE));
@@ -51,7 +51,7 @@ public class ShippingService {
 
         // ゴールド会員の場合は、ゴールド会員用の割引率を適用する
         // → ただし定義された「割引後の下限金額」を下回ることは許容されない
-        } else if (client.ClientType() == ClientType.GOLD) {
+        } else if (client.clientType() == ClientType.GOLD) {
             if (GOLD_COST_LIMIT < totalCost) {
                 Integer discountedPrice = Integer.class.cast(
                         Math.round(totalCost * GOLD_NET_RATE));
