@@ -24,7 +24,9 @@ public class GreetingStaticTest {
     @Mock
     MockedStatic<TimeManager> mock;
 
-    // 変数を初期化する
+    /*
+     *  各テストメソッド呼び出しの前処理（共通変数の初期化など）
+     */
     @BeforeEach
     void setUp() {
         // モックを初期化する（@Mockが付与されたフィールドにモックを割り当てる）
@@ -37,9 +39,13 @@ public class GreetingStaticTest {
         greeting = new Greeting();
     }
 
+    /*
+     *  各テストメソッド呼び出しの後処理（クリーンアップ、リソースの開放など）
+     */
     @AfterEach
     void tearDown() {
-        mock.close(); // 静的モックを解除
+        // スタティックモックを解除
+        mock.close();
     }
 
     /*

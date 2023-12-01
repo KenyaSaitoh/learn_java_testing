@@ -2,6 +2,7 @@ package pro.kensait.mockito.javase;
 
 import static org.mockito.Mockito.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -18,7 +19,7 @@ public class Main_Exception {
             when(mock.get(1)).thenReturn("bar");
             when(mock.get(2)).thenThrow(new RuntimeException());
 
-            List<Integer> keyList = List.of(0, 1, 2);
+            List<Integer> keyList = Arrays.asList(0, 1, 2);
             for (Integer key : keyList) {
                 try {
                     String value = mock.get(key);
@@ -38,7 +39,7 @@ public class Main_Exception {
                     new IllegalArgumentException("2nd Exception"),
                     new NoSuchElementException("3rd Exception"));
 
-            List<Integer> keyList = List.of(0, 0, 0);
+            List<Integer> keyList = Arrays.asList(0, 0, 0);
             for (Integer key : keyList) {
                 try {
                     String value = mock.get(key);

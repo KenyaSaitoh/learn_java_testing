@@ -2,7 +2,7 @@ package pro.kensait.junit5.assertion;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -14,16 +14,16 @@ public class AssertCollectionTest {
     // すべての要素が完全に一致することを検証する
     @Test
     public void test01() {
-        List<String> expected = List.of("foo", "bar", "baz");
-        List<String> actual = List.of("foo", "bar", "baz");
+        List<String> expected = Arrays.asList("foo", "bar", "baz");
+        List<String> actual = Arrays.asList("foo", "bar", "baz");
         assertIterableEquals(expected, actual);
     }
 
     // すべての要素が一致する（ソート順は無視）ことを検証する
     @Test
     public void test02() {
-        List<String> expected = new ArrayList<>(List.of("foo", "bar", "baz"));
-        List<String> actual = new ArrayList<>(List.of("baz", "bar", "foo"));
+        List<String> expected = Arrays.asList("foo", "bar", "baz");
+        List<String> actual = Arrays.asList("baz", "bar", "foo");
         Collections.sort(expected);
         Collections.sort(actual);
         assertIterableEquals(expected, actual);
@@ -32,14 +32,14 @@ public class AssertCollectionTest {
     // 指定した要素がすべて含まれていることを検証する
     @Test
     public void test03() {
-        List<String> actual = List.of("foo", "bar", "baz");
-        assertTrue(actual.containsAll(List.of("baz", "foo")));
+        List<String> actual = Arrays.asList("foo", "bar", "baz");
+        assertTrue(actual.containsAll(Arrays.asList("baz", "foo")));
     }
 
     // 指定したサイズであることを検証する
     @Test
     public void test04() {
-        List<String> actual = List.of("foo", "bar", "baz");
+        List<String> actual = Arrays.asList("foo", "bar", "baz");
         assertEquals(3, actual.size());
     }
 

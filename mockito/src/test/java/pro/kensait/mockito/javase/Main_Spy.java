@@ -3,6 +3,7 @@ package pro.kensait.mockito.javase;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,7 @@ public class Main_Spy {
             when(mock.get(1)).thenReturn("bar");
             when(mock.get(2)).thenReturn("baz");
 
-            List<Integer> keyList = List.of(0, 1, 2, 3);
+            List<Integer> keyList = Arrays.asList(0, 1, 2, 3);
             for (Integer key : keyList) {
                 String value = mock.get(key);
                 System.out.println(key + " => " + value);
@@ -46,7 +47,7 @@ public class Main_Spy {
             when(mock.get(1)).thenReturn("barbar");
             when(mock.get(2)).thenReturn("baz0", "baz1", "baz2");
 
-            List<Integer> keyList = List.of(0, 1, 2, 2, 1, 2, 2);
+            List<Integer> keyList = Arrays.asList(0, 1, 2, 2, 1, 2, 2);
             for (Integer key : keyList) {
                 String value = mock.get(key);
                 System.out.println(key + " => " + value);
@@ -59,7 +60,7 @@ public class Main_Spy {
 
             when(mock.get(anyInt())).thenReturn("foo");
 
-            List<Integer> keyList = List.of(0, 1, 2);
+            List<Integer> keyList = Arrays.asList(0, 1, 2);
             for (Integer key : keyList) {
                 String value = mock.get(key);
                 System.out.println(key + " => " + value);
@@ -75,7 +76,7 @@ public class Main_Spy {
             mock.put(2, "baz");
             when(mock.get(2)).thenReturn("bazbaz");
 
-            List<Integer> keyList = List.of(0, 1, 2);
+            List<Integer> keyList = Arrays.asList(0, 1, 2);
             for (Integer key : keyList) {
                 String value = mock.get(key);
                 System.out.println(key + " => " + value);

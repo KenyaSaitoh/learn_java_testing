@@ -8,7 +8,7 @@ public class AssertSameTest {
 
     // 同じインスタンスであること（同一性）を検証する
     @Test
-    public void test01() {
+    public void test_SameInstance() {
         String expected = "foo";
         String actual = "foo";
         assertSame(expected, actual);
@@ -16,9 +16,9 @@ public class AssertSameTest {
 
     // 同じインスタンスではないことを検証する
     @Test
-    public void test02() {
-        Person expected = new Person("Alice", 25);
-        Person actual = new Person("Alice", 25);
-        assertNotSame (expected, actual);
+    public void test_NotSameInstance() {
+        String expected = new String("foo");
+        String actual = new String("foo");
+        assertNotSame(expected, actual);
     }
 }

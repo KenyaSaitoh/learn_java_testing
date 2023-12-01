@@ -1,6 +1,7 @@
 package pro.kensait.java.shipping;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /*
@@ -61,11 +62,7 @@ public class ShippingService {
         }
 
         // 配送を表すレコードを生成する
-        Shipping shipping = new Shipping(
-                LocalDate.now(),
-                client,
-                receiveDate,
-                baggageList,
+        Shipping shipping = new Shipping(LocalDateTime.now(), client, receiveDate, baggageList,
                 totalCost);
 
         // 配送リポジトリに配送レコードを保存する

@@ -3,6 +3,7 @@ package pro.kensait.java.shipping;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,7 +29,9 @@ public class ShippingServiceTest {
     // テスト対象クラスが依存しているクラス（モック対象）
     MockCostCalculator costCalculator;
 
-    // 変数を初期化する
+    /*
+     *  各テストメソッド呼び出しの前処理（共通変数の初期化など）
+     */
     @BeforeEach
     void setUp() {
         // モックを生成する
@@ -64,8 +67,8 @@ public class ShippingServiceTest {
         Shipping actual = ShippingRepository.shippingList.get(0);
 
         // 「期待値」を生成する
-        Shipping expected = new Shipping(LocalDate.now(), goldClient, receiveDate, baggageList,
-                1600);
+        Shipping expected = new Shipping(LocalDateTime.now(),goldClient, receiveDate,
+                baggageList, 1600);
 
         // 「期待値」と「実際の値」が一致しているかを検証する
         assertEquals(expected, actual);
@@ -88,8 +91,8 @@ public class ShippingServiceTest {
         Shipping actual = ShippingRepository.shippingList.get(0);
 
         // 「期待値」を生成する
-        Shipping expected = new Shipping(LocalDate.now(), goldClient, receiveDate, baggageList,
-                3000);
+        Shipping expected = new Shipping(LocalDateTime.now(), goldClient, receiveDate,
+                baggageList, 3000);
 
         // 「期待値」と「実際の値」が一致しているかを検証する
         assertEquals(expected, actual);
@@ -113,8 +116,8 @@ public class ShippingServiceTest {
         Shipping actual = ShippingRepository.shippingList.get(0);
 
         // 「期待値」を生成する
-        Shipping expected = new Shipping(LocalDate.now(), goldClient, receiveDate, baggageList,
-                4320);
+        Shipping expected = new Shipping(LocalDateTime.now(), goldClient, receiveDate,
+                baggageList, 4320);
 
         // 「期待値」と「実際の値」が一致しているかを検証する
         assertEquals(expected, actual);
@@ -126,7 +129,7 @@ public class ShippingServiceTest {
     @Test
     void testOrderShipping_DiamondCustomer_NoDiscount() {
         // 引数である荷物リストを生成する（テスト毎に異なる）
-        List<Baggage> baggageList = List.of(new Baggage(BaggageType.MIDDLE, false));
+        List<Baggage> baggageList = Arrays.asList(new Baggage(BaggageType.MIDDLE, false));
 
         // テスト実行
         shippingService.orderShipping(diamondClient, receiveDate, baggageList);
@@ -135,8 +138,8 @@ public class ShippingServiceTest {
         Shipping actual = ShippingRepository.shippingList.get(0);
 
         // 「期待値」を生成する
-        Shipping expected = new Shipping(LocalDate.now(), diamondClient, receiveDate, baggageList,
-                1600);
+        Shipping expected = new Shipping(LocalDateTime.now(), diamondClient, receiveDate,
+                baggageList, 1600);
 
         // 「期待値」と「実際の値」が一致しているかを検証する
         assertEquals(expected, actual);
@@ -159,8 +162,8 @@ public class ShippingServiceTest {
         Shipping actual = ShippingRepository.shippingList.get(0);
 
         // 「期待値」を生成する
-        Shipping expected = new Shipping(LocalDate.now(), diamondClient, receiveDate, baggageList,
-                2500);
+        Shipping expected = new Shipping(LocalDateTime.now(), diamondClient, receiveDate,
+                baggageList, 2500);
 
         // 「期待値」と「実際の値」が一致しているかを検証する
         assertEquals(expected, actual);
@@ -184,8 +187,8 @@ public class ShippingServiceTest {
         Shipping actual = ShippingRepository.shippingList.get(0);
 
         // 「期待値」を生成する
-        Shipping expected = new Shipping(LocalDate.now(), diamondClient, receiveDate, baggageList,
-                3600);
+        Shipping expected = new Shipping(LocalDateTime.now(), diamondClient, receiveDate,
+                baggageList, 3600);
 
         // 「期待値」と「実際の値」が一致しているかを検証する
         assertEquals(expected, actual);

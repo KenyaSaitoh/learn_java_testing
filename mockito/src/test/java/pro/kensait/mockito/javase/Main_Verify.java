@@ -2,6 +2,7 @@ package pro.kensait.mockito.javase;
 
 import static org.mockito.Mockito.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +20,7 @@ public class Main_Verify {
             when(mock.get(1)).thenReturn("bar");
             when(mock.get(2)).thenReturn("baz");
 
-            List<Integer> keyList = List.of(0, 0, 0);
+            List<Integer> keyList = Arrays.asList(0, 0, 0);
             for (Integer key : keyList) {
                 String value = mock.get(key);
                 System.out.println(key + " => " + value);
@@ -38,7 +39,7 @@ public class Main_Verify {
             when(mock.get(1)).thenReturn("bar");
             when(mock.get(2)).thenReturn("baz");
 
-            List<Integer> keyList = List.of(0, 0, 0);
+            List<Integer> keyList = Arrays.asList(0, 0, 0);
             for (Integer key : keyList) {
                 String value = mock.get(key);
                 System.out.println(key + " => " + value);
@@ -57,7 +58,7 @@ public class Main_Verify {
             when(mock.get(1)).thenReturn("bar");
             when(mock.get(2)).thenReturn("baz");
 
-            List<Integer> keyList = List.of(0, 0, 0);
+            List<Integer> keyList = Arrays.asList(0, 0, 0);
             for (Integer key : keyList) {
                 String value = mock.get(key);
                 System.out.println(key + " => " + value);
@@ -76,7 +77,7 @@ public class Main_Verify {
             when(mock.get(1)).thenReturn("bar");
             when(mock.get(2)).thenReturn("baz");
 
-            List<Integer> keyList = List.of(0, 1, 2);
+            List<Integer> keyList = Arrays.asList(0, 1, 2);
             for (Integer key : keyList) {
                 String value = mock.get(key);
                 System.out.println(key + " => " + value);

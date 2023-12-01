@@ -2,7 +2,6 @@ package pro.kensait.java.timeofday;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /*
@@ -18,12 +17,6 @@ public class GreetingTest {
 
     // テスト対象クラスが依存しているクラス（モック対象）
     TimeManagerIF mock;
-
-    // 変数を初期化する
-    @BeforeEach
-    void setUp() {
-
-    }
 
     /*
      * 時間帯が朝の場合、返されるメッセージをテストする

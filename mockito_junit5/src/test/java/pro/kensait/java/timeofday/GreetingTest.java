@@ -23,7 +23,9 @@ public class GreetingTest {
     @Mock
     TimeManagerIF mock;
 
-    // 変数を初期化する
+    /*
+     *  各テストメソッド呼び出しの前処理（共通変数の初期化など）
+     */
     @BeforeEach
     void setUp() {
         // モックを初期化する（@Mockが付与されたフィールドにモックを割り当てる）
