@@ -67,6 +67,7 @@ subprojects {
         testImplementation "com.github.tomakehurst:wiremock:${wireMockVer}"
         testImplementation "com.codeborne:selenide:${selenideVer}"
         testImplementation "com.google.code.findbugs:jsr305:${findbugsVer}"
+        runtimeOnly "mysql:mysql-connector-java:${mySqlConnectorVer}"
     }
 
     // JUnit5設定

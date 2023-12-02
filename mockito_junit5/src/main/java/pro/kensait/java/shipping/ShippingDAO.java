@@ -7,10 +7,14 @@ import java.util.List;
  * 配送データを保存するためのリポジトリ
  * 実際の業務アプリではデータベースが想定されるが、便宜上リストに保存する
  */
-public class ShippingRepository {
+public class ShippingDAO {
+    private static List<Shipping> shippingList = new ArrayList<>();
+
     public static void save(Shipping shipping) {
         shippingList.add(shipping);
     }
 
-    public static List<Shipping> shippingList = new ArrayList<>();
+    public static List<Shipping> findAll() {
+        return shippingList;
+    }
 }

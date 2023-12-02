@@ -61,7 +61,7 @@ public class ShippingServiceTest2 {
         receiveDate = LocalDate.of(2023, 11, 30);
 
         // リポジトリをクリアする → これはデータベース初期化に相当する
-        ShippingRepository.shippingList.clear();
+        ShippingDAO.findAll().clear();
     }
 
     /*
@@ -79,7 +79,7 @@ public class ShippingServiceTest2 {
         shippingService.orderShipping(diamondClient, receiveDate, baggageList);
 
         // リポジトリから「実際の値」を取得する
-        Shipping actual = ShippingRepository.shippingList.get(0);
+        Shipping actual = ShippingDAO.findAll().get(0);
 
         // 「期待値」を生成する
         Shipping expected = new Shipping(orderDateTime, diamondClient, receiveDate,
