@@ -65,7 +65,7 @@ public class ShippingService {
         Shipping shipping = new Shipping(LocalDateTime.now(), client, receiveDate, baggageList,
                 totalCost);
 
-        // 配送リポジトリに配送レコードを保存する
+        // 配送DAOに配送レコードを保存する
         ShippingDAO.save(shipping);
     }
 }

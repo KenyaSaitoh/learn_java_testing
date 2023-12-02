@@ -47,7 +47,7 @@ public class ShippingServiceTest {
                 ClientType.GOLD, RegionType.KANSAI);
         receiveDate = LocalDate.of(2023, 11, 30);
 
-        // リポジトリをクリアする → これはデータベース初期化に相当する
+        // DAOが保持するリストをクリアする（DB利用時はテーブル初期化に相当する）
         ShippingDAO.findAll().clear();
     }
 

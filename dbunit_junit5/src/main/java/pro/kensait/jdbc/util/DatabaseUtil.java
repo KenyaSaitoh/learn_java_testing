@@ -1,11 +1,11 @@
-package pro.kensait.java.jdbc.util;
+package pro.kensait.jdbc.util;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
-public class PropertyUtil {
+public class DatabaseUtil {
 
     private static ResourceBundle resource;
     static {
@@ -18,7 +18,7 @@ public class PropertyUtil {
         }
     }
 
-    public static String getValue(String key) {
+    public static String getProperty(String key) {
         return resource.getString(key);
     }
 }

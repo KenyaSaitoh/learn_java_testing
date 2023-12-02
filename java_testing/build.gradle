@@ -20,8 +20,8 @@ buildscript {
         dbunitVer = "2.7.3"
         restAssuredVer = "5.3.2"
         wireMockVer = "3.0.1"
+        guavaVer = "32.1.2-jre"
         selenideVer = "7.0.2"
-        findbugsVer = "3.0.2"
     }
 
     // リポジトリ設定
@@ -64,9 +64,9 @@ subprojects {
         testImplementation "org.mockito:mockito-inline:${mockitoInlineVer}"
         testImplementation "org.dbunit:dbunit:${dbunitVer}"
         testImplementation "io.rest-assured:rest-assured:${restAssuredVer}"
-        testImplementation "com.github.tomakehurst:wiremock:${wireMockVer}"
+        testImplementation "com.github.tomakehurst:wiremock-jre8:${wireMockVer}"
+        testImplementation "com.google.guava:guava:${guavaVer}"
         testImplementation "com.codeborne:selenide:${selenideVer}"
-        testImplementation "com.google.code.findbugs:jsr305:${findbugsVer}"
         runtimeOnly "mysql:mysql-connector-java:${mySqlConnectorVer}"
     }
 
