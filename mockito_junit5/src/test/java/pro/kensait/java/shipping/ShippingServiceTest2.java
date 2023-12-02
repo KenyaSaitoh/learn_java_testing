@@ -68,7 +68,7 @@ public class ShippingServiceTest2 {
      * ダイヤモンド会員で、割引になった場合（下限に到達せず）の更新結果をテストする
      */
     @Test
-    void testOrderShipping_DiamondCustomer_Discount_NoLimit() {
+    void test_OrderShipping_DiamondCustomer_Discount_NoLimit() {
         // モック化されたCostCalculatorの振る舞いを決める
         when(costCalculator.calcShippingCost(any(), any())).thenReturn(1600);
 
@@ -78,7 +78,7 @@ public class ShippingServiceTest2 {
         // テスト実行
         shippingService.orderShipping(diamondClient, receiveDate, baggageList);
 
-        // リポジトリから「実際の値」を取得する
+        // DAOが保持するリストから「実際の値」を取得する
         Shipping actual = ShippingDAO.findAll().get(0);
 
         // 「期待値」を生成する

@@ -42,13 +42,13 @@ public class FeeEnclosedTest1 {
         }
 
         @Test
-        void calcFee_ToOtherBank_Over40000_ReturnsRightFee() {
+        void test_CalcFee_ToOtherBank_Over40000_ReturnsRightFee() {
             int actual = feeService.calcFee(OTHER_BANK_CODE, 40999);
             assertEquals(200, actual);
         }
 
         @Test
-        void calcFee_ToOtherBank_Under40000_ReturnsRightFee() {
+        void test_CalcFee_ToOtherBank_Under40000_ReturnsRightFee() {
             int actual = feeService.calcFee(OTHER_BANK_CODE, 39000);
             assertEquals(500, actual);
         }

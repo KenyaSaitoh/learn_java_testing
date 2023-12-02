@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +12,7 @@ public class AssertCollectionTest {
 
     // すべての要素が完全に一致することを検証する
     @Test
-    public void test01() {
+    public void test_AllElements_Maches() {
         List<String> expected = Arrays.asList("foo", "bar", "baz");
         List<String> actual = Arrays.asList("foo", "bar", "baz");
         assertIterableEquals(expected, actual);
@@ -21,7 +20,7 @@ public class AssertCollectionTest {
 
     // すべての要素が一致する（ソート順は無視）ことを検証する
     @Test
-    public void test02() {
+    public void test_AllElements_Maches_IgnoreSort() {
         List<String> expected = Arrays.asList("foo", "bar", "baz");
         List<String> actual = Arrays.asList("baz", "bar", "foo");
         Collections.sort(expected);
@@ -31,43 +30,22 @@ public class AssertCollectionTest {
 
     // 指定した要素がすべて含まれていることを検証する
     @Test
-    public void test03() {
+    public void test_ContainsElements() {
         List<String> actual = Arrays.asList("foo", "bar", "baz");
         assertTrue(actual.containsAll(Arrays.asList("baz", "foo")));
     }
 
     // 指定したサイズであることを検証する
     @Test
-    public void test04() {
+    public void test_ElementsSize() {
         List<String> actual = Arrays.asList("foo", "bar", "baz");
         assertEquals(3, actual.size());
     }
 
     // 空であることを検証する
     @Test
-    public void test05() {
+    public void test_ElementsEmpty() {
         List<String> actual = List.of();
         assertTrue(actual.isEmpty());
-    }
-
-    // Mapに指定したキーが含まれていることを検証する
-    @Test
-    public void test06() {
-        Map<Integer, String> actual = Map.of(1, "One", 2, "Two", 3, "Three");
-        assertTrue(actual.containsKey(2));
-    }
-
-    // Mapに指定した値が含まれていることを検証する
-    @Test
-    public void test07() {
-        Map<Integer, String> actual = Map.of(1, "One", 2, "Two", 3, "Three");
-        assertTrue(actual.containsValue("Two"));
-    }
-
-    // Mapに指定したエントリーが含まれていることを検証する
-    @Test
-    public void test08() {
-        Map<Integer, String> actual = Map.of(1, "One", 2, "Two", 3, "Three");
-        assertTrue(actual.entrySet().contains(Map.entry(2, "Two")));
     }
 }

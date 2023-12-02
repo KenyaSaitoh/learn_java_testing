@@ -52,8 +52,7 @@ public class EmployeeDAO {
     }
 
     // 検索（月給の範囲で検索）
-    public List<Employee> findEmployeesBySalary(int lowerSalary,
-            int upperSalary) {
+    public List<Employee> findEmployeesBySalary(int lowerSalary, int upperSalary) {
         // PreparedStatementに渡すSQL文を定義する
         String sqlStr = "SELECT EMPLOYEE_ID, EMPLOYEE_NAME, DEPARTMENT_NAME, "
                 + "ENTRANCE_DATE, JOB_NAME, SALARY FROM EMPLOYEE "
@@ -106,6 +105,48 @@ public class EmployeeDAO {
             pstmt.setInt(6, employee.getSalary());
             pstmt.setNull(7, Types.BINARY);
             
+            // 更新を実行する
+            pstmt.executeUpdate();
+
+        } catch (SQLException sqle) {
+            throw new RuntimeException(sqle);
+        }
+    }
+
+    // 削除
+    public void deleteEmployee(Integer employeeId) {
+        // PreparedStatementに渡すSQL文を定義する
+        String sqlStr = "DELETE FROM EMPLOYEE WHERE EMPLOYEE_ID = ?";
+        try (
+                // PreparedStatementを生成する
+                PreparedStatement pstmt = conn.prepareStatement(sqlStr);
+                ) {
+
+            // パラメータをセットする
+            pstmt.setInt(1, employeeId);
+
+            // 更新を実行する
+            pstmt.executeUpdate();
+
+        } catch (SQLException sqle) {
+            throw new RuntimeException(sqle);
+        }
+    }
+
+    // 更新（一括更新）
+    public void updateSalary(String departmentName, Integer increase) {
+        // PreparedStatementに渡すSQL文を定義する
+        String sqlStr = "UPDATE EMPLOYEE SET SALARY = SALARY + ? "
+                + "WHERE DEPARTMENT_NAME = ?";
+        try (
+                // PreparedStatementを生成する
+                PreparedStatement pstmt = conn.prepareStatement(sqlStr);
+                ) {
+
+            // パラメータをセットする
+            pstmt.setInt(1, increase);
+            pstmt.setString(2, departmentName);
+
             // 更新を実行する
             pstmt.executeUpdate();
 

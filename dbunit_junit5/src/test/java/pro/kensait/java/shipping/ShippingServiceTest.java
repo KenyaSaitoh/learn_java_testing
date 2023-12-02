@@ -2,12 +2,19 @@ package pro.kensait.java.shipping;
 
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
+import static pro.kensait.jdbc.util.DatabaseUtil.*;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
+import org.dbunit.IDatabaseTester;
+import org.dbunit.JdbcDatabaseTester;
+import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.csv.CsvDataSet;
+import org.dbunit.operation.DatabaseOperation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -17,6 +24,9 @@ import org.mockito.MockitoAnnotations;
  * ShippingServiceを対象にしたテストクラス
  */
 public class ShippingServiceTest {
+    private static final String TEST_DATA_FILE = "src/test/resources/test-data.cav";
+    private static final String EXPECTED_DATA_FILE_1 = "src/test/resources/expected-data-1.csv";
+
     /*
      *  すべてのテストメソッドに共通的な変数はフィールドとして宣言する
      */
@@ -33,6 +43,9 @@ public class ShippingServiceTest {
     Baggage baggage;
     LocalDateTime orderDateTime;
     LocalDate receiveDate;
+
+    // DBユニットのための変数
+    IDatabaseTester databaseTester;
 
     /*
      *  各テストメソッド呼び出しの前処理（共通変数の初期化など）
@@ -57,6 +70,24 @@ public class ShippingServiceTest {
         // DAOが保持するリストをクリアする（DB利用時はテーブル初期化に相当する）
     }
 
+    @BeforeEach
+    public void setUpDatabase() throws Exception {
+        // プロパティファイルよりデータベース情報を取得する
+        String driver = getProperty("jdbc.driver");
+        String url = getProperty("jdbc.url");
+        String user = getProperty("jdbc.user");
+        String password = getProperty("jdbc.password");
+
+        // IDatabaseTesterを初期化する
+        databaseTester = new JdbcDatabaseTester(driver, url, user, password);
+
+        // CSVファイルから初期データを読み込む
+        IDataSet dataSet = new CsvDataSet(new File(TEST_DATA_FILE));
+        databaseTester.setDataSet(dataSet);
+        databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
+        databaseTester.onSetup();
+    }
+
     /*
      * ダイヤモンド会員で、割引になった場合（下限に到達せず）の更新結果をテストする
      */
@@ -72,7 +103,7 @@ public class ShippingServiceTest {
         // テスト実行
         shippingService.orderShipping(diamondClient, receiveDate, baggageList);
 
-        // リポジトリから「実際の値」を取得する
+        // DAOが保持するリストから「実際の値」を取得する
 
         // 「期待値」を生成する
         Shipping expected = new Shipping(orderDateTime, diamondClient, receiveDate,

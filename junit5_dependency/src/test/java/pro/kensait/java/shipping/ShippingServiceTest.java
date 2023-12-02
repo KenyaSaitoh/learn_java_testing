@@ -63,7 +63,7 @@ public class ShippingServiceTest {
         // テスト実行
         shippingService.orderShipping(goldClient, receiveDate, baggageList);
 
-        // リポジトリから「実際の値」を取得する
+        // DAOが保持するリストから「実際の値」を取得する
         Shipping actual = ShippingDAO.findAll().get(0);
 
         // 「期待値」を生成する
@@ -87,7 +87,7 @@ public class ShippingServiceTest {
         // テスト実行
         shippingService.orderShipping(goldClient, receiveDate, baggageList);
 
-        // リポジトリから「実際の値」を取得する
+        // DAOが保持するリストから「実際の値」を取得する
         Shipping actual = ShippingDAO.findAll().get(0);
 
         // 「期待値」を生成する
@@ -112,7 +112,7 @@ public class ShippingServiceTest {
         // テスト実行
         shippingService.orderShipping(goldClient, receiveDate, baggageList);
 
-        // リポジトリから「実際の値」を取得する
+        // DAOが保持するリストから「実際の値」を取得する
         Shipping actual = ShippingDAO.findAll().get(0);
 
         // 「期待値」を生成する
@@ -134,7 +134,7 @@ public class ShippingServiceTest {
         // テスト実行
         shippingService.orderShipping(diamondClient, receiveDate, baggageList);
 
-        // リポジトリから「実際の値」を取得する
+        // DAOが保持するリストから「実際の値」を取得する
         Shipping actual = ShippingDAO.findAll().get(0);
 
         // 「期待値」を生成する
@@ -158,7 +158,7 @@ public class ShippingServiceTest {
         // テスト実行
         shippingService.orderShipping(diamondClient, receiveDate, baggageList);
 
-        // リポジトリから「実際の値」を取得する
+        // DAOが保持するリストから「実際の値」を取得する
         Shipping actual = ShippingDAO.findAll().get(0);
 
         // 「期待値」を生成する
@@ -183,7 +183,7 @@ public class ShippingServiceTest {
         // テスト実行
         shippingService.orderShipping(diamondClient, receiveDate, baggageList);
 
-        // リポジトリから「実際の値」を取得する
+        // DAOが保持するリストから「実際の値」を取得する
         Shipping actual = ShippingDAO.findAll().get(0);
 
         // 「期待値」を生成する

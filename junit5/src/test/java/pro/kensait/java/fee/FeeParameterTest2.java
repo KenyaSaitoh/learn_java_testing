@@ -17,7 +17,7 @@ public class FeeParameterTest2 {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/parameter.csv", numLinesToSkip = 1)
-    public void calcFee(String bankCode, int amount, int expectedFee) {
+    public void test_CalcFee(String bankCode, int amount, int expectedFee) {
         int actual = feeService.calcFee(bankCode, amount);
         assertEquals(expectedFee, actual);
     }

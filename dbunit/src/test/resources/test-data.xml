@@ -1,6 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<dataset>
-  <PERSON PERSON_ID="1" PERSON_NAME="Alice" AGE="25" GENDER="FEMALE" />
-  <PERSON PERSON_ID="2" PERSON_NAME="Bob" AGE="35" GENDER="MALE" />
-  <PERSON PERSON_ID="3" PERSON_NAME="Carol" AGE="30" GENDER="FEMALE" />
-</dataset>

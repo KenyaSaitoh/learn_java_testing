@@ -21,7 +21,7 @@ public class FeeParameterTest1 {
 
     @ParameterizedTest
     @MethodSource("fixtureProvider")
-    public void calcFee(Fixture f) {
+    public void test_CalcFee(Fixture f) {
         int actual = feeService.calcFee(f.bankCode, f.amount);
         assertEquals(f.expectedFee, actual);
     }

@@ -63,7 +63,7 @@ public class ShippingServiceTest {
      * ゴールド会員で、割引なしになった場合の更新結果をテストする
      */
     @Test
-    void testOrderShipping_GoldCustomer_NoDiscount() {
+    void test_OrderShipping_GoldCustomer_NoDiscount() {
         // モック化されたCostCalculatorの振る舞いを決める
         when(costCalculator.calcShippingCost(
                 any(BaggageType.class), any(RegionType.class))).thenReturn(1600);
@@ -74,7 +74,7 @@ public class ShippingServiceTest {
         // テスト実行
         shippingService.orderShipping(goldClient, receiveDate, baggageList);
 
-        // リポジトリから「実際の値」を取得する
+        // DAOが保持するリストから「実際の値」を取得する
         Shipping actual = ShippingDAO.findAll().get(0);
 
         // 「期待値」を生成する
@@ -89,7 +89,7 @@ public class ShippingServiceTest {
      * ゴールド会員で、割引になった場合（ただし下限に到達）の更新結果をテストする
      */
     @Test
-    void testOrderShipping_GoldCustomer_Discount_ReachLimit() {
+    void test_OrderShipping_GoldCustomer_Discount_ReachLimit() {
         // モック化されたCostCalculatorの振る舞いを決める
         when(costCalculator.calcShippingCost(
                 any(BaggageType.class), any(RegionType.class))).thenReturn(1600);
@@ -100,7 +100,7 @@ public class ShippingServiceTest {
         // テスト実行
         shippingService.orderShipping(goldClient, receiveDate, baggageList);
 
-        // リポジトリから「実際の値」を取得する
+        // DAOが保持するリストから「実際の値」を取得する
         Shipping actual = ShippingDAO.findAll().get(0);
 
         // 「期待値」を生成する
@@ -115,7 +115,7 @@ public class ShippingServiceTest {
      * ゴールド会員で、割引になった場合（下限に到達せず）の更新結果をテストする
      */
     @Test
-    void testOrderShipping_GoldCustomer_Discount_NoLimit() {
+    void test_OrderShipping_GoldCustomer_Discount_NoLimit() {
         // モック化されたCostCalculatorの振る舞いを決める
         when(costCalculator.calcShippingCost(
                 any(BaggageType.class), any(RegionType.class))).thenReturn(1600);
@@ -126,7 +126,7 @@ public class ShippingServiceTest {
         // テスト実行
         shippingService.orderShipping(goldClient, receiveDate, baggageList);
 
-        // リポジトリから「実際の値」を取得する
+        // DAOが保持するリストから「実際の値」を取得する
         Shipping actual = ShippingDAO.findAll().get(0);
 
         // 「期待値」を生成する
@@ -141,7 +141,7 @@ public class ShippingServiceTest {
      * ダイヤモンド会員で、割引なしになった場合の更新結果をテストする
      */
     @Test
-    void testOrderShipping_DiamondCustomer_NoDiscount() {
+    void test_OrderShipping_DiamondCustomer_NoDiscount() {
         // モック化されたCostCalculatorの振る舞いを決める
         when(costCalculator.calcShippingCost(
                 any(BaggageType.class), any(RegionType.class))).thenReturn(1600);
@@ -152,7 +152,7 @@ public class ShippingServiceTest {
         // テスト実行
         shippingService.orderShipping(diamondClient, receiveDate, baggageList);
 
-        // リポジトリから「実際の値」を取得する
+        // DAOが保持するリストから「実際の値」を取得する
         Shipping actual = ShippingDAO.findAll().get(0);
 
         // 「期待値」を生成する
@@ -167,7 +167,7 @@ public class ShippingServiceTest {
      * ダイヤモンド会員で、割引になった場合（ただし下限に到達）の更新結果をテストする
      */
     @Test
-    void testOrderShipping_DiamondCustomer_Discount_ReachLimit() {
+    void test_OrderShipping_DiamondCustomer_Discount_ReachLimit() {
         // モック化されたCostCalculatorの振る舞いを決める
         when(costCalculator.calcShippingCost(
                 any(BaggageType.class), any(RegionType.class))).thenReturn(1600);
@@ -178,7 +178,7 @@ public class ShippingServiceTest {
         // テスト実行
         shippingService.orderShipping(diamondClient, receiveDate, baggageList);
 
-        // リポジトリから「実際の値」を取得する
+        // DAOが保持するリストから「実際の値」を取得する
         Shipping actual = ShippingDAO.findAll().get(0);
 
         // 「期待値」を生成する
@@ -193,7 +193,7 @@ public class ShippingServiceTest {
      * ダイヤモンド会員で、割引になった場合（下限に到達せず）の更新結果をテストする
      */
     @Test
-    void testOrderShipping_DiamondCustomer_Discount_NoLimit() {
+    void test_OrderShipping_DiamondCustomer_Discount_NoLimit() {
         // モック化されたCostCalculatorの振る舞いを決める
         when(costCalculator.calcShippingCost(
                 any(BaggageType.class), any(RegionType.class))).thenReturn(1600);
@@ -204,7 +204,7 @@ public class ShippingServiceTest {
         // テスト実行
         shippingService.orderShipping(diamondClient, receiveDate, baggageList);
 
-        // リポジトリから「実際の値」を取得する
+        // DAOが保持するリストから「実際の値」を取得する
         Shipping actual = ShippingDAO.findAll().get(0);
 
         // 「期待値」を生成する

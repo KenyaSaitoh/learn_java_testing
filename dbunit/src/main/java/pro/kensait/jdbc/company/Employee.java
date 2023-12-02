@@ -2,6 +2,7 @@ package pro.kensait.jdbc.company;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Employee {
     // 社員ID
@@ -97,5 +98,32 @@ public class Employee {
                 + ", departmentName=" + departmentName + ", entranceDate=" + entranceDate
                 + ", jobName=" + jobName + ", salary=" + salary + ", photo="
                 + Arrays.toString(photo) + "]";
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + Arrays.hashCode(photo);
+        result = prime * result + Objects.hash(departmentName, employeeId, employeeName,
+                entranceDate, jobName, salary);
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Employee other = (Employee) obj;
+        return Objects.equals(departmentName, other.departmentName)
+                && Objects.equals(employeeId, other.employeeId)
+                && Objects.equals(employeeName, other.employeeName)
+                && Objects.equals(entranceDate, other.entranceDate)
+                && Objects.equals(jobName, other.jobName) && Arrays.equals(photo, other.photo)
+                && Objects.equals(salary, other.salary);
     }
 }

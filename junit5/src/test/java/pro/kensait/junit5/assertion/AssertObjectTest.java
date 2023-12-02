@@ -48,7 +48,7 @@ public class AssertObjectTest {
 
     // リストの並び順を踏まえて、同じ値でないこと（非等価性）を検証する
     @Test
-    public void test_NotEquals_WithOrdering() {
+    public void test_EotEquals_WithOrdering() {
         List<String> expectedHobbies = Arrays.asList("BASEBALL", "MUSIC", "MOVIE");
         List<String> actualHobbies = Arrays.asList("MUSIC", "MOVIE", "BASEBALL");
         Person3 expected = new Person3("Alice", 25, expectedHobbies);
