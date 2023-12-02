@@ -55,7 +55,7 @@ public class ShippingServiceTest {
      * ゴールド会員で、割引なしになった場合の更新結果をテストする
      */
     @Test
-    void testOrderShipping_GoldCustomer_NoDiscount() {
+    void test_OrderShipping_GoldCustomer_NoDiscount() {
         // 引数である荷物リストを生成する（テスト毎に異なる）
         List<Baggage> baggageList = Arrays.asList(
                 new Baggage(BaggageType.MIDDLE, false));
@@ -78,7 +78,7 @@ public class ShippingServiceTest {
      * ゴールド会員で、割引になった場合（ただし下限に到達）の更新結果をテストする
      */
     @Test
-    void testOrderShipping_GoldCustomer_Discount_ReachLimit() {
+    void test_OrderShipping_GoldCustomer_Discount_ReachLimit() {
         // 引数である荷物リストを生成する（テスト毎に異なる）
         List<Baggage> baggageList = Arrays.asList(
                 new Baggage(BaggageType.MIDDLE, false),
@@ -102,7 +102,7 @@ public class ShippingServiceTest {
      * ゴールド会員で、割引になった場合（下限に到達せず）の更新結果をテストする
      */
     @Test
-    void testOrderShipping_GoldCustomer_Discount_NoLimit() {
+    void test_OrderShipping_GoldCustomer_Discount_NoLimit() {
         // 引数である荷物リストを生成する（テスト毎に異なる）
         List<Baggage> baggageList = Arrays.asList(
                 new Baggage(BaggageType.SMALL, false),
@@ -127,7 +127,7 @@ public class ShippingServiceTest {
      * ダイヤモンド会員で、割引なしになった場合の更新結果をテストする
      */
     @Test
-    void testOrderShipping_DiamondCustomer_NoDiscount() {
+    void test_OrderShipping_DiamondCustomer_NoDiscount() {
         // 引数である荷物リストを生成する（テスト毎に異なる）
         List<Baggage> baggageList = Arrays.asList(new Baggage(BaggageType.MIDDLE, false));
 
@@ -149,7 +149,7 @@ public class ShippingServiceTest {
      * ダイヤモンド会員で、割引になった場合（ただし下限に到達）の更新結果をテストする
      */
     @Test
-    void testOrderShipping_DiamondCustomer_Discount_ReachLimit() {
+    void test_OrderShipping_DiamondCustomer_Discount_ReachLimit() {
         // 引数である荷物リストを生成する（テスト毎に異なる）
         List<Baggage> baggageList = Arrays.asList(
                 new Baggage(BaggageType.MIDDLE, false),
@@ -173,7 +173,7 @@ public class ShippingServiceTest {
      * ダイヤモンド会員で、割引になった場合（下限に到達せず）の更新結果をテストする
      */
     @Test
-    void testOrderShipping_DiamondCustomer_Discount_NoLimit() {
+    void test_OrderShipping_DiamondCustomer_Discount_NoLimit() {
         // 引数である荷物リストを生成する（テスト毎に異なる）
         List<Baggage> baggageList = Arrays.asList(
                 new Baggage(BaggageType.SMALL, false),

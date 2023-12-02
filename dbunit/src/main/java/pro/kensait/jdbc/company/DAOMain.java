@@ -33,12 +33,12 @@ public class DAOMain {
 
             // 主キー検索
             System.out.println("***** 主キー検索 *****");
-            Employee emp1 = employeeDAO.findEmployee(10001);
+            Employee emp1 = employeeDAO.selectEmployee(10001);
             System.out.println(emp1);
 
             // 条件検索
             System.out.println("***** 条件検索 *****");
-            List<Employee> resultList = employeeDAO.findEmployeesBySalary(300000, 400000);
+            List<Employee> resultList = employeeDAO.selectEmployeesBySalary(300000, 400000);
             for (Employee employee : resultList) {
                 System.out.println(employee);
             }
@@ -47,7 +47,16 @@ public class DAOMain {
             System.out.println("***** 挿入 *****");
             Employee emp2 = new Employee(10021, "Steve", "SALES", LocalDate.of(2017, 10, 1),
                     null, 380000);
-            employeeDAO.createEmployee(emp2);
+            employeeDAO.insertEmployee(emp2);
+
+            // 削除
+            System.out.println("***** 削除 *****");
+            employeeDAO.deleteEmployee(10004);
+
+            // 一括更新
+            System.out.println("***** 一括更新 *****");
+            employeeDAO.updateSalary("SALES", 3000);
+
         } catch (SQLException sqle) {
             throw new RuntimeException(sqle);
         }

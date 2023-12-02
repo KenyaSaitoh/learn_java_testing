@@ -18,7 +18,7 @@ public class EmployeeDAO {
     }
 
     // 検索（主キーから）
-    public Employee findEmployee(int employeeId) {
+    public Employee selectEmployee(int employeeId) {
         // PreparedStatementに渡すSQL文を定義する
         String sqlStr = "SELECT EMPLOYEE_ID, EMPLOYEE_NAME, DEPARTMENT_NAME, "
                 + "ENTRANCE_DATE, JOB_NAME, SALARY FROM EMPLOYEE "
@@ -52,7 +52,7 @@ public class EmployeeDAO {
     }
 
     // 検索（月給の範囲で検索）
-    public List<Employee> findEmployeesBySalary(int lowerSalary, int upperSalary) {
+    public List<Employee> selectEmployeesBySalary(int lowerSalary, int upperSalary) {
         // PreparedStatementに渡すSQL文を定義する
         String sqlStr = "SELECT EMPLOYEE_ID, EMPLOYEE_NAME, DEPARTMENT_NAME, "
                 + "ENTRANCE_DATE, JOB_NAME, SALARY FROM EMPLOYEE "
@@ -88,7 +88,7 @@ public class EmployeeDAO {
     }
 
     // 挿入
-    public void createEmployee(Employee employee) {
+    public void insertEmployee(Employee employee) {
         // PreparedStatementに渡すSQL文を定義する
         String sqlStr = "INSERT INTO EMPLOYEE VALUES(?, ?, ?, ?, ?, ?, ?)";
         try (

@@ -1,5 +1,6 @@
 package pro.kensait.java.shipping;
 
+import static org.dbunit.Assertion.*; // これを先にimportすることが重要！
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 import static pro.kensait.jdbc.util.DatabaseUtil.*;
@@ -12,8 +13,13 @@ import java.util.List;
 
 import org.dbunit.IDatabaseTester;
 import org.dbunit.JdbcDatabaseTester;
+import org.dbunit.database.IDatabaseConnection;
+import org.dbunit.dataset.DefaultDataSet;
+import org.dbunit.dataset.DefaultTable;
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.ITable;
 import org.dbunit.dataset.csv.CsvDataSet;
+import org.dbunit.dataset.filter.DefaultColumnFilter;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,8 +30,7 @@ import org.mockito.MockitoAnnotations;
  * ShippingServiceを対象にしたテストクラス
  */
 public class ShippingServiceTest {
-    private static final String TEST_DATA_FILE = "src/test/resources/test-data.cav";
-    private static final String EXPECTED_DATA_FILE_1 = "src/test/resources/expected-data-1.csv";
+    private static final String EXPECTED_DATA_DIR = "src/test/resources/EXPECTED_DATA";
 
     /*
      *  すべてのテストメソッドに共通的な変数はフィールドとして宣言する
@@ -46,6 +51,7 @@ public class ShippingServiceTest {
 
     // DBユニットのための変数
     IDatabaseTester databaseTester;
+    IDatabaseConnection databaseConnection;
 
     /*
      *  各テストメソッド呼び出しの前処理（共通変数の初期化など）
@@ -66,12 +72,13 @@ public class ShippingServiceTest {
         baggage = new Baggage(BaggageType.MIDDLE, false);
         orderDateTime = LocalDateTime.now();
         receiveDate = LocalDate.of(2023, 11, 30);
-
-        // DAOが保持するリストをクリアする（DB利用時はテーブル初期化に相当する）
     }
 
+    /*
+     *  データベースやDBUnitを初期化する
+     */
     @BeforeEach
-    public void setUpDatabase() throws Exception {
+    void setUpDatabase() throws Exception {
         // プロパティファイルよりデータベース情報を取得する
         String driver = getProperty("jdbc.driver");
         String url = getProperty("jdbc.url");
@@ -81,10 +88,12 @@ public class ShippingServiceTest {
         // IDatabaseTesterを初期化する
         databaseTester = new JdbcDatabaseTester(driver, url, user, password);
 
-        // CSVファイルから初期データを読み込む
-        IDataSet dataSet = new CsvDataSet(new File(TEST_DATA_FILE));
-        databaseTester.setDataSet(dataSet);
-        databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
+        // 空のデータセットを生成する
+        IDataSet emptyDataSet = new DefaultDataSet(new DefaultTable("SHIPPING"));
+
+        // テーブルを初期化（全件削除）する
+        databaseTester.setDataSet(emptyDataSet);
+        databaseTester.setSetUpOperation(DatabaseOperation.TRUNCATE_TABLE);
         databaseTester.onSetup();
     }
 
@@ -92,7 +101,7 @@ public class ShippingServiceTest {
      * ダイヤモンド会員で、割引になった場合（下限に到達せず）の更新結果をテストする
      */
     @Test
-    void testOrderShipping_DiamondCustomer_Discount_NoLimit() {
+    void test_OrderShipping_DiamondCustomer_Discount_NoLimit() throws Exception {
         // モック化されたCostCalculatorの振る舞いを決める
         when(costCalculator.calcShippingCost(
                 any(BaggageType.class), any(RegionType.class))).thenReturn(1600);
@@ -103,13 +112,20 @@ public class ShippingServiceTest {
         // テスト実行
         shippingService.orderShipping(diamondClient, receiveDate, baggageList);
 
-        // DAOが保持するリストから「実際の値」を取得する
+        // ORDER_DATE_TIME列を検証の対象外にするために、配列を用意用意する
+        String[] excludedColumns = new String[]{"ORDER_DATE_TIME"};
 
-        // 「期待値」を生成する
-        Shipping expected = new Shipping(orderDateTime, diamondClient, receiveDate,
-                baggageList, 3600);
+        // 「期待値」となるテーブル（ORDER_DATE_TIME列除く）を取得する
+        IDataSet expectedDataSet = new CsvDataSet(new File(EXPECTED_DATA_DIR));
+        ITable expectedTable = DefaultColumnFilter.excludedColumnsTable(
+                expectedDataSet.getTable("SHIPPING"), excludedColumns);
+
+        // 「実際の値」となるテーブル（ORDER_DATE_TIME列除く）を取得する
+        IDataSet databaseDataSet = databaseTester.getConnection().createDataSet();
+        ITable actualTable = DefaultColumnFilter.excludedColumnsTable(
+                databaseDataSet.getTable("SHIPPING"), excludedColumns);
 
         // 「期待値」と「実際の値」が一致しているかを検証する
-        //assertEquals(expected, actual);
+        assertEquals(expectedTable, actualTable);
     }
 }
