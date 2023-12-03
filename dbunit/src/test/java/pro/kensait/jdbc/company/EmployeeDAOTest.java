@@ -176,7 +176,7 @@ public class EmployeeDAOTest {
     void test_UpdateSalary() throws Exception {
         // テスト実行し、「実際の値」を取得する
         EmployeeDAO employeeDAO = new EmployeeDAO(jdbcConnection);
-        employeeDAO.updateSalary("SALES", 3000);
+        employeeDAO.updateEmployeeSalary("SALES", 3000);
 
         // 「期待値」となるテーブルを取得する（CSVファイルから）
         IDataSet expectedDataSet = new CsvDataSet(new File(EXPECTED_DATA_DIR_3));

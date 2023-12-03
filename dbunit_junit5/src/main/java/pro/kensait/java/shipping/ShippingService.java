@@ -66,6 +66,6 @@ public class ShippingService {
                 totalCost);
 
         // 配送DAOに配送レコードを保存する
-        ShippingDAO.save(shipping);
+        ShippingDAO.insertShipping(shipping);
     }
 }

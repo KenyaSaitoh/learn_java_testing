@@ -134,7 +134,7 @@ public class EmployeeDAO {
     }
 
     // 更新（一括更新）
-    public void updateSalary(String departmentName, Integer increase) {
+    public void updateEmployeeSalary(String departmentName, Integer increase) {
         // PreparedStatementに渡すSQL文を定義する
         String sqlStr = "UPDATE EMPLOYEE SET SALARY = SALARY + ? "
                 + "WHERE DEPARTMENT_NAME = ?";

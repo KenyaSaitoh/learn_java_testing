@@ -55,7 +55,7 @@ public class DAOMain {
 
             // 一括更新
             System.out.println("***** 一括更新 *****");
-            employeeDAO.updateSalary("SALES", 3000);
+            employeeDAO.updateEmployeeSalary("SALES", 3000);
 
         } catch (SQLException sqle) {
             throw new RuntimeException(sqle);

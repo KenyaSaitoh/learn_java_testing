@@ -28,7 +28,7 @@ public class ShippingDAO {
         }
     }
 
-    public static void save(Shipping shipping) {
+    public static void insertShipping(Shipping shipping) {
         // PreparedStatementに渡すSQL文を定義する
         String sqlStr = "INSERT INTO SHIPPING "
                 + "(ORDER_DATE_TIME, CLIENT_NAME, RECEIVE_DATE, BAGGAGE_COUNT, TOTAL_PRICE) "
