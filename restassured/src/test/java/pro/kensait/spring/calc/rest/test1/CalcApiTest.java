@@ -1,4 +1,4 @@
-package pro.kensait.spring.calc.rest.api;
+package pro.kensait.spring.calc.rest.test1;
 
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,7 +10,7 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
-public class CalcApiTest_1 {
+public class CalcApiTest {
 
     @BeforeAll
     public static void setup() {
@@ -20,15 +20,31 @@ public class CalcApiTest_1 {
     }
 
     @Test
-    public void test_AddMethod_ReturnsRightResult() {
-        String requestBody = "{\"param1\": 30.0, \"param2\": 10.0}";
-
+    public void test_AddMethod_ByGet_ReturnsRightResult() {
         // RestAssuredを使用してAPIをテストし、レスポンスを取得
         Response response = given()
-                .contentType(ContentType.JSON)
-                .body(requestBody)
+                .queryParam("param1", 30.0)
+                .queryParam("param2", 10.0)
                 .when()
-                .post("/add")
+                .get("/add1")
+                .then()
+                .extract()
+                .response();
+
+        // ステータスコードとレスポンスボディを検証
+        assertEquals(200, response.getStatusCode());
+        assertEquals("40.0", response.getBody().asString());
+    }
+
+    @Test
+    public void test_AddMethod_ByPost_ReturnsRightResult() {
+        // RestAssuredを使用してAPIをテストし、レスポンスを取得
+        Response response = given()
+                .contentType(ContentType.URLENC)
+                .param("param1", 30.0)
+                .param("param2", 10.0)
+                .when()
+                .post("/add2")
                 .then()
                 .extract()
                 .response();

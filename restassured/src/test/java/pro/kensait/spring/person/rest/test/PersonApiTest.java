@@ -1,4 +1,4 @@
-package pro.kensait.spring.person.rest.api;
+package pro.kensait.spring.person.rest.test;
 
 import static io.restassured.RestAssured.*;
 
