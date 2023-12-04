@@ -1,4 +1,4 @@
-package pro.kensait.spring.calc.rest.server.api;
+package pro.kensait.spring.calc.rest.api;
 
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,7 +10,7 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
-public class CalcApiTest_1 {
+public class CalcApiTest_2 {
 
     @BeforeAll
     public static void setup() {
@@ -20,8 +20,8 @@ public class CalcApiTest_1 {
     }
 
     @Test
-    public void test_AddMethod_ReturnsRightResult() {
-        String requestBody = "{\"param1\": 30.0, \"param2\": 10.0}";
+    public void test_AddMethod_ReturnsStatusCode400() {
+        String requestBody = "{\"param1\": 30.0, \"param2\": -5000.0}";
 
         // RestAssuredを使用してAPIをテストし、レスポンスを取得
         Response response = given()
@@ -34,7 +34,6 @@ public class CalcApiTest_1 {
                 .response();
 
         // ステータスコードとレスポンスボディを検証
-        assertEquals(200, response.getStatusCode());
-        assertEquals("40.0", response.getBody().asString());
+        assertEquals(400, response.getStatusCode());
     }
 }

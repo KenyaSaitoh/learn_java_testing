@@ -1,4 +1,4 @@
-package pro.kensait.spring.greet.rest.server.api;
+package pro.kensait.spring.greet.rest.api;
 
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
