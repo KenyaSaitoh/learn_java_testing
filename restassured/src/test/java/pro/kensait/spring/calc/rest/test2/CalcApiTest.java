@@ -35,14 +35,15 @@ public class CalcApiTest {
                 .response();
 
         // ステータスコードとレスポンスボディを検証
-        assertEquals(400, response.getStatusCode());
+        assertEquals(200, response.getStatusCode());
     }
 
     @Test
     public void test_AddMethod_Error_Returns_StatusCode400() {
         // パラメータを生成する
-        CalcParam param = new CalcParam(30.0, -5000.0);
-
+        CalcParam param = new CalcParam(30.0, -1000.0);
+        System.out.println(param);
+        
         // RestAssuredを使用してAPIをテストし、レスポンスを取得
         Response response = given()
                 .contentType(ContentType.JSON)

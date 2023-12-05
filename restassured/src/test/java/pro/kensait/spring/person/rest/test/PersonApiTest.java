@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 
 public class PersonApiTest {
 
@@ -33,11 +34,14 @@ public class PersonApiTest {
     // 全Personのリストを取得するテスト
     @Test
     public void test_GetAllPersons() {
-        given()
+        Response response = given()
                 .when()
-                .get() // GETリクエストを実行
+                .get() // 正しいエンドポイントを指定
                 .then()
-                .statusCode(200); // ステータスコードが200であることを検証
+                .statusCode(200) // ステータスコードが200であることを検証
+                .extract()
+                .response(); // レスポンスを抽出
+        System.out.println(response.asString());
     }
 
     // 特定の年齢以下のPersonのリストを取得するテスト
