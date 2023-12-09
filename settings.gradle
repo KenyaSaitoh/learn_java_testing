@@ -27,7 +27,5 @@ includeFlat \
 'dbunit',
 'dbunit_junit5',
 'restassured',
-'restassured_junit5',
 'wiremock',
-'wiremock_junit5',
 'selenium'
