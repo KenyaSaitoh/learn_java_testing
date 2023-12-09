@@ -16,6 +16,7 @@ import org.mockito.MockitoAnnotations;
 
 /*
  * ShippingServiceを対象にしたテストクラス
+ * 引数もモッキングする
  */
 public class ShippingServiceTest2 {
     /*

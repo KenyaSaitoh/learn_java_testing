@@ -10,33 +10,40 @@ import com.github.tomakehurst.wiremock.WireMockServer;
 
 public class WireMockApp {
 
+    // WireMockサーバーのインスタンスを生成し、ポート8080で起動
     public static void main(String[] args) {
         WireMockServer wireMockServer = new WireMockServer(8080); // ポート番号を指定
         wireMockServer.start();
 
+        // WireMockの設定をlocalhostのポート8080に合わせる
         configureFor("localhost", 8080);
+
+        // GET /persons/{personId}のURLに対するモックレスポンスを設定
         stubFor(get(urlPathMatching("/persons/\\d+"))
                 .willReturn(aResponse()
-                    .withStatus(200)
+                    .withStatus(200) // HTTPステータス200
                     .withHeader("Content-Type", "application/json")
-                    .withBody("{\"personId\": 1, \"personName\": \"Alice\", \"age\": 30, \"gender\": \"Female\"}"))); // AliceのPersonオブジェクト
+                    .withBody("{\"personId\": 1, \"personName\": \"Alice\", \"age\": 30, \"gender\": \"Female\"}"))); // モックレスポンスのボディ
 
         ObjectMapper mapper = new ObjectMapper();
         JsonNode personNodes = mapper.valueToTree(personList2);
-        
+
+        // GET /personsのURLに対するモックレスポンスを設定
         stubFor(get(urlPathEqualTo("/persons"))
                 .willReturn(aResponse()
-                    .withStatus(200)
+                    .withStatus(200) // HTTPステータス200
                     .withHeader("Content-Type", "application/json")
-                    .withBody(jsonPersonList)));
+                    .withBody(jsonPersonList))); // 静的なJSONレスポンス
 
+        // GET /persons/query_by_ageのURLに対するモックレスポンスを設定
         stubFor(get(urlPathEqualTo("/persons/query_by_age"))
-                .withQueryParam("lowerAge", equalTo("30"))
+                .withQueryParam("lowerAge", equalTo("30")) // クエリパラメータの条件
                 .willReturn(aResponse()
                     .withStatus(200)
                     .withHeader("Content-Type", "application/json")
-                    .withJsonBody(personNodes)));
+                    .withJsonBody(personNodes))); // ObjectMapperを使用した動的なJSONレスポンス
 
+        // POST /personsのURLに対するモックレスポンスを設定
         stubFor(post(urlPathEqualTo("/persons"))
                 .withRequestBody(containing("personName"))
                 .withRequestBody(containing("age"))
@@ -44,8 +51,9 @@ public class WireMockApp {
                 .willReturn(aResponse()
                     .withStatus(200)
                     .withHeader("Content-Type", "application/json")
-                    .withBody("{\"personId\": 3, \"personName\": \"Charlie\", \"age\": 20, \"gender\": \"Male\"}"))); // 新規作成されたCharlieのPersonオブジェクト
+                    .withBody("{\"personId\": 3, \"personName\": \"Charlie\", \"age\": 20, \"gender\": \"Male\"}"))); // 新規作成されたPersonオブジェクト
 
+        // PUT /persons/{personId}のURLに対するモックレスポンスを設定
         stubFor(put(urlPathMatching("/persons/\\d+"))
                 .withRequestBody(containing("personName"))
                 .withRequestBody(containing("age"))
@@ -53,8 +61,9 @@ public class WireMockApp {
                 .willReturn(aResponse()
                     .withStatus(200)
                     .withHeader("Content-Type", "application/json")
-                    .withBody("{\"personId\": 1, \"personName\": \"UpdatedAlice\", \"age\": 35, \"gender\": \"Female\"}"))); // 更新されたAliceのPersonオブジェクト
+                    .withBody("{\"personId\": 1, \"personName\": \"UpdatedAlice\", \"age\": 35, \"gender\": \"Female\"}"))); // 更新されたPersonオブジェクト
 
+        // DELETE /persons/{personId}のURLに対するモックレスポンスを設定
         stubFor(delete(urlPathMatching("/persons/\\d+"))
                 .willReturn(aResponse()
                     .withStatus(200)
@@ -63,6 +72,7 @@ public class WireMockApp {
 
     }
 
+    // 静的なJSONレスポンスのデータ
     static final String jsonPersonList = """
             [
                 {

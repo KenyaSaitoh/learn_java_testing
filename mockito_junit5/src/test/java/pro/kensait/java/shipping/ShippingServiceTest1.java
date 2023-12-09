@@ -16,8 +16,9 @@ import org.mockito.MockitoAnnotations;
 
 /*
  * ShippingServiceを対象にしたテストクラス
+ * 引数は直接生成する（モッキングしない）
  */
-public class ShippingServiceTest {
+public class ShippingServiceTest1 {
     /*
      *  すべてのテストメソッドに共通的な変数はフィールドとして宣言する
      */
