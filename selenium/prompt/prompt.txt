@@ -1,7 +1,0 @@
-以下の画面遷移を行うためのSeleniumのコードを、Java（Selenide）で生成してください。
-
-1：http://localhost:8080/にアクセスする
-2：メールアドレスalice@gmail.com、パスワードpasswordでログインしてください
-ログインボタンのIDはloginButtonです
-ログインはPOSTで、URLは/processLoginです
-3：ログインに成功したら、/toSelectにリダイレクトしてください
