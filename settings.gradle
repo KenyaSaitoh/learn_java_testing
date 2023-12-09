@@ -30,5 +30,4 @@ includeFlat \
 'restassured_junit5',
 'wiremock',
 'wiremock_junit5',
-'selenium',
-'selenium_junit5'
+'selenium'
