@@ -48,7 +48,7 @@ subprojects {
     def defaultEncoding = "UTF-8"
     tasks.withType(AbstractCompile).each { it.options.encoding = defaultEncoding }
 
-    // Gradle7.x対応
+    // リソース競合時の処理を設定（Gradle7.x対応）
     tasks.withType(ProcessResources) {
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
     }

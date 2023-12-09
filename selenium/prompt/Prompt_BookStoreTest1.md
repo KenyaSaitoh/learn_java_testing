@@ -29,7 +29,7 @@ Seleniumのコードを、Java（Selenide）で生成してください。
 |13|クリック|fixButton|||
 |14|検証||title()|BookOrderPage|
 |15|クリック|bankTransfer|||
-|16|クリック|orderButton|||
+|16|クリック|orderButton1|||
 |17|検証||title()|OrderSuccessPage|
 |18|クリック|logoutButton|||
 |19|検証||title()|FinishPage|

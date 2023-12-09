@@ -62,7 +62,7 @@ class BookStoreTest1 {
         $("#bankTransfer").click();
 
         // 16. クリック: orderButton
-        $("#orderButton").click();
+        $("#orderButton1").click();
 
         // 17. ページのタイトル検証: OrderSuccessPage
         assertEquals("OrderSuccessPage", title());
