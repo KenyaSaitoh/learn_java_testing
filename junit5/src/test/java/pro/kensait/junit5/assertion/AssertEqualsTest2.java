@@ -10,7 +10,7 @@ import java.util.Objects;
 
 import org.junit.jupiter.api.Test;
 
-public class AssertObjectTest {
+public class AssertEqualsTest2 {
 
     // 同じ値であること（等価性）を検証する
     @Test
