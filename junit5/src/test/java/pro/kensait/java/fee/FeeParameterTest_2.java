@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
-public class FeeParameterTest2 {
+public class FeeParameterTest_2 {
 
     FeeService feeService;
 

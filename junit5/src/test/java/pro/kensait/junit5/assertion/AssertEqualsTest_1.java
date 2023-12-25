@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-public class AssertEqualsTest1 {
+public class AssertEqualsTest_1 {
 
     // 同じ値であること（等価性）を検証する
     @Test
