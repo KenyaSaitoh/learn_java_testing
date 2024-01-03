@@ -1,4 +1,4 @@
-package pro.kensait.java.testing;
+package pro.kensait.java.coverage;
 
 import java.util.Scanner;
 
