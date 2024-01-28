@@ -1,0 +1,63 @@
+$ cd /cygdrive/d/DevTools/gatling-charts-highcharts-bundle-3.10.3/bin
+
+$ ./gatling.bat -sf D:/GitHubRepos/udemy_projects/learn_java_testing/gatling/src/test/java/pro/kensait/gatling \
+-rf D:/GitHubRepos/udemy_projects/learn_java_testing/gatling/report
+
+GATLING_HOME is set to "D:\DevTools\gatling-charts-highcharts-bundle-3.10.3"
+JAVA = "D:\Java\jdk-17.0.3.1\bin\java.exe"
+GATLING_HOME is set to D:\DevTools\gatling-charts-highcharts-bundle-3.10.3
+Do you want to run the simulation locally, on Gatling Enterprise, or just package it?
+Type the number corresponding to your choice and press enter
+[0] <Quit>
+[1] Run the Simulation locally
+[2] Package and upload the Simulation to Gatling Enterprise Cloud, and run it there
+[3] Package the Simulation for Gatling Enterprise
+[4] Show help and exit
+1
+pro.kensait.gatling.BookStoreSimulation is the only simulation, executing it.
+Select run description (optional)
+
+Simulation pro.kensait.gatling.BookStoreSimulation started...
+
+================================================================================
+2024-01-28 18:11:20                                           2s elapsed
+---- Requests ------------------------------------------------------------------
+> Global                                                   (OK=5      KO=0     )
+> Request_HomePage                                         (OK=1      KO=0     )
+> Login                                                    (OK=1      KO=0     )
+> Login Redirect 1                                         (OK=1      KO=0     )
+> Access_BookSelectPage                                    (OK=1      KO=0     )
+> Access_BookSelectPage Redirect 1                         (OK=1      KO=0     )
+
+---- BookStoreTest -------------------------------------------------------------
+[##########################################################################]100%
+          waiting: 0      / active: 0      / done: 1
+================================================================================
+
+Simulation pro.kensait.gatling.BookStoreSimulation completed in 2 seconds
+Parsing log file(s)...
+Parsing log file(s) done in 0s.
+Generating reports...
+
+================================================================================
+---- Global Information --------------------------------------------------------
+> request count                                          5 (OK=5      KO=0     )
+> min response time                                     14 (OK=14     KO=-     )
+> max response time                                    623 (OK=623    KO=-     )
+> mean response time                                   146 (OK=146    KO=-     )
+> std deviation                                        239 (OK=239    KO=-     )
+> response time 50th percentile                         23 (OK=23     KO=-     )
+> response time 75th percentile                         51 (OK=51     KO=-     )
+> response time 95th percentile                        509 (OK=509    KO=-     )
+> response time 99th percentile                        600 (OK=600    KO=-     )
+> mean requests/sec                                  1.667 (OK=1.667  KO=-     )
+---- Response Time Distribution ------------------------------------------------
+> t < 800 ms                                             5 (100%)
+> 800 ms <= t < 1200 ms                                  0 (  0%)
+> t >= 1200 ms                                           0 (  0%)
+> failed                                                 0 (  0%)
+================================================================================
+
+Reports generated, please open the following file: file:///D:/GitHubRepos/udemy_projects/learn_java_testing/gatling/book
+storesimulation-20240128091115654/index.html
+続行するには何かキーを押してください . . .

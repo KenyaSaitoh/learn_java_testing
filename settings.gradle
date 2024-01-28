@@ -28,4 +28,5 @@ includeFlat \
 'dbunit_junit5',
 'restassured',
 'wiremock',
-'selenium'
+'selenium',
+'gatling'

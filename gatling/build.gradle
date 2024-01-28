@@ -1,0 +1,14 @@
+plugins {
+    // id "scala" // GatlingはScalaで書かれているため、Scalaプラグインが必要
+    // id "com.github.lkishalmi.gatling" version "3.3.4" // Gatlingプラグイン
+}
+
+dependencies {
+    // Gatlingの依存関係
+    testImplementation "io.gatling:gatling-core:${gatlingVersion}"
+    testImplementation "io.gatling:gatling-http:${gatlingVersion}"
+    testImplementation "io.gatling:gatling-test-framework:${gatlingVersion}"
+    testImplementation "io.gatling.highcharts:gatling-charts-highcharts:${gatlingVersion}"
+    //testImplementation "io.gatling:gatling-javaapi-core:${gatlingVersion}"
+    //testImplementation "io.gatling:gatling-javaapi-http:${gatlingVersion}"
+}

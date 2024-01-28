@@ -22,6 +22,7 @@ buildscript {
         wireMockVer = "3.0.1"
         guavaVer = "32.1.2-jre"
         selenideVer = "7.0.2"
+        gatlingVersion = "3.10.3"
     }
 
     // リポジトリ設定
