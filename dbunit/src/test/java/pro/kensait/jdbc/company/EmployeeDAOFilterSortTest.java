@@ -80,30 +80,30 @@ public class EmployeeDAOFilterSortTest {
      */
     @Test
     void test_InsertEmployee() throws Exception {
-        // テスト実行し、「実際の値」を取得する
+        // テスト実行し、実測値を取得する
         EmployeeDAO employeeDAO = new EmployeeDAO(jdbcConnection);
         Employee employee = new Employee(10021, "Steve", "SALES", LocalDate.of(2017, 10, 1),
                 null, 380000);
         employeeDAO.insertEmployee(employee);
 
-        // ORDER_DATE_TIME列を検証の対象外にするために、配列を用意用意する
+        // ORDER_DATE_TIME列を検証の対象外にするために、配列を用意する
         String[] excludedColumns = new String[]{"ENTRANCE_DATE"};
 
-        // 「期待値」となるテーブルを（ENTRANCE_DATE列除く）取得する（CSVファイルから）
+        // 期待値となるテーブルを（ENTRANCE_DATE列除く）取得する（CSVファイルから）
         IDataSet expectedDataSet = new CsvDataSet(new File(EXPECTED_DATA_DIR_1));
         ITable expectedTable = DefaultColumnFilter.excludedColumnsTable(
                 expectedDataSet.getTable("EMPLOYEE"), excludedColumns);
 
-        // 「実際の値」となるテーブル（ENTRANCE_DATE列除く）を取得する
+        // 実測値となるテーブル（ENTRANCE_DATE列除く）を取得する
         IDataSet databaseDataSet = databaseTester.getConnection().createDataSet();
         ITable actualTable = DefaultColumnFilter.excludedColumnsTable(
                 databaseDataSet.getTable("EMPLOYEE"), excludedColumns);
 
-        // 「実際の値」をソートする（必要に応じて）
+        // 実測値をソートする（必要に応じて）
         String[] columns = {"EMPLOYEE_ID"};
         ITable sortedActualTable = new SortedTable(actualTable, columns);
 
-        // 「期待値」と「実際の値」が一致しているかを検証する
+        // 期待値と実測値が一致しているかを検証する
         assertEquals(expectedTable, sortedActualTable);
     }
 }

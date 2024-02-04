@@ -83,15 +83,15 @@ public class EmployeeDAOTest {
      */
     @Test
     void test_SelectEmployee() {
-        // テスト実行し、「実際の値」を取得する
+        // テスト実行し、実測値を取得する
         EmployeeDAO employeeDAO = new EmployeeDAO(jdbcConnection);
         Employee actual = employeeDAO.selectEmployee(10001);
 
-        // 「期待値」を生成する
+        // 期待値を生成する
         Employee expected = new Employee(10001, "Alice", "SALES" ,LocalDate.of(2012, 4, 1),
                 "MANAGER", 500000);
 
-        // 「期待値」と「実際の値」が一致しているかを検証する
+        // 期待値と実測値が一致しているかを検証する
         assertEquals(expected, actual);
     }
 
@@ -100,11 +100,11 @@ public class EmployeeDAOTest {
      */
     @Test
     void test_SelectEmployeesBySalary() throws Exception {
-        // テスト実行し、「実際の値」を取得する
+        // テスト実行し、実測値を取得する
         EmployeeDAO employeeDAO = new EmployeeDAO(jdbcConnection);
         List<Employee> actualList = employeeDAO.selectEmployeesBySalary(300000, 400000);
 
-        // 「期待値リスト」のサイズと「実際の値リスト」のサイズが一致しているかを検証する
+        // 「期待値リスト」のサイズと「実測値リスト」のサイズが一致しているかを検証する
         assertEquals(4, actualList.size());
 
         // 「期待値リスト」を生成する
@@ -114,14 +114,14 @@ public class EmployeeDAOTest {
                 new Employee(10005, "Ellen", "SALES" ,LocalDate.of(2013, 4, 1), "CHIEF", 300000),
                 new Employee(10011, "Oscar", "PRODUCT" ,LocalDate.of(2015, 11, 1), "CHIEF", 320000));
 
-        // 「実際の値リスト」をソートする
+        // 「実測値リスト」をソートする
         Collections.sort(actualList, (e1, e2) -> {
             if (e1.getEmployeeId() < e2.getEmployeeId()) return -1;
             if (e1.getEmployeeId() > e2.getEmployeeId()) return 1;
             return 0;
          });
 
-        // 「期待値リスト」と「実際の値リスト」が一致しているかを検証する
+        // 「期待値リスト」と「実測値リスト」が一致しているかを検証する
         assertIterableEquals(expectedList, actualList);
     }
 
@@ -130,21 +130,21 @@ public class EmployeeDAOTest {
      */
     @Test
     void test_InsertEmployee() throws Exception {
-        // テスト実行し、「実際の値」を取得する
+        // テスト実行し、実測値を取得する
         EmployeeDAO employeeDAO = new EmployeeDAO(jdbcConnection);
         Employee employee = new Employee(10021, "Steve", "SALES", LocalDate.of(2017, 10, 1),
                 null, 380000);
         employeeDAO.insertEmployee(employee);
 
-        // 「期待値」となるテーブルを取得する（CSVファイルから）
+        // 期待値となるテーブルを取得する（CSVファイルから）
         IDataSet expectedDataSet = new CsvDataSet(new File(EXPECTED_DATA_DIR_1));
         ITable expectedTable = expectedDataSet.getTable("EMPLOYEE");
 
-        // 「実際の値」となるテーブルを取得する
+        // 実測値となるテーブルを取得する
         IDataSet databaseDataSet = databaseTester.getConnection().createDataSet();
         ITable actualTable = databaseDataSet.getTable("EMPLOYEE");
 
-        // 「期待値」と「実際の値」が一致しているかを検証する
+        // 期待値と実測値が一致しているかを検証する
         assertEquals(expectedTable, actualTable);
     }
 
@@ -153,19 +153,19 @@ public class EmployeeDAOTest {
      */
     @Test
     void test_DeleteEmployee() throws Exception {
-        // テスト実行し、「実際の値」を取得する
+        // テスト実行し、実測値を取得する
         EmployeeDAO employeeDAO = new EmployeeDAO(jdbcConnection);
         employeeDAO.deleteEmployee(10004);
 
-        // 「期待値」となるテーブルを取得する（CSVファイルから）
+        // 期待値となるテーブルを取得する（CSVファイルから）
         IDataSet expectedDataSet = new CsvDataSet(new File(EXPECTED_DATA_DIR_2));
         ITable expectedTable = expectedDataSet.getTable("EMPLOYEE");
 
-        // 「実際の値」となるテーブルを取得する
+        // 実測値となるテーブルを取得する
         IDataSet databaseDataSet = databaseTester.getConnection().createDataSet();
         ITable actualTable = databaseDataSet.getTable("EMPLOYEE");
 
-        // 「期待値」と「実際の値」が一致しているかを検証する
+        // 期待値と実測値が一致しているかを検証する
         assertEquals(expectedTable, actualTable);
     }
 
@@ -174,19 +174,19 @@ public class EmployeeDAOTest {
      */
     @Test
     void test_UpdateSalary() throws Exception {
-        // テスト実行し、「実際の値」を取得する
+        // テスト実行し、実測値を取得する
         EmployeeDAO employeeDAO = new EmployeeDAO(jdbcConnection);
         employeeDAO.updateEmployeeSalary("SALES", 3000);
 
-        // 「期待値」となるテーブルを取得する（CSVファイルから）
+        // 期待値となるテーブルを取得する（CSVファイルから）
         IDataSet expectedDataSet = new CsvDataSet(new File(EXPECTED_DATA_DIR_3));
         ITable expectedTable = expectedDataSet.getTable("EMPLOYEE");
 
-        // 「実際の値」となるテーブルを取得する
+        // 実測値となるテーブルを取得する
         IDataSet databaseDataSet = databaseTester.getConnection().createDataSet();
         ITable actualTable = databaseDataSet.getTable("EMPLOYEE");
 
-        // 「期待値」と「実際の値」が一致しているかを検証する
+        // 期待値と実測値が一致しているかを検証する
         assertEquals(expectedTable, actualTable);
     }
 }

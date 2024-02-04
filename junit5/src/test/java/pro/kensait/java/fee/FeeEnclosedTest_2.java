@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 public class FeeEnclosedTest_2 {
-    private static final String OUR_BANK_CODE = "B001"; // 自行
-    private static final String OTHER_BANK_CODE = "B999"; // 他行
+    private static final String OUR_BANK_CODE = "B001"; // 自分の銀行
+    private static final String OTHER_BANK_CODE = "B999"; // 他の銀行
 
     @Nested
-    class 自行宛振込 {
+    class 自分の銀行宛振込 {
         FeeService feeService;
 
         @BeforeEach
@@ -33,7 +33,7 @@ public class FeeEnclosedTest_2 {
     }
 
     @Nested
-    class 他行宛振込 {
+    class 他の銀行宛振込 {
         FeeService feeService;
 
         @BeforeEach

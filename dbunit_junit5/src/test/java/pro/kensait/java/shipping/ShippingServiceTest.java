@@ -22,6 +22,7 @@ import org.dbunit.dataset.csv.CsvDataSet;
 import org.dbunit.dataset.filter.DefaultColumnFilter;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -33,28 +34,28 @@ public class ShippingServiceTest {
     private static final String EXPECTED_DATA_DIR = "src/test/resources/EXPECTED_DATA";
 
     /*
-     *  すべてのテストメソッドに共通的な変数はフィールドとして宣言する
+     *  すべてのテストメソッドに共通的なフィクスチャを、フィールドとして宣言する
      */
 
     // テスト対象クラス
     ShippingService shippingService;
 
-    // テスト対象クラスが依存しているクラス（@Mockを付与してモック化）
+    // テスト対象クラスの呼び出し先（@Mockを付与してモック化）
     @Mock CostCalculatorIF costCalculator;
 
-    // 上記以外の共通的な変数
+    // 各テストメソッドで共通的なフィクスチャ
     Client goldClient;
     Client diamondClient;
     Baggage baggage;
     LocalDateTime orderDateTime;
     LocalDate receiveDate;
 
-    // DBユニットのための変数
+    // DBユニットのためのフィクスチャ
     IDatabaseTester databaseTester;
     IDatabaseConnection databaseConnection;
 
     /*
-     *  各テストメソッド呼び出しの前処理（共通変数の初期化など）
+     *  各テストメソッド呼び出しの事前処理
      */
     @BeforeEach
     void setUp() {
@@ -64,7 +65,7 @@ public class ShippingServiceTest {
         // モックをテスト対象クラスに注入する
         shippingService = new ShippingService(costCalculator);
 
-        // 変数を設定する
+        // 各テストメソッドで共通的なフィクスチャを設定する
         goldClient = new Client(10001, "Alice", "大阪府住吉区1-1-1",
                 ClientType.GOLD, RegionType.KANSAI);
         diamondClient = new Client(10001, "Alice", "大阪府住吉区1-1-1",
@@ -97,35 +98,33 @@ public class ShippingServiceTest {
         databaseTester.onSetup();
     }
 
-    /*
-     * ダイヤモンド会員で、割引になった場合（下限に到達せず）の更新結果をテストする
-     */
     @Test
+    @DisplayName("ダイヤモンド会員で、割引になった場合（下限に到達せず）の更新結果をテストする")
     void test_OrderShipping_DiamondCustomer_Discount_NoLimit() throws Exception {
         // モック化されたCostCalculatorの振る舞いを決める
         when(costCalculator.calcShippingCost(
                 any(BaggageType.class), any(RegionType.class))).thenReturn(1600);
 
-        // 引数である荷物リストを生成する（テスト毎に個数が異なる）
+        // 引数である荷物リストを生成する（テストメソッド毎に個数が異なる）
         List<Baggage> baggageList = Arrays.asList(baggage, baggage, baggage);
 
         // テスト実行
         shippingService.orderShipping(diamondClient, receiveDate, baggageList);
 
-        // ORDER_DATE_TIME列を検証の対象外にするために、配列を用意用意する
+        // ORDER_DATE_TIME列を検証の対象外にするために、配列を用意する
         String[] excludedColumns = new String[]{"ORDER_DATE_TIME"};
 
-        // 「期待値」となるテーブル（ORDER_DATE_TIME列除く）を取得する
+        // 期待値となるテーブル（ORDER_DATE_TIME列除く）を取得する
         IDataSet expectedDataSet = new CsvDataSet(new File(EXPECTED_DATA_DIR));
         ITable expectedTable = DefaultColumnFilter.excludedColumnsTable(
                 expectedDataSet.getTable("SHIPPING"), excludedColumns);
 
-        // 「実際の値」となるテーブル（ORDER_DATE_TIME列除く）を取得する
+        // 実測値となるテーブル（ORDER_DATE_TIME列除く）を取得する
         IDataSet databaseDataSet = databaseTester.getConnection().createDataSet();
         ITable actualTable = DefaultColumnFilter.excludedColumnsTable(
                 databaseDataSet.getTable("SHIPPING"), excludedColumns);
 
-        // 「期待値」と「実際の値」が一致しているかを検証する
+        // 期待値と実測値が一致しているかを検証する
         assertEquals(expectedTable, actualTable);
     }
 }

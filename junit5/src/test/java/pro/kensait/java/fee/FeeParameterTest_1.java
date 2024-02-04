@@ -9,8 +9,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 public class FeeParameterTest_1 {
-    private static final String OUR_BANK_CODE = "B001"; // 自行
-    private static final String OTHER_BANK_CODE = "B999"; // 他行
+    private static final String OUR_BANK_CODE = "B001"; // 自分の銀行
+    private static final String OTHER_BANK_CODE = "B999"; // 他の銀行
 
     FeeService feeService;
 
