@@ -44,10 +44,10 @@ public class ShippingServiceTest {
         shippingService = new ShippingService(costCalculator);
 
         // 各テストメソッドで共通的なフィクスチャを設定する
-        diamondClient = new Client(10001, "Alice", "大阪府住吉区1-1-1",
-                ClientType.DIAMOND, RegionType.KANSAI);
-        goldClient = new Client(10001, "Alice", "大阪府住吉区1-1-1",
-                ClientType.GOLD, RegionType.KANSAI);
+        diamondClient = new Client(10001, "Alice", "福岡県福岡市1-1-1",
+                ClientType.DIAMOND, RegionType.KYUSHU);
+        goldClient = new Client(10001, "Alice", "福岡県福岡市1-1-1",
+                ClientType.GOLD, RegionType.KYUSHU);
         baggage = new Baggage(BaggageType.MIDDLE, false);
         orderDateTime = LocalDateTime.now();
         receiveDate = LocalDate.of(2023, 11, 30);
