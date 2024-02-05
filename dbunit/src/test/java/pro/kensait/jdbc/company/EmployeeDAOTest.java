@@ -19,30 +19,32 @@ import org.dbunit.dataset.ITable;
 import org.dbunit.dataset.csv.CsvDataSet;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /*
  * ShippingServiceを対象にしたテストクラス
  */
 public class EmployeeDAOTest {
+    // DBUnitが使用するファイル格納ディレクトリ
     private static final String INIT_DATA_DIR = "src/test/resources/INIT_DATA";
     private static final String EXPECTED_DATA_DIR_1 = "src/test/resources/EXPECTED_DATA_1";
     private static final String EXPECTED_DATA_DIR_2 = "src/test/resources/EXPECTED_DATA_2";
     private static final String EXPECTED_DATA_DIR_3 = "src/test/resources/EXPECTED_DATA_3";
 
     /*
-     *  すべてのテストメソッドに共通的な変数はフィールドとして宣言する
+     *  すべてのテストメソッドに共通的なフィクスチャを、フィールドとして宣言する
      */
 
     // テスト対象クラス
     EmployeeDAO employeeDAO;
 
-    // DBユニットのための変数
+    // DBUnitのためのフィクスチャ
     IDatabaseTester databaseTester;
     IDatabaseConnection databaseConnection;
 
-    // 共通的な変数（EmployeeDAOを動作させるためにjava.sql.Connectionが必要）
-    Connection jdbcConnection;
+    // 各テストメソッドで共通的なフィクスチャ
+    Connection jdbcConnection; // EmployeeDAOを動作させるためにjava.sql.Connectionが必要
 
     /*
      *  データベースやDBUnitを初期化する
@@ -78,10 +80,8 @@ public class EmployeeDAOTest {
         databaseTester.onSetup();
     }
 
-    /*
-     * 主キー検索の結果をテストする
-     */
     @Test
+    @DisplayName("主キー検索の結果をテストする")
     void test_SelectEmployee() {
         // テスト実行し、実測値を取得する
         EmployeeDAO employeeDAO = new EmployeeDAO(jdbcConnection);
@@ -95,10 +95,8 @@ public class EmployeeDAOTest {
         assertEquals(expected, actual);
     }
 
-    /*
-     * 条件検索の結果をテストする
-     */
     @Test
+    @DisplayName("条件検索の結果をテストする")
     void test_SelectEmployeesBySalary() throws Exception {
         // テスト実行し、実測値を取得する
         EmployeeDAO employeeDAO = new EmployeeDAO(jdbcConnection);
@@ -125,10 +123,8 @@ public class EmployeeDAOTest {
         assertIterableEquals(expectedList, actualList);
     }
 
-    /*
-     * 挿入の結果をテストする
-     */
     @Test
+    @DisplayName("挿入の結果をテストする")
     void test_InsertEmployee() throws Exception {
         // テスト実行し、実測値を取得する
         EmployeeDAO employeeDAO = new EmployeeDAO(jdbcConnection);
@@ -148,10 +144,8 @@ public class EmployeeDAOTest {
         assertEquals(expectedTable, actualTable);
     }
 
-    /*
-     * 削除の結果をテストする
-     */
     @Test
+    @DisplayName("削除の結果をテストする")
     void test_DeleteEmployee() throws Exception {
         // テスト実行し、実測値を取得する
         EmployeeDAO employeeDAO = new EmployeeDAO(jdbcConnection);
@@ -169,10 +163,8 @@ public class EmployeeDAOTest {
         assertEquals(expectedTable, actualTable);
     }
 
-    /*
-     * 一括更新の結果をテストする
-     */
     @Test
+    @DisplayName("一括更新の結果をテストする")
     void test_UpdateSalary() throws Exception {
         // テスト実行し、実測値を取得する
         EmployeeDAO employeeDAO = new EmployeeDAO(jdbcConnection);

@@ -18,28 +18,30 @@ import org.dbunit.dataset.csv.CsvDataSet;
 import org.dbunit.dataset.filter.DefaultColumnFilter;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /*
  * ShippingServiceを対象にしたテストクラス
  */
 public class EmployeeDAOFilterSortTest {
+    // DBUnitが使用するファイル格納ディレクトリ
     private static final String INIT_DATA = "src/test/resources/INIT_DATA";
     private static final String EXPECTED_DATA_DIR_1 = "src/test/resources/EXPECTED_DATA_1";
 
     /*
-     *  すべてのテストメソッドに共通的な変数はフィールドとして宣言する
+     *  すべてのテストメソッドに共通的なフィクスチャを、フィールドとして宣言する
      */
 
     // テスト対象クラス
     EmployeeDAO employeeDAO;
 
-    // DBユニットのための変数
+    // DBUnitのためのフィクスチャ
     IDatabaseTester databaseTester;
     IDatabaseConnection databaseConnection;
 
-    // 共通的な変数（EmployeeDAOを動作させるためにjava.sql.Connectionが必要）
-    Connection jdbcConnection;
+    // 各テストメソッドで共通的なフィクスチャ
+    Connection jdbcConnection; // EmployeeDAOを動作させるためにjava.sql.Connectionが必要
 
     /*
      *  データベースやDBUnitを初期化する
@@ -75,10 +77,8 @@ public class EmployeeDAOFilterSortTest {
         databaseTester.onSetup();
     }
 
-    /*
-     * 挿入の結果をテストする
-     */
     @Test
+    @DisplayName("挿入の結果をテストする")
     void test_InsertEmployee() throws Exception {
         // テスト実行し、実測値を取得する
         EmployeeDAO employeeDAO = new EmployeeDAO(jdbcConnection);

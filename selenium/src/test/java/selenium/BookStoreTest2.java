@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 
 class BookStoreTest2 {
 
@@ -84,13 +85,22 @@ class BookStoreTest2 {
         // 23. クリック: orderButton
         $("#orderButton1").click();
 
-        // 24. ページのタイトル検証: OrderSuccessPage
+        // 24. ポップアップウィンドウ キャンセル操作
+        Selenide.dismiss();
+
+        // 25. クリック: orderButton
+        $("#orderButton1").click();
+
+        // 26. ポップアップウィンドウ OK操作
+        Selenide.confirm();
+
+        // 27. ページのタイトル検証: OrderSuccessPage
         assertEquals("OrderSuccessPage", title());
 
-        // 25. クリック: logoutButton
+        // 28. クリック: logoutButton
         $("#logoutButton").click();
 
-        // 26. ページのタイトル検証: FinishPage
+        // 29. ページのタイトル検証: FinishPage
         assertEquals("FinishPage", title());
     }
 }

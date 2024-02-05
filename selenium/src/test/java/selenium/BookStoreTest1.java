@@ -64,13 +64,22 @@ class BookStoreTest1 {
         // 16. クリック: orderButton
         $("#orderButton1").click();
 
-        // 17. ページのタイトル検証: OrderSuccessPage
+        // 17. ポップアップウィンドウ キャンセル操作
+        Selenide.dismiss();
+
+        // 18. クリック: orderButton
+        $("#orderButton1").click();
+
+        // 19. ポップアップウィンドウ OK操作
+        Selenide.confirm();
+
+        // 20. ページのタイトル検証: OrderSuccessPage
         assertEquals("OrderSuccessPage", title());
 
-        // 18. クリック: logoutButton
+        // 21. クリック: logoutButton
         $("#logoutButton").click();
 
-        // 19. ページのタイトル検証: FinishPage
+        // 22. ページのタイトル検証: FinishPage
         assertEquals("FinishPage", title());
     }
 }

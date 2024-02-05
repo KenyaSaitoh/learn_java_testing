@@ -30,7 +30,10 @@ Seleniumのコードを、Java（Selenide）で生成してください。
 |14|検証||title()|BookOrderPage|
 |15|クリック|bankTransfer|||
 |16|クリック|orderButton1|||
-|17|検証||title()|OrderSuccessPage|
-|18|クリック|logoutButton|||
-|19|検証||title()|FinishPage|
+|17|クリック||ポップアップウィンドウ|キャンセル|
+|18|クリック|orderButton1|||
+|19|クリック||ポップアップウィンドウ|OK|
+|20|検証||title()|OrderSuccessPage|
+|21|クリック|logoutButton|||
+|22|検証||title()|FinishPage|
 
