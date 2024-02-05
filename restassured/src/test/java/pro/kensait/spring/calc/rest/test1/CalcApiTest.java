@@ -4,6 +4,7 @@ import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import io.restassured.RestAssured;
@@ -20,8 +21,9 @@ public class CalcApiTest {
     }
 
     @Test
-    public void test_AddMethod_ByGet_RightResult() {
-        // RestAssuredを使用してAPIをテストし、レスポンスを取得
+    @DisplayName("GETメソッドで加算処理を呼び出す")
+    public void test_Add_Get() {
+        // RestAssuredを使用してAPIをテストし、レスポンスを取得する
         Response response = given()
                 .queryParam("param1", 30.0)
                 .queryParam("param2", 10.0)
@@ -31,14 +33,15 @@ public class CalcApiTest {
                 .extract()
                 .response();
 
-        // ステータスコードとレスポンスボディを検証
+        // ステータスコードとレスポンスボディを検証する
         assertEquals(200, response.getStatusCode());
         assertEquals("40.0", response.getBody().asString());
     }
 
     @Test
-    public void test_AddMethod_ByPost_RightResult() {
-        // RestAssuredを使用してAPIをテストし、レスポンスを取得
+    @DisplayName("POSTメソッドで加算処理を呼び出す")
+    public void test_Add_Post() {
+        // RestAssuredを使用してAPIをテストし、レスポンスを取得する
         Response response = given()
                 .contentType(ContentType.URLENC)
                 .param("param1", 30.0)
@@ -49,7 +52,7 @@ public class CalcApiTest {
                 .extract()
                 .response();
 
-        // ステータスコードとレスポンスボディを検証
+        // ステータスコードとレスポンスボディを検証する
         assertEquals(200, response.getStatusCode());
         assertEquals("40.0", response.getBody().asString());
     }
