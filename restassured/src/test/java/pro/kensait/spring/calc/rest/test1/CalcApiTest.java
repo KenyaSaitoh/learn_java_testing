@@ -20,7 +20,7 @@ public class CalcApiTest {
     }
 
     @Test
-    public void test_AddMethod_ByGet_ReturnsRightResult() {
+    public void test_AddMethod_ByGet_RightResult() {
         // RestAssuredを使用してAPIをテストし、レスポンスを取得
         Response response = given()
                 .queryParam("param1", 30.0)
@@ -37,7 +37,7 @@ public class CalcApiTest {
     }
 
     @Test
-    public void test_AddMethod_ByPost_ReturnsRightResult() {
+    public void test_AddMethod_ByPost_RightResult() {
         // RestAssuredを使用してAPIをテストし、レスポンスを取得
         Response response = given()
                 .contentType(ContentType.URLENC)

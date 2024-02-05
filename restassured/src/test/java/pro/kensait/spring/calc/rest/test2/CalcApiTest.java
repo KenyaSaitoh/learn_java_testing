@@ -20,7 +20,7 @@ public class CalcApiTest {
     }
 
     @Test
-    public void test_AddMethod_ReturnsRightResult_StatusCode200() {
+    public void test_AddMethod_RightResult_StatusCode200() {
         // パラメータを生成する
         CalcParam param = new CalcParam(30.0, 10.0);
 
@@ -39,7 +39,7 @@ public class CalcApiTest {
     }
 
     @Test
-    public void test_AddMethod_Error_Returns_StatusCode400() {
+    public void test_AddMethod_Error_StatusCode400() {
         // パラメータを生成する
         CalcParam param = new CalcParam(30.0, -1000.0);
         System.out.println(param);
