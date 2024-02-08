@@ -17,21 +17,19 @@ import org.junit.jupiter.api.BeforeEach;
  * ShippingServiceを対象にしたテストクラス
  */
 public class SetUpTruncateTest {
-    private static final String EXPECTED_DATA_FILE = "src/test/resources/expected-data.xml";
-
     /*
-     *  すべてのテストメソッドに共通的な変数はフィールドとして宣言する
+     *  すべてのテストメソッドに共通的なフィクスチャを、フィールドとして宣言する
      */
 
     // テスト対象クラス
     EmployeeDAO employeeDAO;
 
-    // DBユニットのための変数
+    // DBUnitのためのフィクスチャ
     IDatabaseTester databaseTester;
     IDatabaseConnection databaseConnection;
 
-    // 共通的な変数（EmployeeDAOを動作させるためにjava.sql.Connectionが必要）
-    Connection jdbcConnection;
+    // 各テストメソッドで共通的なフィクスチャ
+    Connection jdbcConnection; // EmployeeDAOを動作させるためにjava.sql.Connectionが必要
 
     /*
      *  データベースやDBUnitを初期化する

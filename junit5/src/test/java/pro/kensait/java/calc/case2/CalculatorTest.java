@@ -15,14 +15,14 @@ public class CalculatorTest {
     }
 
     @Test
-    public void testAdd() {
+    public void test_Add() {
         calc.add();
         int actual = calc.getAnswer();
         assertEquals(40, actual);
     }
 
     @Test
-    public void testSubtract() {
+    public void test_Subtract() {
         calc.subtract();
         int actual = calc.getAnswer();
         assertEquals(20, actual);

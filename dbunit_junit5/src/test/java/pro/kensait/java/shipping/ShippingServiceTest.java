@@ -31,6 +31,7 @@ import org.mockito.MockitoAnnotations;
  * ShippingServiceを対象にしたテストクラス
  */
 public class ShippingServiceTest {
+    // DBUnitが使用するデータ格納ディレクトリ
     private static final String EXPECTED_DATA_DIR = "src/test/resources/EXPECTED_DATA";
 
     /*

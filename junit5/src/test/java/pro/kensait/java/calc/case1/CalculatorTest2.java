@@ -20,13 +20,13 @@ public class CalculatorTest2 {
     }
 
     @Test
-    public void testAdd() {
+    public void test_Add() {
         int actual = calc.add(30, 10);
         assertEquals(actual, 40);
     }
 
     @Test
-    public void testSubtract() {
+    public void test_Subtract() {
         int actual = calc.subtract(30, 10);
         assertEquals(actual, 20);
     }

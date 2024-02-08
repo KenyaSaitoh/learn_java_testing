@@ -14,14 +14,14 @@ public class CalcExceptionTest {
     }
 
     @Test
-    public void testMultiplyExpectedException_1() {
+    public void test_Multiply_Exception_1() {
         assertThrows(RuntimeException.class, () -> {
             calc.multiply1(100_000, 15);
         });
     }
 
     @Test
-    public void testMultiplyExpectedException_2() {
+    public void test_Multiply_Exception_2() {
         RuntimeException thrown = assertThrows(RuntimeException.class,
                 () -> {
             calc.multiply1(100_000, 15);
@@ -30,7 +30,7 @@ public class CalcExceptionTest {
     }
 
     @Test
-    public void testMultiplyExpectedException_3() {
+    public void test_Multiply_Exception_3() {
         assertThrows(LimitOverException.class, () -> {
             calc.multiply2(100_000, 15);
         });

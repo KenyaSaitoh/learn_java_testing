@@ -6,12 +6,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-public class FeeEnclosedTest_2 {
+public class FeeEnclosedTest {
     private static final String OUR_BANK_CODE = "B001"; // 自分の銀行
     private static final String OTHER_BANK_CODE = "B999"; // 他の銀行
 
     @Nested
-    class 自分の銀行宛振込 {
+    class ToOurBank {
         FeeService feeService;
 
         @BeforeEach
@@ -20,20 +20,20 @@ public class FeeEnclosedTest_2 {
         }
 
         @Test
-        void 金額30000円以上の振込手数料計算() {
+        void test_CalcFee_ToOurBank_Over30000_RightFee() {
             int actual = feeService.calcFee(OUR_BANK_CODE, 30000);
             assertEquals(0, actual);
         }
 
         @Test
-        void 金額30000円未満の振込手数料計算() {
+        void test_CalcFee_ToOurBank_Under30000_RightFee() {
             int actual = feeService.calcFee(OUR_BANK_CODE, 29999);
             assertEquals(100, actual);
         }
     }
 
     @Nested
-    class 他の銀行宛振込 {
+    class ToOtherBank {
         FeeService feeService;
 
         @BeforeEach
@@ -42,14 +42,14 @@ public class FeeEnclosedTest_2 {
         }
 
         @Test
-        void 金額40000円以上の振込手数料計算() {
-            int actual = feeService.calcFee(OTHER_BANK_CODE, 40000);
+        void test_CalcFee_ToOtherBank_Over40000_RightFee() {
+            int actual = feeService.calcFee(OTHER_BANK_CODE, 40999);
             assertEquals(200, actual);
         }
 
         @Test
-        void 金額40000円未満の振込手数料計算() {
-            int actual = feeService.calcFee(OTHER_BANK_CODE, 39999);
+        void test_CalcFee_ToOtherBank_Under40000_RightFee() {
+            int actual = feeService.calcFee(OTHER_BANK_CODE, 39000);
             assertEquals(500, actual);
         }
     }

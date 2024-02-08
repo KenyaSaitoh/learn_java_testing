@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
  * ShippingServiceを対象にしたテストクラス
  */
 public class EmployeeDAOTest {
-    // DBUnitが使用するファイル格納ディレクトリ
+    // DBUnitが使用するデータ格納ディレクトリ
     private static final String INIT_DATA_DIR = "src/test/resources/INIT_DATA";
     private static final String EXPECTED_DATA_DIR_1 = "src/test/resources/EXPECTED_DATA_1";
     private static final String EXPECTED_DATA_DIR_2 = "src/test/resources/EXPECTED_DATA_2";

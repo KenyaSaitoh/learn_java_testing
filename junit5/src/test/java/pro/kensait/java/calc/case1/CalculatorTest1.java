@@ -11,21 +11,21 @@ import org.junit.jupiter.api.Test;
 public class CalculatorTest1 {
 
     @Test
-    public void testAdd() {
+    public void test_Add() {
         Calculator calc = new Calculator();
         int actual = calc.add(30, 10);
         assertEquals(actual, 40);
     }
 
     @Test
-    public void testSubtract() {
+    public void test_Subtract() {
         Calculator calc = new Calculator();
         int actual = calc.subtract(30, 10);
         assertEquals(actual, 20);
     }
     
     @Test
-    public void testFail() {
+    public void test_Fail() {
         // fail("意図的に失敗させる");
     }
 }
