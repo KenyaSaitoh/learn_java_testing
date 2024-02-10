@@ -67,40 +67,34 @@ class BookStoreTest2 {
         // 17. クリック: button-5
         $("#button-5").click();
 
-        // 18. クリック: toSelectLink
-        $("#toSelectLink").click();
-
-        // 19. クリック: button-2
-        $("#button-2").click();
-
-        // 20. クリック: fixButton
+        // 18. クリック: fixButton
         $("#fixButton").click();
 
-        // 21. ページのタイトル検証: BookOrderPage
+        // 19. ページのタイトル検証: BookOrderPage
         assertEquals("BookOrderPage", title());
 
-        // 22. クリック: bankTransfer
+        // 20. クリック: bankTransfer
         $("#bankTransfer").click();
+
+        // 21. クリック: orderButton
+        $("#orderButton1").click();
+
+        // 22. ポップアップウィンドウ キャンセル操作
+        Selenide.dismiss();
 
         // 23. クリック: orderButton
         $("#orderButton1").click();
 
-        // 24. ポップアップウィンドウ キャンセル操作
-        Selenide.dismiss();
-
-        // 25. クリック: orderButton
-        $("#orderButton1").click();
-
-        // 26. ポップアップウィンドウ OK操作
+        // 24. ポップアップウィンドウ OK操作
         Selenide.confirm();
 
-        // 27. ページのタイトル検証: OrderSuccessPage
+        // 25. ページのタイトル検証: OrderSuccessPage
         assertEquals("OrderSuccessPage", title());
 
-        // 28. クリック: logoutButton
+        // 26. クリック: logoutButton
         $("#logoutButton").click();
 
-        // 29. ページのタイトル検証: FinishPage
+        // 27. ページのタイトル検証: FinishPage
         assertEquals("FinishPage", title());
     }
 }

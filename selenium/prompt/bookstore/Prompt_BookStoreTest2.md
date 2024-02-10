@@ -1,16 +1,15 @@
 以下の「打鍵指示書」に従って画面テストを行います。
 Seleniumのコードを、Java（Selenide）で生成してください。
-生成するコードは、seleniumパッケージ配下のBookStoreTest2クラスという名前で、JUnit5のテストクラスとして出力してください。
+生成するコードは、seleniumパッケージ配下のBookStoreTest1クラスという名前で、JUnit5のテストクラスとして出力してください。
 
 ［制約条件］
 
 * 検証は、JUnit5のassert文を使ってください。
 * ID属性は、"#"で表現してください。
 * リンクはID属性を指定してクリックしてください。
-* 要素とは、HTMLタグを表していますので、IDではありません。
-* 要素は、Selenideの"$$"を使ってください。
+* 要素（HTMLタグ）は、Selenideの"$$"を使ってください。
 * URLは、最初にアクセスしたURLとポート番号をベースとして定義してください。
-* リダイレクトは、1秒待ってから、テストプログラム内でGETでopenしてください。
+* リダイレクトは、1秒程度待ってから、テストプログラム内でGETしてください。
 
 ［打鍵指示書］
 
@@ -33,23 +32,13 @@ Seleniumのコードを、Java（Selenide）で生成してください。
 |15|クリック|button-2|||
 |16|クリック|toSelectLink|||
 |17|クリック|button-5|||
-|18|クリック|toSelectLink|||
-|19|クリック|button-2|||
-|20|クリック|fixButton|||
-|21|検証||title()|BookOrderPage|
-|22|クリック|bankTransfer|||
+|18|クリック|fixButton|||
+|19|検証||title()|BookOrderPage|
+|20|クリック|bankTransfer|||
+|21|クリック|orderButton1|||
+|22|クリック||ポップアップウィンドウ|キャンセル|
 |23|クリック|orderButton1|||
-|24|クリック||ポップアップウィンドウ|キャンセル|
-|25|クリック|orderButton1|||
-|26|クリック||ポップアップウィンドウ|OK|
-|27|検証||title()|OrderSuccessPage|
-|28|クリック|logoutButton|||
-|29|検証||title()|FinishPage|
-
-
-
-
-
-
-
-
+|24|クリック||ポップアップウィンドウ|OK|
+|25|検証||title()|OrderSuccessPage|
+|26|クリック|logoutButton|||
+|27|検証||title()|FinishPage|

@@ -7,10 +7,9 @@ Seleniumのコードを、Java（Selenide）で生成してください。
 * 検証は、JUnit5のassert文を使ってください。
 * ID属性は、"#"で表現してください。
 * リンクはID属性を指定してクリックしてください。
-* 要素とは、HTMLタグを表していますので、IDではありません。
-* 要素は、Selenideの"$$"を使ってください。
+* 要素（HTMLタグ）は、Selenideの"$$"を使ってください。
 * URLは、最初にアクセスしたURLとポート番号をベースとして定義してください。
-* リダイレクトは、1秒待ってから、テストプログラム内でGETでopenしてください。
+* リダイレクトは、1秒程度待ってから、テストプログラム内でGETしてください。
 
 |#|指示|ID|場所|VALUE|
 |:--|--|--|--|--|
@@ -24,16 +23,13 @@ Seleniumのコードを、Java（Selenide）で生成してください。
 |8|クリック|button-2||2|
 |9|クリック|toSelectLink|||
 |10|クリック|button-5||5|
-|11|クリック|toSelectLink|||
-|12|クリック|button-2||2|
-|13|クリック|fixButton|||
-|14|検証||title()|BookOrderPage|
-|15|クリック|bankTransfer|||
+|11|クリック|fixButton|||
+|12|検証||title()|BookOrderPage|
+|13|クリック|bankTransfer|||
+|14|クリック|orderButton1|||
+|15|クリック||ポップアップウィンドウ|キャンセル|
 |16|クリック|orderButton1|||
-|17|クリック||ポップアップウィンドウ|キャンセル|
-|18|クリック|orderButton1|||
-|19|クリック||ポップアップウィンドウ|OK|
-|20|検証||title()|OrderSuccessPage|
-|21|クリック|logoutButton|||
-|22|検証||title()|FinishPage|
-
+|17|クリック||ポップアップウィンドウ|OK|
+|18|検証||title()|OrderSuccessPage|
+|19|クリック|logoutButton|||
+|20|検証||title()|FinishPage|
