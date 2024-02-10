@@ -1,6 +1,6 @@
 plugins {
-    // id "scala" // GatlingはScalaで書かれているため、Scalaプラグインが必要
-    // id "com.github.lkishalmi.gatling" version "3.3.4" // Gatlingプラグイン
+    id "scala" // GatlingはScalaで書かれているため、Scalaプラグインが必要
+    id "com.github.lkishalmi.gatling" version "3.3.4" // Gatlingプラグイン
 }
 
 dependencies {
