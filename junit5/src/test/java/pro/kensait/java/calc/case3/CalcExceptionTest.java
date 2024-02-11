@@ -6,10 +6,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CalcExceptionTest {
+    /*
+     *  すべてのテストメソッドに共通的なフィクスチャを、フィールドとして宣言する
+     */
     Calculator calc;
 
+    /*
+     *  各テストメソッド呼び出しの事前処理
+     */
     @BeforeEach
     public void setUp() {
+        // 各テストメソッドで共通的なフィクスチャを設定する
         calc = new Calculator();
     }
 

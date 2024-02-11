@@ -8,8 +8,16 @@ import org.junit.jupiter.api.Test;
 public class FeeOurBankTest {
     private static final String OUR_BANK_CODE = "B001"; // 自分の銀行
 
+    /*
+     *  すべてのテストメソッドに共通的なフィクスチャを、フィールドとして宣言する
+     */
+
+    // テスト対象クラス
     FeeService feeService;
 
+    /*
+     *  各テストメソッド呼び出しの事前処理
+     */
     @BeforeEach
     public void setUp() {
         feeService = new FeeService();

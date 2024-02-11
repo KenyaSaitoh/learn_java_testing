@@ -10,12 +10,16 @@ import org.junit.jupiter.api.Test;
  * テストメソッド共通の前処理（@BeforeEach）で、テスト対象クラスのインスタンスを生成する
  */
 public class CalculatorTest_2 {
+    /*
+     *  すべてのテストメソッドに共通的なフィクスチャを、フィールドとして宣言する
+     */
 
     // テスト対象クラス
     Calculator calc;
 
     @BeforeEach
     public void setUp() {
+        // 各テストメソッドで共通的なフィクスチャを設定する
         calc = new Calculator();
     }
 

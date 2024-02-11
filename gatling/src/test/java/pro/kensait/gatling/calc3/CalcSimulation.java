@@ -10,13 +10,19 @@ import io.gatling.javaapi.http.HttpProtocolBuilder;
 public class CalcSimulation extends Simulation {
 
     HttpProtocolBuilder httpProtocol = http
+            // ベースURLを設定
             .baseUrl("http://localhost:8080")
+            // Acceptヘッダ（一般的なWebブラウザの想定）
             .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
+            // DNTヘッダに"1"を設定（追跡を望まない）
             .doNotTrackHeader("1")
-            .acceptLanguageHeader("en-US,en;q=0.5")
+            // Accept-Languageヘッダ（日本語を優先する）
+            .acceptLanguageHeader("ja,ja-JP;q=0.9,en-US;q=0.8,en;q=0.7")
+            // Accept-Encodingヘッダ（コンテンツの圧縮形式をサーバーに伝える）
             .acceptEncodingHeader("gzip, deflate")
-            .userAgentHeader(
-                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0");
+            // User-Agentヘッダ（WindowsのChromeの想定）
+            .userAgentHeader("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                    + "(KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
 
     ScenarioBuilder scn = scenario("Calculation Scenario")
             .exec(http("Open Homepage")

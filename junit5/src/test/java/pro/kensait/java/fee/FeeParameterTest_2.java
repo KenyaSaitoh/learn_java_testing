@@ -8,8 +8,16 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 
 public class FeeParameterTest_2 {
 
+    /*
+     *  すべてのテストメソッドに共通的なフィクスチャを、フィールドとして宣言する
+     */
+
+    // テスト対象クラス
     FeeService feeService;
 
+    /*
+     *  各テストメソッド呼び出しの事前処理
+     */
     @BeforeEach
     public void setUp() {
         feeService = new FeeService();

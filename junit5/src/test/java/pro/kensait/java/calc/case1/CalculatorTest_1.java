@@ -23,9 +23,4 @@ public class CalculatorTest_1 {
         int actual = calc.subtract(30, 10);
         assertEquals(20, actual);
     }
-    
-    @Test
-    public void test_Fail() {
-        // fail("意図的に失敗させる");
-    }
 }

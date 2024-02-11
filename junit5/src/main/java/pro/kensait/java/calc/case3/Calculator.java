@@ -7,30 +7,20 @@ package pro.kensait.java.calc.case3;
 public class Calculator {
     private static final int LIMIT = 1_000_000; // 極度
 
-    // 足し算を実行する［1］
-    public int add(int param1, int param2) {
-        return param1 + param2;
-    }
-
-    // 引き算を実行する［2］
-    public int subtract(int param1, int param2) {
-        return param1 - param2;
-    }
-
-    // 掛け算を実行する［3］
+    // 掛け算を実行する［1］
     public int multiply1(int param1, int param2) {
         int result = param1 * param2;
-        if (LIMIT < result) { // ［4］
+        if (LIMIT < result) { // ［2］
             // ビジネスロジックでエラー（極度オーバー）が発生
             throw new RuntimeException("LIMIT OVER OCCURED!");
         }
         return result;
     }
 
-    // 掛け算を実行する［5］
+    // 掛け算を実行する［3］
     public int multiply2(int param1, int param2) {
         int result = param1 * param2;
-        if (LIMIT < result) { // ［6］
+        if (LIMIT < result) { // ［4］
             // ビジネスロジックでエラー（極度オーバー）が発生
             throw new LimitOverException("calc result is " + result);
         }

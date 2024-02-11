@@ -12,8 +12,12 @@ public class FeeEnclosedTest {
 
     @Nested
     class ToOurBank {
+        // テスト対象クラス
         FeeService feeService;
 
+        /*
+         *  各テストメソッド呼び出しの事前処理
+         */
         @BeforeEach
         void setUp() {
             feeService = new FeeService();
@@ -34,8 +38,12 @@ public class FeeEnclosedTest {
 
     @Nested
     class ToOtherBank {
+        // テスト対象クラス
         FeeService feeService;
 
+        /*
+         *  各テストメソッド呼び出しの事前処理
+         */
         @BeforeEach
         void setUp() {
             feeService = new FeeService();
