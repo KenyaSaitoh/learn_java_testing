@@ -1,9 +1,10 @@
 以下の「打鍵指示書」に従って画面テストを行います。
 Seleniumのコードを、Java（Selenide）で生成してください。
-生成するコードは、seleniumパッケージ配下のBookStoreTest3クラスという名前で、JUnit5のテストクラスとして出力してください。
 
 ［制約条件］
 
+* 生成するコードは、pro.kensait.selenium.bookstoreパッケージ配下のBookStoreTest3クラスという名前で、
+  JUnit5のテストクラスとして出力してください。
 * 検証は、JUnit5のassert文を使ってください。
 * ID属性は、"#"で表現してください。
 * リンクはID属性を指定してクリックしてください。

@@ -1,4 +1,4 @@
-package selenium;
+package pro.kensait.selenium.mvc_calc_3;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 
-class Calc3Test {
+class CalcTest {
 
     @Test
     void testCalculation() {

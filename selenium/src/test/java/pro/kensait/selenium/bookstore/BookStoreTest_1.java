@@ -1,4 +1,4 @@
-package selenium;
+package pro.kensait.selenium.bookstore;
 
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 
-class BookStoreTest4 {
+class BookStoreTest_1 {
 
     @Test
     void testBookStoreOperations() {
@@ -34,8 +34,8 @@ class BookStoreTest4 {
         assertEquals("BookSelectPage", title());
 
         // 7. テーブルの1行目の1列目の検証
-        String firstBookTitle = $$("#bookstore-table tbody tr").first().$$("td").first().text();
-        assertEquals("Java SEディープダイブ", firstBookTitle);
+        String bookTitle = $$("#bookstore-table tbody tr").first().$$("td").first().text();
+        assertEquals("Java SEディープダイブ", bookTitle);
 
         // 8. クリック: button-2
         $("#button-2").click();
@@ -46,58 +46,34 @@ class BookStoreTest4 {
         // 10. クリック: button-5
         $("#button-5").click();
 
-        // 11. クリック: toSelectLink
-        $("#toSelectLink").click();
-
-        // 12. クリック: toSearchLink
-        $("#toSearchLink").click();
-
-        // 13. ページのタイトル検証: BookSearchPage
-        assertEquals("BookSearchPage", title());
-
-        // 14. 選択: category
-        $("#category").selectOptionByValue("2");
-
-        // 15. 入力: keyword
-        $("#keyword").setValue("Cloud");
-
-        // 16. クリック: search1Button
-        $("#search1Button").click();
-
-        // 17. ページのタイトル検証: BookSelectPage
-        assertEquals("BookSelectPage", title());
-
-        // 18. クリック: button-14
-        $("#button-14").click();
-
-        // 19. クリック: fixButton
+        // 11. クリック: fixButton
         $("#fixButton").click();
 
-        // 20. ページのタイトル検証: BookOrderPage
+        // 12. ページのタイトル検証: BookOrderPage
         assertEquals("BookOrderPage", title());
 
-        // 21. クリック: bankTransfer
+        // 13. クリック: bankTransfer
         $("#bankTransfer").click();
 
-        // 22. クリック: orderButton
+        // 14. クリック: orderButton
         $("#orderButton1").click();
 
-        // 23. ポップアップウィンドウ キャンセル操作
+        // 15. ポップアップウィンドウ キャンセル操作
         Selenide.dismiss();
 
-        // 24. クリック: orderButton
+        // 16. クリック: orderButton
         $("#orderButton1").click();
 
-        // 25. ポップアップウィンドウ OK操作
+        // 17. ポップアップウィンドウ OK操作
         Selenide.confirm();
 
-        // 26. ページのタイトル検証: OrderSuccessPage
+        // 18. ページのタイトル検証: OrderSuccessPage
         assertEquals("OrderSuccessPage", title());
 
-        // 27. クリック: logoutButton
+        // 19. クリック: logoutButton
         $("#logoutButton").click();
 
-        // 28. ページのタイトル検証: FinishPage
+        // 20. ページのタイトル検証: FinishPage
         assertEquals("FinishPage", title());
     }
 }

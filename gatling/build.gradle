@@ -1,14 +1,40 @@
+// プラグイン設定
 plugins {
     id "scala" // GatlingはScalaで書かれているため、Scalaプラグインが必要
     id "com.github.lkishalmi.gatling" version "3.3.4" // Gatlingプラグイン
 }
 
+// 依存関係設定
 dependencies {
-    // Gatlingの依存関係
+    // Log4j
+    implementation "org.apache.logging.log4j:log4j-slf4j-impl:${log4jVer}"
+    implementation "org.apache.logging.log4j:log4j-core:${log4jVer}"
+    // JUnit5
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVer}"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:${junitVer}"
+    testImplementation "org.junit.platform:junit-platform-launcher:${junitPlatformVer}"
+    testImplementation "org.junit.platform:junit-platform-suite-api:${junitPlatformVer}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVer}"
+    // Gatling
     testImplementation "io.gatling:gatling-core:${gatlingVersion}"
     testImplementation "io.gatling:gatling-http:${gatlingVersion}"
     testImplementation "io.gatling:gatling-test-framework:${gatlingVersion}"
     testImplementation "io.gatling.highcharts:gatling-charts-highcharts:${gatlingVersion}"
-    //testImplementation "io.gatling:gatling-javaapi-core:${gatlingVersion}"
-    //testImplementation "io.gatling:gatling-javaapi-http:${gatlingVersion}"
+}
+
+// JUnit5設定
+test {
+    // JUnit Platformを使う設定
+    useJUnitPlatform()
+
+    testLogging {
+        // テスト時の標準出力と標準エラー出力を表示する
+        showStandardStreams true
+        // イベントを出力する
+        events "started", "skipped", "passed", "failed"
+        // 例外発生時の出力設定
+        exceptionFormat "full"
+        // テスト完了後にレポートを生成
+        finalizedBy jacocoTestReport
+    }
 }

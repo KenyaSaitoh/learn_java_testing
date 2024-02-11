@@ -1,4 +1,4 @@
-package selenium;
+package pro.kensait.selenium.bookstore;
 
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 
-class BookStoreTest2 {
+class BookStoreTest_2 {
 
     @Test
     void testCustomerRegistrationAndBookSelection() {

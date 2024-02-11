@@ -8,20 +8,20 @@ import org.junit.jupiter.api.Test;
  * ステートを保持しない計算機（Calculatorクラス）をテストする
  * テストメソッド内で、テスト対象クラスのインスタンスを生成する
  */
-public class CalculatorTest1 {
+public class CalculatorTest_1 {
 
     @Test
     public void test_Add() {
         Calculator calc = new Calculator();
         int actual = calc.add(30, 10);
-        assertEquals(actual, 40);
+        assertEquals(40, actual);
     }
 
     @Test
     public void test_Subtract() {
         Calculator calc = new Calculator();
         int actual = calc.subtract(30, 10);
-        assertEquals(actual, 20);
+        assertEquals(20, actual);
     }
     
     @Test

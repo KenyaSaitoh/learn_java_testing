@@ -1,0 +1,16 @@
+// 依存関係設定
+dependencies {
+    // Log4j
+    implementation "org.apache.logging.log4j:log4j-slf4j-impl:${log4jVer}"
+    implementation "org.apache.logging.log4j:log4j-core:${log4jVer}"
+    // JUnit5
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVer}"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:${junitVer}"
+    testImplementation "org.junit.platform:junit-platform-launcher:${junitPlatformVer}"
+    testImplementation "org.junit.platform:junit-platform-suite-api:${junitPlatformVer}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVer}"
+    // Selenide
+    testImplementation "com.codeborne:selenide:${selenideVer}"
+    // MySQL JDBCドライバ
+    runtimeOnly "mysql:mysql-connector-java:${mySqlConnectorVer}"
+}
