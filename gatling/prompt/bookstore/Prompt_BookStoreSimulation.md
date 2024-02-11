@@ -3,11 +3,11 @@ Gatlingのシミュレーションクラスを、概念的なJavaコードとし
 
 ［制約条件］
 
-* クラス名は、`BookStoreSimulation`とします。
+* パッケージ名は`pro.kensait.gatling.bookstore.scenario1`、クラス名は`BookStoreSimulation`とします。
 * シミュレーションクラスは、`io.gatling.javaapi.core.Simulation`を継承してください。
 * ベースURLは、`localhost:8080`に設定してください。
 * シナリオは、`ScenarioBuilder`を使って生成してください。
-* setUpには、イニシャライザーを使ってください。
+* `setUp()`には、イニシャライザーを使ってください。
 * Titleの検証は、`css("title")`と指定することでTitleを取得してください。
 * "Save CSRF"では、`#csrfToken`というIDのvalue属性から、CSRFトークンを取得してください。
 * シナリオは、`pace()`メソッドによって、シナリオ番号1～12の間を、30秒間のペースに調整してください。

@@ -3,6 +3,7 @@ package pro.kensait.gatling.bookstore.scenario1;
 import static io.gatling.javaapi.core.CoreDsl.*;
 import static io.gatling.javaapi.http.HttpDsl.*;
 
+import io.gatling.javaapi.core.FeederBuilder;
 import io.gatling.javaapi.core.ScenarioBuilder;
 import io.gatling.javaapi.core.Simulation;
 import io.gatling.javaapi.http.HttpProtocolBuilder;
@@ -24,9 +25,12 @@ public class BookStoreSimulation extends Simulation {
             .userAgentHeader("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
                     + "(KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
 
+    private FeederBuilder.Batchable<String> feeder = csv("data/users.csv");
+
     private ScenarioBuilder scn = scenario("BookStoreTest")
             .forever().on(
                     pace(30)
+                    .feed(feeder.circular())
                     .exec(
                             http("Open")
                             .get("/")
@@ -41,16 +45,26 @@ public class BookStoreSimulation extends Simulation {
                     .exec(
                             http("Login")
                             .post("/processLogin")
-                            .formParam("email", "alice@gmail.com")
-                            .formParam("password", "password")
+                            // .formParam("email", "alice@gmail.com")
+                            // .formParam("password", "password")
+                            .formParam("email", "#{userId}")
+                            .formParam("password", "#{password}")
                             .formParam("_csrf", "#{csrfToken}")
                             .check(
-                                    // リダイレクトは自動的に行われるため、リダイレクトされた後をcheckする
+                                    // リダイレクトは自動的に行われるため、リダイレクト後にcheckする
                                     status().is(200),
                                     css("title").is("BookSelectPage"),
                                     css("#csrfToken", "value").saveAs("csrfToken")
                                     )
                             )
+
+                    // デバッグ用コード
+                    .exec(
+                            (session) -> {
+                                System.out.println("Login userId => " + session.getString("userId"));
+                                return session;
+                    })
+
                     .pause(2)
 
                     .exec(
@@ -162,7 +176,8 @@ public class BookStoreSimulation extends Simulation {
                                     css("title").is("FinishPage")
                                     )
                             )
-                    );
+                    )
+            ;
 
     {
         setUp(
