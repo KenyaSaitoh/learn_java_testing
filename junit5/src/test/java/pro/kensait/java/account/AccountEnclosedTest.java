@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
  */
 public class AccountEnclosedTest {
     // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
+    // テスト対象クラス
     Account account;
 
     @Nested

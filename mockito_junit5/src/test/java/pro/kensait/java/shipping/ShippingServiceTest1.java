@@ -20,9 +20,7 @@ import org.mockito.MockitoAnnotations;
  * 引数は直接生成する（モッキングしない）
  */
 public class ShippingServiceTest1 {
-    /*
-     *  各テストケースで共通的なフィクスチャを、フィールドとして宣言する
-     */
+    // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
 
     // テスト対象クラス
     ShippingService shippingService;
@@ -37,9 +35,7 @@ public class ShippingServiceTest1 {
     LocalDateTime orderDateTime;
     LocalDate receiveDate;
 
-    /*
-     *  各テストケースで共通的な事前処理
-     */
+    // 各テストケースで共通的な事前処理
     @BeforeEach
     void setUp() {
         // モックを初期化する（@Mockが付与されたフィールドにモックを割り当てる）

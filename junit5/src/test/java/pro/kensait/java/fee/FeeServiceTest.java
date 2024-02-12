@@ -9,16 +9,11 @@ public class FeeServiceTest {
     private static final String OUR_BANK_CODE = "B001"; // 自分の銀行
     private static final String OTHER_BANK_CODE = "B999"; // 他の銀行
 
-    /*
-     *  各テストケースで共通的なフィクスチャを、フィールドとして宣言する
-     */
-
+    // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
     // テスト対象クラス
     FeeService feeService;
 
-    /*
-     *  各テストケースで共通的な事前処理
-     */
+    // 各テストケースで共通的な事前処理
     @BeforeEach
     public void setUp() {
      // 共通フィクスチャを設定する

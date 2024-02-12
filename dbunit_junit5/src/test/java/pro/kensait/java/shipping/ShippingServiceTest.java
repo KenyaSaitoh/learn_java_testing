@@ -34,9 +34,7 @@ public class ShippingServiceTest {
     // DBUnitが使用するデータ格納ディレクトリ
     private static final String EXPECTED_DATA_DIR = "src/test/resources/EXPECTED_DATA";
 
-    /*
-     *  各テストケースで共通的なフィクスチャを、フィールドとして宣言する
-     */
+    // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
 
     // テスト対象クラス
     ShippingService shippingService;
@@ -55,9 +53,7 @@ public class ShippingServiceTest {
     IDatabaseTester databaseTester;
     IDatabaseConnection databaseConnection;
 
-    /*
-     *  各テストケースで共通的な事前処理
-     */
+    // 各テストケースで共通的な事前処理
     @BeforeEach
     void setUp() {
         // モックを初期化する（@Mockが付与されたフィールドにモックを割り当てる）
@@ -76,9 +72,7 @@ public class ShippingServiceTest {
         receiveDate = LocalDate.of(2023, 11, 30);
     }
 
-    /*
-     *  データベースやDBUnitを初期化する
-     */
+    // データベースやDBUnitを初期化する
     @BeforeEach
     void setUpDatabase() throws Exception {
         // プロパティファイルよりデータベース情報を取得する

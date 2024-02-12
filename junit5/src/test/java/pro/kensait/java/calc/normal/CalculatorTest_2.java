@@ -9,10 +9,7 @@ import org.junit.jupiter.api.Test;
  * Calculatorクラス（通常の計算機）のためのテストクラス
  */
 public class CalculatorTest_2 {
-    /*
-     *  各テストケースで共通的なフィクスチャを、フィールドとして宣言する
-     */
-
+    // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
     // テスト対象クラス
     Calculator calc;
 

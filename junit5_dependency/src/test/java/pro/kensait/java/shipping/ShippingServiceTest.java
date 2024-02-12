@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
  */
 public class ShippingServiceTest {
     /*
-     *  各テストケースで共通的なフィクスチャを、フィールドとして宣言する
+     // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
      */
 
     // テスト対象クラス
@@ -33,7 +33,7 @@ public class ShippingServiceTest {
     LocalDate receiveDate;
 
     /*
-     *  各テストケースで共通的な事前処理
+// 各テストケースで共通的な事前処理
      */
     @BeforeEach
     void setUp() {

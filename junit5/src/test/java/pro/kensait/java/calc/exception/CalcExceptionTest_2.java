@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 public class CalcExceptionTest_2 {
     // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
+    // テスト対象クラス
     Calculator calc;
 
     // 各テストケースで共通的な事前処理

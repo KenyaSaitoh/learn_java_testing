@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 class CustomerLogic1Test {
-
     // 命令網羅によるテストケース
     @Test
     void test_StatementCoverage() {

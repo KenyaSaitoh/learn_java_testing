@@ -9,16 +9,11 @@ import org.junit.jupiter.api.Test;
  * Calculatorクラス（状態を保持する計算機）のためのテストクラス
  */
 public class CalculatorTest {
-    /*
-     *  各テストケースで共通的なフィクスチャを、フィールドとして宣言する
-     */
-
+    // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
     // テスト対象クラス
     Calculator calc;
 
-    /*
-     *  各テストケースで共通的な事前処理
-     */
+    // 各テストケースで共通的な事前処理
     @BeforeEach
     public void setUp() {
         // 共通フィクスチャを設定する

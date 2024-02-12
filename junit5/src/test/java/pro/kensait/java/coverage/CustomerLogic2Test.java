@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 class CustomerLogic2Test {
-
     // 分岐網羅によるテストケース（条件が真の場合）
     @Test
     void test_BranchCoverage_1() {

@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
  * Calculatorクラス（通常の計算機）のためのテストクラス
  */
 public class CalculatorTest_1 {
-
     // 足し算のテスト
     @Test
     public void test_Add() {
