@@ -2,8 +2,8 @@ package pro.kensait.mockito.calc.mocking;
 
 import static org.mockito.Mockito.*;
 
-import pro.kensait.java.calc.CalcIF;
-import pro.kensait.java.calc.CalcImpl;
+import pro.kensait.java.calc.impl.CalcIF;
+import pro.kensait.java.calc.impl.CalcImpl;
 
 public class Main_IF {
 

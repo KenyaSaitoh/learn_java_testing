@@ -6,20 +6,21 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /*
- * Calculatorクラス（状態を保持する計算機）のためのテストクラス
+ * StatefulCalculatorクラス（状態を保持する計算機）のためのテストクラス
  */
-public class CalculatorTest {
+public class StatefulCalcTest {
     // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
     // テスト対象クラス
-    Calculator calc;
+    StatefulCalc calc;
 
     // 各テストケースで共通的な事前処理
     @BeforeEach
     public void setUp() {
         // 共通フィクスチャを設定する
-        calc = new Calculator(30, 10);
+        calc = new StatefulCalc(30, 10);
     }
 
+    // 足し算のテスト
     @Test
     public void test_Add() {
         // 実行フェーズ
@@ -29,6 +30,7 @@ public class CalculatorTest {
         assertEquals(40, actual);
     }
 
+    // 引き算のテスト
     @Test
     public void test_Subtract() {
         // 実行フェーズ

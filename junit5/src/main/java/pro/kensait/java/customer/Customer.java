@@ -1,5 +1,8 @@
 package pro.kensait.java.customer;
 
+/*
+ * 顧客を表すクラス
+ */
 public class Customer {
     private final int id;
     private final String name;

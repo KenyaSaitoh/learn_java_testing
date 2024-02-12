@@ -23,6 +23,7 @@ public class FeeParameterTest_1 {
         feeService = new FeeService();
     }
 
+    // 手数料計算のテスト（メソッドからパラメータを取得する）
     @ParameterizedTest
     @MethodSource("fixtureProvider")
     public void test_CalcFee(Fixture f) {
@@ -32,6 +33,7 @@ public class FeeParameterTest_1 {
         assertEquals(f.expectedFee, actual);
     }
 
+    // パラメータを提供するメソッド
     static Stream<Fixture> fixtureProvider() {
         return Stream.of(
             new Fixture(OUR_BANK_CODE, 30999, 0),
@@ -41,10 +43,11 @@ public class FeeParameterTest_1 {
         );
     }
 
+    // フィクスチャを表すクラス
     static class Fixture {
-        String bankCode;
-        int amount;
-        int expectedFee;
+        String bankCode; // 振込先銀行コード
+        int amount; // 金額
+        int expectedFee; // 期待値（手数料）
         Fixture(String bankCode, int amount, int expectedFee) {
             this.bankCode = bankCode;
             this.amount = amount;

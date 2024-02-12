@@ -1,11 +1,11 @@
-package pro.kensait.java.calc;
+package pro.kensait.java.calc.stateful;
 
-public class CalcStateful {
+public class StatefulCalc {
     private int x;
     private int y;
     private int z;
 
-    public CalcStateful(int x, int y, int z) {
+    public StatefulCalc(int x, int y, int z) {
         this.x = x;
         this.y = y;
         this.z = z;

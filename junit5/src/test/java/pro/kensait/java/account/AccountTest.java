@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 /*
- * Accountクラスのためのテストクラス
+ * Accountクラス（口座）のためのテストクラス
  */
 public class AccountTest {
     // 入金のテスト（金額0円の口座に対して）
@@ -36,6 +36,7 @@ public class AccountTest {
         // 準備フェーズ
         Account account = new Account("00001234", 10000); //［3］
         try {
+            // 実行フェーズ
             account.withdraw(3000);
         } catch (InsufficientBalanceException ibe) {
             fail();

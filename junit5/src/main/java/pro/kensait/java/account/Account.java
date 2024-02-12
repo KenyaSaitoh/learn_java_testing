@@ -26,6 +26,7 @@ public class Account {
         balance -= amount; // 残高を減算する
     }
 
+    // 残高ゼロチェックする
     public boolean isBalanceZero() {
         return balance == 0;
     }

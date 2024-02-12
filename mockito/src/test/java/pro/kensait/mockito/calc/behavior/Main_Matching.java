@@ -3,7 +3,7 @@ package pro.kensait.mockito.calc.behavior;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
-import pro.kensait.java.calc.Calculator;
+import pro.kensait.java.calc.normal.Calculator;
 
 public class Main_Matching {
 

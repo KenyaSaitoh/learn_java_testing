@@ -3,12 +3,12 @@ package pro.kensait.java.calc.sideeffect;
 /*
  * 状態を保持する計算機
  */
-public class Calculator {
+public class StatefulCalc {
     private final int param1;
     private final int param2;
     private int answer;
 
-    public Calculator(int param1, int param2) {
+    public StatefulCalc(int param1, int param2) {
         this.param1 = param1;
         this.param2 = param2;
     }

@@ -1,7 +1,6 @@
-package pro.kensait.java.calc;
+package pro.kensait.java.calc.unextendable;
 
-public class CalcImpl implements CalcIF {
-    @Override
+public final class FinalCalc {
     public int compute(int x, int y, int z) {
         int answer = (x + y) * z;
         if (answer < 0) {

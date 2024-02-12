@@ -2,7 +2,7 @@ package pro.kensait.mockito.calc.mocking;
 
 import static org.mockito.Mockito.*;
 
-import pro.kensait.java.calc.Calculator;
+import pro.kensait.java.calc.normal.Calculator;
 
 public class Main_Instance {
 

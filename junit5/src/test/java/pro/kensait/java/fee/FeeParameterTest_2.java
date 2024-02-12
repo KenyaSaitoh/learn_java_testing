@@ -18,6 +18,7 @@ public class FeeParameterTest_2 {
         feeService = new FeeService();
     }
 
+    // 手数料計算のテスト（CSVファイルからパラメータを取得する）
     @ParameterizedTest
     @CsvFileSource(resources = "/parameter.csv", numLinesToSkip = 1)
     public void test_CalcFee(String bankCode, int amount, int expectedFee) {

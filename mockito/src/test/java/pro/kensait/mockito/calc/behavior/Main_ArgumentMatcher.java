@@ -5,7 +5,7 @@ import static org.mockito.Mockito.*;
 
 import org.mockito.ArgumentMatcher;
 
-import pro.kensait.java.calc.Calculator;
+import pro.kensait.java.calc.normal.Calculator;
 
 public class Main_ArgumentMatcher {
 

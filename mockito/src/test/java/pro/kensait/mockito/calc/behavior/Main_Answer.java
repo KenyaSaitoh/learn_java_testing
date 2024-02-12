@@ -5,7 +5,7 @@ import static org.mockito.Mockito.*;
 
 import org.mockito.stubbing.Answer;
 
-import pro.kensait.java.calc.Calculator;
+import pro.kensait.java.calc.normal.Calculator;
 
 public class Main_Answer {
     private static final int ERROR_CONDITION = -1;

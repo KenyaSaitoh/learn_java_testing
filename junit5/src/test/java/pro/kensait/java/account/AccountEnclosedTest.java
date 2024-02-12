@@ -7,13 +7,14 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 /*
- * Accountクラスのためのテストクラス
+ * Accountクラス（口座）のための構造化されたテストクラス
  */
 public class AccountEnclosedTest {
-    // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
+    // 全テストケースで共通的なフィクスチャを、フィールドとして宣言する
     // テスト対象クラス
     Account account;
 
+    // 残高ゼロの場合のテストケース
     @Nested
     class BalanceZeroTest {
         // 各テストケースで共通的な事前処理
@@ -49,6 +50,7 @@ public class AccountEnclosedTest {
         }
     }
 
+    // 残高ゼロ以外の場合のテストケース
     @Nested
     class BalanceNonZeroTest {
         // 各テストケースで共通的な事前処理
@@ -64,6 +66,7 @@ public class AccountEnclosedTest {
             // 準備フェーズ
             Account account = new Account("00001234", 10000);
             try {
+                // 実行フェーズ
                 account.withdraw(3000);
             } catch (InsufficientBalanceException ibe) {
                 fail();

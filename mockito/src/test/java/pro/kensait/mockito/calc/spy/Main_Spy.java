@@ -2,18 +2,18 @@ package pro.kensait.mockito.calc.spy;
 
 import static org.mockito.Mockito.*;
 
-import pro.kensait.java.calc.CalcStateful;
+import pro.kensait.java.calc.stateful.StatefulCalc;
 
 public class Main_Spy {
 
     public static void main(String[] args) {
         // CalcStatefulクラスのモック（Spy）を振る舞い毎に生成する
-        CalcStateful calc1 = new CalcStateful(5, 10, 3);
-        CalcStateful mock1 = spy(calc1);
-        CalcStateful calc2 = new CalcStateful(5, 10, 8);
-        CalcStateful mock2 = spy(calc2);
-        CalcStateful calc3 = new CalcStateful(5, 10, -1);
-        CalcStateful mock3 = spy(calc3);
+        StatefulCalc calc1 = new StatefulCalc(5, 10, 3);
+        StatefulCalc mock1 = spy(calc1);
+        StatefulCalc calc2 = new StatefulCalc(5, 10, 8);
+        StatefulCalc mock2 = spy(calc2);
+        StatefulCalc calc3 = new StatefulCalc(5, 10, -1);
+        StatefulCalc mock3 = spy(calc3);
 
         // モックの振る舞いを定義する
         // ケース1

@@ -20,6 +20,7 @@ public class FeeServiceTest {
         feeService = new FeeService();
     }
 
+    // 自分の銀行宛に30000円を振り込み、手数料が0円であることをテストする
     @Test
     public void test_CalcFee_ToOurBank_Over30000_RightFee() {
         // 実行フェーズ
@@ -28,6 +29,7 @@ public class FeeServiceTest {
         assertEquals(0, actual);
     } 
 
+    // 自分の銀行宛に29999円を振り込み、手数料が100円であることをテストする
     @Test
     public void test_CalcFee_ToOurBank_Under30000_RightFee() {
         // 実行フェーズ
@@ -36,6 +38,7 @@ public class FeeServiceTest {
         assertEquals(100, actual);
     }
 
+    // 他の銀行宛に40000円を振り込み、手数料が200円であることをテストする
     @Test
     public void test_CalcFee_ToOtherBank_Over40000_RightFee() {
         // 実行フェーズ
@@ -44,6 +47,7 @@ public class FeeServiceTest {
         assertEquals(200, actual);
     }
 
+    // 他の銀行宛に39999円を振り込み、手数料が500円であることをテストする
     @Test
     public void test_CalcFee_ToOtherBank_Under40000_RightFee() {
         // 実行フェーズ
