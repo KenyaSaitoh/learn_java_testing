@@ -30,7 +30,7 @@ public class EmployeeDAOFilterSortTest {
     private static final String EXPECTED_DATA_DIR_1 = "src/test/resources/EXPECTED_DATA_1";
 
     /*
-     *  すべてのテストメソッドに共通的なフィクスチャを、フィールドとして宣言する
+     *  各テストケースで共通的なフィクスチャを、フィールドとして宣言する
      */
 
     // テスト対象クラス

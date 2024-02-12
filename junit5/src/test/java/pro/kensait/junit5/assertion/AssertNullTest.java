@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+/*
+ * assertNull()によるNULL値の検証方法を説明するためのテストクラス
+ */
 public class AssertNullTest {
 
     // null値であることを検証する

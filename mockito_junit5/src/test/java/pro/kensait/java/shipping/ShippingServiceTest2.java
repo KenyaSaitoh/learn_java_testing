@@ -21,7 +21,7 @@ import org.mockito.MockitoAnnotations;
  */
 public class ShippingServiceTest2 {
     /*
-     *  すべてのテストメソッドに共通的なフィクスチャを、フィールドとして宣言する
+     *  各テストケースで共通的なフィクスチャを、フィールドとして宣言する
      */
 
     // テスト対象クラス
@@ -43,7 +43,7 @@ public class ShippingServiceTest2 {
     LocalDate receiveDate;
 
     /*
-     *  各テストメソッド呼び出しの事前処理
+     *  各テストケースで共通的な事前処理
      */
     @BeforeEach
     void setUp() {

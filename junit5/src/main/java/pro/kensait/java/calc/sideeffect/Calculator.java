@@ -1,7 +1,7 @@
-package pro.kensait.java.calc.case2;
+package pro.kensait.java.calc.sideeffect;
 
 /*
- * ステートを保持する計算機
+ * 状態を保持する計算機
  */
 public class Calculator {
     private final int param1;

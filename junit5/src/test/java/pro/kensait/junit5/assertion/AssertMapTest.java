@@ -6,6 +6,9 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
+/*
+ * マップを検証する方法を説明するためのテストクラス
+ */
 public class AssertMapTest {
 
     // Mapに指定したキーが含まれていることを検証する

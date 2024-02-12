@@ -8,29 +8,34 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import pro.kensait.java.fee.FeeService;
+
 public class FeeParameterTest_1 {
     private static final String OUR_BANK_CODE = "B001"; // 自分の銀行
     private static final String OTHER_BANK_CODE = "B999"; // 他の銀行
 
     /*
-     *  すべてのテストメソッドに共通的なフィクスチャを、フィールドとして宣言する
+     *  各テストケースで共通的なフィクスチャを、フィールドとして宣言する
      */
 
     // テスト対象クラス
     FeeService feeService;
 
     /*
-     *  各テストメソッド呼び出しの事前処理
+     *  各テストケースで共通的な事前処理
      */
     @BeforeEach
     public void setUp() {
+        // 共通フィクスチャを設定する
         feeService = new FeeService();
     }
 
     @ParameterizedTest
     @MethodSource("fixtureProvider")
     public void test_CalcFee(Fixture f) {
+        // 実行フェーズ
         int actual = feeService.calcFee(f.bankCode, f.amount);
+        // 検証フェーズ
         assertEquals(f.expectedFee, actual);
     }
 

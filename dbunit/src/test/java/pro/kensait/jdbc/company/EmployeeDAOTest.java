@@ -33,7 +33,7 @@ public class EmployeeDAOTest {
     private static final String EXPECTED_DATA_DIR_3 = "src/test/resources/EXPECTED_DATA_3";
 
     /*
-     *  すべてのテストメソッドに共通的なフィクスチャを、フィールドとして宣言する
+     *  各テストケースで共通的なフィクスチャを、フィールドとして宣言する
      */
 
     // テスト対象クラス

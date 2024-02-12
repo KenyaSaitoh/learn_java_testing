@@ -1,4 +1,4 @@
-package pro.kensait.java.calc.case3;
+package pro.kensait.java.calc.exception;
 
 /*
  * ステートを保持しない（ステートレスな）計算機
@@ -12,7 +12,7 @@ public class Calculator {
         int result = param1 * param2;
         if (LIMIT < result) { // ［2］
             // ビジネスロジックでエラー（極度オーバー）が発生
-            throw new RuntimeException("LIMIT OVER OCCURED!");
+            throw new IllegalArgumentException("LIMIT OVER OCCURED!");
         }
         return result;
     }

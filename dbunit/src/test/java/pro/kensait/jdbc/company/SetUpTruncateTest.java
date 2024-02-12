@@ -18,7 +18,7 @@ import org.junit.jupiter.api.BeforeEach;
  */
 public class SetUpTruncateTest {
     /*
-     *  すべてのテストメソッドに共通的なフィクスチャを、フィールドとして宣言する
+     *  各テストケースで共通的なフィクスチャを、フィールドとして宣言する
      */
 
     // テスト対象クラス

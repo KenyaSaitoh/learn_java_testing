@@ -1,12 +1,12 @@
 package pro.kensait.java.fee;
 
 public class FeeService {
-    private static final String OUR_BANK_CODE = "B001"; // 自分の銀行
+    private static final String OUR_BANK_CODE = "B001"; // 銀行コード（自分の銀行）
 
     // 振込手数料の計算を行う
     public int calcFee(String bankCode, int amount) {
 
-        // 自分の銀行かどうかを判定する
+        // 振込先が自分の銀行かどうかを判定する
         if (OUR_BANK_CODE.equals(bankCode)) {
             // 自分の銀行の場合、30000円以上は無料、それ以外は100円
             if (30000 <= amount) {

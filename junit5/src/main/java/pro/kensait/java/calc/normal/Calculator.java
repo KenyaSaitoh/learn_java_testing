@@ -1,7 +1,7 @@
-package pro.kensait.java.calc.case1;
+package pro.kensait.java.calc.normal;
 
 /*
- * ステートを保持しない（ステートレスな）計算機
+ * 通常の計算機（状態を保持しない）
  */
 public class Calculator {
 

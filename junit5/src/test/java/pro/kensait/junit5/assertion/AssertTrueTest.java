@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+/*
+ * assertTrue()による真偽の検証方法を説明するためのテストクラス
+ */
 public class AssertTrueTest {
 
     // boolean値trueであることを検証する

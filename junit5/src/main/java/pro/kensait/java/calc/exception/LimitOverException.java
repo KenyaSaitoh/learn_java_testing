@@ -1,4 +1,4 @@
-package pro.kensait.java.calc.case3;
+package pro.kensait.java.calc.exception;
 
 /*
  * 極度オーバー時に発生する例外

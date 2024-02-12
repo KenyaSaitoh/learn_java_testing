@@ -1,4 +1,4 @@
-package pro.kensait.java.calc.case2;
+package pro.kensait.java.calc.sideeffect;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,36 +6,39 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /*
- * ステートを保持する計算機（Calculatorクラス）をテストする
- * テストメソッド共通の前処理（@BeforeEach）で、テスト対象クラスのインスタンスを生成する
+ * Calculatorクラス（状態を保持する計算機）のためのテストクラス
  */
 public class CalculatorTest {
     /*
-     *  すべてのテストメソッドに共通的なフィクスチャを、フィールドとして宣言する
+     *  各テストケースで共通的なフィクスチャを、フィールドとして宣言する
      */
 
     // テスト対象クラス
     Calculator calc;
 
     /*
-     *  各テストメソッド呼び出しの事前処理
+     *  各テストケースで共通的な事前処理
      */
     @BeforeEach
     public void setUp() {
-        // 各テストメソッドで共通的なフィクスチャを設定する
+        // 共通フィクスチャを設定する
         calc = new Calculator(30, 10);
     }
 
     @Test
     public void test_Add() {
+        // 実行フェーズ
         calc.add();
+        // 検証フェーズ
         int actual = calc.getAnswer();
         assertEquals(40, actual);
     }
 
     @Test
     public void test_Subtract() {
+        // 実行フェーズ
         calc.subtract();
+        // 検証フェーズ
         int actual = calc.getAnswer();
         assertEquals(20, actual);
     }

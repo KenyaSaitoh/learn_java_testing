@@ -8,6 +8,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+/*
+ * コレクションを検証する方法を説明するためのテストクラス
+ */
 public class AssertCollectionTest {
 
     // すべての要素が完全に一致することを検証する

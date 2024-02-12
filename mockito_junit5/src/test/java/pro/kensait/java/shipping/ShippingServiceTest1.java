@@ -21,7 +21,7 @@ import org.mockito.MockitoAnnotations;
  */
 public class ShippingServiceTest1 {
     /*
-     *  すべてのテストメソッドに共通的なフィクスチャを、フィールドとして宣言する
+     *  各テストケースで共通的なフィクスチャを、フィールドとして宣言する
      */
 
     // テスト対象クラス
@@ -38,7 +38,7 @@ public class ShippingServiceTest1 {
     LocalDate receiveDate;
 
     /*
-     *  各テストメソッド呼び出しの事前処理
+     *  各テストケースで共通的な事前処理
      */
     @BeforeEach
     void setUp() {
@@ -48,7 +48,7 @@ public class ShippingServiceTest1 {
         // モックをテスト対象クラスに注入する
         shippingService = new ShippingService(costCalculator);
 
-        // 各テストメソッドで共通的なフィクスチャを設定する
+        // 共通フィクスチャを設定する
         goldClient = new Client(10001, "Alice", "福岡県福岡市1-1-1",
                 ClientType.GOLD, RegionType.KYUSHU);
         diamondClient = new Client(10001, "Alice", "福岡県福岡市1-1-1",
