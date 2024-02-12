@@ -35,9 +35,7 @@ public class CalculatorTest_2 {
     // 引き算のテスト
     @Test
     public void test_Subtract() {
-        // 実行フェーズ
-        int actual = calc.subtract(30, 10);
-        // 検証フェーズ
-        assertEquals(20, actual);
+        // 実行＋検証フェーズ
+        assertEquals(20, calc.subtract(30, 10));
     }
 }

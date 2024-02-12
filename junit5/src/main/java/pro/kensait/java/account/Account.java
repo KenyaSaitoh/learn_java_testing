@@ -1,5 +1,8 @@
 package pro.kensait.java.account;
 
+/*
+ * 銀行口座を表すクラス
+ */
 public class Account {
     private String accountNum; // 口座番号
     private int balance; // 残高
@@ -21,6 +24,10 @@ public class Account {
             throw new InsufficientBalanceException();
         }
         balance -= amount; // 残高を減算する
+    }
+
+    public boolean isBalanceZero() {
+        return balance == 0;
     }
 
     // アクセサメソッド

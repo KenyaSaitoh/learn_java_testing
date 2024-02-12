@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import pro.kensait.java.coverage.CustomerType;
 
 /*
- * コンストラクタの検証方法を説明するためのテストクラス
+ * コンストラクタによるインスタンス生成を検証するためのテストクラス
  */
 public class ConstructorTest {
 

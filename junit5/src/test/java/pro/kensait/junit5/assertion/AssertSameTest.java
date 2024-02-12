@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 /*
- * assertSame()による同一性の検証方法を説明するためのテストクラス
+ * 同一性を検証するためのテストクラス
  */
 public class AssertSameTest {
 

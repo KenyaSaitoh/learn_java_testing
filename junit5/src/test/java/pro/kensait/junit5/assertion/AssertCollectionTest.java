@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 /*
- * コレクションを検証する方法を説明するためのテストクラス
+ * コレクションを検証するためのテストクラス
  */
 public class AssertCollectionTest {
 

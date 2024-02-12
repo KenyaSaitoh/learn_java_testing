@@ -11,7 +11,7 @@ import java.util.Objects;
 import org.junit.jupiter.api.Test;
 
 /*
- * インスタンスの等価性を検証する方法を説明するためのテストクラス
+ * インスタンスの等価性を検証するためのテストクラス
  */
 public class AssertEqualsTest_2 {
 

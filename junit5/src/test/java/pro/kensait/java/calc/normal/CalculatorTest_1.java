@@ -25,9 +25,7 @@ public class CalculatorTest_1 {
     public void test_Subtract() {
         // 準備フェーズ
         Calculator calc = new Calculator();
-        // 実行フェーズ
-        int actual = calc.subtract(30, 10);
-        // 検証フェーズ
-        assertEquals(20, actual);
+        // 実行＋検証フェーズ
+        assertEquals(20, calc.subtract(30, 10));
     }
 }

@@ -21,6 +21,15 @@ public class CalcExceptionTest_1 {
     }
 
     @Test
+    public void test_Multiply_No_Exception() {
+        try {
+            calc.multiply1(100_000, 5);
+        } catch(IllegalArgumentException iae) {
+            fail(); // 失敗したとみなす
+        }
+    }
+
+    @Test
     public void test_Multiply_Exception_1() {
         try {
             calc.multiply1(100_000, 15);

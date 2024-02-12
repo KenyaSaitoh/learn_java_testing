@@ -7,7 +7,7 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 /*
- * マップを検証する方法を説明するためのテストクラス
+ * マップを検証するためのテストクラス
  */
 public class AssertMapTest {
 

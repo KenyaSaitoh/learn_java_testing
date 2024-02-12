@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 /*
- * assertTrue()による真偽の検証方法を説明するためのテストクラス
+ * 条件判定の結果（真偽値）を検証するためのテストクラス
  */
 public class AssertTrueTest {
 
@@ -14,6 +14,13 @@ public class AssertTrueTest {
     public void test_True() {
         boolean actual = true;
         assertTrue(actual);
+    }
+
+    // boolean値falseであることを検証する
+    @Test
+    public void test_False() {
+        boolean actual = false;
+        assertFalse(actual);
     }
 
     // 指定したクラスのインスタンス型であることを検証する

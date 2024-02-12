@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 /*
- * fail()による検証方法を説明するためのテストクラス
+ * 明示的に失敗を引き起こすためのテストクラス
  */
 public class Fail {
 
