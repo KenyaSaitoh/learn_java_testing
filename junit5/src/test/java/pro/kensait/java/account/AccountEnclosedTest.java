@@ -41,7 +41,7 @@ public class AccountEnclosedTest {
             });
         }
 
-        // ゼロ口座確認のテスト（金額0円の口座に対して）
+        // 残高ゼロチェックのテスト（金額0円の口座に対して）
         @Test
         public void test_IsBalanceZero_Balance_Zero() {
             // 実行＋検証フェーズ
@@ -72,7 +72,7 @@ public class AccountEnclosedTest {
             assertEquals(7000, account.getBalance());
         }
 
-        // ゼロ口座確認のテスト（金額10000円の口座に対して）
+        // 残高ゼロチェックのテスト（金額10000円の口座に対して）
         @Test
         public void test_IsNotBalanceZero_Balance_NonZero() {
             // 準備フェーズ

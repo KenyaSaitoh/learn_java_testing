@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 /*
  * 明示的に失敗を引き起こすためのテストクラス
  */
-public class Fail {
+public class FailTest {
 
     @Test
     public void test_Fail() {

@@ -1,4 +1,4 @@
-package pro.kensait.junit5.assertion;
+package pro.kensait.java.customer;
 
 public class Customer {
     private final int id;
@@ -8,7 +8,7 @@ public class Customer {
     public Customer(int id, String name) {
         this.id = id;
         this.name = name;
-        this.customerType = CustomerType.GOLD; // デフォルト値
+        this.customerType = CustomerType.GENERAL; // デフォルト値
     }
 
     public int getId() {

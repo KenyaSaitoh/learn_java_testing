@@ -16,14 +16,33 @@ test {
     // JUnit Platformを使う設定
     useJUnitPlatform()
 
+    // ログ設定
     testLogging {
         // テスト時の標準出力と標準エラー出力を表示する
         showStandardStreams true
-        // イベントを出力する
+        // 指定されたイベントを表示する
         events "started", "skipped", "passed", "failed"
-        // 例外発生時の出力設定
+        // 例外発生時はすべての情報を表示する
         exceptionFormat "full"
-        // テスト完了後にレポートを生成
+        // テスト完了後にJacocoテストレポートを生成する
         finalizedBy jacocoTestReport
+    }
+
+    // JUnit5レポート設定
+    reports {
+        // HTML形式レポートの出力先
+        html.outputLocation.set(layout.buildDirectory.dir("reports/junit5/html"))
+        // XML形式レポートの出力先
+        junitXml.outputLocation.set(layout.buildDirectory.dir("reports/junit5/xml"))
+    }
+}
+
+// Jacocoテストレポート設定
+jacocoTestReport {
+    reports {
+        // HTML形式レポートの出力先
+        html.destination file("${buildDir}/reports/jacoco/html")
+        // XML形式レポートの出力先
+        xml.destination file("${buildDir}/reports/jacoco/xml")
     }
 }
