@@ -18,7 +18,7 @@ public class FeeParameterTest_1 {
 
     // 各テストケースで共通的な事前処理
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         // 共通フィクスチャを設定する
         feeService = new FeeService();
     }
@@ -26,7 +26,7 @@ public class FeeParameterTest_1 {
     // 手数料計算のテスト（メソッドからパラメータを取得する）
     @ParameterizedTest
     @MethodSource("fixtureProvider")
-    public void test_CalcFee(Fixture f) {
+    void test_CalcFee(Fixture f) {
         // 実行フェーズ
         int actual = feeService.calcFee(f.bankCode, f.amount);
         // 検証フェーズ

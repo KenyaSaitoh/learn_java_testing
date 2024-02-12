@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class FailTest {
 
     @Test
-    public void test_Fail() {
+    void test_Fail() {
         int result = 30 + 10;
         if (40 != result) {
             fail();

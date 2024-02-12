@@ -17,7 +17,7 @@ public class AssertEqualsTest_2 {
 
     // 同じ値であること（等価性）を検証する
     @Test
-    public void test_Equals() {
+    void test_Equals() {
         LocalDateTime now = LocalDateTime.now();
         Person1 expected = new Person1("Alice", 25, now);
         Person1 actual = new Person1("Alice", 25, now);
@@ -26,7 +26,7 @@ public class AssertEqualsTest_2 {
 
     // 最終更新時間を除外して、同じ値であること（等価性）を検証する
     @Test
-    public void test_Equals_WithoutLastUpdateTime() throws Exception {
+    void test_Equals_WithoutLastUpdateTime() throws Exception {
         Person1 expected = new Person1("Alice", 25, LocalDateTime.now());
         Thread.sleep(1000);
         Person1 actual = new Person1("Alice", 25, LocalDateTime.now());
@@ -42,7 +42,7 @@ public class AssertEqualsTest_2 {
 
     // 最終更新時間を意識して、同じ値であること（等価性）を検証する
     @Test
-    public void test_Equals_ConsideringLastUpdateTime() throws Exception {
+    void test_Equals_ConsideringLastUpdateTime() throws Exception {
         Person2 expected = new Person2("Alice", 25, LocalDateTime.now());
         Thread.sleep(1000);
         Person2 actual = new Person2("Alice", 25, LocalDateTime.now());
@@ -51,7 +51,7 @@ public class AssertEqualsTest_2 {
 
     // リストの並び順を踏まえて、同じ値でないこと（非等価性）を検証する
     @Test
-    public void test_EotEquals_WithOrdering() {
+    void test_EotEquals_WithOrdering() {
         List<String> expectedHobbies = Arrays.asList("BASEBALL", "MUSIC", "MOVIE");
         List<String> actualHobbies = Arrays.asList("MUSIC", "MOVIE", "BASEBALL");
         Person3 expected = new Person3("Alice", 25, expectedHobbies);
@@ -61,7 +61,7 @@ public class AssertEqualsTest_2 {
 
     // リストの並び順を無視して、同じ値であること（等価性）を検証する
     @Test
-    public void test_Equals_IgnoringOrdering() {
+    void test_Equals_IgnoringOrdering() {
         List<String> expectedHobbies = Arrays.asList("BASEBALL", "MUSIC", "MOVIE");
         List<String> actualHobbies = Arrays.asList("MUSIC", "MOVIE", "BASEBALL");
         Person3 expected = new Person3("Alice", 25, expectedHobbies);

@@ -15,14 +15,14 @@ public class StatefulCalcTest {
 
     // 各テストケースで共通的な事前処理
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         // 共通フィクスチャを設定する
         calc = new StatefulCalc(30, 10);
     }
 
     // 足し算のテスト
     @Test
-    public void test_Add() {
+    void test_Add() {
         // 実行フェーズ
         calc.add();
         // 検証フェーズ
@@ -32,7 +32,7 @@ public class StatefulCalcTest {
 
     // 引き算のテスト
     @Test
-    public void test_Subtract() {
+    void test_Subtract() {
         // 実行フェーズ
         calc.subtract();
         // 検証フェーズ

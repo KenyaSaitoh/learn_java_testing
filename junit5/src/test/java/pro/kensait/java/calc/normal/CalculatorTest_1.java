@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class CalculatorTest_1 {
     // 足し算のテスト
     @Test
-    public void test_Add() {
+    void test_Add() {
         // 準備フェーズ
         Calculator calc = new Calculator();
         // 実行フェーズ
@@ -21,7 +21,7 @@ public class CalculatorTest_1 {
 
     // 引き算のテスト
     @Test
-    public void test_Subtract() {
+    void test_Subtract() {
         // 準備フェーズ
         Calculator calc = new Calculator();
         // 実行＋検証フェーズ

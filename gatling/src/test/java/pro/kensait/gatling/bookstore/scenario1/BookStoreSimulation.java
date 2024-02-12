@@ -45,8 +45,6 @@ public class BookStoreSimulation extends Simulation {
                     .exec(
                             http("Login")
                             .post("/processLogin")
-                            // .formParam("email", "alice@gmail.com")
-                            // .formParam("password", "password")
                             .formParam("email", "#{userId}")
                             .formParam("password", "#{password}")
                             .formParam("_csrf", "#{csrfToken}")
@@ -70,7 +68,7 @@ public class BookStoreSimulation extends Simulation {
                     .exec(
                             http("Add Book 1")
                             .post("/addBook")
-                            .formParam("bookId", "2")
+                            .formParam("bookId", "3")
                             .formParam("_csrf", "#{csrfToken}")
                             .check(
                                     status().is(200),
@@ -135,7 +133,19 @@ public class BookStoreSimulation extends Simulation {
 
                     .exec(http("Add Book 3")
                             .post("/addBook")
-                            .formParam("bookId", "14")
+                            .formParam("bookId", "11")
+                            .formParam("_csrf", "#{csrfToken}")
+                            .check(
+                                    status().is(200),
+                                    css("title").is("CartViewPage"),
+                                    css("#csrfToken", "value").saveAs("csrfToken")
+                                    )
+                            )
+                    .pause(2)
+
+                    .exec(http("Remove Book")
+                            .post("/removeBook")
+                            .formParam("removeBookIdList", "3")
                             .formParam("_csrf", "#{csrfToken}")
                             .check(
                                     status().is(200),

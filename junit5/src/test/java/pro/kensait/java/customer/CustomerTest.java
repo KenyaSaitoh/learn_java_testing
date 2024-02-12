@@ -12,7 +12,7 @@ import pro.kensait.java.customer.Customer.CustomerType;
 public class CustomerTest {
 
     @Test
-    public void test_Customer_Constructor() {
+    void test_Customer_Constructor() {
         // 実行フェーズ
         Customer customer = new Customer(1, "foo");
         // 検証フェーズ

@@ -15,7 +15,7 @@ public class AssertCollectionTest {
 
     // すべての要素が完全に一致することを検証する
     @Test
-    public void test_AllElements_Mach() {
+    void test_AllElements_Mach() {
         List<String> expected = Arrays.asList("foo", "bar", "baz");
         List<String> actual = Arrays.asList("foo", "bar", "baz");
         assertIterableEquals(expected, actual);
@@ -23,7 +23,7 @@ public class AssertCollectionTest {
 
     // すべての要素が一致する（ソート順は無視）ことを検証する
     @Test
-    public void test_AllElements_Maches_IgnoreSort() {
+    void test_AllElements_Maches_IgnoreSort() {
         List<String> expected = Arrays.asList("foo", "bar", "baz");
         List<String> actual = Arrays.asList("baz", "bar", "foo");
         Collections.sort(expected);
@@ -33,21 +33,21 @@ public class AssertCollectionTest {
 
     // 指定した要素がすべて含まれていることを検証する
     @Test
-    public void test_ContainsElements() {
+    void test_ContainsElements() {
         List<String> actual = Arrays.asList("foo", "bar", "baz");
         assertTrue(actual.containsAll(Arrays.asList("baz", "foo")));
     }
 
     // 指定したサイズであることを検証する
     @Test
-    public void test_ElementsSize() {
+    void test_ElementsSize() {
         List<String> actual = Arrays.asList("foo", "bar", "baz");
         assertEquals(3, actual.size());
     }
 
     // 空であることを検証する
     @Test
-    public void test_ElementsEmpty() {
+    void test_ElementsEmpty() {
         List<String> actual = List.of();
         assertTrue(actual.isEmpty());
     }

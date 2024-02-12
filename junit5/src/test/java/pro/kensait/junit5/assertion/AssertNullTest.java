@@ -11,14 +11,14 @@ public class AssertNullTest {
 
     // null値であることを検証する
     @Test
-    public void test_IsNull() {
+    void test_IsNull() {
         String actual = null;
         assertNull(actual);
     }
 
     // null値でないことを検証する
     @Test
-    public void test_IsNotNull() {
+    void test_IsNotNull() {
         String actual = "foo";
         assertNotNull(actual);
     }

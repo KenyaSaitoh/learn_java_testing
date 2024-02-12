@@ -15,14 +15,14 @@ public class FeeServiceTest {
 
     // 各テストケースで共通的な事前処理
     @BeforeEach
-    public void setUp() {
+    void setUp() {
      // 共通フィクスチャを設定する
         feeService = new FeeService();
     }
 
     // 自分の銀行宛に30000円を振り込み、手数料が0円であることをテストする
     @Test
-    public void test_CalcFee_ToOurBank_Over30000_RightFee() {
+    void test_CalcFee_ToOurBank_Over30000_RightFee() {
         // 実行フェーズ
         int actual = feeService.calcFee(OUR_BANK_CODE, 30000);
         // 検証フェーズ
@@ -31,7 +31,7 @@ public class FeeServiceTest {
 
     // 自分の銀行宛に29999円を振り込み、手数料が100円であることをテストする
     @Test
-    public void test_CalcFee_ToOurBank_Under30000_RightFee() {
+    void test_CalcFee_ToOurBank_Under30000_RightFee() {
         // 実行フェーズ
         int actual = feeService.calcFee(OUR_BANK_CODE, 29999);
         // 検証フェーズ
@@ -40,7 +40,7 @@ public class FeeServiceTest {
 
     // 他の銀行宛に40000円を振り込み、手数料が200円であることをテストする
     @Test
-    public void test_CalcFee_ToOtherBank_Over40000_RightFee() {
+    void test_CalcFee_ToOtherBank_Over40000_RightFee() {
         // 実行フェーズ
         int actual = feeService.calcFee(OTHER_BANK_CODE, 40000);
         // 検証フェーズ
@@ -49,7 +49,7 @@ public class FeeServiceTest {
 
     // 他の銀行宛に39999円を振り込み、手数料が500円であることをテストする
     @Test
-    public void test_CalcFee_ToOtherBank_Under40000_RightFee() {
+    void test_CalcFee_ToOtherBank_Under40000_RightFee() {
         // 実行フェーズ
         int actual = feeService.calcFee(OTHER_BANK_CODE, 39999);
         // 検証フェーズ

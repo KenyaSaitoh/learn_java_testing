@@ -21,7 +21,7 @@ public class OutputCalcTest {
 
     // 各テストケースで共通的な事前処理
     @BeforeAll
-    public static void beforeAll() {
+    static void beforeAll() {
         // 標準出力をバイト配列出力ストリームに置き換える
         originalOut = System.out;
         output = new ByteArrayOutputStream();
@@ -30,14 +30,14 @@ public class OutputCalcTest {
 
     // 各テストケースで共通的な事前処理
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         // 共通フィクスチャを設定する
         calc = new OutputCalc();
     }
 
     // 足し算のテスト
     @Test
-    public void test_Add() {
+    void test_Add() {
         // 実行フェーズ
         calc.add(30, 10);
         // 検証フェーズ
@@ -46,7 +46,7 @@ public class OutputCalcTest {
 
     // 引き算のテスト
     @Test
-    public void test_Subtract() {
+    void test_Subtract() {
         // 実行フェーズ
         calc.subtract(30, 10);
         // 検証フェーズ

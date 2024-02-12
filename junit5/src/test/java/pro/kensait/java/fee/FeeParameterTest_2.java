@@ -13,7 +13,7 @@ public class FeeParameterTest_2 {
 
     // 各テストケースで共通的な事前処理
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         // 共通フィクスチャを設定する
         feeService = new FeeService();
     }
@@ -21,7 +21,7 @@ public class FeeParameterTest_2 {
     // 手数料計算のテスト（CSVファイルからパラメータを取得する）
     @ParameterizedTest
     @CsvFileSource(resources = "/parameter.csv", numLinesToSkip = 1)
-    public void test_CalcFee(String bankCode, int amount, int expectedFee) {
+    void test_CalcFee(String bankCode, int amount, int expectedFee) {
         // 実行フェーズ
         int actual = feeService.calcFee(bankCode, amount);
         // 検証フェーズ

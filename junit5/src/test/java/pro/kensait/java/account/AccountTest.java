@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class AccountTest {
     // 入金のテスト（金額0円の口座に対して）
     @Test
-    public void test_Deposite_Balance_Zero() {
+    void test_Deposite_Balance_Zero() {
         // 準備フェーズ
         Account account = new Account("00001234", 0); //［1］
         // 実行フェーズ
@@ -21,7 +21,7 @@ public class AccountTest {
 
     // 出金のテスト（金額0円の口座に対して）
     @Test
-    public void test_Withdraw_Balance_Zero() {
+    void test_Withdraw_Balance_Zero() {
         // 準備フェーズ
         Account account = new Account("00001234", 0); //［2］
         // 実行＋検証フェーズ
@@ -32,7 +32,7 @@ public class AccountTest {
 
     // 出金のテスト（金額10000円の口座に対して）
     @Test
-    public void test_Withdraw_Balance_NonZero() {
+    void test_Withdraw_Balance_NonZero() {
         // 準備フェーズ
         Account account = new Account("00001234", 10000); //［3］
         try {
@@ -47,7 +47,7 @@ public class AccountTest {
 
     // 残高ゼロチェックのテスト（金額0円の口座に対して）
     @Test
-    public void test_IsBalanceZero_Balance_Zero() {
+    void test_IsBalanceZero_Balance_Zero() {
         // 準備フェーズ
         Account account = new Account("00001234", 0); //［6］
         // 実行＋検証フェーズ
@@ -56,7 +56,7 @@ public class AccountTest {
 
     // 残高ゼロチェックのテスト（金額10000円の口座に対して）
     @Test
-    public void test_IsNotBalanceZero_Balance_NonZero() {
+    void test_IsNotBalanceZero_Balance_NonZero() {
         // 準備フェーズ
         Account account = new Account("00001234", 10000); //［5］
         // 実行＋検証フェーズ

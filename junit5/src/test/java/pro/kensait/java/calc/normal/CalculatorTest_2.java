@@ -15,14 +15,14 @@ public class CalculatorTest_2 {
 
     // 各テストケースで共通的な事前処理
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         // 共通フィクスチャを設定する
         calc = new Calculator();
     }
 
     // 足し算のテスト
     @Test
-    public void test_Add() {
+    void test_Add() {
         // 実行フェーズ
         int actual = calc.add(30, 10);
         // 検証フェーズ
@@ -31,7 +31,7 @@ public class CalculatorTest_2 {
 
     // 引き算のテスト
     @Test
-    public void test_Subtract() {
+    void test_Subtract() {
         // 実行＋検証フェーズ
         assertEquals(20, calc.subtract(30, 10));
     }
