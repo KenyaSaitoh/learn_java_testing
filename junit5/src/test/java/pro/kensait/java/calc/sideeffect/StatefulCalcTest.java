@@ -3,6 +3,7 @@ package pro.kensait.java.calc.sideeffect;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /*
@@ -20,7 +21,7 @@ public class StatefulCalcTest {
         calc = new StatefulCalc(30, 10);
     }
 
-    // 足し算のテスト
+    @DisplayName("足し算のテスト")
     @Test
     void test_Add() {
         // 実行フェーズ
@@ -30,7 +31,7 @@ public class StatefulCalcTest {
         assertEquals(40, actual);
     }
 
-    // 引き算のテスト
+    @DisplayName("引き算のテスト")
     @Test
     void test_Subtract() {
         // 実行フェーズ

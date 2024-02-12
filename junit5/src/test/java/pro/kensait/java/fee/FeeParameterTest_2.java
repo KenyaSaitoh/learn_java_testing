@@ -3,6 +3,7 @@ package pro.kensait.java.fee;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
@@ -18,9 +19,9 @@ public class FeeParameterTest_2 {
         feeService = new FeeService();
     }
 
-    // 手数料計算のテスト（CSVファイルからパラメータを取得する）
     @ParameterizedTest
     @CsvFileSource(resources = "/parameter.csv", numLinesToSkip = 1)
+    @DisplayName("手数料計算のテスト（CSVファイルからパラメータを取得する）")
     void test_CalcFee(String bankCode, int amount, int expectedFee) {
         // 実行フェーズ
         int actual = feeService.calcFee(bankCode, amount);

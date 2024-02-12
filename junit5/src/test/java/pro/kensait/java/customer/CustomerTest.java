@@ -2,6 +2,7 @@ package pro.kensait.java.customer;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import pro.kensait.java.customer.Customer.CustomerType;
@@ -12,6 +13,7 @@ import pro.kensait.java.customer.Customer.CustomerType;
 public class CustomerTest {
 
     @Test
+    @DisplayName("Customerクラスのインスタンス生成をテストする")
     void test_Customer_Constructor() {
         // 実行フェーズ
         Customer customer = new Customer(1, "foo");

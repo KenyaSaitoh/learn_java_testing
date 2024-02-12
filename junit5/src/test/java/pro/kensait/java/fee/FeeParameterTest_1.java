@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -23,9 +24,9 @@ public class FeeParameterTest_1 {
         feeService = new FeeService();
     }
 
-    // 手数料計算のテスト（メソッドからパラメータを取得する）
     @ParameterizedTest
     @MethodSource("fixtureProvider")
+    @DisplayName("手数料計算のテスト（メソッドからパラメータを取得する）")
     void test_CalcFee(Fixture f) {
         // 実行フェーズ
         int actual = feeService.calcFee(f.bankCode, f.amount);

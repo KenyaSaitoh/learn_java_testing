@@ -7,6 +7,7 @@ import java.io.PrintStream;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /*
@@ -35,8 +36,8 @@ public class OutputCalcTest {
         calc = new OutputCalc();
     }
 
-    // 足し算のテスト
     @Test
+    @DisplayName("足し算のテスト")
     void test_Add() {
         // 実行フェーズ
         calc.add(30, 10);
@@ -44,8 +45,8 @@ public class OutputCalcTest {
         assertEquals("40" + System.lineSeparator(), output.toString());
     }
 
-    // 引き算のテスト
     @Test
+    @DisplayName("引き算のテスト")
     void test_Subtract() {
         // 実行フェーズ
         calc.subtract(30, 10);

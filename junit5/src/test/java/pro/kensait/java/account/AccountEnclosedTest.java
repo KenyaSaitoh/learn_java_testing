@@ -3,6 +3,7 @@ package pro.kensait.java.account;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +15,8 @@ public class AccountEnclosedTest {
     // テスト対象クラス
     Account account;
 
-    // 残高ゼロの場合のテストケース
     @Nested
+    @DisplayName("残高ゼロの口座に対するテスト")
     class BalanceZeroTest {
         // 各テストケースで共通的な事前処理
         @BeforeEach
@@ -24,8 +25,8 @@ public class AccountEnclosedTest {
             account = new Account("00001234", 0);
         }
 
-        // 入金のテスト（金額0円の口座に対して）
         @Test
+        @DisplayName("入金のテスト")
         void test_Deposite_Balance_Zero() {
             // 実行フェーズ
             account.deposit(3000);
@@ -33,8 +34,8 @@ public class AccountEnclosedTest {
             assertEquals(3000, account.getBalance());
         }
 
-        // 出金のテスト（金額0円の口座に対して）
         @Test
+        @DisplayName("出金のテスト")
         void test_Withdraw_Balance_Zero() {
             // 実行＋検証フェーズ
             assertThrows(InsufficientBalanceException.class, () -> {
@@ -42,7 +43,7 @@ public class AccountEnclosedTest {
             });
         }
 
-        // 残高ゼロチェックのテスト（金額0円の口座に対して）
+        @DisplayName("残高ゼロチェックのテスト")
         @Test
         void test_IsBalanceZero_Balance_Zero() {
             // 実行＋検証フェーズ
@@ -50,8 +51,8 @@ public class AccountEnclosedTest {
         }
     }
 
-    // 残高ゼロ以外の場合のテストケース
     @Nested
+    @DisplayName("残高ゼロ以外の口座に対するテスト")
     class BalanceNonZeroTest {
         // 各テストケースで共通的な事前処理
         @BeforeEach
@@ -60,7 +61,16 @@ public class AccountEnclosedTest {
             account = new Account("00001234", 10000);
         }
 
-        // 出金のテスト（金額10000円の口座に対して）
+        @Test
+        @DisplayName("入金のテスト")
+        void test_Deposite_Balance_NonZero() {
+            // 実行フェーズ
+            account.deposit(3000);
+            // 検証フェーズ
+            assertEquals(13000, account.getBalance());
+        }
+
+        @DisplayName("出金のテスト")
         @Test
         void test_Withdraw_Balance_NonZero() {
             // 準備フェーズ
@@ -75,7 +85,7 @@ public class AccountEnclosedTest {
             assertEquals(7000, account.getBalance());
         }
 
-        // 残高ゼロチェックのテスト（金額10000円の口座に対して）
+        @DisplayName("残高ゼロチェックのテスト")
         @Test
         void test_IsNotBalanceZero_Balance_NonZero() {
             // 準備フェーズ
