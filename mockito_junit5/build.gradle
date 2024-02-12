@@ -16,22 +16,25 @@ dependencies {
 
 // JUnit5設定
 test {
-    // JUnit Platformを使う設定
-    useJUnitPlatform()
+    // JUnit Platformの設定
+    useJUnitPlatform {
+        // 特定のタグが指定されたテストクラスを、ビルドテストの対象外とする
+        excludeTags "excludeFromBuild"
+    }
 
     // ログ設定
     testLogging {
-        // テスト時の標準出力と標準エラー出力を表示する
+        // ビルドテスト時の標準出力と標準エラー出力を表示する
         showStandardStreams true
         // 指定されたイベントを表示する
         events "started", "skipped", "passed", "failed"
         // 例外発生時はすべての情報を表示する
         exceptionFormat "full"
-        // テスト完了後にJacocoテストレポートを生成する
+        // ビルドテスト後に、Jacocoテストレポートを生成する
         finalizedBy jacocoTestReport
     }
 
-    // JUnit5レポート設定
+    // レポート設定
     reports {
         // HTML形式レポートの出力先
         html.outputLocation.set(layout.buildDirectory.dir("reports/junit5/html"))

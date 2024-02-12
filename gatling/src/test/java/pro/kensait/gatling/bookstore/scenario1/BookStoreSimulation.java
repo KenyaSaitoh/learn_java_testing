@@ -189,6 +189,7 @@ public class BookStoreSimulation extends Simulation {
                     )
             ;
 
+    // イニシャライザーでセットアップする
     {
         setUp(
                 scn.injectOpen(

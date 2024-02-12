@@ -25,7 +25,7 @@ public class CalcSimulation extends Simulation {
                     + "(KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
 
     ScenarioBuilder scn = scenario("Calculation Scenario")
-            .exec(http("Open Homepage")
+            .exec(http("Open TopPage")
                     .get("/")
                     .check(status().is(200))
                     .check(css("title").is("CalcInputPage"))
@@ -53,6 +53,8 @@ public class CalcSimulation extends Simulation {
                     .pause(1, 4)
                     )
             ;
+
+    // イニシャライザーでセットアップする
     {
         setUp(scn.injectOpen(
                 rampUsers(3).during(30)).protocols(httpProtocol))
