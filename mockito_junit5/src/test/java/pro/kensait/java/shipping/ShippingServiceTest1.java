@@ -21,14 +21,13 @@ import org.mockito.MockitoAnnotations;
  */
 public class ShippingServiceTest1 {
     // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
-
     // テスト対象クラス
     ShippingService shippingService;
 
     // テスト対象クラスの呼び出し先（@Mockを付与してモック化）
     @Mock CostCalculatorIF costCalculator;
 
-    // 各テストメソッドで共通的なフィクスチャ
+    // その他の各テストメソッドで共通的なフィクスチャ
     Client goldClient;
     Client diamondClient;
     Baggage baggage;

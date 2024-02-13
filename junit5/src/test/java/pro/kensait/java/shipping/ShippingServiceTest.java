@@ -19,7 +19,7 @@ public class ShippingServiceTest {
     // テスト対象クラス
     ShippingService shippingService;
 
-    // 各テストメソッドで共通的なフィクスチャ
+    // その他の各テストメソッドで共通的なフィクスチャ
     Client goldClient;
     Baggage baggage;
     LocalDateTime orderDateTime;

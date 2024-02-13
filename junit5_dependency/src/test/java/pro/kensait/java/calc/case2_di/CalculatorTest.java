@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 class CalculatorTest {
-    //  すべてのテストメソッドに共通的な変数はフィールドとして宣言する
+    // すべてのテストメソッドに共通的な変数はフィールドとして宣言する
     // テスト対象クラス
     Calculator calc;
 

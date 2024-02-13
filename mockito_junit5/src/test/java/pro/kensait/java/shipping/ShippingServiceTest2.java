@@ -21,7 +21,6 @@ import org.mockito.MockitoAnnotations;
  */
 public class ShippingServiceTest2 {
     // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
-
     // テスト対象クラス
     ShippingService shippingService;
 
@@ -36,7 +35,7 @@ public class ShippingServiceTest2 {
     @Mock
     Baggage baggage;
 
-    // モック化対象外の共通的なフィクスチャ
+    // その他のモック化対象外の共通的なフィクスチャ
     LocalDateTime orderDateTime;
     LocalDate receiveDate;
 

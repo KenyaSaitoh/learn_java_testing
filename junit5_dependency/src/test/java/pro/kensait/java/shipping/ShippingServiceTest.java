@@ -15,26 +15,21 @@ import org.junit.jupiter.api.Test;
  * ShippingServiceを対象にしたテストクラス
  */
 public class ShippingServiceTest {
-    /*
-     // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
-     */
-
+    // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
     // テスト対象クラス
     ShippingService shippingService;
 
     // テスト対象クラスの呼び出し先（モック対象）
     MockCostCalculator costCalculator;
 
-    // 各テストメソッドで共通的なフィクスチャ
+    //その他の各テストメソッドで共通的なフィクスチャ
     Client diamondClient;
     Client goldClient;
     Baggage baggage;
     LocalDateTime orderDateTime;
     LocalDate receiveDate;
 
-    /*
-// 各テストケースで共通的な事前処理
-     */
+    // 各テストケースで共通的な事前処理
     @BeforeEach
     void setUp() {
         // モックを生成する
