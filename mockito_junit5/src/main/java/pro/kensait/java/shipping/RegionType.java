@@ -4,11 +4,11 @@ package pro.kensait.java.shipping;
  * 地域種別
  */
 public enum RegionType {
-    HOKKAIDO(2.0F),
+    HOKKAIDO(1.5F),
     HONSHU(1.0F),
-    SHIKOKU(1.5F),
-    KYUSHU(2.0F),
-    OKINAWA(2.5F);
+    SHIKOKU(1.3F),
+    KYUSHU(1.3F),
+    OKINAWA(1.8F);
 
     private final float weighting; // 重み付け
 

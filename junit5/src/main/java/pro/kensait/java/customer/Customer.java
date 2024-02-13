@@ -25,8 +25,4 @@ public class Customer {
     public CustomerType getCustomerType() {
         return customerType;
     }
-
-    public static enum CustomerType {
-        GENERAL, GOLD
-    }
 }

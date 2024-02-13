@@ -1,4 +1,4 @@
-package pro.kensait.java.coverage;
+package pro.kensait.java.customer;
 
 import static org.junit.jupiter.api.Assertions.*;
 

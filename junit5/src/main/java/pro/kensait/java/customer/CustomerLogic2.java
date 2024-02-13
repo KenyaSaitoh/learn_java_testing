@@ -1,4 +1,4 @@
-package pro.kensait.java.coverage;
+package pro.kensait.java.customer;
 
 public class CustomerLogic2 {
     // 顧客タイプと購入金額から配送料を決定する

@@ -5,8 +5,8 @@ package pro.kensait.java.shipping;
  */
 public enum BaggageType {
     SMALL(1.0F), // 小サイズ
-    MIDDLE(1.5F), // 中サイズ
-    LARGE(2.0F); // 大サイズ
+    MIDDLE(1.2F), // 中サイズ
+    LARGE(1.5F); // 大サイズ
 
     private final float weighting;
 
