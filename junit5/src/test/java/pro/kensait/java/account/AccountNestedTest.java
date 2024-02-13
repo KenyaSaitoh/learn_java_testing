@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 /*
- * Accountクラス（口座）のための構造化されたテストクラス
+ * Accountクラス（口座）のための構造化されたテストクラス（Nestedクラス）
  */
-public class AccountEnclosedTest {
+public class AccountNestedTest {
     // 全テストケースで共通的なフィクスチャを、フィールドとして宣言する
     // テスト対象クラス
     Account account;

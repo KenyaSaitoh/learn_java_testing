@@ -18,23 +18,24 @@ import org.mockito.MockitoAnnotations;
 
 /*
  * ShippingServiceを対象にしたテストクラス
- * ShippingServiceTest1との相違点
- * Nestedクラスを使う点
+ * ShippingServiceTest2との相違点
+ * 引数であるBaggage、Clientもモック化する点
  */
-public class ShippingServiceTest2 {
+public class ShippingServiceTest3 {
     // テスト対象クラス
     ShippingService shippingService;
 
     // テスト対象クラスの呼び出し先（@Mockを付与してモック化）
-    @Mock
-    CostCalculatorIF costCalculator;
+    @Mock CostCalculatorIF costCalculator;
 
-    //その他のすべてのテストケースで共通的なフィクスチャ
-    Baggage baggage;
+    // 各テストケースで共通的なフィクスチャ（@Mockを付与してモック化）［差分］
+    @Mock Baggage baggage;
+
+    // その他のモック化対象外の共通的なフィクスチャ
     LocalDateTime orderDateTime;
     LocalDate receiveDate;
 
-    // すべてのテストケースで共通的な事前処理
+    // 各テストケースで共通的な事前処理
     @BeforeEach
     void setUp() {
         // モックを初期化する（@Mockが付与されたフィールドにモックを割り当てる）
@@ -47,8 +48,10 @@ public class ShippingServiceTest2 {
         // モックをテスト対象クラスに注入する
         shippingService = new ShippingService(costCalculator);
 
-        // 共通フィクスチャを設定する
-        baggage = new Baggage(BaggageType.MIDDLE, false);
+        // モック化されたBaggageの振る舞いを決める［差分］
+        when(baggage.baggageType()).thenReturn(BaggageType.MIDDLE);
+
+        // その他の共通的なフィクスチャを設定する
         orderDateTime = LocalDateTime.now();
         receiveDate = LocalDate.of(2023, 11, 30);
 
@@ -59,20 +62,23 @@ public class ShippingServiceTest2 {
     @Nested
     @DisplayName("ゴールド会員のテスト")
     class GoldCustomerTest {
-        // GoldCustomerTestクラス内の各テストケースで共通的なフィクスチャ
-        Client client;
+        // GoldCustomerTestクラス内の各テストケースで共通的なフィクスチャ［差分］
+        @Mock Client client;
 
         // GoldCustomerTestクラス内の各テストケースで共通的な事前処理
         @BeforeEach
         void setUp() {
-            client = new Client(10001, "Alice", "福岡県福岡市1-1-1",
-                    ClientType.GOLD, RegionType.KYUSHU);
+            // モックを初期化する（@Mockが付与されたフィールドにモックを割り当てる）［差分］
+            MockitoAnnotations.openMocks(this);
+
+            // モック化されたClientの振る舞いを決める［差分］
+            when(client.clientType()).thenReturn(ClientType.GOLD);
         }
 
         @Test
         @DisplayName("割引なしになった場合の更新結果をテストする")
         void test_OrderShipping_GoldCustomer_NoDiscount() {
-            // 引数である荷物リストを生成する（テストメソッド毎に個数が異なる）
+            // 引数である荷物リストを生成する（テストケース毎に個数が異なる）
             List<Baggage> baggageList = Arrays.asList(baggage);
 
             // テスト実行
@@ -133,14 +139,17 @@ public class ShippingServiceTest2 {
     @Nested
     @DisplayName("ダイヤモンド会員のテスト")
     class DiamondCustomerTest {
-        // DiamondCustomerTestクラス内の各テストケースで共通的なフィクスチャ
-        Client client;
+        // DiamondCustomerTestクラス内の各テストケースで共通的なフィクスチャ［差分］
+        @Mock Client client;
 
         // DiamondCustomerTestクラス内の各テストケースで共通的な事前処理
         @BeforeEach
         void setUp() {
-            client = new Client(10001, "Alice", "福岡県福岡市1-1-1",
-                    ClientType.DIAMOND, RegionType.KYUSHU);
+            // モックを初期化する（@Mockが付与されたフィールドにモックを割り当てる）［差分］
+            MockitoAnnotations.openMocks(this);
+
+            // モック化されたClientの振る舞いを決める［差分］
+            when(client.clientType()).thenReturn(ClientType.DIAMOND);
         }
 
         @Test

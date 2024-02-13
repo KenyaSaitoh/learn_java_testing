@@ -10,8 +10,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 
 /*
- * 配送データを保存するためのリポジトリ
- * 実際の業務アプリではデータベースが想定されるが、便宜上リストに保存する
+ * 配送データを保存するためのデータアクセスクラス
  */
 public class ShippingDAO {
     private static String driver = getProperty("jdbc.driver");
@@ -28,7 +27,7 @@ public class ShippingDAO {
         }
     }
 
-    public static void insertShipping(Shipping shipping) {
+    public static void save(Shipping shipping) {
         // PreparedStatementに渡すSQL文を定義する
         String sqlStr = "INSERT INTO SHIPPING "
                 + "(ORDER_DATE_TIME, CLIENT_NAME, RECEIVE_DATE, BAGGAGE_COUNT, TOTAL_PRICE) "

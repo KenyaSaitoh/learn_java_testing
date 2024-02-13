@@ -8,10 +8,10 @@ import java.util.List;
  * 配送処理を表すビジネスロジック（テスト対象）
  */
 public class ShippingService {
-    private static final int DIAMOND_COST_LIMIT = 2500; // ダイヤモンド会員の割引後の下限金額
-    private static final float DIAMOND_NET_RATE = 0.75F; // ダイヤモンド会員の割引率
-    private static final int GOLD_COST_LIMIT = 3000; // ゴールド会員の割引後の下限金額
     private static final float GOLD_NET_RATE = 0.9F; // ゴールド会員の割引率
+    private static final int GOLD_COST_LIMIT = 3000; // ゴールド会員の割引後の下限金額
+    private static final float DIAMOND_NET_RATE = 0.75F; // ダイヤモンド会員の割引率
+    private static final int DIAMOND_COST_LIMIT = 2500; // ダイヤモンド会員の割引後の下限金額
 
     // 配送料計算ロジックを表すインタフェース
     private CostCalculatorIF costCalculator;
@@ -22,9 +22,7 @@ public class ShippingService {
     }
 
     // 配送の注文を受ける
-    public void orderShipping(Client client,
-            LocalDate receiveDate,
-            List<Baggage> baggageList) {
+    public void orderShipping(Client client, LocalDate receiveDate, List<Baggage> baggageList) {
 
         // 配送料の合計値
         Integer totalCost = 0;
@@ -38,25 +36,25 @@ public class ShippingService {
             totalCost = totalCost + shippingCost;
         }
 
-        // ダイヤモンド会員の場合は、ダイヤモンド会員用の割引率を適用する
-        // → ただし定義された「割引後の下限金額」を下回ることは許容されない
-        if (client.clientType() == ClientType.DIAMOND) {
-            if (DIAMOND_COST_LIMIT < totalCost) {
-                Integer discountedPrice = Integer.class.cast(
-                        Math.round(totalCost * DIAMOND_NET_RATE));
-                totalCost = discountedPrice < DIAMOND_COST_LIMIT ?
-                        DIAMOND_COST_LIMIT :
-                            discountedPrice;
-            }
-
         // ゴールド会員の場合は、ゴールド会員用の割引率を適用する
         // → ただし定義された「割引後の下限金額」を下回ることは許容されない
-        } else if (client.clientType() == ClientType.GOLD) {
+        if (client.clientType() == ClientType.GOLD) {
             if (GOLD_COST_LIMIT < totalCost) {
                 Integer discountedPrice = Integer.class.cast(
                         Math.round(totalCost * GOLD_NET_RATE));
                 totalCost = discountedPrice < GOLD_COST_LIMIT ?
                         GOLD_COST_LIMIT :
+                            discountedPrice;
+            }
+
+        // ダイヤモンド会員の場合は、ダイヤモンド会員用の割引率を適用する
+        // → ただし定義された「割引後の下限金額」を下回ることは許容されない
+        } else if (client.clientType() == ClientType.DIAMOND) {
+            if (DIAMOND_COST_LIMIT < totalCost) {
+                Integer discountedPrice = Integer.class.cast(
+                        Math.round(totalCost * DIAMOND_NET_RATE));
+                totalCost = discountedPrice < DIAMOND_COST_LIMIT ?
+                        DIAMOND_COST_LIMIT :
                             discountedPrice;
             }
         }

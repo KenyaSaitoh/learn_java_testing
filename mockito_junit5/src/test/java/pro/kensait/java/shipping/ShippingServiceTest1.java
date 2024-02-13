@@ -17,24 +17,24 @@ import org.mockito.MockitoAnnotations;
 
 /*
  * ShippingServiceを対象にしたテストクラス
+ * Nestedクラスは使わない
  * 引数は直接生成する（モッキングしない）
  */
 public class ShippingServiceTest1 {
-    // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
     // テスト対象クラス
     ShippingService shippingService;
 
     // テスト対象クラスの呼び出し先（@Mockを付与してモック化）
     @Mock CostCalculatorIF costCalculator;
 
-    // その他の各テストメソッドで共通的なフィクスチャ
+    // 各テストケースで共通的なフィクスチャ
     Client goldClient;
     Client diamondClient;
     Baggage baggage;
     LocalDateTime orderDateTime;
     LocalDate receiveDate;
 
-    // 各テストケースで共通的な事前処理
+    // すべてのテストケースで共通的な事前処理
     @BeforeEach
     void setUp() {
         // モックを初期化する（@Mockが付与されたフィールドにモックを割り当てる）
@@ -43,7 +43,11 @@ public class ShippingServiceTest1 {
         // モックをテスト対象クラスに注入する
         shippingService = new ShippingService(costCalculator);
 
-        // 共通フィクスチャを設定する
+        // モック化されたCostCalculatorの振る舞いを決める
+        when(costCalculator.calcShippingCost(
+                nullable(BaggageType.class), nullable(RegionType.class))).thenReturn(1600);
+
+        // 各テストケースで共通的なフィクスチャを設定する
         goldClient = new Client(10001, "Alice", "福岡県福岡市1-1-1",
                 ClientType.GOLD, RegionType.KYUSHU);
         diamondClient = new Client(10001, "Alice", "福岡県福岡市1-1-1",
@@ -59,11 +63,7 @@ public class ShippingServiceTest1 {
     @Test
     @DisplayName("ゴールド会員で、割引なしになった場合の更新結果をテストする")
     void test_OrderShipping_GoldCustomer_NoDiscount() {
-        // モック化されたCostCalculatorの振る舞いを決める
-        when(costCalculator.calcShippingCost(
-                any(BaggageType.class), any(RegionType.class))).thenReturn(1600);
-
-        // 引数である荷物リストを生成する（テストメソッド毎に個数が異なる）
+        // 引数である荷物リストを生成する（テストケース毎に個数が異なる）
         List<Baggage> baggageList = Arrays.asList(baggage);
 
         // テスト実行
@@ -83,11 +83,7 @@ public class ShippingServiceTest1 {
     @Test
     @DisplayName("ゴールド会員で、割引になった場合（ただし下限に到達）の更新結果をテストする")
     void test_OrderShipping_GoldCustomer_Discount_ReachLimit() {
-        // モック化されたCostCalculatorの振る舞いを決める
-        when(costCalculator.calcShippingCost(
-                any(BaggageType.class), any(RegionType.class))).thenReturn(1600);
-
-        // 引数である荷物リストを生成する（テストメソッド毎に個数が異なる）
+        // 引数である荷物リストを生成する（テストケース毎に個数が異なる）
         List<Baggage> baggageList = Arrays.asList(baggage, baggage);
 
         // テスト実行
@@ -107,11 +103,7 @@ public class ShippingServiceTest1 {
     @Test
     @DisplayName("ゴールド会員で、割引になった場合（下限に到達せず）の更新結果をテストする")
     void test_OrderShipping_GoldCustomer_Discount_NoLimit() {
-        // モック化されたCostCalculatorの振る舞いを決める
-        when(costCalculator.calcShippingCost(
-                any(BaggageType.class), any(RegionType.class))).thenReturn(1600);
-
-        // 引数である荷物リストを生成する（テストメソッド毎に個数が異なる）
+        // 引数である荷物リストを生成する（テストケース毎に個数が異なる）
         List<Baggage> baggageList = Arrays.asList(baggage, baggage, baggage);
 
         // テスト実行
@@ -131,11 +123,7 @@ public class ShippingServiceTest1 {
     @Test
     @DisplayName("ダイヤモンド会員で、割引なしになった場合の更新結果をテストする")
     void test_OrderShipping_DiamondCustomer_NoDiscount() {
-        // モック化されたCostCalculatorの振る舞いを決める
-        when(costCalculator.calcShippingCost(
-                any(BaggageType.class), any(RegionType.class))).thenReturn(1600);
-
-        // 引数である荷物リストを生成する（テストメソッド毎に個数が異なる）
+        // 引数である荷物リストを生成する（テストケース毎に個数が異なる）
         List<Baggage> baggageList = Arrays.asList(baggage);
 
         // テスト実行
@@ -155,11 +143,7 @@ public class ShippingServiceTest1 {
     @Test
     @DisplayName("ダイヤモンド会員で、割引になった場合（ただし下限に到達）の更新結果をテストする")
     void test_OrderShipping_DiamondCustomer_Discount_ReachLimit() {
-        // モック化されたCostCalculatorの振る舞いを決める
-        when(costCalculator.calcShippingCost(
-                any(BaggageType.class), any(RegionType.class))).thenReturn(1600);
-
-        // 引数である荷物リストを生成する（テストメソッド毎に個数が異なる）
+        // 引数である荷物リストを生成する（テストケース毎に個数が異なる）
         List<Baggage> baggageList = Arrays.asList(baggage, baggage);
 
         // テスト実行
@@ -179,11 +163,7 @@ public class ShippingServiceTest1 {
     @Test
     @DisplayName("ダイヤモンド会員で、割引になった場合（下限に到達せず）の更新結果をテストする")
     void test_OrderShipping_DiamondCustomer_Discount_NoLimit() {
-        // モック化されたCostCalculatorの振る舞いを決める
-        when(costCalculator.calcShippingCost(
-                any(BaggageType.class), any(RegionType.class))).thenReturn(1600);
-
-        // 引数である荷物リストを生成する（テストメソッド毎に個数が異なる）
+        // 引数である荷物リストを生成する（テストケース毎に個数が異なる）
         List<Baggage> baggageList = Arrays.asList(baggage, baggage, baggage);
 
         // テスト実行
