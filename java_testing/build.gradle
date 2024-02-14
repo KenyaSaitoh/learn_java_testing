@@ -16,7 +16,7 @@ buildscript {
         log4jVer = "2.22.1"
         junitVer = "5.10.1"
         junitPlatformVer = "1.10.1"
-        mockitoVer = "5.7.0"
+        mockitoVer = "5.10.0"
         mockitoInlineVer = "5.2.0"
         dbunitVer = "2.7.3"
         restAssuredVer = "5.3.2"

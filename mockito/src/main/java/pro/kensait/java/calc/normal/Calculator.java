@@ -1,7 +1,9 @@
 package pro.kensait.java.calc.normal;
 
 public class Calculator {
-    public int compute(int x, int y, int z) {
+
+    // argThat()の対象にプリミティブ型は認められない模様
+    public int compute(int x, int y, Integer z) {
         int answer = (x + y) * z;
         if (answer < 0) {
             throw new IllegalArgumentException("引数不正");

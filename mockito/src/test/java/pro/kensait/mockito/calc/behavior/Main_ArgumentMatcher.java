@@ -3,6 +3,8 @@ package pro.kensait.mockito.calc.behavior;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatcher;
 
 import pro.kensait.java.calc.normal.Calculator;
@@ -12,26 +14,23 @@ public class Main_ArgumentMatcher {
     private static final int NORMAL_CONDITION_1 = 1;
     private static final int NORMAL_CONDITION_2 = 2;
     private static final int ERROR_CONDITION = -1;
-    
-    public static void main(String[] args) {
-        // Calculatorクラスのモックを生成する
-        Calculator mock = mock(Calculator.class);
+    Calculator mock;
 
+    @BeforeEach
+    void setUp() {
+        // Calculatorクラスのモックを生成する
+        mock = mock(Calculator.class);
+    }
+    
+    @Test
+    void test1() {
         // ArgumentMatcherを定義する
         ArgumentMatcher<Integer> isNormal1 = arg -> arg.equals(NORMAL_CONDITION_1);
-        ArgumentMatcher<Integer> isNormal2 = arg -> arg.equals(NORMAL_CONDITION_2);
-        ArgumentMatcher<Integer> isError = arg -> arg.equals(ERROR_CONDITION);
 
         // ArgumentMatcherを使ってモックの振る舞いを定義する
         // ケース1
         when(mock.compute(anyInt(), anyInt(), argThat(isNormal1)))
                 .thenReturn(50);
-        // ケース2
-        when(mock.compute(anyInt(), anyInt(), argThat(isNormal2)))
-                .thenReturn(100);
-        // ケース3
-        when(mock.compute(anyInt(), anyInt(), argThat(isError)))
-                .thenThrow(new IllegalArgumentException("エラー")); 
 
         // モックを呼び出す
         try {
@@ -41,6 +40,15 @@ public class Main_ArgumentMatcher {
         } catch (RuntimeException re) {
             System.out.println(re);
         }
+    }
+    @Test
+    void test2() {
+        // ケース2
+        // Calculatorクラスのモックを生成する
+        ArgumentMatcher<Integer> isNormal2 = arg -> arg.equals(NORMAL_CONDITION_2);
+
+        when(mock.compute(anyInt(), anyInt(), argThat(isNormal2)))
+                .thenReturn(100);
 
         try {
             // ケース2の挙動を確認する
@@ -49,6 +57,14 @@ public class Main_ArgumentMatcher {
         } catch (RuntimeException re) {
             System.out.println(re);
         }
+    }
+    @Test
+    void test3() {
+        // Calculatorクラスのモックを生成する
+        ArgumentMatcher<Integer> isError = arg -> arg.equals(ERROR_CONDITION);
+        // ケース3
+        when(mock.compute(anyInt(), anyInt(), argThat(isError)))
+                .thenThrow(new IllegalArgumentException("エラー")); 
 
         try {
             // ケース3の挙動を確認する
