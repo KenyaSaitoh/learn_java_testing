@@ -16,7 +16,7 @@ public class StaticClassInlineTest {
         // CalcUtilクラスのスタティックモックを生成する
         MockedStatic<CalcUtil> mock = mockStatic(CalcUtil.class);
 
-        // モックの振る舞いを定義する
+        // モックの振る舞いを設定する
         // ケース1
         mock.when(() -> CalcUtil.compute(5, 10, 3)).thenReturn(50);
         // ケース2

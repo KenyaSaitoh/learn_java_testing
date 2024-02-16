@@ -4,56 +4,65 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 import static pro.kensait.mockito.mocking.Util.*;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("ArgumentMatchersによる引数マッチングの挙動を確認する")
 @SuppressWarnings("unchecked")
 public class MatcherTest {
 
     @Test
+    @DisplayName("anyInt()による引数マッチングの挙動を確認する")
     void test_Case_1() {
+        // Mapインタフェースをモック化する
         Map<Integer, String> mapMock = mock(Map.class);
 
+        // 振る舞いを設定する（when方式）
         when(mapMock.get(anyInt())).thenReturn("foo");
 
-        // マップからすべてのエントリを抽出する（実行フェーズ）
-        List<Integer> keyList = Arrays.asList(0, 1, 2);
-        extractEntry(mapMock, keyList, "test_Case_1");
+        // ユーティリティ（Mapからすべてのエントリを抽出しコンソールに表示）
+        extractEntry(mapMock, List.of(0, 1, 2), "test_Case_1");
     }
 
     @Test
+    @DisplayName("any()による引数マッチングの挙動を確認する")
     void test_Case_2() {
+        // Mapインタフェースをモック化する
         Map<Integer, String> mapMock = mock(Map.class);
 
+        // 振る舞いを設定する（when方式）
         when(mapMock.get(any(Integer.class))).thenReturn("hoge");
 
-        // マップからすべてのエントリを抽出する（実行フェーズ）
-        List<Integer> keyList = Arrays.asList(0, 1, null);
-        extractEntry(mapMock, keyList, "test_Case_2");
+        // ユーティリティ（Mapからすべてのエントリを抽出しコンソールに表示）
+        extractEntry(mapMock, List.of(0, 1, null), "test_Case_2");
     }
 
     @Test
+    @DisplayName("eq()による引数マッチングの挙動を確認する")
     void test_Case_3() {
+        // Mapインタフェースをモック化する
         Map<Integer, String> mapMock = mock(Map.class);
 
+        // 振る舞いを設定する（when方式）
         when(mapMock.get(eq(1))).thenReturn("hoge");
 
-        // マップからすべてのエントリを抽出する（実行フェーズ）
-        List<Integer> keyList = Arrays.asList(0, 1, null);
-        extractEntry(mapMock, keyList, "test_Case_3");
+        // ユーティリティ（Mapからすべてのエントリを抽出しコンソールに表示）
+        extractEntry(mapMock, List.of(0, 1, null), "test_Case_3");
     }
 
     @Test
+    @DisplayName("nullable()による引数マッチングの挙動を確認する")
     void test_Case_4() {
+        // Mapインタフェースをモック化する
         Map<Integer, String> mapMock = mock(Map.class);
 
+        // 振る舞いを設定する（when方式）
         when(mapMock.get(nullable(Integer.class))).thenReturn("hoge");
 
-        // マップからすべてのエントリを抽出する（実行フェーズ）
-        List<Integer> keyList = Arrays.asList(0, 1, null);
-        extractEntry(mapMock, keyList, "test_Case_4");
+        // ユーティリティ（Mapからすべてのエントリを抽出しコンソールに表示）
+        extractEntry(mapMock, List.of(0, 1, null), "test_Case_4");
     }
 }

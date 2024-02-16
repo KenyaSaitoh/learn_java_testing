@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Util {
     /*
-     * マップからすべてのエントリを取り出して、表示する
+     * Mapからすべてのエントリを抽出し、コンソールに表示する
      */
     public static void extractEntry(Map<Integer, String> map, List<Integer> keyList,
             String name) {

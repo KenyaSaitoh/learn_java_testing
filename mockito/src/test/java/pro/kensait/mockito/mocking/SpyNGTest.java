@@ -4,14 +4,17 @@ import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.exceptions.base.MockitoException;
 
-public class NGTest {
+@DisplayName("スパイの制約を確認するテスト")
+public class SpyNGTest {
 
     @Test
+    @DisplayName("引数のないコンストラクタがないとスパイ化できないことを確認する")
     void test_Case_1() {
-        // 引数のないコンストラクタがないとスパイ化できない
+        // 
         try {
             LocalDate spy = spy(LocalDate.class);
             when(spy.getDayOfMonth()).thenReturn(10);
@@ -22,8 +25,8 @@ public class NGTest {
     }
 
     @Test
+    @DisplayName("StringクラスやClassクラスはスパイ化できないことを確認する")
     void test_Case_2() {
-        // StringクラスやClassクラスはスパイ化できない
         try {
             String spy = spy(String.class);
             when(spy.length()).thenReturn(10);

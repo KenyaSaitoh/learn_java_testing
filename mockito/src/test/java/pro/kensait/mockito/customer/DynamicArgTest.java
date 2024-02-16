@@ -21,16 +21,16 @@ public class DynamicArgTest {
         // すべての@Mockアノテーションが付与されたフィールドをモック化する
         MockitoAnnotations.openMocks(this);
 
-        // ArgumentMatcherを使ってモックの振る舞いを定義する
+        // ArgumentMatcherを使ってモックの振る舞いを設定する
         // 顧客種別が一般会員の場合の振る舞い
         ArgumentMatcher<Customer> isGeneral = arg -> arg.getCustomerType() == CustomerType.GENERAL;
-        //doReturn(500).when(mock).calcDeliveryFee(argThat(isGeneral));
-        when(mock.calcDeliveryFee(argThat(isGeneral))).thenReturn(500);
+        doReturn(500).when(mock).calcDeliveryFee(argThat(isGeneral));
+        //when(mock.calcDeliveryFee(argThat(isGeneral))).thenReturn(500);
 
         // 顧客種別がゴールド会員の場合の振る舞い
         ArgumentMatcher<Customer> isGold =  arg -> arg.getCustomerType() == CustomerType.GOLD;
-        //doReturn(300).when(mock).calcDeliveryFee(argThat(isGold));
-        when(mock.calcDeliveryFee(argThat(isGold))).thenReturn(300);
+        doReturn(300).when(mock).calcDeliveryFee(argThat(isGold));
+        //when(mock.calcDeliveryFee(argThat(isGold))).thenReturn(300);
     }
 
     @Test
