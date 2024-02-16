@@ -11,7 +11,7 @@ import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("when方式：モックの基本的な挙動を確認する")
+@DisplayName("モックの基本的な挙動を確認するテストクラス")
 @SuppressWarnings("unchecked")
 public class MockTest {
 
@@ -26,8 +26,8 @@ public class MockTest {
         when(mapMock.get(1)).thenReturn("bar");
         when(mapMock.get(2)).thenReturn("baz");
 
-        // ユーティリティ（Mapからすべてのエントリを抽出しコンソールに表示）
-        extractEntry(mapMock, List.of(0, 1, 2, 3), "test_Case_1");
+        // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
+        extractEntry(mapMock, Arrays.asList(0, 1, 2, 3), "test_Case_1");
     }
 
     @Test
@@ -41,8 +41,8 @@ public class MockTest {
         when(mapMock.get(1)).thenReturn("bar");
         when(mapMock.get(2)).thenReturn("baz");
 
-        // ユーティリティ（Mapからすべてのエントリを抽出しコンソールに表示）
-        extractEntry(mapMock, List.of(0, 1, 2, 3), "test_Case_2");
+        // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
+        extractEntry(mapMock, Arrays.asList(0, 1, 2, 3), "test_Case_2");
     }
 
     @Test
@@ -70,7 +70,7 @@ public class MockTest {
         when(mapMock.get(1)).thenReturn("bar");
         when(mapMock.get(2)).thenReturn("baz0", "baz1", "baz2");
 
-        // ユーティリティ（Mapからすべてのエントリを抽出しコンソールに表示）
+        // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
         List<Integer> keyList = Arrays.asList(0, 1, 2, 2, 1, 2, 2);
         extractEntry(mapMock, keyList, "test_Case_5");
     }
@@ -86,7 +86,7 @@ public class MockTest {
         doReturn("bar").when(mapMock).get(1);
         doReturn("baz").when(mapMock).get(2);
 
-        // ユーティリティ（Mapからすべてのエントリを抽出しコンソールに表示）
-        extractEntry(mapMock, List.of(0, 1, 2, 3), "test_Case_5");
+        // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
+        extractEntry(mapMock, Arrays.asList(0, 1, 2, 3), "test_Case_5");
     }
 }

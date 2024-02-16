@@ -3,14 +3,14 @@ package pro.kensait.mockito.mocking;
 import static org.mockito.Mockito.*;
 import static pro.kensait.mockito.mocking.Util.*;
 
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("スパイの挙動を確認するテスト")
+@DisplayName("スパイの挙動を確認するテストクラス")
 @SuppressWarnings("unchecked")
 public class SpyTest {
 
@@ -25,8 +25,8 @@ public class SpyTest {
         when(mapSpy.get(1)).thenReturn("bar");
         when(mapSpy.get(2)).thenReturn("baz");
 
-        // ユーティリティ（Mapからすべてのエントリを抽出しコンソールに表示）
-        extractEntry(mapSpy, List.of(0, 1, 2, 3), "test_Case_1");
+        // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
+        extractEntry(mapSpy, Arrays.asList(0, 1, 2, 3), "test_Case_1");
     }
 
     @Test
@@ -41,8 +41,8 @@ public class SpyTest {
         // 振る舞いを設定する（when方式）
         when(mapMock.get(2)).thenReturn("bazbaz");
 
-        // ユーティリティ（Mapからすべてのエントリを抽出しコンソールに表示）
-        extractEntry(mapMock, List.of(0, 1, 2), "test_Mock");
+        // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
+        extractEntry(mapMock, Arrays.asList(0, 1, 2), "test_Mock");
     }
 
     @Test
@@ -57,7 +57,7 @@ public class SpyTest {
         // 振る舞いを設定する（when方式）
         when(mapSpy.get(2)).thenReturn("bazbaz");
 
-        // ユーティリティ（Mapからすべてのエントリを抽出しコンソールに表示）
-        extractEntry(mapSpy, List.of(0, 1, 2), "test_Spy");
+        // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
+        extractEntry(mapSpy, Arrays.asList(0, 1, 2), "test_Spy");
     }
 }

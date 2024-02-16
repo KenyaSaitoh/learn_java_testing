@@ -4,13 +4,13 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 import static pro.kensait.mockito.mocking.Util.*;
 
-import java.util.List;
+import java.util.Arrays;
 import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("ArgumentMatchersによる引数マッチングの挙動を確認する")
+@DisplayName("引数マッチングの挙動を確認するテストクラス")
 @SuppressWarnings("unchecked")
 public class MatcherTest {
 
@@ -23,8 +23,8 @@ public class MatcherTest {
         // 振る舞いを設定する（when方式）
         when(mapMock.get(anyInt())).thenReturn("foo");
 
-        // ユーティリティ（Mapからすべてのエントリを抽出しコンソールに表示）
-        extractEntry(mapMock, List.of(0, 1, 2), "test_Case_1");
+        // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
+        extractEntry(mapMock, Arrays.asList(0, 1, null), "test_Case_1");
     }
 
     @Test
@@ -36,8 +36,8 @@ public class MatcherTest {
         // 振る舞いを設定する（when方式）
         when(mapMock.get(any(Integer.class))).thenReturn("hoge");
 
-        // ユーティリティ（Mapからすべてのエントリを抽出しコンソールに表示）
-        extractEntry(mapMock, List.of(0, 1, null), "test_Case_2");
+        // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
+        extractEntry(mapMock, Arrays.asList(0, 1, null), "test_Case_2");
     }
 
     @Test
@@ -49,8 +49,8 @@ public class MatcherTest {
         // 振る舞いを設定する（when方式）
         when(mapMock.get(eq(1))).thenReturn("hoge");
 
-        // ユーティリティ（Mapからすべてのエントリを抽出しコンソールに表示）
-        extractEntry(mapMock, List.of(0, 1, null), "test_Case_3");
+        // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
+        extractEntry(mapMock, Arrays.asList(0, 1, null), "test_Case_3");
     }
 
     @Test
@@ -62,7 +62,7 @@ public class MatcherTest {
         // 振る舞いを設定する（when方式）
         when(mapMock.get(nullable(Integer.class))).thenReturn("hoge");
 
-        // ユーティリティ（Mapからすべてのエントリを抽出しコンソールに表示）
-        extractEntry(mapMock, List.of(0, 1, null), "test_Case_4");
+        // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
+        extractEntry(mapMock, Arrays.asList(0, 1, null), "test_Case_4");
     }
 }
