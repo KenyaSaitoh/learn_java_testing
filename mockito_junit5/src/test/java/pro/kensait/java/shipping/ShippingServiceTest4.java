@@ -28,10 +28,12 @@ public class ShippingServiceTest4 {
     ShippingService shippingService;
 
     // テスト対象クラスの呼び出し先（@Mockを付与してモック化）
-    @Mock CostCalculatorIF costCalculator;
+    @Mock
+    CostCalculatorIF costCalculator;
 
     // 各テストケースで共通的なフィクスチャ（@Mockを付与してモック化）［差分］
-    @Mock Baggage baggage;
+    @Mock
+    Baggage baggage;
 
     // その他のモック化対象外の共通的なフィクスチャ
     LocalDateTime orderDateTime;

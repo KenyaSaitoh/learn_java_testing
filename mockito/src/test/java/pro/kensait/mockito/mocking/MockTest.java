@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 public class MockTest {
 
     @Test
-    void test1() {
+    void test_Case_1() {
         Map<Integer, String> mock = mock(Map.class);
 
         when(mock.get(0)).thenReturn("foo");
@@ -26,7 +26,7 @@ public class MockTest {
     }
 
     @Test
-    void test11() {
+    void test_Case_2() {
         Map<Integer, String> mock = mock(HashMap.class);
 
         when(mock.get(0)).thenReturn("foo");
@@ -38,7 +38,7 @@ public class MockTest {
     }
 
     @Test
-    void test2() {
+    void test_Case_3() {
         Map<String, String> mock = mock(Map.class);
 
         when(mock.get(new String("1"))).thenReturn("one");
@@ -49,7 +49,7 @@ public class MockTest {
     }
 
     @Test
-    void test3() {
+    void test_Case_4() {
         Map<Integer, String> mock = mock(Map.class);
 
         when(mock.get(0)).thenReturn("foo");
@@ -62,7 +62,7 @@ public class MockTest {
     }
 
     @Test
-    void test4() {
+    void test_Case_5() {
         Map<Integer, String> mock = mock(Map.class);
 
         when(mock.get(anyInt())).thenReturn("foo");
@@ -72,7 +72,7 @@ public class MockTest {
     }
 
     @Test
-    void test5() {
+    void test_Case_6() {
         Map<Integer, String> mock = mock(Map.class);
 
         mock.put(0, "foo");
@@ -84,9 +84,8 @@ public class MockTest {
         printMock(mock, keyList);
     }
 
-
     @Test
-    void test6() {
+    void test_Case_7() {
         Map<Integer, String> mock = mock(Map.class);
 
         when(mock.get(any(Integer.class))).thenReturn("hoge");
@@ -96,7 +95,7 @@ public class MockTest {
     }
 
     @Test
-    void test7() {
+    void test_Case_8() {
         Map<Integer, String> mock = mock(Map.class);
 
         when(mock.get(nullable(Integer.class))).thenReturn("hoge");

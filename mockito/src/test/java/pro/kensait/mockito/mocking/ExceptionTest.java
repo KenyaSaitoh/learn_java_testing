@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 public class ExceptionTest {
 
     @Test
-    void test() {
+    void test_Case_1() {
         Map<Integer, String> mock = mock(Map.class);
 
         when(mock.get(0)).thenReturn("foo");
@@ -32,7 +32,7 @@ public class ExceptionTest {
     }
 
     @Test
-    void test2() {
+    void test_Case_2() {
         Map<Integer, String> mock = mock(Map.class);
 
         when(mock.get(0)).thenThrow(

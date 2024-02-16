@@ -4,16 +4,17 @@ import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import pro.kensait.mockito.calc.irregular.FinalCalc;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 public class FinalClassInlineTest {
-
+    @Mock
     FinalCalc mock;
 
     @BeforeEach
     void setUp() {
-        mock = mock(FinalCalc.class);
+        // すべての@Mockアノテーションが付与されたフィールドをモック化する
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test

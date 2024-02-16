@@ -25,7 +25,8 @@ public class ShippingServiceTest1 {
     ShippingService shippingService;
 
     // テスト対象クラスの呼び出し先（@Mockを付与してモック化）
-    @Mock CostCalculatorIF costCalculator;
+    @Mock
+    CostCalculatorIF costCalculator;
 
     // 各テストケースで共通的なフィクスチャ
     Client goldClient;

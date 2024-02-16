@@ -1,5 +1,8 @@
 package pro.kensait.mockito.calc.stateful;
 
+/*
+ * 計算機を表すクラス（状態を保持する）
+ */
 public class StatefulCalc {
     private int x;
     private int y;

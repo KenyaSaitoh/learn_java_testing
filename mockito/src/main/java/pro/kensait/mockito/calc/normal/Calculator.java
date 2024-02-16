@@ -1,9 +1,10 @@
 package pro.kensait.mockito.calc.normal;
 
+/*
+ * 計算機を表すクラス
+ */
 public class Calculator {
-
-    // argThat()の対象にプリミティブ型は認められない模様
-    public int compute(int x, int y, Integer z) {
+    public int compute(int x, int y, int z) {
         int answer = (x + y) * z;
         if (answer < 0) {
             throw new IllegalArgumentException("引数不正");

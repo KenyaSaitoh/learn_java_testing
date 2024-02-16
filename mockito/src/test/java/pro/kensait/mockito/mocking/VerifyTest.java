@@ -13,7 +13,7 @@ import org.mockito.InOrder;
 public class VerifyTest {
 
     @Test
-    void test1() {
+    void test_Case_1() {
         Map<Integer, String> mock = mock(Map.class);
 
         when(mock.get(0)).thenReturn("foo");
@@ -31,7 +31,7 @@ public class VerifyTest {
     }
 
     @Test
-    void test2() {
+    void test_Case_2() {
 
         Map<Integer, String> mock = mock(Map.class);
 
@@ -51,7 +51,7 @@ public class VerifyTest {
     }
 
     @Test
-    void test3() {
+    void test_Case_3() {
         Map<Integer, String> mock = mock(Map.class);
 
         when(mock.get(0)).thenReturn("foo");
@@ -69,7 +69,7 @@ public class VerifyTest {
     }
 
     @Test
-    void test4() {
+    void test_Case_4() {
         Map<Integer, String> mock = mock(Map.class);
 
         when(mock.get(0)).thenReturn("foo");
