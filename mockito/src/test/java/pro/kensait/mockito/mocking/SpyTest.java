@@ -2,6 +2,7 @@ package pro.kensait.mockito.mocking;
 
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
+import static pro.kensait.mockito.mocking.Util.*;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -21,11 +22,9 @@ public class SpyTest {
         when(mapSpy.get(1)).thenReturn("bar");
         when(mapSpy.get(2)).thenReturn("baz");
 
+        // マップからすべてのエントリを抽出する（実行フェーズ）
         List<Integer> keyList = Arrays.asList(0, 1, 2, 3);
-        for (Integer key : keyList) {
-            String value = mapSpy.get(key);
-            System.out.println(key + " => " + value);
-        }
+        extractEntry(mapSpy, keyList, "test_Case_4");
     }
 
     @Test
@@ -48,11 +47,9 @@ public class SpyTest {
         when(mapSpy.get(1)).thenReturn("barbar");
         when(mapSpy.get(2)).thenReturn("baz0", "baz1", "baz2");
 
+        // マップからすべてのエントリを抽出する（実行フェーズ）
         List<Integer> keyList = Arrays.asList(0, 1, 2, 2, 1, 2, 2);
-        for (Integer key : keyList) {
-            String value = mapSpy.get(key);
-            System.out.println(key + " => " + value);
-        }
+        extractEntry(mapSpy, keyList, "test_Case_4");
     }
 
     @Test
@@ -61,11 +58,9 @@ public class SpyTest {
 
         when(mapSpy.get(anyInt())).thenReturn("foo");
 
+        // マップからすべてのエントリを抽出する（実行フェーズ）
         List<Integer> keyList = Arrays.asList(0, 1, 2);
-        for (Integer key : keyList) {
-            String value = mapSpy.get(key);
-            System.out.println(key + " => " + value);
-        }
+        extractEntry(mapSpy, keyList, "test_Case_4");
     }
 
     @Test
@@ -77,10 +72,8 @@ public class SpyTest {
         mapSpy.put(2, "baz");
         when(mapSpy.get(2)).thenReturn("bazbaz");
 
+        // マップからすべてのエントリを抽出する（実行フェーズ）
         List<Integer> keyList = Arrays.asList(0, 1, 2);
-        for (Integer key : keyList) {
-            String value = mapSpy.get(key);
-            System.out.println(key + " => " + value);
-        }
+        extractEntry(mapSpy, keyList, "test_Case_5");
     }
 }
