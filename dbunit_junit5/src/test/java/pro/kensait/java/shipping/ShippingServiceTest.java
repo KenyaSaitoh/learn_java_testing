@@ -29,7 +29,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-@DisplayName("ShippingServiceを対象にしたテストクラス")
+/*
+ * ShippingServiceを対象にしたテストクラス
+ * データベースアクセスあり
+ */
 public class ShippingServiceTest {
     // DBUnitが使用するデータ格納ディレクトリ
     private static final String EXPECTED_DATA_DIR = "src/test/resources/EXPECTED_DATA";

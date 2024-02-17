@@ -20,7 +20,7 @@ public class DynamicArgTest {
         // すべての@Mockアノテーションが付与されたフィールドをモック化する
         MockitoAnnotations.openMocks(this);
 
-        // モックの振る舞いを設定する
+        // モックの振る舞いを先にすべて設定する
         // ケース1
         when(mock.compute(anyInt(), anyInt(), eq(1))).thenReturn(50);
         // ケース2

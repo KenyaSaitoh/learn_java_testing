@@ -17,7 +17,7 @@ import org.mockito.stubbing.Answer;
  * @Mockアノテーションでモック化する
  */
 public class DynamicAnswerTest {
-    // モック（CalcIF）
+    // モック
     @Mock
     CalcIF mock;
 

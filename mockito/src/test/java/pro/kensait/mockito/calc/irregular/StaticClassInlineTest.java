@@ -4,11 +4,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 
-import pro.kensait.mockito.calc.irregular.CalcUtil;
-
+/*
+ * static修飾子を付与したユーティリティを持つ計算機（CalcUtil）をモック化するテスト
+ */
 public class StaticClassInlineTest {
 
     @BeforeAll
@@ -16,7 +18,7 @@ public class StaticClassInlineTest {
         // CalcUtilクラスのスタティックモックを生成する
         MockedStatic<CalcUtil> mock = mockStatic(CalcUtil.class);
 
-        // モックの振る舞いを設定する
+        // モックの振る舞いを先にすべて設定する
         // ケース1
         mock.when(() -> CalcUtil.compute(5, 10, 3)).thenReturn(50);
         // ケース2
@@ -27,19 +29,22 @@ public class StaticClassInlineTest {
     }
 
     @Test
-    void test1() {
+    @DisplayName("ケース1の振る舞いをテストする")
+    void test_Case_1() {
         int answer = CalcUtil.compute(5, 10, 3);
         assertEquals(50, answer);
     }
 
     @Test
-    void test2() {
+    @DisplayName("ケース2の振る舞いをテストする")
+    void test_Case_2() {
         int answer = CalcUtil.compute(5, 10, 8);
         assertEquals(100, answer);
     }
 
     @Test
-    void test3() {
+    @DisplayName("ケース3の振る舞いをテストする")
+    void test_Case_3() {
         int answer = CalcUtil.compute(5, 10, -1);
         assertEquals(100, answer);
     }

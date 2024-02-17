@@ -24,7 +24,7 @@ public class CalculatorTest3 {
         // すべての@Mockアノテーションが付与されたフィールドをモック化する
         MockitoAnnotations.openMocks(this);
 
-        // ここではモックの振る舞いを先に決める
+        // モックの振る舞いを先にすべて設定する
         // ケース1の振る舞い
         when(mock.compute(5, 10, 3)).thenReturn(50);
         // ケース2の振る舞い
