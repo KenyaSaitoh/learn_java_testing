@@ -10,7 +10,9 @@ import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("副作用を抑止する挙動を確認するテストクラス")
+/*
+ * 副作用を抑止する挙動を確認するテストクラス
+ */
 @SuppressWarnings("unchecked")
 public class DoNothingTest {
 

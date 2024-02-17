@@ -7,8 +7,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
-import pro.kensait.junit5.fee.FeeService;
-
 public class FeeParameterTest_2 {
     // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
     // テスト対象クラス

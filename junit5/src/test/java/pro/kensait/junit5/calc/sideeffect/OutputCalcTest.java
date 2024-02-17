@@ -10,13 +10,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import pro.kensait.junit5.calc.sideeffect.OutputCalc;
-
 /*
- * OutputCalculatorクラス（計算結果をコンソールやログに表示する計算機）のためのテストクラス
+ * OutputCalculator（計算結果をコンソールやログに表示する計算機）のためのテストクラス
  */
 public class OutputCalcTest {
-    // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
     // テスト対象クラス
     OutputCalc calc;
     static PrintStream originalOut;

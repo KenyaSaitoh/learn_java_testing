@@ -4,9 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import pro.kensait.junit5.customer.CustomerLogic2;
-import pro.kensait.junit5.customer.CustomerType;
-
 class CustomerLogic2Test {
     // 分岐網羅によるテストケース（条件が真の場合）
     @Test

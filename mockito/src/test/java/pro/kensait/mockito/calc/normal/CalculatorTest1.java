@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /*
- * 計算機インタフェース（CaclIF）をモック化するテスト
+ * 計算機インタフェース（CaclIF）をモック化するテストクラス
  * インタフェースと実装は分離する
  * mock()メソッドでモック化する
  */

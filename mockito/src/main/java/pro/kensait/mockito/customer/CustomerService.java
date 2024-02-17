@@ -1,6 +1,9 @@
 package pro.kensait.mockito.customer;
 
-public class CustomerLogic {
+/*
+ * 顧客サービスを表すクラス
+ */
+public class CustomerService {
 
     // 顧客タイプから配送料を決定する
     public Integer calcDeliveryFee(Customer customer) {

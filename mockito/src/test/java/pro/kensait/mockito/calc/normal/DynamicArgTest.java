@@ -10,6 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+/*
+ * 計算機インタフェース（CaclIF）をモック化するテストクラス
+ * ArgumentMatchersによって、引数マッチングを行う
+ */
 public class DynamicArgTest {
     // モック
     @Mock

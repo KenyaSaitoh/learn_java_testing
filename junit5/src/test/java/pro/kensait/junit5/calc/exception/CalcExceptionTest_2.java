@@ -6,11 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import pro.kensait.junit5.calc.exception.Calculator;
-import pro.kensait.junit5.calc.exception.LimitOverException;
-
-public class CalcExceptionTest_2 {
-    // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
+class CalcExceptionTest_2 {
     // テスト対象クラス
     Calculator calc;
 

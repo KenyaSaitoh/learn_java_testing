@@ -5,11 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import pro.kensait.junit5.account.Account;
-import pro.kensait.junit5.account.InsufficientBalanceException;
-
 /*
- * Accountクラス（口座）のためのテストクラス
+ * Account（口座）のためのテストクラス
  */
 public class AccountTest {
     @Test

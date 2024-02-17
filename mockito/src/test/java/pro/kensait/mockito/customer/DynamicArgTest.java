@@ -11,10 +11,14 @@ import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+/*
+ * 顧客サービス（CustomerService）をモック化するテストクラス
+ * ArgumentMatchers（argThat()）によって、引数マッチングを行う
+ */
 public class DynamicArgTest {
     // モック
     @Mock
-    CustomerLogic mock;
+    CustomerService mock;
 
     @BeforeEach
     void setUp() {

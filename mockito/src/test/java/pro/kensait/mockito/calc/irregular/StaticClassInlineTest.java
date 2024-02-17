@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 
 /*
- * static修飾子を付与したユーティリティを持つ計算機（CalcUtil）をモック化するテスト
+ * static修飾子を付与したユーティリティを持つ計算機（CalcUtil）をモック化するテストクラス
  */
 public class StaticClassInlineTest {
 

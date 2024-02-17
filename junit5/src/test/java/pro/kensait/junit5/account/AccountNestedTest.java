@@ -7,11 +7,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import pro.kensait.junit5.account.Account;
-import pro.kensait.junit5.account.InsufficientBalanceException;
-
 /*
- * Accountクラス（口座）のための構造化されたテストクラス（Nestedクラス）
+ * Account（口座）のための構造化されたテストクラス（Nestedクラス）
  */
 public class AccountNestedTest {
     // 全テストケースで共通的なフィクスチャを、フィールドとして宣言する

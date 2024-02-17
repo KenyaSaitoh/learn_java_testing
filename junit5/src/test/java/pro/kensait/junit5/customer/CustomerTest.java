@@ -5,9 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import pro.kensait.junit5.customer.Customer;
-import pro.kensait.junit5.customer.CustomerType;
-
 /*
  * コンストラクタによるインスタンス生成を検証するためのテストクラス
  */

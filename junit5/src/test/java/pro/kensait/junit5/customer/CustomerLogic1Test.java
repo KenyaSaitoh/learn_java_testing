@@ -4,9 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import pro.kensait.junit5.customer.CustomerLogic1;
-import pro.kensait.junit5.customer.CustomerType;
-
 class CustomerLogic1Test {
     // 命令網羅によるテストケース
     @Test

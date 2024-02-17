@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import pro.kensait.junit5.calc.exception.Calculator;
-
-public class CalcExceptionTest_1 {
-    // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
+/*
+ * Calculator（計算機）のためのテストクラス
+ */
+class CalcExceptionTest_1 {
     // テスト対象クラス
     Calculator calc;
 

@@ -10,7 +10,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 /*
- * 計算機クラス（Calculator）をモック化するテスト(1)
+ * 計算機クラス（Calculator）をモック化するテストクラス
  * インタフェースと実装は分離しない
  * @Mockアノテーションでモック化する
  */

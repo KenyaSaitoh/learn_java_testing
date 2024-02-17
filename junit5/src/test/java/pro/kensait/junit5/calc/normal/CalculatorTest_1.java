@@ -4,10 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import pro.kensait.junit5.calc.normal.Calculator;
-
 /*
- * Calculatorクラス（通常の計算機）のためのテストクラス
+ * Calculator（通常の計算機）のためのテストクラス
  */
 public class CalculatorTest_1 {
     // 足し算のテスト

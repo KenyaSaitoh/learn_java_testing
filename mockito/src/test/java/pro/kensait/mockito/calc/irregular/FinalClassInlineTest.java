@@ -10,7 +10,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 /*
- * final修飾子を付与した継承不可の計算機（FinalCalc）をモック化するテスト
+ * final修飾子を付与した継承不可の計算機（FinalCalc）をモック化するテストクラス
  */
 public class FinalClassInlineTest {
     @Mock

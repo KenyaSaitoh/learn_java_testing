@@ -10,7 +10,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 
 /*
- * 状態を持つ計算機（StatefulCalc）をスパイ化するテスト
+ * 状態を持つ計算機（StatefulCalc）をスパイ化するテストクラス
  */
 public class CalcSpyTest {
     // スパイ

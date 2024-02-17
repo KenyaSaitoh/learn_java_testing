@@ -12,7 +12,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.stubbing.Answer;
 
 /*
- * 計算機インタフェース（CaclIF）をモック化するテスト
+ * 計算機インタフェース（CaclIF）をモック化するテストクラス
  * インタフェースと実装は分離する
  * @Mockアノテーションでモック化する
  */

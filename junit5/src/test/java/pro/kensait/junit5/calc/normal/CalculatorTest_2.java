@@ -6,13 +6,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import pro.kensait.junit5.calc.normal.Calculator;
-
 /*
- * Calculatorクラス（通常の計算機）のためのテストクラス
+ * Calculator（通常の計算機）のためのテストクラス
  */
 public class CalculatorTest_2 {
-    // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
     // テスト対象クラス
     Calculator calc;
 
