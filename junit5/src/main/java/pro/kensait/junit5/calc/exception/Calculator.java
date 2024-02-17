@@ -1,7 +1,7 @@
 package pro.kensait.junit5.calc.exception;
 
 /*
- * ステートを保持しない（ステートレスな）計算機
+ * 状態を保持しない計算機を表すクラス
  * 掛け算において、結果が一定の値（極度）を超えると例外が発生する
  */
 public class Calculator {

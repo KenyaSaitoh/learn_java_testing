@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /*
- * 
+ * FeeService（手数料計算サービス）のためのテストクラス
  */
 public class FeeServiceTest {
     private static final String OUR_BANK_CODE = "B001"; // 自分の銀行

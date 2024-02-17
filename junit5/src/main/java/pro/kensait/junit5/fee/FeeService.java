@@ -1,5 +1,8 @@
 package pro.kensait.junit5.fee;
 
+/*
+ * 手数料計算サービスを表すクラス
+ */
 public class FeeService {
     private static final String OUR_BANK_CODE = "B001"; // 銀行コード（自分の銀行）
 

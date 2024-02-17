@@ -10,7 +10,9 @@ import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("引数マッチングの挙動を確認するテストクラス")
+/*
+ * 引数マッチングの挙動を確認するテストクラス
+ */
 @SuppressWarnings("unchecked")
 public class MatcherTest {
 

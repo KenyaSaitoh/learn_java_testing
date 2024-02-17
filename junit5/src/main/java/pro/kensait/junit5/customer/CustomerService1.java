@@ -1,6 +1,10 @@
 package pro.kensait.junit5.customer;
 
-public class CustomerLogic1 {
+/*
+ * 顧客サービスを表すクラス
+ */
+public class CustomerService1 {
+
     // 顧客タイプから配送料を決定する
     public static int calcDeliveryFee(CustomerType customerType) {
         int deliveryFee = 600;

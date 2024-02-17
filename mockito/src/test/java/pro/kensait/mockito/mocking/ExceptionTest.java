@@ -10,7 +10,9 @@ import java.util.NoSuchElementException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("モックの例外を送出する振る舞いを確認するテストクラス")
+/*
+ * モックの例外を送出する振る舞いを確認するテストクラス
+ */
 @SuppressWarnings("unchecked")
 public class ExceptionTest {
 

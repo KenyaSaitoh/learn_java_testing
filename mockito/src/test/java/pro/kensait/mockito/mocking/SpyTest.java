@@ -10,7 +10,9 @@ import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("スパイの挙動を確認するテストクラス")
+/*
+ * スパイの挙動を確認するテストクラス
+ */
 @SuppressWarnings("unchecked")
 public class SpyTest {
 

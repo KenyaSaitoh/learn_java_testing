@@ -11,7 +11,9 @@ import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("モックの基本的な挙動を確認するテストクラス")
+/*
+ * モックの基本的な挙動を確認するテストクラス
+ */
 @SuppressWarnings("unchecked")
 public class MockTest {
 

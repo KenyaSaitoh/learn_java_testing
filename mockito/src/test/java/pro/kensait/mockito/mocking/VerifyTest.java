@@ -10,7 +10,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 
-@DisplayName("モックのコミュニケーションベース検証を確認するテストクラス")
+/*
+ * モックのコミュニケーションベース検証を確認するテストクラス
+ */
 @SuppressWarnings("unchecked")
 public class VerifyTest {
 

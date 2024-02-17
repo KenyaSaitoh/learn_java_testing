@@ -1,7 +1,7 @@
 package pro.kensait.junit5.testing;
 
 /*
- * 特殊な計算機
+ * 特殊な計算機を表すクラス
  */
 public class SpecialCalculator {
 

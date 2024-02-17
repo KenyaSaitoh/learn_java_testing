@@ -8,7 +8,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.exceptions.base.MockitoException;
 
-@DisplayName("スパイの制約を確認するテストクラス")
+/*
+ * スパイの制約を確認するテストクラス
+ */
 public class SpyNGTest {
 
     @Test

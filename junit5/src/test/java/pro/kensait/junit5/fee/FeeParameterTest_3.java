@@ -5,13 +5,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 /*
  * FeeService（手数料計算サービス）のためのテストクラス
- * アノテーションから単一のパラメータを読み込む
+ * CSVファイルからパラメータを読み込む
  */
-public class FeeParameterTest_1 {
+public class FeeParameterTest_3 {
     // テスト対象クラス
     FeeService feeService;
 
@@ -23,13 +23,12 @@ public class FeeParameterTest_1 {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"B001,30999,0", "B001,29000,100", "B999,40000,200", "B999,39999,500"})
-    @DisplayName("手数料計算のテスト（値リストからパラメータを取得する）")
-    void test_CalcFee(String f) {
-        String[] params = f.split(",");
+    @CsvFileSource(resources = "/parameter.csv", numLinesToSkip = 1)
+    @DisplayName("手数料計算のテスト（CSVファイルからパラメータを取得する）")
+    void test_CalcFee(String bankCode, int amount, int expectedFee) {
         // 実行フェーズ
-        int actual = feeService.calcFee(params[0], Integer.parseInt(params[1]));
+        int actual = feeService.calcFee(bankCode, amount);
         // 検証フェーズ
-        assertEquals(Integer.parseInt(params[2]), actual);
+        assertEquals(expectedFee, actual);
     }
 }

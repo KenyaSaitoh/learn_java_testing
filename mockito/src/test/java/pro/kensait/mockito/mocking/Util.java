@@ -3,10 +3,10 @@ package pro.kensait.mockito.mocking;
 import java.util.List;
 import java.util.Map;
 
+/*
+ * Mapからすべてのエントリを抽出し、コンソールに表示するユーティリティ
+ */
 public class Util {
-    /*
-     * Mapからすべてのエントリを抽出し、コンソールに表示する
-     */
     public static void extractEntry(Map<Integer, String> map, List<Integer> keyList,
             String name) {
         System.out.println("***** [ "+ name + " ] *****");

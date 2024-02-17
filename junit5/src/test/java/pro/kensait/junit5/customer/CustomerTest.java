@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /*
- * コンストラクタによるインスタンス生成を検証するためのテストクラス
+ * Customerのためのテストクラス
  */
 public class CustomerTest {
 
