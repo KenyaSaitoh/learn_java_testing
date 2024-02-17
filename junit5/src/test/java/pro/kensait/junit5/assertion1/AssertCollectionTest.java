@@ -1,4 +1,4 @@
-package pro.kensait.junit5.assertion;
+package pro.kensait.junit5.assertion1;
 
 import static org.junit.jupiter.api.Assertions.*;
 

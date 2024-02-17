@@ -1,4 +1,4 @@
-package pro.kensait.junit5.assertion;
+package pro.kensait.junit5.assertion2;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,6 +6,8 @@ import java.time.Duration;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
+import pro.kensait.junit5.assertion.ComplexService;
 
 /*
  * タイムアウトを検証するためのテストクラス

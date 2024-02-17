@@ -1,4 +1,4 @@
-package pro.kensait.junit5.assertion;
+package pro.kensait.junit5.assertion1;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.Objects;
 
 import org.junit.jupiter.api.Test;
+
+import pro.kensait.junit5.assertion.Person1;
+import pro.kensait.junit5.assertion.Person2;
+import pro.kensait.junit5.assertion.Person3;
 
 /*
  * インスタンスの等価性を検証するためのテストクラス
