@@ -10,7 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 /*
- * FeeService（手数料計算サービス）のためのテストクラス
+ * FeeService（手数料計算サービス）を対象にしたテストクラス
  * スタティックメソッドの呼び出し結果からパラメータを読み込む
  */
 public class FeeParameterTest_2 {

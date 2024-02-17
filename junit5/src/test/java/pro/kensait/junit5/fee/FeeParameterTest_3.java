@@ -8,7 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
 /*
- * FeeService（手数料計算サービス）のためのテストクラス
+ * FeeService（手数料計算サービス）を対象にしたテストクラス
  * CSVファイルからパラメータを読み込む
  */
 public class FeeParameterTest_3 {

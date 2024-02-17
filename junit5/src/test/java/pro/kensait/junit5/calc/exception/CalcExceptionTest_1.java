@@ -7,7 +7,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /*
- * Calculator（計算機）のためのテストクラス
+ * Calculator（計算機）を対象にしたテストクラス
+ * fail()を利用する
  */
 class CalcExceptionTest_1 {
     // テスト対象クラス

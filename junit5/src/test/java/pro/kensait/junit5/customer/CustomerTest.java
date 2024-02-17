@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /*
- * Customerのためのテストクラス
+ * Customerを対象にしたテストクラス
  */
 public class CustomerTest {
 

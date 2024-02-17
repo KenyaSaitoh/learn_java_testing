@@ -6,6 +6,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/*
+ * Calculator（計算機）を対象にしたテストクラス
+ * assertThrows()を利用する
+ */
 class CalcExceptionTest_2 {
     // テスト対象クラス
     Calculator calc;

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /*
- * OutputCalculator（計算結果をコンソールやログに表示する計算機）のためのテストクラス
+ * OutputCalculator（計算結果をコンソールやログに表示する計算機）を対象にしたテストクラス
  */
 public class OutputCalcTest {
     // テスト対象クラス

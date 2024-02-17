@@ -7,7 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /*
- * StatefulCalculator（状態を保持する計算機）のためのテストクラス
+ * StatefulCalculator（状態を保持する計算機）を対象にしたテストクラス
  */
 public class StatefulCalcTest {
     // テスト対象クラス

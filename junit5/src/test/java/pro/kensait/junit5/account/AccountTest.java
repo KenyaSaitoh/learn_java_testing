@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /*
- * Account（口座）のためのテストクラス
+ * Account（口座）を対象にしたテストクラス
  */
 public class AccountTest {
 
