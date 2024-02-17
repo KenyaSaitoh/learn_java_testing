@@ -10,28 +10,24 @@ import java.time.LocalDate;
 
 import org.dbunit.IDatabaseTester;
 import org.dbunit.JdbcDatabaseTester;
+import org.dbunit.database.DatabaseConfig;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ITable;
 import org.dbunit.dataset.SortedTable;
 import org.dbunit.dataset.csv.CsvDataSet;
 import org.dbunit.dataset.filter.DefaultColumnFilter;
+import org.dbunit.ext.mysql.MySqlDataTypeFactory;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-/*
- * ShippingServiceを対象にしたテストクラス
- */
+@DisplayName("EmployeeDAOを対象にしたテストクラス（挿入後にソートして検証）")
 public class EmployeeDAOFilterSortTest {
     // DBUnitが使用するデータ格納ディレクトリ
     private static final String INIT_DATA = "src/test/resources/INIT_DATA";
     private static final String EXPECTED_DATA_DIR_1 = "src/test/resources/EXPECTED_DATA_1";
-
-    /*
-     // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
-     */
 
     // テスト対象クラス
     EmployeeDAO employeeDAO;
@@ -67,6 +63,10 @@ public class EmployeeDAOFilterSortTest {
         // DatabaseConnectionを取得する
         databaseConnection = databaseTester.getConnection();
 
+        // MariaDB（MySQL）用のDataTypeFactoryを設定する
+        DatabaseConfig config = databaseConnection.getConfig();
+        config.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new MySqlDataTypeFactory());
+
         // Connectionを取得する
         jdbcConnection = databaseConnection.getConnection();
 
@@ -78,7 +78,7 @@ public class EmployeeDAOFilterSortTest {
     }
 
     @Test
-    @DisplayName("挿入の結果をテストする")
+    @DisplayName("挿入の結果をテストする（ソートして全件検証）")
     void test_InsertEmployee() throws Exception {
         // テスト実行し、実測値を取得する
         EmployeeDAO employeeDAO = new EmployeeDAO(jdbcConnection);

@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
-public class DAOMain {
+public class Main {
 
     public static void main(String[] args) throws Exception {
         // プロパティファイルよりデータベース情報を取得する

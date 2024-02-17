@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.dbunit.IDatabaseTester;
 import org.dbunit.JdbcDatabaseTester;
+import org.dbunit.database.DatabaseConfig;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.DefaultDataSet;
 import org.dbunit.dataset.DefaultTable;
@@ -20,6 +21,7 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ITable;
 import org.dbunit.dataset.csv.CsvDataSet;
 import org.dbunit.dataset.filter.DefaultColumnFilter;
+import org.dbunit.ext.mysql.MySqlDataTypeFactory;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -27,9 +29,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-/*
- * ShippingServiceを対象にしたテストクラス
- */
+@DisplayName("ShippingServiceを対象にしたテストクラス")
 public class ShippingServiceTest {
     // DBUnitが使用するデータ格納ディレクトリ
     private static final String EXPECTED_DATA_DIR = "src/test/resources/EXPECTED_DATA";
@@ -55,7 +55,7 @@ public class ShippingServiceTest {
     // 各テストケースで共通的な事前処理
     @BeforeEach
     void setUp() {
-        // モックを初期化する（@Mockが付与されたフィールドにモックを割り当てる）
+        // モックを初期化する（@Mockが付与されたフィールドをモック化する）
         MockitoAnnotations.openMocks(this);
 
         // モックをテスト対象クラスに注入する
@@ -82,6 +82,13 @@ public class ShippingServiceTest {
 
         // IDatabaseTesterを初期化する
         databaseTester = new JdbcDatabaseTester(driver, url, user, password);
+
+        // DatabaseConnectionを取得する
+        databaseConnection = databaseTester.getConnection();
+
+        // MariaDB（MySQL）用のDataTypeFactoryを設定する
+        DatabaseConfig config = databaseConnection.getConfig();
+        config.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new MySqlDataTypeFactory());
 
         // 空のデータセットを生成する
         IDataSet emptyDataSet = new DefaultDataSet(new DefaultTable("SHIPPING"));

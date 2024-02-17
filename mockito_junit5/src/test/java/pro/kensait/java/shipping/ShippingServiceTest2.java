@@ -25,7 +25,7 @@ public class ShippingServiceTest2 {
     // テスト対象クラス
     ShippingService shippingService;
 
-    // テスト対象クラスの呼び出し先（@Mockを付与してモック化）
+    // テスト対象クラスの呼び出し先
     @Mock
     CostCalculatorIF costCalculator;
 
@@ -37,7 +37,7 @@ public class ShippingServiceTest2 {
     // すべてのテストケースで共通的な事前処理
     @BeforeEach
     void setUp() {
-        // モックを初期化する（@Mockが付与されたフィールドにモックを割り当てる）
+        // モックを初期化する（@Mockが付与されたフィールドをモック化する）
         MockitoAnnotations.openMocks(this);
 
         // モック化されたCostCalculatorの振る舞いを決める

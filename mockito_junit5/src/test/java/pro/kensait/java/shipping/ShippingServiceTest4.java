@@ -27,11 +27,11 @@ public class ShippingServiceTest4 {
     // テスト対象クラス
     ShippingService shippingService;
 
-    // テスト対象クラスの呼び出し先（@Mockを付与してモック化）
+    // テスト対象クラスの呼び出し先
     @Mock
     CostCalculatorIF costCalculator;
 
-    // 各テストケースで共通的なフィクスチャ（@Mockを付与してモック化）［差分］
+    // 各テストケースで共通的なフィクスチャ
     @Mock
     Baggage baggage;
 
@@ -49,7 +49,7 @@ public class ShippingServiceTest4 {
         // モックをテスト対象クラスに注入する
         shippingService = new ShippingService(costCalculator);
 
-        // モック化されたBaggageの振る舞いを決める［差分］
+        // モック化されたBaggageの振る舞いを決める
         when(baggage.baggageType()).thenReturn(BaggageType.MIDDLE);
 
         // その他の共通的なフィクスチャを設定する
@@ -63,7 +63,7 @@ public class ShippingServiceTest4 {
     @Nested
     @DisplayName("ゴールド会員のテスト")
     class GoldCustomerTest {
-        // GoldCustomerTestクラス内の各テストケースで共通的なフィクスチャ［差分］
+        // GoldCustomerTestクラス内の各テストケースで共通的なフィクスチャ
         @Mock Client client;
 
         // GoldCustomerTestクラス内の各テストケースで共通的な事前処理
@@ -137,7 +137,7 @@ public class ShippingServiceTest4 {
     @Nested
     @DisplayName("ダイヤモンド会員のテスト")
     class DiamondCustomerTest {
-        // DiamondCustomerTestクラス内の各テストケースで共通的なフィクスチャ［差分］
+        // DiamondCustomerTestクラス内の各テストケースで共通的なフィクスチャ
         @Mock Client client;
 
         // DiamondCustomerTestクラス内の各テストケースで共通的な事前処理

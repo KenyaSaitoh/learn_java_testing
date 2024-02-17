@@ -13,28 +13,24 @@ import java.util.List;
 
 import org.dbunit.IDatabaseTester;
 import org.dbunit.JdbcDatabaseTester;
+import org.dbunit.database.DatabaseConfig;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ITable;
 import org.dbunit.dataset.csv.CsvDataSet;
+import org.dbunit.ext.mysql.MySqlDataTypeFactory;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-/*
- * ShippingServiceを対象にしたテストクラス
- */
+@DisplayName("EmployeeDAOを対象にしたテストクラス")
 public class EmployeeDAOTest {
     // DBUnitが使用するデータ格納ディレクトリ
     private static final String INIT_DATA_DIR = "src/test/resources/INIT_DATA";
     private static final String EXPECTED_DATA_DIR_1 = "src/test/resources/EXPECTED_DATA_1";
     private static final String EXPECTED_DATA_DIR_2 = "src/test/resources/EXPECTED_DATA_2";
     private static final String EXPECTED_DATA_DIR_3 = "src/test/resources/EXPECTED_DATA_3";
-
-    /*
-     // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
-     */
 
     // テスト対象クラス
     EmployeeDAO employeeDAO;
@@ -50,7 +46,7 @@ public class EmployeeDAOTest {
      *  データベースやDBUnitを初期化する
      */
     @BeforeEach
-    public void setUpDatabase() throws Exception {
+    void setUpDatabase() throws Exception {
         // プロパティファイルよりデータベース情報を取得する
         String driver = getProperty("jdbc.driver");
         String url = getProperty("jdbc.url");
@@ -69,6 +65,10 @@ public class EmployeeDAOTest {
 
         // DatabaseConnectionを取得する
         databaseConnection = databaseTester.getConnection();
+
+        // MariaDB（MySQL）用のDataTypeFactoryを設定する
+        DatabaseConfig config = databaseConnection.getConfig();
+        config.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new MySqlDataTypeFactory());
 
         // Connectionを取得する
         jdbcConnection = databaseConnection.getConnection();

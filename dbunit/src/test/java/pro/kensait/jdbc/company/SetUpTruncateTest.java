@@ -6,21 +6,18 @@ import java.sql.Connection;
 
 import org.dbunit.IDatabaseTester;
 import org.dbunit.JdbcDatabaseTester;
+import org.dbunit.database.DatabaseConfig;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.DefaultDataSet;
 import org.dbunit.dataset.DefaultTable;
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.ext.mysql.MySqlDataTypeFactory;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 
-/*
- * ShippingServiceを対象にしたテストクラス
- */
+@DisplayName("EmployeeDAOを対象に、テーブルの初期化だけを行うテストクラス")
 public class SetUpTruncateTest {
-    /*
-     // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
-     */
-
     // テスト対象クラス
     EmployeeDAO employeeDAO;
 
@@ -54,6 +51,10 @@ public class SetUpTruncateTest {
 
         // DatabaseConnectionを取得する
         databaseConnection = databaseTester.getConnection();
+
+        // MariaDB（MySQL）用のDataTypeFactoryを設定する
+        DatabaseConfig config = databaseConnection.getConfig();
+        config.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new MySqlDataTypeFactory());
 
         // Connectionを取得する
         jdbcConnection = databaseConnection.getConnection();

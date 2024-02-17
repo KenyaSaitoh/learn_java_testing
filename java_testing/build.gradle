@@ -12,7 +12,7 @@ buildscript {
         jeeVer = "10.0.0"
         jeeTxVer = "2.0.1"
         mybatisStarterVer = "3.0.2"
-        mySqlConnectorVer = "8.0.33"
+        mariaDbConnectorVer = "3.3.2"
         log4jVer = "2.22.1"
         junitVer = "5.10.2"
         junitPlatformVer = "1.10.2"
@@ -31,7 +31,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "mysql:mysql-connector-java:${mySqlConnectorVer}"
+        classpath "org.mariadb.jdbc:mariadb-java-client:${mariaDbConnectorVer}"
     }
 }
 
@@ -79,15 +79,15 @@ subprojects {
         }
     }
 
-    // 初期データをセットアップする（MySQL）
-    task setupMySQL doLast {
-        execSqlDir("$projectDir/sql/mysql", envconf.mysql.general.url,
-                envconf.mysql.general.user, envconf.mysql.general.password,
-                envconf.mysql.driverClass)
+    // 初期データをセットアップする（MariaDB）
+    task setupMariaDB doLast {
+        execSqlDir("$projectDir/sql/mariadb", envconf.mariadb.general.url,
+                envconf.mariadb.general.user, envconf.mariadb.general.password,
+                envconf.mariadb.driverClass)
     }
 
     // タスクをグループ化する
-    [setupMySQL]*.group = "setup-init-data"
+    [setupMariaDB]*.group = "setup-init-data"
 }
 
 // 設定情報の読み込み
@@ -135,21 +135,21 @@ def execSql(file, url, user, password, driverClass) {
         }
 }
 
-// MySQLを初期化する
-task initMySQL doLast {
+// MariaDBを初期化する
+task initMariaDB doLast {
     println envconf
-    execSql("$projectDir/sql/mysql/DROP_MYSQL_USER.sql",
-            envconf.mysql.general.baseUrl, "root", envconf.mysql.rootPassword,
-            envconf.mysql.driverClass)
-    execSql("$projectDir/sql/mysql/DROP_MYSQL_DATABASE.sql",
-            envconf.mysql.general.baseUrl, "root", envconf.mysql.rootPassword,
-            envconf.mysql.driverClass)
-    execSql("$projectDir/sql/mysql/CREATE_MYSQL_USER.sql",
-            envconf.mysql.general.baseUrl, "root", envconf.mysql.rootPassword,
-            envconf.mysql.driverClass)
-    execSql("$projectDir/sql/mysql/CREATE_MYSQL_DATABASE.sql",
-            envconf.mysql.general.baseUrl, "root", envconf.mysql.rootPassword,
-            envconf.mysql.driverClass)
+    execSql("$projectDir/sql/mariadb/DROP_MARIADB_USER.sql",
+            envconf.mariadb.general.baseUrl, "root", envconf.mariadb.rootPassword,
+            envconf.mariadb.driverClass)
+    execSql("$projectDir/sql/mariadb/DROP_MARIADB_DATABASE.sql",
+            envconf.mariadb.general.baseUrl, "root", envconf.mariadb.rootPassword,
+            envconf.mariadb.driverClass)
+    execSql("$projectDir/sql/mariadb/CREATE_MARIADB_USER.sql",
+            envconf.mariadb.general.baseUrl, "root", envconf.mariadb.rootPassword,
+            envconf.mariadb.driverClass)
+    execSql("$projectDir/sql/mariadb/CREATE_MARIADB_DATABASE.sql",
+            envconf.mariadb.general.baseUrl, "root", envconf.mariadb.rootPassword,
+            envconf.mariadb.driverClass)
 }
 
-[initMySQL]*.group = "init-database"
+[initMariaDB]*.group = "init-database"

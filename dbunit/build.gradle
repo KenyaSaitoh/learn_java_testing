@@ -14,6 +14,8 @@ dependencies {
     testImplementation "org.mockito:mockito-inline:${mockitoInlineVer}"
     // DBUnit
     testImplementation "org.dbunit:dbunit:${dbunitVer}"
+    // MariaDB JDBCドライバ
+    runtimeOnly "org.mariadb.jdbc:mariadb-java-client:${mariaDbConnectorVer}"
 }
 
 // JUnit5設定

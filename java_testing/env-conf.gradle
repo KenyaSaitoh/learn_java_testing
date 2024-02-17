@@ -1,7 +1,7 @@
-// MySQL
-mysql {
-    driverClass = "com.mysql.cj.jdbc.Driver"
-    datasourceClass = "com.mysql.cj.jdbc.MysqlDataSource"
+// MariaDB
+mariadb {
+    driverClass = "org.mariadb.jdbc.Driver"
+    datasourceClass = "org.mariadb.jdbc.MariaDbDataSource"
     hostName = "localhost"
     port = "3306"
     rootPassword = "rootroot"
@@ -9,10 +9,10 @@ mysql {
         user = "TESTUSER"
         password = "PASSWORD"
         db = "TESTDB"
-        baseUrl = "jdbc:mysql://localhost:${port}"
+        baseUrl = "jdbc:mariadb://localhost:${port}"
         url = "${baseUrl}/${general.db}"
-        connPoolName = "MySQLPool"
-        datasourceJndiName = "jdbc/MySQLDS"
+        connPoolName = "MariaDBPool"
+        datasourceJndiName = "jdbc/MariaDB"
     }
 }
 

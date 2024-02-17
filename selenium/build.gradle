@@ -11,8 +11,6 @@ dependencies {
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVer}"
     // Selenide
     testImplementation "com.codeborne:selenide:${selenideVer}"
-    // MySQL JDBCドライバ
-    runtimeOnly "mysql:mysql-connector-java:${mySqlConnectorVer}"
 }
 
 // JUnit5設定

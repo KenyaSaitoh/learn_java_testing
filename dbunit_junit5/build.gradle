@@ -14,8 +14,8 @@ dependencies {
     testImplementation "org.mockito:mockito-inline:${mockitoInlineVer}"
     // DBUnit
     testImplementation "org.dbunit:dbunit:${dbunitVer}"
-    // MySQL JDBCドライバ
-    runtimeOnly "mysql:mysql-connector-java:${mySqlConnectorVer}"
+    // MariaDB JDBCドライバ
+    runtimeOnly "org.mariadb.jdbc:mariadb-java-client:${mariaDbConnectorVer}"
 }
 
 // JUnit5設定

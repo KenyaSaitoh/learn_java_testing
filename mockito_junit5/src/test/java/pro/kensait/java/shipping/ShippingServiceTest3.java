@@ -25,11 +25,11 @@ public class ShippingServiceTest3 {
     // テスト対象クラス
     ShippingService shippingService;
 
-    // テスト対象クラスの呼び出し先（@Mockを付与してモック化）
+    // テスト対象クラスの呼び出し先
     @Mock
     CostCalculatorIF costCalculator;
 
-    // 各テストケースで共通的なフィクスチャ（@Mockを付与してモック化）［差分］
+    // 各テストケースで共通的なフィクスチャ［差分］
     @Mock
     Baggage baggage;
 
@@ -40,7 +40,7 @@ public class ShippingServiceTest3 {
     // 各テストケースで共通的な事前処理
     @BeforeEach
     void setUp() {
-        // モックを初期化する（@Mockが付与されたフィールドにモックを割り当てる）
+        // モックを初期化する（@Mockが付与されたフィールドをモック化する）
         MockitoAnnotations.openMocks(this);
 
         // モック化されたCostCalculatorの振る舞いを決める
@@ -65,12 +65,13 @@ public class ShippingServiceTest3 {
     @DisplayName("ゴールド会員のテスト")
     class GoldCustomerTest {
         // GoldCustomerTestクラス内の各テストケースで共通的なフィクスチャ［差分］
-        @Mock Client client;
+        @Mock
+        Client client;
 
         // GoldCustomerTestクラス内の各テストケースで共通的な事前処理
         @BeforeEach
         void setUp() {
-            // モックを初期化する（@Mockが付与されたフィールドにモックを割り当てる）［差分］
+            // モックを初期化する（@Mockが付与されたフィールドをモック化する）［差分］
             MockitoAnnotations.openMocks(this);
 
             // モック化されたClientの振る舞いを決める［差分］
@@ -142,12 +143,13 @@ public class ShippingServiceTest3 {
     @DisplayName("ダイヤモンド会員のテスト")
     class DiamondCustomerTest {
         // DiamondCustomerTestクラス内の各テストケースで共通的なフィクスチャ［差分］
-        @Mock Client client;
+        @Mock
+        Client client;
 
         // DiamondCustomerTestクラス内の各テストケースで共通的な事前処理
         @BeforeEach
         void setUp() {
-            // モックを初期化する（@Mockが付与されたフィールドにモックを割り当てる）［差分］
+            // モックを初期化する（@Mockが付与されたフィールドをモック化する）［差分］
             MockitoAnnotations.openMocks(this);
 
             // モック化されたClientの振る舞いを決める［差分］
