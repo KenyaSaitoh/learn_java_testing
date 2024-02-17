@@ -11,20 +11,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import pro.kensait.junit5.shipping.Baggage;
-import pro.kensait.junit5.shipping.BaggageType;
-import pro.kensait.junit5.shipping.Client;
-import pro.kensait.junit5.shipping.ClientType;
-import pro.kensait.junit5.shipping.RegionType;
-import pro.kensait.junit5.shipping.Shipping;
-import pro.kensait.junit5.shipping.ShippingDAO;
-import pro.kensait.junit5.shipping.ShippingService;
-
 /*
  * ShippingServiceを対象にしたテストクラス
+ * ライフサイクルとテストフィクスチャの関係性を説明するために使用
  */
 public class ShippingServiceTest {
-    // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
     // テスト対象クラス
     ShippingService shippingService;
 

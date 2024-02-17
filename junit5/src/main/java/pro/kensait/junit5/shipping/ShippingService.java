@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /*
- * 配送処理を表すビジネスロジック（テスト対象）
+ * 配送サービスを表すクラス（テスト対象）
  */
 public class ShippingService {
     public static final Integer BASE_PRICE = 1000; // 配送料計算のベースとなる価格

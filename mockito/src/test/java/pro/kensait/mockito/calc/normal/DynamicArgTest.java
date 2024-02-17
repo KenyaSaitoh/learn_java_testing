@@ -19,6 +19,7 @@ public class DynamicArgTest {
     @Mock
     CalcIF mock;
 
+    // 各テストケースで共通的な事前処理
     @BeforeEach
     void setUp() {
         // すべての@Mockアノテーションが付与されたフィールドをモック化する

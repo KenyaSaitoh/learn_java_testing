@@ -1,7 +1,7 @@
 package pro.kensait.junit5.account;
 
 /*
- * 銀行口座を表すクラス
+ * 銀行口座を表すクラス（テスト対象）
  */
 public class Account {
     private String accountNum; // 口座番号

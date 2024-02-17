@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /*
- * 副作用（計算結果をコンソールやログに表示）を持つ計算機を表すクラス
+ * 副作用（計算結果をコンソールやログに表示）を持つ計算機を表すクラス（テスト対象）
  */
 public class OutputCalc {
     private static final Logger logger = LoggerFactory.getLogger(OutputCalc.class);

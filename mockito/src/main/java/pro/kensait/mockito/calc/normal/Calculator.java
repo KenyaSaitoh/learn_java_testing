@@ -1,7 +1,7 @@
 package pro.kensait.mockito.calc.normal;
 
 /*
- * 計算機を表すクラス
+ * 計算機を表すクラス（テスト対象）
  */
 public class Calculator {
     public int compute(int x, int y, int z) {

@@ -19,7 +19,7 @@ public class OutputCalcTest {
     static PrintStream originalOut;
     static ByteArrayOutputStream output;
 
-    // 各テストケースで共通的な事前処理
+    // テストプログラム全体に対する事前処理
     @BeforeAll
     static void beforeAll() {
         // 標準出力をバイト配列出力ストリームに置き換える

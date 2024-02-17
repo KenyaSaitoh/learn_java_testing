@@ -2,14 +2,16 @@ package pro.kensait.junit5.calc.normal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /*
  * Calculator（通常の計算機）のためのテストクラス
  */
 public class CalculatorTest_1 {
-    // 足し算のテスト
+
     @Test
+    @DisplayName("足し算のテスト")
     void test_Add() {
         // 準備フェーズ
         Calculator calc = new Calculator();
@@ -19,8 +21,8 @@ public class CalculatorTest_1 {
         assertEquals(40, actual);
     }
 
-    // 引き算のテスト
     @Test
+    @DisplayName("引き算のテスト")
     void test_Subtract() {
         // 準備フェーズ
         Calculator calc = new Calculator();

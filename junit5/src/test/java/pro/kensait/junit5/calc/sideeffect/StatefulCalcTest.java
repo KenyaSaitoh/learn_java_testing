@@ -20,8 +20,8 @@ public class StatefulCalcTest {
         calc = new StatefulCalc(30, 10);
     }
 
-    @DisplayName("足し算のテスト")
     @Test
+    @DisplayName("足し算のテスト")
     void test_Add() {
         // 実行フェーズ
         calc.add();
@@ -30,8 +30,8 @@ public class StatefulCalcTest {
         assertEquals(40, actual);
     }
 
-    @DisplayName("引き算のテスト")
     @Test
+    @DisplayName("引き算のテスト")
     void test_Subtract() {
         // 実行フェーズ
         calc.subtract();

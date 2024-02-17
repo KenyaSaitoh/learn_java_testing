@@ -1,7 +1,7 @@
 package pro.kensait.mockito.customer;
 
 /*
- * 顧客サービスを表すクラス
+ * 顧客サービスを表すクラス（状態を保持する）
  */
 public class CustomerService {
 

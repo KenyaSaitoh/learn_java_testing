@@ -9,6 +9,9 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * EMPLOYEEテーブルへのアクセスを担うDAO（テスト対象）
+ */
 public class EmployeeDAO {
     private Connection conn;
 

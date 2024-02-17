@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Objects;
 
+/*
+ * 社員を表すDTO
+ */
 public class Employee {
     // 社員ID
     private Integer employeeId;

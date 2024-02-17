@@ -3,6 +3,7 @@ package pro.kensait.junit5.fee;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /*
@@ -12,7 +13,6 @@ public class FeeServiceTest {
     private static final String OUR_BANK_CODE = "B001"; // 自分の銀行
     private static final String OTHER_BANK_CODE = "B999"; // 他の銀行
 
-    // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
     // テスト対象クラス
     FeeService feeService;
 
@@ -23,8 +23,8 @@ public class FeeServiceTest {
         feeService = new FeeService();
     }
 
-    // 自分の銀行宛に30000円を振り込み、手数料が0円であることをテストする
     @Test
+    @DisplayName("自分の銀行宛に30000円を振り込み、手数料が0円であることをテストする")
     void test_CalcFee_ToOurBank_Over30000_RightFee() {
         // 実行フェーズ
         int actual = feeService.calcFee(OUR_BANK_CODE, 30000);
@@ -32,8 +32,8 @@ public class FeeServiceTest {
         assertEquals(0, actual);
     } 
 
-    // 自分の銀行宛に29999円を振り込み、手数料が100円であることをテストする
     @Test
+    @DisplayName("自分の銀行宛に29999円を振り込み、手数料が100円であることをテストする")
     void test_CalcFee_ToOurBank_Under30000_RightFee() {
         // 実行フェーズ
         int actual = feeService.calcFee(OUR_BANK_CODE, 29999);
@@ -41,8 +41,8 @@ public class FeeServiceTest {
         assertEquals(100, actual);
     }
 
-    // 他の銀行宛に40000円を振り込み、手数料が200円であることをテストする
     @Test
+    @DisplayName("他の銀行宛に40000円を振り込み、手数料が200円であることをテストする")
     void test_CalcFee_ToOtherBank_Over40000_RightFee() {
         // 実行フェーズ
         int actual = feeService.calcFee(OTHER_BANK_CODE, 40000);
@@ -50,8 +50,8 @@ public class FeeServiceTest {
         assertEquals(200, actual);
     }
 
-    // 他の銀行宛に39999円を振り込み、手数料が500円であることをテストする
     @Test
+    @DisplayName("他の銀行宛に39999円を振り込み、手数料が500円であることをテストする")
     void test_CalcFee_ToOtherBank_Under40000_RightFee() {
         // 実行フェーズ
         int actual = feeService.calcFee(OTHER_BANK_CODE, 39999);

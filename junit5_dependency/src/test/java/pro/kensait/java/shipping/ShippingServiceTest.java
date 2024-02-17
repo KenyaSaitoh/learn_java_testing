@@ -27,7 +27,7 @@ public class ShippingServiceTest {
     LocalDateTime orderDateTime;
     LocalDate receiveDate;
 
-    // すべてのテストケースで共通的な事前処理
+    // 各テストケースで共通的な事前処理
     @BeforeEach
     void setUp() {
         // モックを生成する

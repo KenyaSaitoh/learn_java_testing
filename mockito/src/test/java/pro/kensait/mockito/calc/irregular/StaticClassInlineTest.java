@@ -13,6 +13,7 @@ import org.mockito.MockedStatic;
  */
 public class StaticClassInlineTest {
 
+    // テストプログラム全体に対する事前処理
     @BeforeAll
     static void configureStaticMocks() {
         // CalcUtilクラスのスタティックモックを生成する

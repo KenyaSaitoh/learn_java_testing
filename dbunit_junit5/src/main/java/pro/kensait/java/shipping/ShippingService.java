@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /*
- * 配送処理を表すビジネスロジック（テスト対象）
+ * 配送サービスを表すクラス（テスト対象）
  */
 public class ShippingService {
     private static final float GOLD_NET_RATE = 0.9F; // ゴールド会員の割引率

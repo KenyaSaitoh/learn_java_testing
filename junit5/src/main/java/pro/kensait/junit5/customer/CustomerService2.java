@@ -1,7 +1,7 @@
 package pro.kensait.junit5.customer;
 
 /*
- * 顧客サービスを表すクラス
+ * 顧客サービスを表すクラス（テスト対象）
  */
 public class CustomerService2 {
 

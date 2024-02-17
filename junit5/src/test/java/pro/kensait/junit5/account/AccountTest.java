@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
  * Account（口座）のためのテストクラス
  */
 public class AccountTest {
+
     @Test
     @DisplayName("残高ゼロの口座に対する入金テスト")
     void test_Deposite_Balance_Zero() {

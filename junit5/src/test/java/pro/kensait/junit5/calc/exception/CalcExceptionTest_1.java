@@ -3,6 +3,7 @@ package pro.kensait.junit5.calc.exception;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /*
@@ -19,8 +20,8 @@ class CalcExceptionTest_1 {
         calc = new Calculator();
     }
 
-    // 掛け算を行い、極度を超えない場合は例外が発生しないことをテストする
     @Test
+    @DisplayName("掛け算を行い、極度を超えない場合は例外が発生しないことをテストする")
     void test_Multiply_No_Exception() {
         try {
             calc.multiply1(100_000, 5);
@@ -30,8 +31,8 @@ class CalcExceptionTest_1 {
         // ここまで進んだら成功
     }
 
-    // 掛け算を行い、極度オーバーした場合に例外が発生することをテストする(1)
     @Test
+    @DisplayName("掛け算を行い、極度オーバーした場合に例外が発生することをテストする(1)")
     void test_Multiply_Exception_1() {
         try {
             calc.multiply1(100_000, 15);
@@ -42,8 +43,8 @@ class CalcExceptionTest_1 {
         fail(); // 失敗したとみなす
     }
 
-    // 掛け算を行い、極度オーバーした場合に例外が発生することをテストする(2)
     @Test
+    @DisplayName("掛け算を行い、極度オーバーした場合に例外が発生することをテストする(2)")
     void test_Multiply_Exception_2() {
         try {
             calc.multiply1(100_000, 15);
