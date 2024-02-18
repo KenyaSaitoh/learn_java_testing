@@ -1,22 +1,22 @@
 package pro.kensait.junit5.assertion;
 
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Person3 {
+public class Person {
     // フィールド
-    private String name;
-    private int age;
-    private List<String> hobbies;
+    private String name; // 名前
+    private int age; // 年齢
+    private LocalDateTime lastUpdateTime; // 最終更新時間
 
     // コンストラクタ
-    public Person3() {
+    public Person() {
     }
 
-    public Person3(String name, int age, List<String> hobbies) {
+    public Person(String name, int age, LocalDateTime lastUpdateTime) {
         this.name = name;
         this.age = age;
-        this.hobbies = hobbies;
+        this.lastUpdateTime = lastUpdateTime;
     }
 
     // アクセサメソッド
@@ -36,22 +36,22 @@ public class Person3 {
         this.age = age;
     }
 
-    public List<String> getHobbies() {
-        return hobbies;
+    public LocalDateTime getLastUpdateTime() {
+        return lastUpdateTime;
     }
 
-    public void setHobbies(List<String> hobbies) {
-        this.hobbies = hobbies;
+    public void setLastUpdateTime(LocalDateTime lastUpdateTime) {
+        this.lastUpdateTime = lastUpdateTime;
     }
 
     @Override
     public String toString() {
-        return "Person2 [name=" + name + ", age=" + age + ", hobbies=" + hobbies + "]";
+        return "Person [name=" + name + ", age=" + age + ", lastUpdateTime=" + lastUpdateTime + "]";
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(age, hobbies, name);
+        return Objects.hash(age, name);
     }
 
     @Override
@@ -62,8 +62,7 @@ public class Person3 {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Person3 other = (Person3) obj;
-        return age == other.age && Objects.equals(hobbies, other.hobbies)
-                && Objects.equals(name, other.name);
+        Person other = (Person) obj;
+        return age == other.age && Objects.equals(name, other.name);
     }
 }

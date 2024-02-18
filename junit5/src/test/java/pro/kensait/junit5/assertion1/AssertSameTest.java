@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
  */
 public class AssertSameTest {
 
-    // 同じインスタンスであること（同一性）を検証する
+    // 実測値が、期待値と同じインスタンスであること（同一性）を検証する
     @Test
     void test_SameInstance() {
         String expected = "foo";
@@ -17,7 +17,7 @@ public class AssertSameTest {
         assertSame(expected, actual);
     }
 
-    // 同じインスタンスではないことを検証する
+    // 実測値が、期待値と同じインスタンスでないことを検証する
     @Test
     void test_NotSameInstance() {
         String expected = new String("foo");

@@ -9,21 +9,27 @@ import org.junit.jupiter.api.Test;
  */
 public class ExceptionTest {
 
-    // IllegalArgumentExceptionの送出を検証する
+    // RuntimeExceptionの送出を検証する
     @Test
-    void test_Throw_Exceptiopn_1() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            throw new IllegalArgumentException();
+    void test_Throw_Exceptiopn() {
+        assertThrows(RuntimeException.class, () -> {
+            throw new RuntimeException();
         });
     }
 
-    // IllegalArgumentExceptionの送出と例外メッセージを検証する
+    // RuntimeExceptionの送出と例外メッセージを検証する
     @Test
-    void test_Throw_Exceptiopn_2() {
-        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
-            throw new IllegalArgumentException("ERROR!");
+    void test_Throw_Exceptiopn_Message() {
+        RuntimeException thrown = assertThrows(RuntimeException.class, () -> {
+            throw new RuntimeException("ERROR!");
         });
         // 加えて、例外メッセージも検証する
         assertEquals("ERROR!", thrown.getMessage());
+    }
+
+    // RuntimeExceptionが送出されないことを検証する
+    @Test
+    void test_DoesNot_Throw_Exception() {
+        assertDoesNotThrow(() -> 30 + 10);
     }
 }

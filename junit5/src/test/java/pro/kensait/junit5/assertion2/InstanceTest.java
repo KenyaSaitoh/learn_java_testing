@@ -10,16 +10,26 @@ import java.util.Objects;
 
 import org.junit.jupiter.api.Test;
 
+import pro.kensait.junit5.assertion.Person;
 import pro.kensait.junit5.assertion.Person1;
 import pro.kensait.junit5.assertion.Person2;
-import pro.kensait.junit5.assertion.Person3;
 
 /*
  * インスタンスの等価性を検証するためのテストクラス
  */
 public class InstanceTest {
 
-    // 同じ値であること（等価性）を検証する
+    // 実測値と期待値を比較し、同じ値であること（等価性）を検証する
+    // 比較対象であるPerson2クラスの等価性判定（equals()）には、最終更新時間は含まれない
+    @Test
+    void test_Equals_ConsideringLastUpdateTime() throws Exception {
+        Person expected = new Person("Alice", 25, LocalDateTime.now());
+        Thread.sleep(1000);
+        Person actual = new Person("Alice", 25, LocalDateTime.now());
+        assertEquals(expected, actual);
+    }
+
+    // 実測値と期待値を比較し、同じ値であること（等価性）を検証する
     @Test
     void test_Equals() {
         LocalDateTime now = LocalDateTime.now();
@@ -28,7 +38,7 @@ public class InstanceTest {
         assertEquals(expected, actual);
     }
 
-    // 最終更新時間を除外して、同じ値であること（等価性）を検証する
+    // 実測値と期待値を比較し、最終更新時間を除外して、同じ値であること（等価性）を検証する
     @Test
     void test_Equals_WithoutLastUpdateTime() throws Exception {
         Person1 expected = new Person1("Alice", 25, LocalDateTime.now());
@@ -44,22 +54,13 @@ public class InstanceTest {
                 p1.getAge() == p2.getAge();
     }
 
-    // 最終更新時間を意識して、同じ値であること（等価性）を検証する
-    @Test
-    void test_Equals_ConsideringLastUpdateTime() throws Exception {
-        Person2 expected = new Person2("Alice", 25, LocalDateTime.now());
-        Thread.sleep(1000);
-        Person2 actual = new Person2("Alice", 25, LocalDateTime.now());
-        assertEquals(expected, actual);
-    }
-
-    // リストの並び順を踏まえて、同じ値でないこと（非等価性）を検証する
+    // リストの並び順を踏まえて、同じ値でないことを検証する
     @Test
     void test_NotEquals_WithOrdering() {
         List<String> expectedHobbies = Arrays.asList("BASEBALL", "MUSIC", "MOVIE");
         List<String> actualHobbies = Arrays.asList("MUSIC", "MOVIE", "BASEBALL");
-        Person3 expected = new Person3("Alice", 25, expectedHobbies);
-        Person3 actual = new Person3("Alice", 25, actualHobbies);
+        Person2 expected = new Person2("Alice", 25, expectedHobbies);
+        Person2 actual = new Person2("Alice", 25, actualHobbies);
         assertNotEquals(expected, actual);
     }
 
@@ -68,8 +69,8 @@ public class InstanceTest {
     void test_Equals_IgnoringOrdering() {
         List<String> expectedHobbies = Arrays.asList("BASEBALL", "MUSIC", "MOVIE");
         List<String> actualHobbies = Arrays.asList("MUSIC", "MOVIE", "BASEBALL");
-        Person3 expected = new Person3("Alice", 25, expectedHobbies);
-        Person3 actual = new Person3("Alice", 25, actualHobbies);
+        Person2 expected = new Person2("Alice", 25, expectedHobbies);
+        Person2 actual = new Person2("Alice", 25, actualHobbies);
 
         // リストを対象外にして検証する
         assertTrue(areEqualIgnoringHobbies(expected, actual));
@@ -84,7 +85,7 @@ public class InstanceTest {
     }
 
     // ヘルパーメソッド（リストHobbiesを除いて等価性を判定する）
-    private boolean areEqualIgnoringHobbies(Person3 p1, Person3 p2) {
+    private boolean areEqualIgnoringHobbies(Person2 p1, Person2 p2) {
         return Objects.equals(p1.getName(), p2.getName()) &&
                 p1.getAge() == p2.getAge();
     }

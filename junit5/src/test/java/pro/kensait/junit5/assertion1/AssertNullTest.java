@@ -9,14 +9,14 @@ import org.junit.jupiter.api.Test;
  */
 public class AssertNullTest {
 
-    // null値であることを検証する
+    // 実測値が、null値であることを検証する
     @Test
     void test_IsNull() {
         String actual = null;
         assertNull(actual);
     }
 
-    // null値でないことを検証する
+    // 実測値が、null値でないことを検証する
     @Test
     void test_IsNotNull() {
         String actual = "foo";

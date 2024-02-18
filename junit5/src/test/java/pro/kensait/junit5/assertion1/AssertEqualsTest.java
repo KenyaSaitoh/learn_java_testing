@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
  */
 public class AssertEqualsTest {
 
-    // 同じ値であること（等価性）を検証する
+    // 実測値が、期待値と同じ値であること（等価性）を検証する
     @Test
     void test_Equals() {
         String expected = "foo";
@@ -17,7 +17,7 @@ public class AssertEqualsTest {
         assertEquals(expected, actual);
     }
 
-    // 同じ値でないことを検証する
+    // 実測値が、期待値と同じ値でないことを検証する
     @Test
     void test_NotEquals() {
         String expected = "foo";
@@ -25,7 +25,7 @@ public class AssertEqualsTest {
         assertNotEquals(expected, actual);
     }
 
-    // 指定された許容誤差の範囲内であることを検証する
+    // 期待値と実測値を比較し、指定された許容誤差の範囲内であることを検証する
     @Test
     void test_Equals_WithinDelta() {
         double expected = 0.3;

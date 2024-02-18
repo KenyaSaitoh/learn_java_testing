@@ -5,8 +5,8 @@ import java.util.Objects;
 
 public class Person1 {
     // フィールド
-    private String name;
-    private int age;
+    private String name; // 名前
+    private int age; // 年齢
     private LocalDateTime lastUpdateTime; // 最終更新時間
 
     // コンストラクタ
@@ -46,7 +46,7 @@ public class Person1 {
 
     @Override
     public String toString() {
-        return "Person [name=" + name + ", age=" + age + ", lastUpdateTime=" + lastUpdateTime + "]";
+        return "Person1 [name=" + name + ", age=" + age + ", lastUpdateTime=" + lastUpdateTime + "]";
     }
 
     @Override
