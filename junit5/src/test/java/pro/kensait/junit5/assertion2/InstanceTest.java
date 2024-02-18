@@ -1,4 +1,4 @@
-package pro.kensait.junit5.assertion1;
+package pro.kensait.junit5.assertion2;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,7 +17,7 @@ import pro.kensait.junit5.assertion.Person3;
 /*
  * インスタンスの等価性を検証するためのテストクラス
  */
-public class AssertEqualsTest_2 {
+public class InstanceTest {
 
     // 同じ値であること（等価性）を検証する
     @Test
@@ -55,7 +55,7 @@ public class AssertEqualsTest_2 {
 
     // リストの並び順を踏まえて、同じ値でないこと（非等価性）を検証する
     @Test
-    void test_EotEquals_WithOrdering() {
+    void test_NotEquals_WithOrdering() {
         List<String> expectedHobbies = Arrays.asList("BASEBALL", "MUSIC", "MOVIE");
         List<String> actualHobbies = Arrays.asList("MUSIC", "MOVIE", "BASEBALL");
         Person3 expected = new Person3("Alice", 25, expectedHobbies);

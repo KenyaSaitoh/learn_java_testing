@@ -5,12 +5,12 @@ package pro.kensait.junit5.calc.normal;
  */
 public class Calculator {
 
-    // 足し算を実行する［1］
+    // 足し算
     public int add(int param1, int param2) {
         return param1 + param2;
     }
 
-    // 引き算を実行する［2］
+    // 引き算
     public int subtract(int param1, int param2) {
         return param1 - param2;
     }

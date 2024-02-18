@@ -1,4 +1,4 @@
-package pro.kensait.junit5.assertion2;
+package pro.kensait.junit5.assertion4;
 
 import static org.junit.jupiter.api.Assumptions.*;
 

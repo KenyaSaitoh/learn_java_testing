@@ -1,4 +1,4 @@
-package pro.kensait.junit5.assertion1;
+package pro.kensait.junit5.assertion2;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 /*
  * マップを検証するためのテストクラス
  */
-public class AssertMapTest {
+public class MapTest {
 
     // Mapに指定したキーが含まれていることを検証する
     @Test

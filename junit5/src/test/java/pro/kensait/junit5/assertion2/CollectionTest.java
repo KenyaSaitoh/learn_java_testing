@@ -1,4 +1,4 @@
-package pro.kensait.junit5.assertion1;
+package pro.kensait.junit5.assertion2;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,15 +11,7 @@ import org.junit.jupiter.api.Test;
 /*
  * コレクションを検証するためのテストクラス
  */
-public class AssertCollectionTest {
-
-    // すべての要素が完全に一致することを検証する
-    @Test
-    void test_AllElements_Mach() {
-        List<String> expected = Arrays.asList("foo", "bar", "baz");
-        List<String> actual = Arrays.asList("foo", "bar", "baz");
-        assertIterableEquals(expected, actual);
-    }
+public class CollectionTest {
 
     // すべての要素が一致する（ソート順は無視）ことを検証する
     @Test

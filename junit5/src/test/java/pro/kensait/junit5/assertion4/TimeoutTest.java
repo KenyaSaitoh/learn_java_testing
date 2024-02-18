@@ -1,4 +1,4 @@
-package pro.kensait.junit5.assertion2;
+package pro.kensait.junit5.assertion4;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,7 +13,7 @@ import pro.kensait.junit5.assertion.ComplexService;
  * タイムアウトを検証するためのテストクラス
  */
 @Tag("excludeFromBuild") // ビルドテスト時に対象外にするためにタグを付与する
-public class AssertTimeoutTest {
+public class TimeoutTest {
 
     // タイムアウトすることを検証する
     @Test

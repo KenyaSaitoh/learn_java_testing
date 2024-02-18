@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 /*
  * 等価性を検証するためのテストクラス
  */
-public class AssertEqualsTest_1 {
+public class AssertEqualsTest {
 
     // 同じ値であること（等価性）を検証する
     @Test
