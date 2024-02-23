@@ -7,7 +7,7 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVer}"
     testImplementation "org.junit.jupiter:junit-jupiter-params:${junitVer}"
     testImplementation "org.junit.platform:junit-platform-launcher:${junitPlatformVer}"
-    testImplementation "org.junit.platform:junit-platform-suite-api:${junitPlatformVer}"
+    testImplementation "org.junit.platform:junit-platform-suite:${junitPlatformVer}"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVer}"
     // WireMock
     testImplementation "com.github.tomakehurst:wiremock-jre8:${wireMockVer}"

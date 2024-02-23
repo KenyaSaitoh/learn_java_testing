@@ -79,7 +79,7 @@ public class ShippingServiceTest3 {
         }
 
         @Test
-        @DisplayName("割引なしになった場合の更新結果をテストする")
+        @DisplayName("割引なしの場合の更新結果をテストする")
         void test_OrderShipping_GoldCustomer_NoDiscount() {
             // 引数である荷物リストを生成する（テストケース毎に個数が異なる）
             List<Baggage> baggageList = Arrays.asList(baggage);
@@ -157,7 +157,7 @@ public class ShippingServiceTest3 {
         }
 
         @Test
-        @DisplayName("割引なしになった場合の更新結果をテストする")
+        @DisplayName("割引なしの場合の更新結果をテストする")
         void test_OrderShipping_DiamondCustomer_NoDiscount() {
             // 引数である荷物リストを生成する（テストメソッド毎に個数が異なる）
             List<Baggage> baggageList = Arrays.asList(baggage);

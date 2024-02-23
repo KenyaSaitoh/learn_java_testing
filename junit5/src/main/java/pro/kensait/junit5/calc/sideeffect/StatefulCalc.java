@@ -13,17 +13,17 @@ public class StatefulCalc {
         this.param2 = param2;
     }
 
-    // 足し算を実行する［1］
+    // 足し算を実行する【1】
     public void add() {
         answer = param1 + param2;
     }
 
-    // 引き算を実行する［2］
+    // 引き算を実行する【2】
     public void subtract() {
         answer = param1 - param2;
     }
 
-    // 答えを取得する［3］
+    // 答えを取得する【3】
     public int getAnswer() {
         return answer;
     }
