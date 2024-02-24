@@ -13,6 +13,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
  * @CsvFileSourceに指定されたCSVファイルから、パラメータを読み込む
  * その時、アサンプションによってパラメータをフィルタリングする
  */
+@DisplayName("振込手数料計算サービスのテストクラス4")
 public class FeeParameterTest_4 {
     private static final String OUR_BANK_CODE = "B001"; // 自分の銀行
 
@@ -26,9 +27,9 @@ public class FeeParameterTest_4 {
         feeService = new FeeService();
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "順番:{index} ; 引数:{arguments}")
     @CsvFileSource(resources = "/parameter.csv", numLinesToSkip = 1)
-    @DisplayName("手数料計算のテスト（CSVファイルからパラメータを取得する）")
+    @DisplayName("CSVファイルからパラメータを取得するテストメソッド")
     void test_CalcFee(String bankCode, int amount, int expectedFee) {
         // アサンプションによって、パラメータとして与えられる銀行コードを、
         // 「自分の銀行」にフィルタリングする

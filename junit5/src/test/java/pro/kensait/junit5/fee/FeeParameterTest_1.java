@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
  * FeeService（振込手数料計算サービス）を対象にしたテストクラス
  * @ValueSourceからアノテーションから単一のパラメータを読み込む
  */
+@DisplayName("振込手数料計算サービスのテストクラス1")
 public class FeeParameterTest_1 {
     // テスト対象クラス
     FeeService feeService;
@@ -22,9 +23,9 @@ public class FeeParameterTest_1 {
         feeService = new FeeService();
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "順番:{index} ; 引数:{arguments}")
     @ValueSource(strings = {"B001,30000,0", "B001,29999,100", "B999,40000,200", "B999,39999,500"})
-    @DisplayName("手数料計算のテスト（値リストからパラメータを取得する）")
+    @DisplayName("リテラル配列からパラメータを取得するテストメソッド")
     void test_CalcFee(String paramStr) {
         String[] param = paramStr.split(",");
         // 実行フェーズ
