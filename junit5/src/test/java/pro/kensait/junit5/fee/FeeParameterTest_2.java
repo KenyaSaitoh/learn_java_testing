@@ -29,7 +29,7 @@ public class FeeParameterTest_2 {
 
     @ParameterizedTest
     @MethodSource("paramProvider")
-    @DisplayName("手数料計算のテスト（メソッドからパラメータを取得する）")
+    @DisplayName("手数料計算のテスト（スタティックメソッドからパラメータを取得する）")
     void test_CalcFee(Parameter param) {
         // 実行フェーズ
         int actual = feeService.calcFee(param.bankCode, param.amount);
@@ -37,7 +37,7 @@ public class FeeParameterTest_2 {
         assertEquals(param.expectedFee, actual);
     }
 
-    // パラメータを提供するメソッド
+    // パラメータを提供するスタティックメソッド
     static Stream<Parameter> paramProvider() {
         return Stream.of(
             new Parameter(OUR_BANK_CODE, 30999, 0),
@@ -49,7 +49,7 @@ public class FeeParameterTest_2 {
 
     // パラメータを表すクラス
     static class Parameter {
-        String bankCode; // 振込先銀行コード
+        String bankCode; // 銀行コード
         int amount; // 金額
         int expectedFee; // 期待値（手数料）
         Parameter(String bankCode, int amount, int expectedFee) {
