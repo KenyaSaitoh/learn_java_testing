@@ -13,7 +13,7 @@ public class LifeCycleTest {
 
     // テストプログラム全体に対する事前処理
     @BeforeAll
-    static void beforeAll() {
+    static void initAll() {
         System.out.println("***** @BeforeAll *****");
     }
 
@@ -25,14 +25,14 @@ public class LifeCycleTest {
 
     // テストケース1
     @Test
-    void test_1() {
-        System.out.println("***** @Test [test_1] *****");
+    void test_Case_1() {
+        System.out.println("***** @Test [test_Case_1] *****");
     }
 
     // テストケース2
     @Test
-    void test_2() {
-        System.out.println("***** @Test [test_2] *****");
+    void test_Case_2() {
+        System.out.println("***** @Test [test_Case_2] *****");
     }
 
     // 各テストケースで共通的な事後処理
@@ -43,7 +43,7 @@ public class LifeCycleTest {
 
     // テストプログラム全体に対する事後処理
     @AfterAll
-    static void afterAll() {
+    static void cleanupAll() {
         System.out.println("***** @AfterAll *****");
     }
 }

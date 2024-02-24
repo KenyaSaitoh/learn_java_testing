@@ -25,8 +25,8 @@ public class FeeParameterTest_1 {
     @ParameterizedTest
     @ValueSource(strings = {"B001,30999,0", "B001,29000,100", "B999,40000,200", "B999,39999,500"})
     @DisplayName("手数料計算のテスト（値リストからパラメータを取得する）")
-    void test_CalcFee(String f) {
-        String[] params = f.split(",");
+    void test_CalcFee(String fixture) {
+        String[] params = fixture.split(",");
         // 実行フェーズ
         int actual = feeService.calcFee(params[0], Integer.parseInt(params[1]));
         // 検証フェーズ

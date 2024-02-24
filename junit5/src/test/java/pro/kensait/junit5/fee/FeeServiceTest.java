@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
  * FeeService（手数料計算サービス）を対象にしたテストクラス
  */
 public class FeeServiceTest {
-    private static final String OUR_BANK_CODE = "B001"; // 自分の銀行
-    private static final String OTHER_BANK_CODE = "B999"; // 他の銀行
+    public static final String OUR_BANK_CODE = "B001"; // 自分の銀行
+    public static final String OTHER_BANK_CODE = "B999"; // 他の銀行
 
     // テスト対象クラス
     FeeService feeService;

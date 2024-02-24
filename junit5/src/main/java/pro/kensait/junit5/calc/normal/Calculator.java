@@ -1,7 +1,8 @@
 package pro.kensait.junit5.calc.normal;
 
 /*
- * 通常の（状態を保持しない）計算機を表すクラス（テスト対象）
+ * 計算機を表すクラス（テスト対象）
+ * 状態は保持しない
  */
 public class Calculator {
 

@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import pro.kensait.junit5.calc.sideeffect.StatefulCalc;
+
 /*
  * StatefulCalculator（状態を保持する計算機）を対象にしたテストクラス
  */
