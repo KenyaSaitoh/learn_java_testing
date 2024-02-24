@@ -12,6 +12,6 @@ import pro.kensait.junit5.calc.normal.CalculatorTest_2;
  */
 @Suite
 @SelectClasses({ CalculatorTest_1.class, CalculatorTest_2.class })
-public class CalcTestSuite_1 {
+public class CalcTestSuite {
     // このクラスはテストスイートを構成するためだけに使用され、通常は追加のコードは含まれない
 }

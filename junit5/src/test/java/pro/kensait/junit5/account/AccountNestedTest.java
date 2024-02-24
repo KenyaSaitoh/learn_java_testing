@@ -8,17 +8,18 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 /*
- * Account（口座）のための構造化されたテストクラス（Nestedクラス）
+ * Account（口座）のためのテストクラス
+ * ネステッドクラスによって階層化
  */
 public class AccountNestedTest {
-    // 全テストケースで共通的なフィクスチャを、フィールドとして宣言する
+    // このテストクラス全体で共通的なフィクスチャを、フィールドとして宣言する
     // テスト対象クラス
     Account account;
 
-    @Nested
+    @Nested // ネステッドクラスを表す
     @DisplayName("残高ゼロの口座に対するテスト")
     class BalanceZeroTest {
-        // 各テストケースで共通的な事前処理
+        // ネステッドクラス内の各テストケースで共通的な前処理
         @BeforeEach
         void setUp() {
             // 共通フィクスチャを設定する
@@ -43,18 +44,18 @@ public class AccountNestedTest {
             });
         }
 
-        @DisplayName("残高ゼロチェックのテスト")
         @Test
+        @DisplayName("残高ゼロチェックのテスト")
         void test_IsBalanceZero_Balance_Zero() {
             // 実行＋検証フェーズ
             assertTrue(account.isBalanceZero());
         }
     }
 
-    @Nested
+    @Nested // ネステッドクラスを表す
     @DisplayName("残高ゼロ以外の口座に対するテスト")
     class BalanceNonZeroTest {
-        // 各テストケースで共通的な事前処理
+        // ネステッドクラス内の各テストケースで共通的な前処理
         @BeforeEach
         void setUp() {
             // 共通フィクスチャを設定する
@@ -70,11 +71,9 @@ public class AccountNestedTest {
             assertEquals(13000, account.getBalance());
         }
 
-        @DisplayName("出金のテスト")
         @Test
+        @DisplayName("出金のテスト")
         void test_Withdraw_Balance_NonZero() {
-            // 準備フェーズ
-            Account account = new Account("00001234", 10000);
             try {
                 // 実行フェーズ
                 account.withdraw(3000);
@@ -85,11 +84,9 @@ public class AccountNestedTest {
             assertEquals(7000, account.getBalance());
         }
 
-        @DisplayName("残高ゼロチェックのテスト")
         @Test
+        @DisplayName("残高ゼロチェックのテスト")
         void test_IsNotBalanceZero_Balance_NonZero() {
-            // 準備フェーズ
-            Account account = new Account("00001234", 10000);
             // 実行＋検証フェーズ
             assertFalse(account.isBalanceZero());
         }

@@ -12,8 +12,9 @@ import io.restassured.http.ContentType;
 
 public class GreetApiTest {
 
+    // テストクラス実行の前処理
     @BeforeAll
-    public static void setup() {
+    public static void initAll() {
         RestAssured.port = 8080;
         RestAssured.baseURI = "http://localhost";
         RestAssured.basePath = "/greet";

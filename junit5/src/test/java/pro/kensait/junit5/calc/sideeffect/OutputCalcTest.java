@@ -19,16 +19,16 @@ public class OutputCalcTest {
     static PrintStream originalOut;
     static ByteArrayOutputStream output;
 
-    // テストプログラム全体に対する事前処理
+    // テストクラス実行の前処理
     @BeforeAll
-    static void beforeAll() {
+    static void initAll() {
         // 標準出力をバイト配列出力ストリームに置き換える
         originalOut = System.out;
         output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));
     }
 
-    // 各テストケースで共通的な事前処理
+    // 各テストケースで共通的な前処理
     @BeforeEach
     void setUp() {
         // 共通フィクスチャを設定する

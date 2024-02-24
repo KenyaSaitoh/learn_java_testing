@@ -27,7 +27,7 @@ public class ShippingServiceTest {
     LocalDateTime orderDateTime;
     LocalDate receiveDate;
 
-    // 各テストケースで共通的な事前処理
+    // 各テストケースで共通的な前処理
     @BeforeEach
     void setUp() {
         // モックを生成する
@@ -50,7 +50,7 @@ public class ShippingServiceTest {
     class GoldCustomerTest {
         // GoldCustomerTestクラス内の各テストケースで共通的なフィクスチャ
         Client client;
-        // GoldCustomerTestクラス内の各テストケースで共通的な事前処理
+        // GoldCustomerTestクラス内の各テストケースで共通的な前処理
         @BeforeEach
         void setUp() {
             client = new Client(10001, "Alice", "福岡県福岡市1-1-1",
@@ -123,7 +123,7 @@ public class ShippingServiceTest {
     class DiamondCustomerTest {
         // DiamondCustomerTestクラス内の各テストケースで共通的なフィクスチャ
         Client client;
-        // DiamondCustomerTestクラス内の各テストケースで共通的な事前処理
+        // DiamondCustomerTestクラス内の各テストケースで共通的な前処理
         @BeforeEach
         void setUp() {
             client = new Client(10001, "Alice", "福岡県福岡市1-1-1",

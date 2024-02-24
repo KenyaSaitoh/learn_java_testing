@@ -37,7 +37,7 @@ public class ShippingServiceTest3 {
     LocalDateTime orderDateTime;
     LocalDate receiveDate;
 
-    // 各テストケースで共通的な事前処理
+    // 各テストケースで共通的な前処理
     @BeforeEach
     void setUp() {
         // モックを初期化する（@Mockが付与されたフィールドをモック化する）
@@ -68,7 +68,7 @@ public class ShippingServiceTest3 {
         @Mock
         Client client;
 
-        // GoldCustomerTestクラス内の各テストケースで共通的な事前処理
+        // GoldCustomerTestクラス内の各テストケースで共通的な前処理
         @BeforeEach
         void setUp() {
             // モックを初期化する（@Mockが付与されたフィールドをモック化する）［差分］
@@ -146,7 +146,7 @@ public class ShippingServiceTest3 {
         @Mock
         Client client;
 
-        // DiamondCustomerTestクラス内の各テストケースで共通的な事前処理
+        // DiamondCustomerTestクラス内の各テストケースで共通的な前処理
         @BeforeEach
         void setUp() {
             // モックを初期化する（@Mockが付与されたフィールドをモック化する）［差分］

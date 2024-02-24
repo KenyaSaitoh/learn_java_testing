@@ -35,7 +35,7 @@ public class ShippingServiceTest1 {
     LocalDateTime orderDateTime;
     LocalDate receiveDate;
 
-    // 各テストケースで共通的な事前処理
+    // 各テストケースで共通的な前処理
     @BeforeEach
     void setUp() {
         // モックを初期化する（@Mockが付与されたフィールドをモック化する）

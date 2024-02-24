@@ -16,7 +16,7 @@ public class CalculatorTest1 {
     // モック
     CalcIF mock;
 
-    // 各テストケースで共通的な事前処理
+    // 各テストケースで共通的な前処理
     @BeforeEach
     void setUp() {
         // CalcIFのモックを生成する

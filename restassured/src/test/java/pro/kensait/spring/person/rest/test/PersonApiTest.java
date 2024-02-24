@@ -11,9 +11,9 @@ import io.restassured.response.Response;
 
 public class PersonApiTest {
 
-    // テストクラスで共通の設定を行うためのセットアップメソッド
+    // テストクラス実行の前処理
     @BeforeAll
-    public static void setup() {
+    public static void initAll() {
         RestAssured.port = 8080; // APIサーバーのポート
         RestAssured.baseURI = "http://localhost"; // APIサーバーのベースURI
         RestAssured.basePath = "/persons"; // APIのベースパス

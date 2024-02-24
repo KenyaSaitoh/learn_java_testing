@@ -13,8 +13,9 @@ import io.restassured.response.Response;
 
 public class CalcApiTest {
 
+    // テストクラス実行の前処理
     @BeforeAll
-    public static void setup() {
+    public static void initAll() {
         RestAssured.port = 8080; // ポート番号
         RestAssured.baseURI = "http://localhost"; // APIのホスト
         RestAssured.basePath = "/calc"; // ベースパス

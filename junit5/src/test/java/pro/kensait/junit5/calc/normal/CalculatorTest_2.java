@@ -8,14 +8,14 @@ import org.junit.jupiter.api.Test;
 
 /*
  * Calculatorを対象にしたテストクラス
- * テストフィクスチャ（テスト対象クラス）を、共通的な事前処理の中でセットアップ
+ * テストフィクスチャ（テスト対象クラス）を、共通的な前処理の中でセットアップ
  */
 @DisplayName("Calculatorを対象にしたテストクラス")
 public class CalculatorTest_2 {
     // テスト対象クラス
     Calculator calc;
 
-    // 各テストケースで共通的な事前処理
+    // 各テストケースで共通的な前処理
     @BeforeEach
     void setUp() {
         // 共通フィクスチャを設定する

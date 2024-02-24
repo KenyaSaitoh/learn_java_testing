@@ -7,43 +7,43 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /*
- * JUnit5のライフサイクルを確認するためのテストクラス
+ * ライフサイクルを確認するためのテストクラス
  */
 public class LifeCycleTest {
 
-    // テストプログラム全体に対する事前処理
+    // テストクラス実行の前処理
     @BeforeAll
     static void initAll() {
-        System.out.println("***** @BeforeAll *****");
+        System.out.println("@BeforeAll");
     }
 
-    // 各テストケースで共通的な事前処理
+    // 各テストケースで共通的な前処理
     @BeforeEach
     void setUp() {
-        System.out.println("***** @BeforeEach *****");
+        System.out.println("@BeforeEach");
     }
 
     // テストケース1
     @Test
     void test_Case_1() {
-        System.out.println("***** @Test [test_Case_1] *****");
+        System.out.println("テストケース1");
     }
 
     // テストケース2
     @Test
     void test_Case_2() {
-        System.out.println("***** @Test [test_Case_2] *****");
+        System.out.println("テストケース2");
     }
 
-    // 各テストケースで共通的な事後処理
+    // 各テストケースで共通的な後処理
     @AfterEach
     void tearDown() {
-        System.out.println("***** @AfterEach *****");
+        System.out.println("@AfterEach");
     }
 
-    // テストプログラム全体に対する事後処理
+    // テストクラス実行の後処理
     @AfterAll
     static void cleanupAll() {
-        System.out.println("***** @AfterAll *****");
+        System.out.println("@AfterAll");
     }
 }
