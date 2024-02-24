@@ -9,6 +9,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import pro.kensait.junit5.fee.FeeService;
 
+/*
+ * FeeService（振込手数料計算サービス）を対象にしたテストクラス
+ * テストテンプレートによって動的にパラメータを切り替える
+ */
 public class FeeTestTemplateTest {
 
     public static final String OUR_BANK_CODE = "B001";

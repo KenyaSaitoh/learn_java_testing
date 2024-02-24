@@ -8,8 +8,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 /*
- * FeeService（手数料計算サービス）を対象にしたテストクラス
- * アノテーションから単一のパラメータを読み込む
+ * FeeService（振込手数料計算サービス）を対象にしたテストクラス
+ * @ValueSourceからアノテーションから単一のパラメータを読み込む
  */
 public class FeeParameterTest_1 {
     // テスト対象クラス
@@ -23,13 +23,13 @@ public class FeeParameterTest_1 {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"B001,30999,0", "B001,29000,100", "B999,40000,200", "B999,39999,500"})
+    @ValueSource(strings = {"B001,30000,0", "B001,29999,100", "B999,40000,200", "B999,39999,500"})
     @DisplayName("手数料計算のテスト（値リストからパラメータを取得する）")
-    void test_CalcFee(String fixture) {
-        String[] params = fixture.split(",");
+    void test_CalcFee(String paramStr) {
+        String[] param = paramStr.split(",");
         // 実行フェーズ
-        int actual = feeService.calcFee(params[0], Integer.parseInt(params[1]));
+        int actual = feeService.calcFee(param[0], Integer.parseInt(param[1]));
         // 検証フェーズ
-        assertEquals(Integer.parseInt(params[2]), actual);
+        assertEquals(Integer.parseInt(param[2]), actual);
     }
 }

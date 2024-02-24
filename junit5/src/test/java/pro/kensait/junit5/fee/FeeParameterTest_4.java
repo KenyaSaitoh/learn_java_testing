@@ -9,8 +9,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
 /*
- * FeeService（手数料計算サービス）を対象にしたテストクラス
- * CSVファイルからパラメータを読み込み、Assumptionでフィルタリングする
+ * FeeService（振込手数料計算サービス）を対象にしたテストクラス
+ * @CsvFileSourceに指定されたCSVファイルから、パラメータを読み込む
+ * その時、アサンプションによってパラメータをフィルタリングする
  */
 public class FeeParameterTest_4 {
     private static final String OUR_BANK_CODE = "B001"; // 自分の銀行
@@ -29,9 +30,9 @@ public class FeeParameterTest_4 {
     @CsvFileSource(resources = "/parameter.csv", numLinesToSkip = 1)
     @DisplayName("手数料計算のテスト（CSVファイルからパラメータを取得する）")
     void test_CalcFee(String bankCode, int amount, int expectedFee) {
-        // AssumptionでbankCodeを「自分の銀行」にフィルタリングする
+        // アサンプションによって、パラメータとして与えられる銀行コードを、
+        // 「自分の銀行」にフィルタリングする
         assumeTrue(bankCode.equals(OUR_BANK_CODE));
-        System.out.println(bankCode);
         // 実行フェーズ
         int actual = feeService.calcFee(bankCode, amount);
         // 検証フェーズ
