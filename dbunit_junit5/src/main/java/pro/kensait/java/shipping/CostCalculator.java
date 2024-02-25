@@ -1,7 +1,7 @@
 package pro.kensait.java.shipping;
 
 /*
- * 荷物毎の配送料を計算するためのビジネスロジック（モック対象）
+ * 荷物毎の配送料計算ロジックを表すクラス（モック対象）
  */
 public class CostCalculator implements CostCalculatorIF {
     @Override
