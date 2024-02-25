@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.stream.Stream;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -18,23 +17,12 @@ public class FeeParameterTest_3 {
     private static final String OUR_BANK_CODE = "B001"; // 自分の銀行
     private static final String OTHER_BANK_CODE = "B999"; // 他の銀行
 
-    // テスト対象クラス
-    FeeService feeService;
-
-    // 各テストケースで共通的な前処理
-    @BeforeEach
-    void setUp() {
-        // 共通フィクスチャを設定する
-        feeService = new FeeService();
-    }
-
     @ParameterizedTest(name = "順番:{index} ; 引数:{arguments}")
     @MethodSource("paramProvider")
     @DisplayName("スタティックメソッドからパラメータを取得するテストメソッド")
     void test_CalcFee(FeeParam param) {
-        // 実行フェーズ
+        FeeService feeService = new FeeService();
         int actual = feeService.calcFee(param.bankCode, param.amount);
-        // 検証フェーズ
         assertEquals(param.expectedFee, actual);
     }
 
