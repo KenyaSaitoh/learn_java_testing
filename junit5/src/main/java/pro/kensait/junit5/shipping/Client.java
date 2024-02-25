@@ -1,7 +1,7 @@
 package pro.kensait.junit5.shipping;
 
 /*
- * 顧客データ
+ * 顧客を表すレコードクラス
  */
 public record Client(
         Integer id, // ID

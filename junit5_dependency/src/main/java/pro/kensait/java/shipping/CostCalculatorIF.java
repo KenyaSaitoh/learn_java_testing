@@ -1,7 +1,7 @@
 package pro.kensait.java.shipping;
 
 /*
- * 配送料計算ロジックを表すインタフェース
+ * 荷物毎の配送料計算ロジックを表すインタフェース
  */
 public interface CostCalculatorIF {
     // 配送料計算のベースとなる価格

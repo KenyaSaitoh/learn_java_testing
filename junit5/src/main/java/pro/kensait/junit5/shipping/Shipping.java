@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 /*
- * 配送データ
+ * 配送データを表すレコードクラス
  */
 public record Shipping(
         LocalDateTime orderDateTime, // 注文日時

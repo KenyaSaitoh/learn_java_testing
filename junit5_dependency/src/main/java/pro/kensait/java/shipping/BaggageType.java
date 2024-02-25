@@ -1,7 +1,7 @@
 package pro.kensait.java.shipping;
 
 /*
- * 荷物種別
+ * 荷物種別を表す列挙型
  */
 public enum BaggageType {
     SMALL(1.0F), // 小サイズ

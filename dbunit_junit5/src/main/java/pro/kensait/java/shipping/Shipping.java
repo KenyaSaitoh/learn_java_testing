@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /*
- * 配送データ
+ * 配送データを表すレコードクラス
  */
 public record Shipping (
         LocalDateTime orderDateTime, // 注文日時

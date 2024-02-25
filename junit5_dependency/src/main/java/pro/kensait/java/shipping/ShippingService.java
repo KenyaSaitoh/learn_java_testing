@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /*
- * 配送サービスを表すクラス（テスト対象）
+ * 配送サービス本体を表すクラス（テスト対象）
  */
 public class ShippingService {
     private static final float GOLD_NET_RATE = 0.9F; // ゴールド会員の割引率
@@ -13,7 +13,7 @@ public class ShippingService {
     private static final float DIAMOND_NET_RATE = 0.75F; // ダイヤモンド会員の割引率
     private static final int DIAMOND_COST_LIMIT = 2500; // ダイヤモンド会員の割引後の下限金額
 
-    // 配送料計算ロジックを表すインタフェース
+    // 荷物毎の配送料計算ロジックを表すインタフェース
     private CostCalculatorIF costCalculator;
 
     // コンストラクタ
@@ -27,7 +27,7 @@ public class ShippingService {
         // 配送料の合計値
         Integer totalCost = 0;
 
-        // 荷物リストでループし、一つ一つの荷物種別ごとに配送料を計算
+        // 荷物リストでループし、一つ一つの荷物種別を表す列挙型ごとに配送料を計算
         // → それらを集計し、配送料の合計値を算出する
         for (Baggage baggage : baggageList) {
             Integer shippingCost =
@@ -59,7 +59,7 @@ public class ShippingService {
             }
         }
 
-        // 配送を表すレコードを生成する
+        // 配送データを表すレコードを生成する
         Shipping shipping = new Shipping(LocalDateTime.now(), client, receiveDate, baggageList,
                 totalCost);
 

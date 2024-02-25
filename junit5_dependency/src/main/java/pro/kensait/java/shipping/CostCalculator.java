@@ -1,14 +1,14 @@
 package pro.kensait.java.shipping;
 
 /*
- * 配送料を計算するためのビジネスロジック（モック対象）
+ * 荷物毎の配送料を計算するためのビジネスロジック（モック対象）
  */
 public class CostCalculator implements CostCalculatorIF {
     @Override
     public Integer calcShippingCost(BaggageType baggageType,
             RegionType regionType) {
         /* 
-         * 荷物種別と地域種別、それぞれの「重み」をもとに配送料を計算する
+         * 荷物種別を表す列挙型と発送元の地域種別を表す列挙型、それぞれの「重み」をもとに荷物毎の配送料を計算する
          * 補足：金額計算なので、本質的にはBigDecimal型を使うべきだが、テスト技法を学ぶ上では
          * ノイズになるので、ここでは便宜上Integer型を使用する
          */

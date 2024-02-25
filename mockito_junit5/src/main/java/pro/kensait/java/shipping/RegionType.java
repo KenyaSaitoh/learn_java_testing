@@ -1,7 +1,7 @@
 package pro.kensait.java.shipping;
 
 /*
- * 地域種別
+ * 発送元の地域種別を表す列挙型
  */
 public enum RegionType {
     HOKKAIDO(1.5F),

@@ -1,7 +1,7 @@
 package pro.kensait.java.shipping;
 
 /*
- * クライアント種別
+ * 顧客種別を表す列挙型
  */
 public enum ClientType {
     GENERAL, GOLD, DIAMOND;

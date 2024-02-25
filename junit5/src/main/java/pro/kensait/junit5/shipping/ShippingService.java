@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /*
- * 配送サービスを表すクラス（テスト対象）
+ * 配送サービス本体を表すクラス（テスト対象）
  */
 public class ShippingService {
     public static final Integer BASE_PRICE = 1000; // 配送料計算のベースとなる価格
@@ -20,7 +20,7 @@ public class ShippingService {
         // 配送料の合計値
         Integer totalCost = 0;
 
-        // 荷物リストでループし、一つ一つの荷物種別ごとに配送料を計算
+        // 荷物リストでループし、一つ一つの荷物種別を表す列挙型ごとに配送料を計算
         // → それらを集計し、配送料の合計値を算出する
         for (Baggage baggage : baggageList) {
             Integer shippingCost =
@@ -51,7 +51,7 @@ public class ShippingService {
             }
         }
 
-        // 配送を表すレコードを生成する
+        // 配送データを表すレコードを生成する
         Shipping shipping = new Shipping(LocalDateTime.now(), client, receiveDate, baggageList,
                 totalCost);
 
@@ -59,7 +59,7 @@ public class ShippingService {
         ShippingDAO.save(shipping);
     }
 
-    /* 荷物種別と地域種別、それぞれの「重み」をもとに配送料を計算する
+    /* 荷物種別を表す列挙型と発送元の地域種別を表す列挙型、それぞれの「重み」をもとに荷物毎の配送料を計算する
      * 補足：金額計算なので、本質的にはBigDecimal型を使うべきだが、テスト技法を学ぶ上では
      * ノイズになるので、ここでは便宜上Integer型を使用する
      */

@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 
 /*
- * 配送データを保存するためのデータアクセスクラス
+ * 配送データを表すレコードクラスを保存するためのデータアクセスクラス
  */
 public class ShippingDAO {
     private static String driver = getProperty("jdbc.driver");
