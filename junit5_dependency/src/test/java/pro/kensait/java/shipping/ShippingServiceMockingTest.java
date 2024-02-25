@@ -15,12 +15,12 @@ import org.junit.jupiter.api.Test;
 /*
  * ShippingServiceを対象にしたテストクラス
  */
-public class ShippingServiceTest_2 {
+public class ShippingServiceMockingTest {
     // テスト対象クラス
     ShippingService shippingService;
 
-    // テスト対象クラスの呼び出し先（モック対象）
-    MockCostCalculator costCalculator;
+    // テスト対象クラスの呼び出し先（テストダブル置き換え対象）
+    CostCalculatorIF costCalculator;
 
     //その他のすべてのテストケースで共通的なフィクスチャ
     Baggage baggage;
@@ -30,10 +30,10 @@ public class ShippingServiceTest_2 {
     // 各テストケースで共通的な前処理
     @BeforeEach
     void setUp() {
-        // モックを生成する
+        // テストダブルを生成する
         costCalculator = new MockCostCalculator();
 
-        // モックをテスト対象クラスに注入する
+        // テストダブルをテスト対象クラスに注入する
         shippingService = new ShippingService(costCalculator);
 
         // 共通フィクスチャを設定する

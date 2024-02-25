@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 /*
  * ShippingServiceを対象にしたテストクラス
  */
-public class ShippingServiceTest_1 {
+public class ShippingServiceTest {
     // テスト対象クラス
     ShippingService shippingService;
 
