@@ -18,10 +18,8 @@ import org.mockito.MockitoAnnotations;
 
 /*
  * ShippingServiceを対象にしたテストクラス
- * ShippingServiceTest2との相違点
- * 引数であるBaggage、Clientもモック化する点
  */
-public class ShippingServiceTest3 {
+public class ShippingServiceTest {
     // テスト対象クラス
     ShippingService shippingService;
 
@@ -29,7 +27,7 @@ public class ShippingServiceTest3 {
     @Mock
     CostCalculatorIF costCalculator;
 
-    // 各テストケースで共通的なフィクスチャ［差分］
+    // 各テストケースで共通的なフィクスチャ
     @Mock
     Baggage baggage;
 
@@ -50,7 +48,7 @@ public class ShippingServiceTest3 {
         // モックをテスト対象クラスに注入する
         shippingService = new ShippingService(costCalculator);
 
-        // モック化されたBaggageの振る舞いを決める［差分］
+        // モック化されたBaggageの振る舞いを決める
         when(baggage.baggageType()).thenReturn(BaggageType.MIDDLE);
 
         // その他の共通的なフィクスチャを設定する
@@ -64,17 +62,17 @@ public class ShippingServiceTest3 {
     @Nested
     @DisplayName("ゴールド会員のテスト")
     class GoldCustomerTest {
-        // GoldCustomerTestクラス内の各テストケースで共通的なフィクスチャ［差分］
+        // GoldCustomerTestクラス内の各テストケースで共通的なフィクスチャ
         @Mock
         Client client;
 
         // GoldCustomerTestクラス内の各テストケースで共通的な前処理
         @BeforeEach
         void setUp() {
-            // モックを初期化する（@Mockが付与されたフィールドをモック化する）［差分］
+            // モックを初期化する（@Mockが付与されたフィールドをモック化する）
             MockitoAnnotations.openMocks(this);
 
-            // モック化されたClientの振る舞いを決める［差分］
+            // モック化されたClientの振る舞いを決める（ゴールド会員）
             when(client.clientType()).thenReturn(ClientType.GOLD);
         }
 
@@ -142,17 +140,17 @@ public class ShippingServiceTest3 {
     @Nested
     @DisplayName("ダイヤモンド会員のテスト")
     class DiamondCustomerTest {
-        // DiamondCustomerTestクラス内の各テストケースで共通的なフィクスチャ［差分］
+        // DiamondCustomerTestクラス内の各テストケースで共通的なフィクスチャ
         @Mock
         Client client;
 
         // DiamondCustomerTestクラス内の各テストケースで共通的な前処理
         @BeforeEach
         void setUp() {
-            // モックを初期化する（@Mockが付与されたフィールドをモック化する）［差分］
+            // モックを初期化する（@Mockが付与されたフィールドをモック化する）
             MockitoAnnotations.openMocks(this);
 
-            // モック化されたClientの振る舞いを決める［差分］
+            // モック化されたClientの振る舞いを決める（ダイヤモンド会員）
             when(client.clientType()).thenReturn(ClientType.DIAMOND);
         }
 
