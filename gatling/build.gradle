@@ -31,10 +31,8 @@ test {
         // テスト時の標準出力と標準エラー出力を表示する
         showStandardStreams true
         // イベントを出力する
-        events "started", "skipped", "passed", "failed"
+        events "passed", "failed", "skipped"
         // 例外発生時の出力設定
         exceptionFormat "full"
-        // テスト完了後にレポートを生成
-        finalizedBy jacocoTestReport
     }
 }

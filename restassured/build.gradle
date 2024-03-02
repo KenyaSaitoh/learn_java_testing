@@ -26,11 +26,9 @@ test {
         // ビルドテスト時の標準出力と標準エラー出力を表示する
         showStandardStreams true
         // 指定されたイベントを表示する
-        events "started", "skipped", "passed", "failed"
+        events "passed", "failed", "skipped"
         // 例外発生時はすべての情報を表示する
         exceptionFormat "full"
-        // ビルドテスト後に、Jacocoテストレポートを生成する
-        finalizedBy jacocoTestReport
     }
 
     // レポート設定
@@ -40,4 +38,7 @@ test {
         // XML形式レポートの出力先
         junitXml.outputLocation.set(layout.buildDirectory.dir("reports/junit5/xml"))
     }
+
+    // ビルドテスト後に、Jacocoテストレポートを生成する
+    finalizedBy jacocoTestReport
 }
