@@ -12,7 +12,7 @@ import org.mockito.Spy;
 /*
  * 状態を持つ計算機（StatefulCalc）をスパイ化するテストクラス
  */
-public class CalcSpyTest {
+public class CalcTest_Spy {
     // スパイ
     @Spy
     StatefulCalc spy1 = new StatefulCalc(5, 10, 3); // ケース1

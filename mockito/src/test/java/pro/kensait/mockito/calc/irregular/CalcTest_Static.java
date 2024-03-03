@@ -11,7 +11,7 @@ import org.mockito.MockedStatic;
 /*
  * static修飾子を付与したユーティリティを持つ計算機（CalcUtil）をモック化するテストクラス
  */
-public class StaticClassInlineTest {
+public class CalcTest_Static {
 
     // テストクラス実行の前処理
     @BeforeAll

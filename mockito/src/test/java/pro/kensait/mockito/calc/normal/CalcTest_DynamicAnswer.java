@@ -15,7 +15,7 @@ import org.mockito.stubbing.Answer;
  * 計算機インタフェース（CaclIF）をモック化するテストクラス
  * インタフェースと実装は分離する
  * @Mockアノテーションでモック化する
- * 振る舞いは引数に応じて動的に決まるものとする
+ * 戻り値は引数に応じて動的に決まるものとする
  */
 public class CalcTest_DynamicAnswer {
     // モック
