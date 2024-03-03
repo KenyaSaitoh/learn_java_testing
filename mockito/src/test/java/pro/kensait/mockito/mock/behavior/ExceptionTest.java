@@ -3,6 +3,7 @@ package pro.kensait.mockito.mock.behavior;
 import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
@@ -29,7 +30,8 @@ public class ExceptionTest {
         when(mapMock.get(2)).thenThrow(new RuntimeException());
 
         // ユーティリティ（指定されたキーに対するエントリをMapから取り出してコンソール表示）
-        MapUtil.printEntry(mapMock, Arrays.asList(0, 1, 2), "test_Case_1");
+        List<Integer> keyList = Arrays.asList(0, 1, 2);
+        MapUtil.printEntry(mapMock, keyList, "test_Case_1");
     }
 
     @Test
@@ -45,7 +47,8 @@ public class ExceptionTest {
                 new NoSuchElementException("3rd Exception"));
 
         // ユーティリティ（指定されたキーに対するエントリをMapから取り出してコンソール表示）
-        MapUtil.printEntry(mapMock, Arrays.asList(0, 0, 0), "test_Case_2");
+        List<Integer> keyList = Arrays.asList(0, 0, 0);
+        MapUtil.printEntry(mapMock, keyList, "test_Case_2");
     }
 
     @Test
@@ -58,7 +61,8 @@ public class ExceptionTest {
         doThrow(RuntimeException.class).when(mapMock).get(0);
 
         // ユーティリティ（指定されたキーに対するエントリをMapから取り出してコンソール表示）
-        MapUtil.printEntry(mapMock, Arrays.asList(0, 0, 0), "test_Case_3");
+        List<Integer> keyList = Arrays.asList(0, 0, 0);
+        MapUtil.printEntry(mapMock, keyList, "test_Case_3");
     }
 
     @Test
@@ -68,12 +72,11 @@ public class ExceptionTest {
         Map<Integer, String> mapMock = mock(Map.class);
 
         // 振る舞いを設定する（do-when方式）
-        doThrow(RuntimeException.class,
-                IllegalArgumentException.class,
-                NoSuchElementException.class)
-                .when(mapMock).get(0);
+        doThrow(RuntimeException.class, IllegalArgumentException.class,
+                NoSuchElementException.class).when(mapMock).get(0);
 
         // ユーティリティ（指定されたキーに対するエントリをMapから取り出してコンソール表示）
-        MapUtil.printEntry(mapMock, Arrays.asList(0, 0, 0), "test_Case_4");
+        List<Integer> keyList = Arrays.asList(0, 0, 0);
+        MapUtil.printEntry(mapMock, keyList, "test_Case_4");
     }
 }
