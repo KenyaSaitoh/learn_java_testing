@@ -15,8 +15,9 @@ import org.mockito.stubbing.Answer;
  * 計算機インタフェース（CaclIF）をモック化するテストクラス
  * インタフェースと実装は分離する
  * @Mockアノテーションでモック化する
+ * 振る舞いは引数に応じて動的に決まるものとする
  */
-public class DynamicAnswerTest {
+public class CalcTest_DynamicAnswer {
     // モック
     @Mock
     CalcIF mock;
@@ -27,7 +28,7 @@ public class DynamicAnswerTest {
         // すべての@Mockアノテーションが付与されたフィールドをモック化する
         MockitoAnnotations.openMocks(this);
 
-        // 任意の振る舞いをAnswerとして定義する
+        // 引数に応じた動的な振る舞いをAnswerとして設定する
         Answer<Integer> answer = invocation -> {
             int x = invocation.getArgument(0); // 第1引数
             int y = invocation.getArgument(1); // 第2引数

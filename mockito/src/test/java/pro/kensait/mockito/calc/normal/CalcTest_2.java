@@ -6,21 +6,24 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 /*
  * 計算機インタフェース（CaclIF）をモック化するテストクラス
  * インタフェースと実装は分離する
- * mock()メソッドでモック化する
+ * @Mockアノテーションでモック化する
  */
-public class CalculatorTest_1 {
+public class CalcTest_2 {
     // モック
+    @Mock
     CalcIF mock;
 
     // 各テストケースで共通的な前処理
     @BeforeEach
     void setUp() {
-        // CalcIFのモックを生成する
-        mock = mock(CalcIF.class);
+        // すべての@Mockアノテーションが付与されたフィールドをモック化する
+        MockitoAnnotations.openMocks(this);
 
         // モックの振る舞いを先にすべて設定する
         // ケース1の振る舞い

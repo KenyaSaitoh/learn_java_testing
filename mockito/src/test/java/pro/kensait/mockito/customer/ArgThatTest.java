@@ -15,7 +15,7 @@ import org.mockito.MockitoAnnotations;
  * 顧客サービス（CustomerService）をモック化するテストクラス
  * ArgumentMatchers（argThat()）によって、引数マッチングを行う
  */
-public class DynamicArgTest {
+public class ArgThatTest {
     // モック
     @Mock
     CustomerService mock;

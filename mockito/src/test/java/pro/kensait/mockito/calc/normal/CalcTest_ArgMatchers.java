@@ -1,6 +1,7 @@
 package pro.kensait.mockito.calc.normal;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -11,10 +12,9 @@ import org.mockito.MockitoAnnotations;
 
 /*
  * 計算機インタフェース（CaclIF）をモック化するテストクラス
- * インタフェースと実装は分離する
- * @Mockアノテーションでモック化する
+ * ArgumentMatchersによって、引数マッチングを行う
  */
-public class CalculatorTest_2 {
+public class CalcTest_ArgMatchers {
     // モック
     @Mock
     CalcIF mock;
@@ -26,31 +26,32 @@ public class CalculatorTest_2 {
         MockitoAnnotations.openMocks(this);
 
         // モックの振る舞いを先にすべて設定する
-        // ケース1の振る舞い
-        when(mock.compute(5, 10, 3)).thenReturn(50);
-        // ケース2の振る舞い
-        when(mock.compute(5, 10, 8)).thenReturn(100);
-        // ケース3の振る舞い（例外発生）
-        when(mock.compute(5, 10, -1)).thenThrow(new IllegalArgumentException());
+        // ケース1
+        when(mock.compute(anyInt(), anyInt(), eq(1))).thenReturn(50);
+        // ケース2
+        when(mock.compute(anyInt(), anyInt(), eq(2))).thenReturn(100);
+        // ケース3
+        when(mock.compute(anyInt(), anyInt(), eq(-1)))
+                .thenThrow(new IllegalArgumentException("エラー"));
     }
 
     @Test
     @DisplayName("ケース1の振る舞いをテストする")
-    void test_Case_1() {
-        int answer = mock.compute(5, 10, 3);
+    void testest_Case_1() {
+        int answer = mock.compute(0, 0, 1);
         assertEquals(50, answer);
     }
 
     @Test
     @DisplayName("ケース2の振る舞いをテストする")
-    void test_Case_2() {
-        int answer = mock.compute(5, 10, 8);
+    void testest_Case_2() {
+        int answer = mock.compute(0, 0, 2);
         assertEquals(100, answer);
     }
 
     @Test
     @DisplayName("ケース3の振る舞い（例外発生）をテストする")
-    void test_Case_3() {
-        assertThrows(IllegalArgumentException.class, () -> mock.compute(5, 10, -1));
+    void testest_Case_3() {
+        assertThrows(IllegalArgumentException.class, () -> mock.compute(0, 0, -1));
     }
 }

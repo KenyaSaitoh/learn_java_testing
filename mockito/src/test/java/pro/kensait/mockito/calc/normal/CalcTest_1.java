@@ -6,24 +6,21 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 /*
- * 計算機クラス（Calculator）をモック化するテストクラス
- * インタフェースと実装を分離しない
- * @Mockアノテーションでモック化する
+ * 計算機インタフェース（CaclIF）をモック化するテストクラス
+ * インタフェースと実装は分離する
+ * mock()メソッドでモック化する
  */
-public class CalculatorTest_3 {
+public class CalcTest_1 {
     // モック
-    @Mock
-    Calculator mock;
+    CalcIF mock;
 
     // 各テストケースで共通的な前処理
     @BeforeEach
     void setUp() {
-        // すべての@Mockアノテーションが付与されたフィールドをモック化する
-        MockitoAnnotations.openMocks(this);
+        // CalcIFのモックを生成する
+        mock = mock(CalcIF.class);
 
         // モックの振る舞いを先にすべて設定する
         // ケース1の振る舞い
@@ -51,6 +48,6 @@ public class CalculatorTest_3 {
     @Test
     @DisplayName("ケース3の振る舞い（例外発生）をテストする")
     void test_Case_3() {
-       assertThrows(IllegalArgumentException.class, () -> mock.compute(5, 10, -1));
+        assertThrows(IllegalArgumentException.class, () -> mock.compute(5, 10, -1));
     }
 }
