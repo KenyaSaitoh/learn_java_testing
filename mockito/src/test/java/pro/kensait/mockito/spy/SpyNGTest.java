@@ -1,4 +1,4 @@
-package pro.kensait.mockito.mocking;
+package pro.kensait.mockito.spy;
 
 import static org.mockito.Mockito.*;
 

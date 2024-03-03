@@ -11,7 +11,7 @@ import org.mockito.MockitoAnnotations;
 
 /*
  * 計算機クラス（Calculator）をモック化するテストクラス
- * インタフェースと実装は分離しない
+ * インタフェースと実装を分離しない
  * @Mockアノテーションでモック化する
  */
 public class CalculatorTest_3 {
@@ -31,7 +31,7 @@ public class CalculatorTest_3 {
         // ケース2の振る舞い
         when(mock.compute(5, 10, 8)).thenReturn(100);
         // ケース3の振る舞い（例外発生）
-        when(mock.compute(5, 10, -1)).thenThrow(new IllegalArgumentException("エラー"));
+        when(mock.compute(5, 10, -1)).thenThrow(new IllegalArgumentException());
     }
 
     @Test

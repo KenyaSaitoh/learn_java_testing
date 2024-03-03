@@ -14,7 +14,7 @@ import org.mockito.MockitoAnnotations;
  * 計算機インタフェース（CaclIF）をモック化するテストクラス
  * ArgumentMatchersによって、引数マッチングを行う
  */
-public class DynamicArgTest {
+public class ArgumentMatchersTest {
     // モック
     @Mock
     CalcIF mock;

@@ -28,7 +28,7 @@ public class CalculatorTest_1 {
         // ケース2の振る舞い
         when(mock.compute(5, 10, 8)).thenReturn(100);
         // ケース3の振る舞い（例外発生）
-        when(mock.compute(5, 10, -1)).thenThrow(new IllegalArgumentException("エラー"));
+        when(mock.compute(5, 10, -1)).thenThrow(new IllegalArgumentException());
     }
 
     @Test

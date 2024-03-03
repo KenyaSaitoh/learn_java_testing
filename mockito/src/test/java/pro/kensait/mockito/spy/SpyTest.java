@@ -1,13 +1,16 @@
-package pro.kensait.mockito.mocking;
+package pro.kensait.mockito.spy;
 
 import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import pro.kensait.mockito.util.MapUtil;
 
 /*
  * スパイの挙動を確認するテストクラス
@@ -21,13 +24,14 @@ public class SpyTest {
         // Mapインタフェースをスパイ化する
         Map<Integer, String> mapSpy = spy(Map.class);
 
-        // 振る舞いを設定する（when方式）
+        // 振る舞いを設定する（when-then方式）
         when(mapSpy.get(0)).thenReturn("foo");
         when(mapSpy.get(1)).thenReturn("bar");
         when(mapSpy.get(2)).thenReturn("baz");
 
-        // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
-        MapUtil.printEntries(mapSpy, Arrays.asList(0, 1, 2, 3), "test_Case_1");
+        // ユーティリティ（指定されたキーに対するエントリをMapから取り出してコンソール表示）
+        List<Integer> keyList = Arrays.asList(0, 1, 2, 3);
+        MapUtil.printEntry(mapSpy, keyList, "test_Case_1");
     }
 
     @Test
@@ -39,11 +43,12 @@ public class SpyTest {
         mapMock.put(1, "bar");
         mapMock.put(2, "baz");
 
-        // 振る舞いを設定する（when方式）
+        // 振る舞いを設定する（when-then方式）
         when(mapMock.get(2)).thenReturn("bazbaz");
 
-        // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
-        MapUtil.printEntries(mapMock, Arrays.asList(0, 1, 2), "test_Mock");
+        // ユーティリティ（指定されたキーに対するエントリをMapから取り出してコンソール表示）
+        List<Integer> keyList = Arrays.asList(0, 1, 2);
+        MapUtil.printEntry(mapMock, keyList, "test_Mock");
     }
 
     @Test
@@ -55,10 +60,10 @@ public class SpyTest {
         mapSpy.put(1, "bar");
         mapSpy.put(2, "baz");
 
-        // 振る舞いを設定する（when方式）
+        // 振る舞いを設定する（when-then方式）
         when(mapSpy.get(2)).thenReturn("bazbaz");
 
-        // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
-        MapUtil.printEntries(mapSpy, Arrays.asList(0, 1, 2), "test_Spy");
+        // ユーティリティ（指定されたキーに対するエントリをMapから取り出してコンソール表示）
+        MapUtil.printEntry(mapSpy, Arrays.asList(0, 1, 2), "test_Spy");
     }
 }

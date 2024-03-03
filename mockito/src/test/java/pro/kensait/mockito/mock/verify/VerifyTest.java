@@ -1,13 +1,16 @@
-package pro.kensait.mockito.mocking;
+package pro.kensait.mockito.mock.verify;
 
 import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
+
+import pro.kensait.mockito.util.MapUtil;
 
 /*
  * モックのコミュニケーションベース検証を確認するテストクラス
@@ -21,13 +24,14 @@ public class VerifyTest {
         // Mapインタフェースをモック化する
         Map<Integer, String> mapMock = mock(Map.class);
 
-        // 振る舞いを設定する（when方式）
+        // 振る舞いを設定する（when-then方式）
         when(mapMock.get(0)).thenReturn("foo");
         when(mapMock.get(1)).thenReturn("bar");
         when(mapMock.get(2)).thenReturn("baz");
 
-        // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
-        MapUtil.printEntries(mapMock, Arrays.asList(0, 0, 0), "test_Case_1");
+        // ユーティリティ（指定されたキーに対するエントリをMapから取り出してコンソール表示）
+        List<Integer> keyList = Arrays.asList(0, 0, 0);
+        MapUtil.printEntry(mapMock, keyList, "test_Case_1");
 
         // `get(0)`の呼び出し回数を検証する
         verify(mapMock, times(3)).get(0);
@@ -39,13 +43,14 @@ public class VerifyTest {
         // Mapインタフェースをモック化する
         Map<Integer, String> mapMock = mock(Map.class);
 
-        // 振る舞いを設定する（when方式）
+        // 振る舞いを設定する（when-then方式）
         when(mapMock.get(0)).thenReturn("foo");
         when(mapMock.get(1)).thenReturn("bar");
         when(mapMock.get(2)).thenReturn("baz");
 
-        // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
-        MapUtil.printEntries(mapMock, Arrays.asList(0, 0, 0), "test_Case_2");
+        // ユーティリティ（指定されたキーに対するエントリをMapから取り出してコンソール表示）
+        List<Integer> keyList = Arrays.asList(0, 0, 0);
+        MapUtil.printEntry(mapMock, keyList, "test_Case_2");
 
         // `get(0)`の呼び出し回数が最大でも5回であることを検証する
         verify(mapMock, atMost(5)).get(0);
@@ -57,13 +62,14 @@ public class VerifyTest {
         // Mapインタフェースをモック化する
         Map<Integer, String> mapMock = mock(Map.class);
 
-        // 振る舞いを設定する（when方式）
+        // 振る舞いを設定する（when-then方式）
         when(mapMock.get(0)).thenReturn("foo");
         when(mapMock.get(1)).thenReturn("bar");
         when(mapMock.get(2)).thenReturn("baz");
 
-        // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
-        MapUtil.printEntries(mapMock, Arrays.asList(0, 0, 0), "test_Case_3");
+        // ユーティリティ（指定されたキーに対するエントリをMapから取り出してコンソール表示）
+        List<Integer> keyList = Arrays.asList(0, 0, 0);
+        MapUtil.printEntry(mapMock, keyList, "test_Case_3");
 
         // `get(1)`の呼び出しが一度も行われていないことを検証する
         verify(mapMock, never()).get(1);
@@ -75,13 +81,14 @@ public class VerifyTest {
         // Mapインタフェースをモック化する
         Map<Integer, String> mapMock = mock(Map.class);
 
-        // 振る舞いを設定する（when方式）
+        // 振る舞いを設定する（when-then方式）
         when(mapMock.get(0)).thenReturn("foo");
         when(mapMock.get(1)).thenReturn("bar");
         when(mapMock.get(2)).thenReturn("baz");
 
-        // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
-        MapUtil.printEntries(mapMock, Arrays.asList(0, 1, 2), "test_Case_4");
+        // ユーティリティ（指定されたキーに対するエントリをMapから取り出してコンソール表示）
+        List<Integer> keyList = Arrays.asList(0, 1, 2);
+        MapUtil.printEntry(mapMock, keyList, "test_Case_4");
 
         // `get(0)`、`get(1)`、`get(2)`という順番に呼び出されていることを検証する
         InOrder inOrder = inOrder(mapMock);
