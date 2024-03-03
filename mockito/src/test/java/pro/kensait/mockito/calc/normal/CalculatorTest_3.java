@@ -14,7 +14,7 @@ import org.mockito.MockitoAnnotations;
  * インタフェースと実装は分離しない
  * @Mockアノテーションでモック化する
  */
-public class CalculatorTest3 {
+public class CalculatorTest_3 {
     // モック
     @Mock
     Calculator mock;

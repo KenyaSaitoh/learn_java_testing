@@ -6,8 +6,8 @@ import java.util.Map;
 /*
  * Mapからすべてのエントリを抽出し、コンソールに表示するユーティリティ
  */
-public class Util {
-    public static void extractEntry(Map<Integer, String> map, List<Integer> keyList,
+public class MapUtil {
+    public static void printEntries(Map<Integer, String> map, List<Integer> keyList,
             String name) {
         System.out.println("***** [ "+ name + " ] *****");
         for (Integer key : keyList) {

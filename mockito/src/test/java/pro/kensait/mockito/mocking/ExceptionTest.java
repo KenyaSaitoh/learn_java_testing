@@ -1,7 +1,6 @@
 package pro.kensait.mockito.mocking;
 
 import static org.mockito.Mockito.*;
-import static pro.kensait.mockito.mocking.Util.*;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -28,7 +27,7 @@ public class ExceptionTest {
         when(mapMock.get(2)).thenThrow(new RuntimeException());
 
         // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
-        extractEntry(mapMock, Arrays.asList(0, 1, 2), "test_Case_1");
+        MapUtil.printEntries(mapMock, Arrays.asList(0, 1, 2), "test_Case_1");
     }
 
     @Test
@@ -44,7 +43,7 @@ public class ExceptionTest {
                 new NoSuchElementException("3rd Exception"));
 
         // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
-        extractEntry(mapMock, Arrays.asList(0, 0, 0), "test_Case_2");
+        MapUtil.printEntries(mapMock, Arrays.asList(0, 0, 0), "test_Case_2");
     }
 
     @Test
@@ -57,7 +56,7 @@ public class ExceptionTest {
         doThrow(RuntimeException.class).when(mapMock).get(0);
 
         // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
-        extractEntry(mapMock, Arrays.asList(0, 0, 0), "test_Case_3");
+        MapUtil.printEntries(mapMock, Arrays.asList(0, 0, 0), "test_Case_3");
     }
 
     @Test
@@ -73,6 +72,6 @@ public class ExceptionTest {
                 .when(mapMock).get(0);
 
         // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
-        extractEntry(mapMock, Arrays.asList(0, 0, 0), "test_Case_4");
+        MapUtil.printEntries(mapMock, Arrays.asList(0, 0, 0), "test_Case_4");
     }
 }

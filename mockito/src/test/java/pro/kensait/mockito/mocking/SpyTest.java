@@ -1,7 +1,6 @@
 package pro.kensait.mockito.mocking;
 
 import static org.mockito.Mockito.*;
-import static pro.kensait.mockito.mocking.Util.*;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -28,7 +27,7 @@ public class SpyTest {
         when(mapSpy.get(2)).thenReturn("baz");
 
         // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
-        extractEntry(mapSpy, Arrays.asList(0, 1, 2, 3), "test_Case_1");
+        MapUtil.printEntries(mapSpy, Arrays.asList(0, 1, 2, 3), "test_Case_1");
     }
 
     @Test
@@ -44,7 +43,7 @@ public class SpyTest {
         when(mapMock.get(2)).thenReturn("bazbaz");
 
         // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
-        extractEntry(mapMock, Arrays.asList(0, 1, 2), "test_Mock");
+        MapUtil.printEntries(mapMock, Arrays.asList(0, 1, 2), "test_Mock");
     }
 
     @Test
@@ -60,6 +59,6 @@ public class SpyTest {
         when(mapSpy.get(2)).thenReturn("bazbaz");
 
         // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
-        extractEntry(mapSpy, Arrays.asList(0, 1, 2), "test_Spy");
+        MapUtil.printEntries(mapSpy, Arrays.asList(0, 1, 2), "test_Spy");
     }
 }

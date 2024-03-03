@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
  * インタフェースと実装は分離する
  * mock()メソッドでモック化する
  */
-public class CalculatorTest1 {
+public class CalculatorTest_1 {
     // モック
     CalcIF mock;
 

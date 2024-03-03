@@ -2,7 +2,6 @@ package pro.kensait.mockito.mocking;
 
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
-import static pro.kensait.mockito.mocking.Util.*;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -26,7 +25,7 @@ public class MatcherTest {
         when(mapMock.get(anyInt())).thenReturn("foo");
 
         // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
-        extractEntry(mapMock, Arrays.asList(0, 1, null), "test_Case_1");
+        MapUtil.printEntries(mapMock, Arrays.asList(0, 1, null), "test_Case_1");
     }
 
     @Test
@@ -39,7 +38,7 @@ public class MatcherTest {
         when(mapMock.get(any(Integer.class))).thenReturn("hoge");
 
         // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
-        extractEntry(mapMock, Arrays.asList(0, 1, null), "test_Case_2");
+        MapUtil.printEntries(mapMock, Arrays.asList(0, 1, null), "test_Case_2");
     }
 
     @Test
@@ -52,7 +51,7 @@ public class MatcherTest {
         when(mapMock.get(eq(1))).thenReturn("hoge");
 
         // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
-        extractEntry(mapMock, Arrays.asList(0, 1, null), "test_Case_3");
+        MapUtil.printEntries(mapMock, Arrays.asList(0, 1, null), "test_Case_3");
     }
 
     @Test
@@ -65,6 +64,6 @@ public class MatcherTest {
         when(mapMock.get(nullable(Integer.class))).thenReturn("hoge");
 
         // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
-        extractEntry(mapMock, Arrays.asList(0, 1, null), "test_Case_4");
+        MapUtil.printEntries(mapMock, Arrays.asList(0, 1, null), "test_Case_4");
     }
 }

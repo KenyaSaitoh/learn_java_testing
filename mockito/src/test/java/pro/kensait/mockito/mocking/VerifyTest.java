@@ -1,7 +1,6 @@
 package pro.kensait.mockito.mocking;
 
 import static org.mockito.Mockito.*;
-import static pro.kensait.mockito.mocking.Util.*;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -28,7 +27,7 @@ public class VerifyTest {
         when(mapMock.get(2)).thenReturn("baz");
 
         // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
-        extractEntry(mapMock, Arrays.asList(0, 0, 0), "test_Case_1");
+        MapUtil.printEntries(mapMock, Arrays.asList(0, 0, 0), "test_Case_1");
 
         // `get(0)`の呼び出し回数を検証する
         verify(mapMock, times(3)).get(0);
@@ -46,7 +45,7 @@ public class VerifyTest {
         when(mapMock.get(2)).thenReturn("baz");
 
         // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
-        extractEntry(mapMock, Arrays.asList(0, 0, 0), "test_Case_2");
+        MapUtil.printEntries(mapMock, Arrays.asList(0, 0, 0), "test_Case_2");
 
         // `get(0)`の呼び出し回数が最大でも5回であることを検証する
         verify(mapMock, atMost(5)).get(0);
@@ -64,7 +63,7 @@ public class VerifyTest {
         when(mapMock.get(2)).thenReturn("baz");
 
         // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
-        extractEntry(mapMock, Arrays.asList(0, 0, 0), "test_Case_3");
+        MapUtil.printEntries(mapMock, Arrays.asList(0, 0, 0), "test_Case_3");
 
         // `get(1)`の呼び出しが一度も行われていないことを検証する
         verify(mapMock, never()).get(1);
@@ -82,7 +81,7 @@ public class VerifyTest {
         when(mapMock.get(2)).thenReturn("baz");
 
         // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
-        extractEntry(mapMock, Arrays.asList(0, 1, 2), "test_Case_4");
+        MapUtil.printEntries(mapMock, Arrays.asList(0, 1, 2), "test_Case_4");
 
         // `get(0)`、`get(1)`、`get(2)`という順番に呼び出されていることを検証する
         InOrder inOrder = inOrder(mapMock);

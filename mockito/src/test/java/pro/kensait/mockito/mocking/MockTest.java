@@ -1,7 +1,6 @@
 package pro.kensait.mockito.mocking;
 
 import static org.mockito.Mockito.*;
-import static pro.kensait.mockito.mocking.Util.*;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -29,7 +28,7 @@ public class MockTest {
         when(mapMock.get(2)).thenReturn("baz");
 
         // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
-        extractEntry(mapMock, Arrays.asList(0, 1, 2, 3), "test_Case_1");
+        MapUtil.printEntries(mapMock, Arrays.asList(0, 1, 2, 3), "test_Case_1");
     }
 
     @Test
@@ -44,7 +43,7 @@ public class MockTest {
         when(mapMock.get(2)).thenReturn("baz");
 
         // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
-        extractEntry(mapMock, Arrays.asList(0, 1, 2, 3), "test_Case_2");
+        MapUtil.printEntries(mapMock, Arrays.asList(0, 1, 2, 3), "test_Case_2");
     }
 
     @Test
@@ -74,7 +73,7 @@ public class MockTest {
 
         // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
         List<Integer> keyList = Arrays.asList(0, 1, 2, 2, 1, 2, 2);
-        extractEntry(mapMock, keyList, "test_Case_5");
+        MapUtil.printEntries(mapMock, keyList, "test_Case_5");
     }
 
     @Test
@@ -89,6 +88,6 @@ public class MockTest {
         doReturn("baz").when(mapMock).get(2);
 
         // ユーティリティ呼び出し（Mapから指定されたキーを持つ値を取り出してコンソールに表示）
-        extractEntry(mapMock, Arrays.asList(0, 1, 2, 3), "test_Case_5");
+        MapUtil.printEntries(mapMock, Arrays.asList(0, 1, 2, 3), "test_Case_5");
     }
 }
