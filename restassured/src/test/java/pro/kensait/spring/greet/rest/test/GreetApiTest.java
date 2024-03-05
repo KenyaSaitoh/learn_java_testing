@@ -12,7 +12,7 @@ import io.restassured.http.ContentType;
 
 public class GreetApiTest {
 
-    // テストクラス実行の前処理
+    // テストクラス全体の前処理
     @BeforeAll
     public static void initAll() {
         RestAssured.port = 8080;

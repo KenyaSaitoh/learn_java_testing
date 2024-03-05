@@ -16,7 +16,7 @@ public class FeeServiceTest {
     // テスト対象クラス
     FeeService feeService;
 
-    // 各テストケースで共通的な前処理
+    // 各テストメソッドで共通的な前処理
     @BeforeEach
     void setUp() {
      // 共通フィクスチャを設定する

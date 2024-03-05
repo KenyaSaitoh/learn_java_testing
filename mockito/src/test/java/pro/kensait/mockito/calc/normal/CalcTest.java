@@ -14,12 +14,12 @@ import org.mockito.MockitoAnnotations;
  * インタフェースと実装を分離しない
  * @Mockアノテーションでモック化する
  */
-public class CalcTest_3 {
+public class CalcTest {
     // モック
     @Mock
     Calculator mock;
 
-    // 各テストケースで共通的な前処理
+    // 各テストメソッドで共通的な前処理
     @BeforeEach
     void setUp() {
         // すべての@Mockアノテーションが付与されたフィールドをモック化する

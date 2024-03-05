@@ -15,7 +15,7 @@ public class CalculatorTest_2 {
     // テスト対象クラス
     Calculator calc;
 
-    // 各テストケースで共通的な前処理
+    // 各テストメソッドで共通的な前処理
     @BeforeEach
     void setUp() {
         // 共通フィクスチャを設定する

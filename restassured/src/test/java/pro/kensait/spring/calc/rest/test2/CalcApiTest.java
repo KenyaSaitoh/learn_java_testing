@@ -13,7 +13,7 @@ import io.restassured.response.Response;
 
 public class CalcApiTest {
 
-    // テストクラス実行の前処理
+    // テストクラス全体の前処理
     @BeforeAll
     public static void initAll() {
         RestAssured.port = 8080; // ポート番号

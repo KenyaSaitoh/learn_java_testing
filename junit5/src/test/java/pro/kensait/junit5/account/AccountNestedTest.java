@@ -19,7 +19,7 @@ public class AccountNestedTest {
     @Nested // ネステッドクラスを表す
     @DisplayName("残高ゼロの口座に対するテスト")
     class BalanceZeroTest {
-        // ネステッドクラス内の各テストケースで共通的な前処理
+        // ネステッドクラス内の各テストメソッドで共通的な前処理
         @BeforeEach
         void setUp() {
             // 共通フィクスチャを設定する
@@ -55,7 +55,7 @@ public class AccountNestedTest {
     @Nested // ネステッドクラスを表す
     @DisplayName("残高ゼロ以外の口座に対するテスト")
     class BalanceNonZeroTest {
-        // ネステッドクラス内の各テストケースで共通的な前処理
+        // ネステッドクラス内の各テストメソッドで共通的な前処理
         @BeforeEach
         void setUp() {
             // 共通フィクスチャを設定する

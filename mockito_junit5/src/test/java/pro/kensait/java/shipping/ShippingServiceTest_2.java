@@ -39,7 +39,7 @@ public class ShippingServiceTest_2 {
     LocalDateTime orderDateTime;
     LocalDate receiveDate;
 
-    // 各テストケースで共通的な前処理
+    // 各テストメソッドで共通的な前処理
     @BeforeEach
     void setUp() {
         // モック化されたCostCalculatorの振る舞いを決める
@@ -66,7 +66,7 @@ public class ShippingServiceTest_2 {
         // GoldCustomerTestクラス内の各テストケースで共通的なフィクスチャ
         @Mock Client client;
 
-        // GoldCustomerTestクラス内の各テストケースで共通的な前処理
+        // GoldCustomerTestクラス内の各テストメソッドで共通的な前処理
         @BeforeEach
         void setUp() {
             // モック化されたClientの振る舞いを決める
@@ -140,7 +140,7 @@ public class ShippingServiceTest_2 {
         // DiamondCustomerTestクラス内の各テストケースで共通的なフィクスチャ
         @Mock Client client;
 
-        // DiamondCustomerTestクラス内の各テストケースで共通的な前処理
+        // DiamondCustomerTestクラス内の各テストメソッドで共通的な前処理
         @BeforeEach
         void setUp() {
             // モック化されたClientの振る舞いを決める（ダイヤモンド会員）

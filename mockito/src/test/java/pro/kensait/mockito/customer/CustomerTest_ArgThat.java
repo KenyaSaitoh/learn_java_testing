@@ -15,12 +15,12 @@ import org.mockito.MockitoAnnotations;
  * 顧客サービス（CustomerService）をモック化するテストクラス
  * ArgumentMatchers（argThat()）によって、引数マッチングを行う
  */
-public class ArgThatTest {
+public class CustomerTest_ArgThat {
     // モック
     @Mock
     CustomerService mock;
 
-    // 各テストケースで共通的な前処理
+    // 各テストメソッドで共通的な前処理
     @BeforeEach
     void setUp() {
         // すべての@Mockアノテーションが付与されたフィールドをモック化する
@@ -30,12 +30,10 @@ public class ArgThatTest {
         // 顧客種別が一般会員の場合の振る舞い
         ArgumentMatcher<Customer> isGeneral = arg -> arg.getCustomerType() == CustomerType.GENERAL;
         doReturn(500).when(mock).calcDeliveryFee(argThat(isGeneral));
-        //when(mock.calcDeliveryFee(argThat(isGeneral))).thenReturn(500);
 
         // 顧客種別がゴールド会員の場合の振る舞い
         ArgumentMatcher<Customer> isGold =  arg -> arg.getCustomerType() == CustomerType.GOLD;
         doReturn(300).when(mock).calcDeliveryFee(argThat(isGold));
-        //when(mock.calcDeliveryFee(argThat(isGold))).thenReturn(300);
     }
 
     @Test

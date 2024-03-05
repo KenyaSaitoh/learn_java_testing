@@ -14,7 +14,7 @@ import com.codeborne.selenide.Selenide;
 
 class BookStoreTest_2 {
 
-    // テストクラス実行の前処理
+    // テストクラス全体の前処理
     @BeforeAll
     static void initAll() {
         // 現在日付と時刻をyyyyMMddHHmmssのフォーマットで取得する

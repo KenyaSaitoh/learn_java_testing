@@ -12,17 +12,15 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.stubbing.Answer;
 
 /*
- * 計算機インタフェース（CaclIF）をモック化するテストクラス
- * インタフェースと実装は分離する
- * @Mockアノテーションでモック化する
+ * 計算機クラス（Calculator）をモック化するテストクラス
  * 戻り値は引数に応じて動的に決まるものとする
  */
 public class CalcTest_DynamicAnswer {
     // モック
     @Mock
-    CalcIF mock;
+    Calculator mock;
 
-    // 各テストケースで共通的な前処理
+    // 各テストメソッドで共通的な前処理
     @BeforeEach
     void setUp() {
         // すべての@Mockアノテーションが付与されたフィールドをモック化する

@@ -27,7 +27,7 @@ public class ShippingServiceMockingTest {
     LocalDateTime orderDateTime;
     LocalDate receiveDate;
 
-    // 各テストケースで共通的な前処理
+    // 各テストメソッドで共通的な前処理
     @BeforeEach
     void setUp() {
         // テストダブルを生成する
@@ -51,7 +51,7 @@ public class ShippingServiceMockingTest {
         // GoldCustomerTestクラス内の各テストケースで共通的なフィクスチャ
         Client client;
 
-        // GoldCustomerTestクラス内の各テストケースで共通的な前処理
+        // GoldCustomerTestクラス内の各テストメソッドで共通的な前処理
         @BeforeEach
         void setUp() {
             // ゴールド会員のインスタンスを生成する
@@ -126,7 +126,7 @@ public class ShippingServiceMockingTest {
         // DiamondCustomerTestクラス内の各テストケースで共通的なフィクスチャ
         Client client;
 
-        // DiamondCustomerTestクラス内の各テストケースで共通的な前処理
+        // DiamondCustomerTestクラス内の各テストメソッドで共通的な前処理
         @BeforeEach
         void setUp() {
             // ダイヤモンド会員のインスタンスを生成する

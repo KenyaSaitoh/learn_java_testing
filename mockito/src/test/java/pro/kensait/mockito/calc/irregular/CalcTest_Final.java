@@ -16,7 +16,7 @@ public class CalcTest_Final {
     @Mock
     FinalCalc mock;
 
-    // 各テストケースで共通的な前処理
+    // 各テストメソッドで共通的な前処理
     @BeforeEach
     void setUp() {
         // すべての@Mockアノテーションが付与されたフィールドをモック化する

@@ -12,13 +12,13 @@ import org.junit.jupiter.api.Test;
  */
 public class NestedLifeCycleTest {
 
-    // テストクラス実行の前処理【1】
+    // テストクラス全体の前処理【1】
     @BeforeAll
     static void initAll() {
         System.out.println("テストクラス全体の@BeforeAll【1】");
     }
 
-    // テストクラス全体の各テストケースで共通的な前処理【2】
+    // テストクラス全体の各テストメソッドで共通的な前処理【2】
     @BeforeEach
     void setUp() {
         System.out.println("テストクラス全体の@BeforeEach【2】");
@@ -26,7 +26,7 @@ public class NestedLifeCycleTest {
 
     @Nested
     class NestedClass1 {
-        // ネステッドクラス内の各テストケースで共通的な前処理【3】
+        // ネステッドクラス内の各テストメソッドで共通的な前処理【3】
         @BeforeEach
         void setUp() {
             System.out.println("NestedClass1の@BeforeEach【3】");
@@ -44,7 +44,7 @@ public class NestedLifeCycleTest {
             System.out.println("テストケース2【5】");
         }
 
-        // ネステッドクラス内の各テストケースで共通的な後処理【6】
+        // ネステッドクラス内の各テストメソッドで共通的な後処理【6】
         @AfterEach
         void tearDown() {
             System.out.println("NestedClass1の@AfterEach【6】");
@@ -53,7 +53,7 @@ public class NestedLifeCycleTest {
 
     @Nested
     class NestedClass2 {
-        // ネステッドクラス内の各テストケースで共通的な前処理【7】
+        // ネステッドクラス内の各テストメソッドで共通的な前処理【7】
         @BeforeEach
         void setUp() {
             System.out.println("NestedClass2の@BeforeEach【7】");
@@ -71,20 +71,20 @@ public class NestedLifeCycleTest {
             System.out.println("テストケース4【9】");
         }
 
-        // ネステッドクラス内の各テストケースで共通的な後処理【10】
+        // ネステッドクラス内の各テストメソッドで共通的な後処理【10】
         @AfterEach
         void tearDown() {
             System.out.println("NestedClass2の@AfterEach【10】");
         }
     }
 
-    // テストクラス全体の各テストケースで共通的な後処理【11】
+    // テストクラス全体の各テストメソッドで共通的な後処理【11】
     @AfterEach
     void tearDown() {
         System.out.println("テストクラス全体の@AfterEach【11】");
     }
 
-    // テストクラス実行の後処理【12】
+    // テストクラス全体の後処理【12】
     @AfterAll
     static void cleanupAll() {
         System.out.println("テストクラス全体の@AfterAll【12】");

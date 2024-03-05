@@ -34,7 +34,7 @@ public class ShippingServiceTest_1 {
     LocalDateTime orderDateTime;
     LocalDate receiveDate;
 
-    // 各テストケースで共通的な前処理
+    // 各テストメソッドで共通的な前処理
     @BeforeEach
     void setUp() {
         // モックを初期化する（@Mockが付与されたフィールドをモック化する）
@@ -62,7 +62,7 @@ public class ShippingServiceTest_1 {
         // GoldCustomerTestクラス内の各テストケースで共通的なフィクスチャ
         Client client;
 
-        // GoldCustomerTestクラス内の各テストケースで共通的な前処理
+        // GoldCustomerTestクラス内の各テストメソッドで共通的な前処理
         @BeforeEach
         void setUp() {
             // ゴールド会員のインスタンスを生成する
@@ -137,7 +137,7 @@ public class ShippingServiceTest_1 {
         // DiamondCustomerTestクラス内の各テストケースで共通的なフィクスチャ
         Client client;
 
-        // DiamondCustomerTestクラス内の各テストケースで共通的な前処理
+        // DiamondCustomerTestクラス内の各テストメソッドで共通的な前処理
         @BeforeEach
         void setUp() {
             // ダイヤモンド会員のインスタンスを生成する

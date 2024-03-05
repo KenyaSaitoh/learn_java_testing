@@ -11,13 +11,13 @@ import org.junit.jupiter.api.Test;
  */
 public class LifeCycleTest {
 
-    // テストクラス実行の前処理
+    // テストクラス全体の前処理
     @BeforeAll
     static void initAll() {
         System.out.println("@BeforeAll");
     }
 
-    // 各テストケースで共通的な前処理
+    // 各テストメソッドで共通的な前処理
     @BeforeEach
     void setUp() {
         System.out.println("@BeforeEach");
@@ -35,13 +35,13 @@ public class LifeCycleTest {
         System.out.println("テストケース2");
     }
 
-    // 各テストケースで共通的な後処理
+    // 各テストメソッドで共通的な後処理
     @AfterEach
     void tearDown() {
         System.out.println("@AfterEach");
     }
 
-    // テストクラス実行の後処理
+    // テストクラス全体の後処理
     @AfterAll
     static void cleanupAll() {
         System.out.println("@AfterAll");

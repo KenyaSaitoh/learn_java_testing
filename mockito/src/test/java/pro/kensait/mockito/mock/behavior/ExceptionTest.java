@@ -58,7 +58,7 @@ public class ExceptionTest {
         Map<Integer, String> mapMock = mock(Map.class);
 
         // 振る舞いを設定する（do-when方式）
-        doThrow(RuntimeException.class).when(mapMock).get(0);
+        doThrow(RuntimeException.class).when(mapMock).get(2);
 
         // ユーティリティ（指定されたキーに対するエントリをMapから取り出してコンソール表示）
         List<Integer> keyList = Arrays.asList(0, 0, 0);
