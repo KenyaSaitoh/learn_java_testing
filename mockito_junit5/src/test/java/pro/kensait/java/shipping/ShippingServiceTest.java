@@ -27,7 +27,7 @@ public class ShippingServiceTest {
     @Mock
     CostCalculatorIF costCalculator;
 
-    // 各テストケースで共通的なフィクスチャ
+    // テスト対象クラスの引数（モック化対象）
     @Mock
     Baggage baggage;
 
@@ -63,6 +63,7 @@ public class ShippingServiceTest {
     @DisplayName("ゴールド会員のテスト")
     class GoldCustomerTest {
         // GoldCustomerTestクラス内の各テストケースで共通的なフィクスチャ
+        // テスト対象クラスの引数（モック化対象）
         @Mock
         Client client;
 
@@ -141,6 +142,7 @@ public class ShippingServiceTest {
     @DisplayName("ダイヤモンド会員のテスト")
     class DiamondCustomerTest {
         // DiamondCustomerTestクラス内の各テストケースで共通的なフィクスチャ
+        // テスト対象クラスの引数（モック化対象）
         @Mock
         Client client;
 

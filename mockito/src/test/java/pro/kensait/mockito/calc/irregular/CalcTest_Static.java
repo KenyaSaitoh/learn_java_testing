@@ -15,18 +15,18 @@ public class CalcTest_Static {
 
     // テストクラス全体の前処理
     @BeforeAll
-    static void configureStaticMocks() {
+    static void initAll() {
         // CalcUtilクラスのスタティックモックを生成する
         MockedStatic<CalcUtil> mock = mockStatic(CalcUtil.class);
 
-        // モックの振る舞いを先にすべて設定する
+        // モックの疑似的な振る舞いをすべて設定する（暗黙的セットアップ）
         // ケース1
         mock.when(() -> CalcUtil.compute(5, 10, 3)).thenReturn(50);
         // ケース2
         mock.when(() -> CalcUtil.compute(5, 10, 8)).thenReturn(100);
         // ケース3
         mock.when(() -> CalcUtil.compute(5, 10, -1))
-                .thenThrow(new IllegalArgumentException("エラー"));
+                .thenThrow(new IllegalArgumentException());
     }
 
     @Test

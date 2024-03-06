@@ -4,21 +4,23 @@ package pro.kensait.mockito.calc.stateful;
  * 状態を保持する計算機を表すクラス（テスト対象）
  */
 public class StatefulCalc {
-    private int x;
-    private int y;
-    private int z;
+    private final int x;
+    private final int y;
 
-    public StatefulCalc(int x, int y, int z) {
+    public StatefulCalc(int x, int y) {
         this.x = x;
         this.y = y;
-        this.z = z;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public int compute() {
-        int answer = (x + y) * z;
-        if (answer < 0) {
-            throw new IllegalArgumentException("引数不正");
-        }
-        return answer;
+        return x * y;
     }
 }

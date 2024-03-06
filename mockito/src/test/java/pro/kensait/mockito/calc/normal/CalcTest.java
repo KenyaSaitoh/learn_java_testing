@@ -25,7 +25,7 @@ public class CalcTest {
         // すべての@Mockアノテーションが付与されたフィールドをモック化する
         MockitoAnnotations.openMocks(this);
 
-        // モックの振る舞いを先にすべて設定する
+        // モックの疑似的な振る舞いをすべて設定する（暗黙的セットアップ）
         // ケース1の振る舞い
         when(mock.compute(5, 10, 3)).thenReturn(50);
         // ケース2の振る舞い

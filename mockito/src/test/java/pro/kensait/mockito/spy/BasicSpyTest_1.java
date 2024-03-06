@@ -69,4 +69,24 @@ public class BasicSpyTest_1 {
         List<Integer> keyList = Arrays.asList(0, 1, 2, 3);
         MapUtil.printEntry(spy, keyList, "test_Case_3");
     }
+
+    @Test
+    @DisplayName("スパイ化したHashMapに対して値を追加した場合の挙動を確認する")
+    void test_Case_4() {
+
+        Map<Integer, String> map = new HashMap<>();
+        map.put(0, "foo");
+        map.put(1, "bar");
+        map.put(2, "baz");
+
+        // HashMapクラスをスパイ化する
+        Map<Integer, String> spy = spy(map);
+
+        // 振る舞いを設定する（when-then方式）
+        when(spy.get(2)).thenReturn("bazbaz");
+
+        // ユーティリティ（指定されたキーに対するエントリをMapから取り出してコンソール表示）
+        List<Integer> keyList = Arrays.asList(0, 1, 2, 3);
+        MapUtil.printEntry(spy, keyList, "test_Case_4");
+    }
 }
