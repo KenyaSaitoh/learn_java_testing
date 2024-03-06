@@ -25,6 +25,7 @@ import org.dbunit.ext.mysql.MySqlDataTypeFactory;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -37,21 +38,22 @@ public class ShippingServiceTest {
     // DBUnitが使用するデータ格納ディレクトリ
     private static final String EXPECTED_DATA_DIR = "src/test/resources/EXPECTED_DATA";
 
-    // 各テストケースで共通的なフィクスチャを、フィールドとして宣言する
     // テスト対象クラス
     ShippingService shippingService;
 
-    // テスト対象クラスの呼び出し先（@Mockを付与してモック化）
-    @Mock CostCalculatorIF costCalculator;
+    // テスト対象クラスの呼び出し先
+    @Mock
+    CostCalculatorIF costCalculator;
+
+    // テスト対象クラスの引数（モック化対象）
+    @Mock
+    Baggage baggage;
 
     // DBユニットのためのフィクスチャ
     IDatabaseTester databaseTester;
     IDatabaseConnection databaseConnection;
 
     // その他の各テストメソッドで共通的なフィクスチャ
-    Client goldClient;
-    Client diamondClient;
-    Baggage baggage;
     LocalDateTime orderDateTime;
     LocalDate receiveDate;
 
@@ -61,15 +63,17 @@ public class ShippingServiceTest {
         // モックを初期化する（@Mockが付与されたフィールドをモック化する）
         MockitoAnnotations.openMocks(this);
 
+        // モック化されたCostCalculatorの振る舞いを決める
+        when(costCalculator.calcShippingCost(
+                nullable(BaggageType.class), nullable(RegionType.class))).thenReturn(1600);
+
         // モックをテスト対象クラスに注入する
         shippingService = new ShippingService(costCalculator);
 
-        // 共通フィクスチャを設定する
-        goldClient = new Client(10001, "Alice", "福岡県福岡市1-1-1",
-                ClientType.GOLD, RegionType.KYUSHU);
-        diamondClient = new Client(10001, "Alice", "福岡県福岡市1-1-1",
-                ClientType.DIAMOND, RegionType.KYUSHU);
-        baggage = new Baggage(BaggageType.MIDDLE, false);
+        // モック化されたBaggageの振る舞いを決める
+        when(baggage.baggageType()).thenReturn(BaggageType.MIDDLE);
+
+        // その他の共通的なフィクスチャを設定する
         orderDateTime = LocalDateTime.now();
         receiveDate = LocalDate.of(2023, 11, 30);
     }
@@ -102,33 +106,52 @@ public class ShippingServiceTest {
         databaseTester.onSetup();
     }
 
-    @Test
-    @DisplayName("ダイヤモンド会員で、割引になった場合（下限に到達せず）の更新結果をテストする")
-    void test_OrderShipping_DiamondCustomer_Discount_NoLimit() throws Exception {
-        // モック化されたCostCalculatorの振る舞いを決める
-        when(costCalculator.calcShippingCost(
-                any(BaggageType.class), any(RegionType.class))).thenReturn(1600);
+    @Nested
+    @DisplayName("ダイヤモンド会員のテスト")
+    class DiamondCustomerTest {
+        // DiamondCustomerTestクラス内の各テストケースで共通的なフィクスチャ
+        // テスト対象クラスの引数（モック化対象）
+        @Mock
+        Client client;
 
-        // 引数である荷物リストを生成する（テストメソッド毎に個数が異なる）
-        List<Baggage> baggageList = Arrays.asList(baggage, baggage, baggage);
+        // DiamondCustomerTestクラス内の各テストメソッドで共通的な前処理
+        @BeforeEach
+        void setUp() {
+            // モックを初期化する（@Mockが付与されたフィールドをモック化する）
+            MockitoAnnotations.openMocks(this);
 
-        // テスト実行
-        shippingService.orderShipping(diamondClient, receiveDate, baggageList);
+            // モック化されたClientの振る舞いを決める（ダイヤモンド会員）
+            when(client.clientType()).thenReturn(ClientType.DIAMOND);
+        }
 
-        // ORDER_DATE_TIME列を検証の対象外にするために、配列を用意する
-        String[] excludedColumns = new String[]{"ORDER_DATE_TIME"};
+        @Test
+        @DisplayName("ダイヤモンド会員で、割引になった場合（下限に到達せず）の更新結果をテストする")
+        void test_OrderShipping_DiamondCustomer_Discount_NoLimit() throws Exception {
+            // モック化されたCostCalculatorの振る舞いを決める
+            when(costCalculator.calcShippingCost(
+                    any(BaggageType.class), any(RegionType.class))).thenReturn(1600);
 
-        // 期待値となるテーブル（ORDER_DATE_TIME列除く）を取得する
-        IDataSet expectedDataSet = new CsvDataSet(new File(EXPECTED_DATA_DIR));
-        ITable expectedTable = DefaultColumnFilter.excludedColumnsTable(
-                expectedDataSet.getTable("SHIPPING"), excludedColumns);
+            // 引数である荷物リストを生成する（テストメソッド毎に個数が異なる）
+            List<Baggage> baggageList = Arrays.asList(baggage, baggage, baggage);
 
-        // 実測値となるテーブル（ORDER_DATE_TIME列除く）を取得する
-        IDataSet databaseDataSet = databaseTester.getConnection().createDataSet();
-        ITable actualTable = DefaultColumnFilter.excludedColumnsTable(
-                databaseDataSet.getTable("SHIPPING"), excludedColumns);
+            // テスト実行
+            shippingService.orderShipping(client, receiveDate, baggageList);
 
-        // 期待値と実測値が一致しているかを検証する
-        assertEquals(expectedTable, actualTable);
+            // ORDER_DATE_TIME列を検証の対象外にするために、配列を用意する
+            String[] excludedColumns = new String[]{"ORDER_DATE_TIME"};
+
+            // 期待値となるテーブル（ORDER_DATE_TIME列除く）を取得する
+            IDataSet expectedDataSet = new CsvDataSet(new File(EXPECTED_DATA_DIR));
+            ITable expectedTable = DefaultColumnFilter.excludedColumnsTable(
+                    expectedDataSet.getTable("SHIPPING"), excludedColumns);
+
+            // 実測値となるテーブル（ORDER_DATE_TIME列除く）を取得する
+            IDataSet databaseDataSet = databaseTester.getConnection().createDataSet();
+            ITable actualTable = DefaultColumnFilter.excludedColumnsTable(
+                    databaseDataSet.getTable("SHIPPING"), excludedColumns);
+
+            // 期待値と実測値が一致しているかを検証する
+            assertEquals(expectedTable, actualTable);
+        }
     }
 }

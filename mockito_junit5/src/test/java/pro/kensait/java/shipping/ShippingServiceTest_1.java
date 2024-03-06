@@ -60,6 +60,7 @@ public class ShippingServiceTest_1 {
     @DisplayName("ゴールド会員のテスト")
     class GoldCustomerTest {
         // GoldCustomerTestクラス内の各テストケースで共通的なフィクスチャ
+        // テスト対象クラスの引数（モック化対象）
         Client client;
 
         // GoldCustomerTestクラス内の各テストメソッドで共通的な前処理
@@ -135,6 +136,7 @@ public class ShippingServiceTest_1 {
     @DisplayName("ダイヤモンド会員のテスト")
     class DiamondCustomerTest {
         // DiamondCustomerTestクラス内の各テストケースで共通的なフィクスチャ
+        // テスト対象クラスの引数（モック化対象）
         Client client;
 
         // DiamondCustomerTestクラス内の各テストメソッドで共通的な前処理
