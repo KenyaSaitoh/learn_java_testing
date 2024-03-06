@@ -19,6 +19,13 @@ import pro.kensait.mockito.util.MapUtil;
 public class BasicMockTest_1 {
 
     @Test
+    void test_Case_0() {
+        Map<Integer, String> mock = mock(HashMap.class);
+        mock.put(0, "foo");
+        System.out.println(mock.get(0));
+    }
+
+    @Test
     @DisplayName("when-then方式：モックの基本的な挙動を確認する（インタフェース）")
     void test_Case_1() {
         // Mapインタフェースをモック化する
@@ -110,5 +117,25 @@ public class BasicMockTest_1 {
         // ユーティリティ（指定されたキーに対するエントリをMapから取り出してコンソール表示）
         List<Integer> keyList = Arrays.asList(0, 1, 2, 2, 1, 2, 2);
         MapUtil.printEntry(mock, keyList, "test_Case_6");
+    }
+
+    @Test
+    @DisplayName("do-when方式：戻り値がない振る舞いの挙動を確認する")
+    void test_Case_7() {
+        // Mapインタフェースをモック化する
+        Map<Integer, String> mock = mock(HashMap.class);
+
+        // 振る舞いを設定する（do-when方式）
+        doReturn("foo").when(mock).get(0);
+        doReturn("bar").when(mock).get(1);
+        doReturn("baz").when(mock).get(2);
+        // 敢えて以下のようにdoNothing()を使わなくても、そもそもモックではclear()は動作しないため
+        // 意味がない（意味があるのはスパイの場合）
+        // doNothing().when(mock).clear(); // clear()が呼び出されても何もしない
+
+        // ユーティリティ（指定されたキーに対するエントリをMapから取り出してコンソール表示）
+        mock.clear();
+        List<Integer> keyList = Arrays.asList(0, 1, 2);
+        MapUtil.printEntry(mock, keyList, "test_Case_7");
     }
 }

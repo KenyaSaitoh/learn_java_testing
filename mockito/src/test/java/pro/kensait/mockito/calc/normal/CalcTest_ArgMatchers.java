@@ -33,7 +33,7 @@ public class CalcTest_ArgMatchers {
         when(mock.compute(any(Integer.class), nullable(Integer.class), eq(2)))
                 .thenReturn(200);
         // 振る舞い3
-        when(mock.compute(any(Integer.class), isNull(), eq(3)))
+        when(mock.compute(any(Integer.class), isNull(Integer.class), eq(3)))
                 .thenReturn(300);
         // 振る舞い4
         when(mock.compute(argThat(arg -> arg < 0), nullable(Integer.class), anyInt()))
@@ -41,7 +41,7 @@ public class CalcTest_ArgMatchers {
 
         /*
          * 注意点1
-         * 以下のようにもう一つ追加でwhen-then方式の振る舞い設定を追加し、
+         * 以下のようにもう一つwhen-then方式の振る舞いを追加で設定し、
          * 第1引数に別のargThat()によるマッチングを指定すると、
          * このときに事前に設定した振る舞い4のwhen()がマッチ呼び出されてしまう。
          * 振る舞い4のwhen()では、argがnullで渡されるため、NullPointerExceptionが発生してしまう。
@@ -73,7 +73,7 @@ public class CalcTest_ArgMatchers {
     @Test
     @DisplayName("振る舞い2にマッチ")
     void testest_Case_2() {
-        int answer = mock.compute(0, null, 2);
+        int answer = mock.compute(0, 0, 2);
         assertEquals(200, answer);
     }
 

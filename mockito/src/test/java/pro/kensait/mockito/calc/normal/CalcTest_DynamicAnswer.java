@@ -31,14 +31,15 @@ public class CalcTest_DynamicAnswer {
             int x = invocation.getArgument(0); // 第1引数
             int y = invocation.getArgument(1); // 第2引数
             int z = invocation.getArgument(2); // 第3引数
-            if (z == -1)
-                throw new IllegalArgumentException("エラー");
+            if (z < 0)
+                throw new IllegalArgumentException();
             // 3つの引数から、その合計値を返すように振る舞いを設定する
             return x + y + z;
         };
 
         // モックの振る舞いを設定する（すべての振る舞いはAnswerで決まる）
-        when(mock.compute(anyInt(), anyInt(), anyInt())).thenAnswer(answer);
+        when(mock.compute(any(Integer.class), any(Integer.class), anyInt())).thenAnswer(answer);
+        // doAnswer(answer).when(mock).compute(any(Integer.class), any(Integer.class), anyInt());
     }
 
     @Test

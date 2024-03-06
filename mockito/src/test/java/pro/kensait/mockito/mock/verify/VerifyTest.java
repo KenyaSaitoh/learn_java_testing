@@ -19,81 +19,100 @@ import pro.kensait.mockito.util.MapUtil;
 public class VerifyTest {
 
     @Test
-    @DisplayName("メソッド呼び出し回数を検証する")
+    @DisplayName("モックのメソッドが呼び出されたかを検証する")
     void test_Case_1() {
         // Mapインタフェースをモック化する
-        Map<Integer, String> mapMock = mock(Map.class);
+        Map<Integer, String> mock = mock(Map.class);
 
         // 振る舞いを設定する（when-then方式）
-        when(mapMock.get(0)).thenReturn("foo");
-        when(mapMock.get(1)).thenReturn("bar");
-        when(mapMock.get(2)).thenReturn("baz");
+        when(mock.get(0)).thenReturn("foo");
+        when(mock.get(1)).thenReturn("bar");
+        when(mock.get(2)).thenReturn("baz");
+
+        // ユーティリティ（指定されたキーに対するエントリをMapから取り出してコンソール表示）
+        List<Integer> keyList = Arrays.asList(0);
+        MapUtil.printEntry(mock, keyList, "test_Case_1");
+
+        // `get(0)`が一度だけ呼び出されたかを検証する
+        verify(mock).get(0);
+    }
+
+    @Test
+    @DisplayName("メソッド呼び出し回数を検証する")
+    void test_Case_2() {
+        // Mapインタフェースをモック化する
+        Map<Integer, String> mock = mock(Map.class);
+
+        // 振る舞いを設定する（when-then方式）
+        when(mock.get(0)).thenReturn("foo");
+        when(mock.get(1)).thenReturn("bar");
+        when(mock.get(2)).thenReturn("baz");
 
         // ユーティリティ（指定されたキーに対するエントリをMapから取り出してコンソール表示）
         List<Integer> keyList = Arrays.asList(0, 0, 0);
-        MapUtil.printEntry(mapMock, keyList, "test_Case_1");
+        MapUtil.printEntry(mock, keyList, "test_Case_2");
 
         // `get(0)`の呼び出し回数を検証する
-        verify(mapMock, times(3)).get(0);
+        verify(mock, times(3)).get(0);
     }
 
     @Test
     @DisplayName("メソッド呼び出し回数が特定の範囲内であることを検証する")
-    void test_Case_2() {
+    void test_Case_3() {
         // Mapインタフェースをモック化する
-        Map<Integer, String> mapMock = mock(Map.class);
+        Map<Integer, String> mock = mock(Map.class);
 
         // 振る舞いを設定する（when-then方式）
-        when(mapMock.get(0)).thenReturn("foo");
-        when(mapMock.get(1)).thenReturn("bar");
-        when(mapMock.get(2)).thenReturn("baz");
+        when(mock.get(0)).thenReturn("foo");
+        when(mock.get(1)).thenReturn("bar");
+        when(mock.get(2)).thenReturn("baz");
 
         // ユーティリティ（指定されたキーに対するエントリをMapから取り出してコンソール表示）
         List<Integer> keyList = Arrays.asList(0, 0, 0);
-        MapUtil.printEntry(mapMock, keyList, "test_Case_2");
+        MapUtil.printEntry(mock, keyList, "test_Case_3");
 
         // `get(0)`の呼び出し回数が最大でも5回であることを検証する
-        verify(mapMock, atMost(5)).get(0);
+        verify(mock, atMost(5)).get(0);
     }
 
     @Test
     @DisplayName("メソッド呼び出しが一度も行われていないことを検証する")
-    void test_Case_3() {
+    void test_Case_4() {
         // Mapインタフェースをモック化する
-        Map<Integer, String> mapMock = mock(Map.class);
+        Map<Integer, String> mock = mock(Map.class);
 
         // 振る舞いを設定する（when-then方式）
-        when(mapMock.get(0)).thenReturn("foo");
-        when(mapMock.get(1)).thenReturn("bar");
-        when(mapMock.get(2)).thenReturn("baz");
+        when(mock.get(0)).thenReturn("foo");
+        when(mock.get(1)).thenReturn("bar");
+        when(mock.get(2)).thenReturn("baz");
 
         // ユーティリティ（指定されたキーに対するエントリをMapから取り出してコンソール表示）
         List<Integer> keyList = Arrays.asList(0, 0, 0);
-        MapUtil.printEntry(mapMock, keyList, "test_Case_3");
+        MapUtil.printEntry(mock, keyList, "test_Case_4");
 
         // `get(1)`の呼び出しが一度も行われていないことを検証する
-        verify(mapMock, never()).get(1);
+        verify(mock, never()).get(1);
     }
 
     @Test
     @DisplayName("メソッド呼び出しが順番通りであることを検証する")
-    void test_Case_4() {
+    void test_Case_5() {
         // Mapインタフェースをモック化する
-        Map<Integer, String> mapMock = mock(Map.class);
+        Map<Integer, String> mock = mock(Map.class);
 
         // 振る舞いを設定する（when-then方式）
-        when(mapMock.get(0)).thenReturn("foo");
-        when(mapMock.get(1)).thenReturn("bar");
-        when(mapMock.get(2)).thenReturn("baz");
+        when(mock.get(0)).thenReturn("foo");
+        when(mock.get(1)).thenReturn("bar");
+        when(mock.get(2)).thenReturn("baz");
 
         // ユーティリティ（指定されたキーに対するエントリをMapから取り出してコンソール表示）
         List<Integer> keyList = Arrays.asList(0, 1, 2);
-        MapUtil.printEntry(mapMock, keyList, "test_Case_4");
+        MapUtil.printEntry(mock, keyList, "test_Case_5");
 
         // `get(0)`、`get(1)`、`get(2)`という順番に呼び出されていることを検証する
-        InOrder inOrder = inOrder(mapMock);
-        inOrder.verify(mapMock).get(0);
-        inOrder.verify(mapMock).get(1);
-        inOrder.verify(mapMock).get(2);
+        InOrder inOrder = inOrder(mock);
+        inOrder.verify(mock).get(0);
+        inOrder.verify(mock).get(1);
+        inOrder.verify(mock).get(2);
     }
 }

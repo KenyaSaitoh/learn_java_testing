@@ -22,22 +22,22 @@ public class DoNothingTest {
     @DisplayName("メソッドは呼び出したが、何も行なわれないことを確認する")
     void test() {
         // HashMapクラスをスパイ化する
-        Map<Integer, String> mapSpy = spy(HashMap.class);
-        mapSpy.put(0, "foo");
-        mapSpy.put(1, "bar");
-        mapSpy.put(2, "baz");
+        Map<Integer, String> spy = spy(HashMap.class);
+        spy.put(0, "foo");
+        spy.put(1, "bar");
+        spy.put(2, "baz");
 
         // 振る舞いを設定する（do-when方式）
-        doNothing().when(mapSpy).clear();
+        doNothing().when(spy).clear();
 
         // モック化されたMapのclear()メソッドを呼び出す
-        mapSpy.clear();
+        spy.clear();
 
         // ユーティリティ（指定されたキーに対するエントリをMapから取り出してコンソール表示）
         List<Integer> keyList = Arrays.asList(0, 1, 2);
-        MapUtil.printEntry(mapSpy, keyList, "test");
+        MapUtil.printEntry(spy, keyList, "test");
 
         // clear()メソッド呼び出しを検証する
-        verify(mapSpy).clear();
+        verify(spy).clear();
     }
 }
