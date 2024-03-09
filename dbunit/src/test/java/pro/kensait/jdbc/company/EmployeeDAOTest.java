@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 
 @DisplayName("EmployeeDAOを対象にしたテストクラス")
 public class EmployeeDAOTest {
-    // DBUnitが使用するデータ格納ディレクトリ
+    // DBUnitのリソースを格納するディレクトリ
     private static final String INIT_DATA_DIR = "src/test/resources/INIT_DATA";
     private static final String EXPECTED_DATA_DIR_1 = "src/test/resources/EXPECTED_DATA_1";
     private static final String EXPECTED_DATA_DIR_2 = "src/test/resources/EXPECTED_DATA_2";
@@ -35,15 +35,15 @@ public class EmployeeDAOTest {
     // テスト対象クラス
     EmployeeDAO employeeDAO;
 
-    // DBUnitのためのフィクスチャ
+    // DBUnitのためのテストフィクスチャ
     IDatabaseTester databaseTester;
     IDatabaseConnection databaseConnection;
 
-    // 各テストメソッドで共通的なフィクスチャ
+    // 各テストメソッドで共通的なテストフィクスチャ
     Connection jdbcConnection; // EmployeeDAOを動作させるためにjava.sql.Connectionが必要
 
     /*
-     *  データベースやDBUnitを初期化する
+     *  DBUnitのテストフィクスチャやデータベース上のデータを初期化する
      */
     @BeforeEach
     void setUpDatabase() throws Exception {
@@ -53,17 +53,10 @@ public class EmployeeDAOTest {
         String user = getProperty("jdbc.user");
         String password = getProperty("jdbc.password");
 
-        try {
-            // JDBCドライバをロードする
-            Class.forName(driver);
-        } catch(ClassNotFoundException cnfe) {
-            throw new RuntimeException(cnfe);
-        }
-
         // IDatabaseTesterを初期化する
         databaseTester = new JdbcDatabaseTester(driver, url, user, password);
 
-        // DatabaseConnectionを取得する
+        // IDatabaseConnectionを取得する
         databaseConnection = databaseTester.getConnection();
 
         // MariaDB（MySQL）用のDataTypeFactoryを設定する
@@ -73,8 +66,18 @@ public class EmployeeDAOTest {
         // Connectionを取得する
         jdbcConnection = databaseConnection.getConnection();
 
+        // データを初期化する
+        initData();
+    }
+
+    /*
+     * データを初期化する
+     */
+    private void initData() throws Exception {
         // CSVファイルから初期データを読み込む
         IDataSet dataSet = new CsvDataSet(new File(INIT_DATA_DIR));
+
+        // データベースの対象テーブルから全件削除し、読み込んだ初期データを挿入する
         databaseTester.setDataSet(dataSet);
         databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
         databaseTester.onSetup();
@@ -98,87 +101,87 @@ public class EmployeeDAOTest {
     @Test
     @DisplayName("条件検索の結果をテストする")
     void test_SelectEmployeesBySalary() throws Exception {
-        // テスト実行し、実測値を取得する
+        // テスト実行し、実測値リストを取得する
         EmployeeDAO employeeDAO = new EmployeeDAO(jdbcConnection);
         List<Employee> actualList = employeeDAO.selectEmployeesBySalary(300000, 400000);
 
-        // 「期待値リスト」のサイズと「実測値リスト」のサイズが一致しているかを検証する
+        // 期待値リストのサイズと実測値リストのサイズが一致しているかを検証する
         assertEquals(4, actualList.size());
 
-        // 「期待値リスト」を生成する
+        // 期待値リストを生成する
         List<Employee> expectedList = List.of(
                 new Employee(10003, "Carol", "HR" ,LocalDate.of(2012, 4, 1), "CHIEF", 350000),
                 new Employee(10004, "Dave", "SALES" ,LocalDate.of(2012, 4, 1), "LEADER", 400000),
                 new Employee(10005, "Ellen", "SALES" ,LocalDate.of(2013, 4, 1), "CHIEF", 300000),
                 new Employee(10011, "Oscar", "PRODUCT" ,LocalDate.of(2015, 11, 1), "CHIEF", 320000));
 
-        // 「実測値リスト」をソートする
+        // 実測値リストをソートする
         Collections.sort(actualList, (e1, e2) -> {
             if (e1.getEmployeeId() < e2.getEmployeeId()) return -1;
             if (e1.getEmployeeId() > e2.getEmployeeId()) return 1;
             return 0;
          });
 
-        // 「期待値リスト」と「実測値リスト」が一致しているかを検証する
+        // 期待値リストと実測値リストが一致しているかを検証する
         assertIterableEquals(expectedList, actualList);
     }
 
     @Test
     @DisplayName("挿入の結果をテストする")
     void test_InsertEmployee() throws Exception {
-        // テスト実行し、実測値を取得する
+        // テストを実行する
         EmployeeDAO employeeDAO = new EmployeeDAO(jdbcConnection);
         Employee employee = new Employee(10021, "Steve", "SALES", LocalDate.of(2017, 10, 1),
                 null, 380000);
         employeeDAO.insertEmployee(employee);
 
-        // 期待値となるテーブルを取得する（CSVファイルから）
+        // DBUnitのAPIで、期待値テーブルをCSVファイルから取得する
         IDataSet expectedDataSet = new CsvDataSet(new File(EXPECTED_DATA_DIR_1));
         ITable expectedTable = expectedDataSet.getTable("EMPLOYEE");
 
-        // 実測値となるテーブルを取得する
-        IDataSet databaseDataSet = databaseTester.getConnection().createDataSet();
+        // DBUnitのAPIで、実測値テーブルをデータベースから取得する
+        IDataSet databaseDataSet = databaseConnection.createDataSet();
         ITable actualTable = databaseDataSet.getTable("EMPLOYEE");
 
-        // 期待値と実測値が一致しているかを検証する
+        // DBUnitのAPIで、期待値テーブルと実測値テーブルが一致しているかを検証する
         assertEquals(expectedTable, actualTable);
     }
 
     @Test
     @DisplayName("削除の結果をテストする")
     void test_DeleteEmployee() throws Exception {
-        // テスト実行し、実測値を取得する
+        // テストを実行する
         EmployeeDAO employeeDAO = new EmployeeDAO(jdbcConnection);
         employeeDAO.deleteEmployee(10004);
 
-        // 期待値となるテーブルを取得する（CSVファイルから）
+        // DBUnitのAPIで、期待値テーブルをCSVファイルから取得する
         IDataSet expectedDataSet = new CsvDataSet(new File(EXPECTED_DATA_DIR_2));
         ITable expectedTable = expectedDataSet.getTable("EMPLOYEE");
 
-        // 実測値となるテーブルを取得する
-        IDataSet databaseDataSet = databaseTester.getConnection().createDataSet();
+        // DBUnitのAPIで、実測値テーブルをデータベースから取得する
+        IDataSet databaseDataSet = databaseConnection.createDataSet();
         ITable actualTable = databaseDataSet.getTable("EMPLOYEE");
 
-        // 期待値と実測値が一致しているかを検証する
+        // DBUnitのAPIで、期待値テーブルと実測値テーブルが一致しているかを検証する
         assertEquals(expectedTable, actualTable);
     }
 
     @Test
     @DisplayName("一括更新の結果をテストする")
     void test_UpdateSalary() throws Exception {
-        // テスト実行し、実測値を取得する
+        // テストを実行する
         EmployeeDAO employeeDAO = new EmployeeDAO(jdbcConnection);
         employeeDAO.updateEmployeeSalary("SALES", 3000);
 
-        // 期待値となるテーブルを取得する（CSVファイルから）
+        // DBUnitのAPIで、期待値テーブルをCSVファイルから取得する
         IDataSet expectedDataSet = new CsvDataSet(new File(EXPECTED_DATA_DIR_3));
         ITable expectedTable = expectedDataSet.getTable("EMPLOYEE");
 
-        // 実測値となるテーブルを取得する
-        IDataSet databaseDataSet = databaseTester.getConnection().createDataSet();
+        // DBUnitのAPIで、実測値テーブルをデータベースから取得する
+        IDataSet databaseDataSet = databaseConnection.createDataSet();
         ITable actualTable = databaseDataSet.getTable("EMPLOYEE");
 
-        // 期待値と実測値が一致しているかを検証する
+        // DBUnitのAPIで、期待値テーブルと実測値テーブルが一致しているかを検証する
         assertEquals(expectedTable, actualTable);
     }
 }

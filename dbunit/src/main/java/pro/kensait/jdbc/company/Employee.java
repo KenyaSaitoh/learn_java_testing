@@ -1,7 +1,6 @@
 package pro.kensait.jdbc.company;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.Objects;
 
 /*
@@ -20,8 +19,6 @@ public class Employee {
     private String jobName;
     // 月給
     private Integer salary;
-    // 写真
-    private byte[] photo;
 
     // 引数なしのコンストラクタ
     public Employee() {
@@ -87,30 +84,17 @@ public class Employee {
         this.salary = salary;
     }
 
-    public byte[] getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
-    }
-
     @Override
     public String toString() {
         return "Employee [employeeId=" + employeeId + ", employeeName=" + employeeName
                 + ", departmentName=" + departmentName + ", entranceDate=" + entranceDate
-                + ", jobName=" + jobName + ", salary=" + salary + ", photo="
-                + Arrays.toString(photo) + "]";
+                + ", jobName=" + jobName + ", salary=" + salary + "]";
     }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + Arrays.hashCode(photo);
-        result = prime * result + Objects.hash(departmentName, employeeId, employeeName,
-                entranceDate, jobName, salary);
-        return result;
+        return Objects.hash(departmentName, employeeId, employeeName, entranceDate, jobName,
+                salary);
     }
 
     @Override
@@ -126,7 +110,6 @@ public class Employee {
                 && Objects.equals(employeeId, other.employeeId)
                 && Objects.equals(employeeName, other.employeeName)
                 && Objects.equals(entranceDate, other.entranceDate)
-                && Objects.equals(jobName, other.jobName) && Arrays.equals(photo, other.photo)
-                && Objects.equals(salary, other.salary);
+                && Objects.equals(jobName, other.jobName) && Objects.equals(salary, other.salary);
     }
 }

@@ -25,26 +25,19 @@ public class SetUpTruncateTest {
     IDatabaseTester databaseTester;
     IDatabaseConnection databaseConnection;
 
-    // 各テストメソッドで共通的なフィクスチャ
+    // 各テストメソッドで共通的なテストフィクスチャ
     Connection jdbcConnection; // EmployeeDAOを動作させるためにjava.sql.Connectionが必要
 
     /*
-     *  データベースやDBUnitを初期化する
+     *  DBUnitのテストフィクスチャやデータベース上のデータを初期化する
      */
     @BeforeEach
-    public void setUpDataBase() throws Exception {
+    public void setUpDatabase() throws Exception {
         // プロパティファイルよりデータベース情報を取得する
         String driver = getProperty("jdbc.driver");
         String url = getProperty("jdbc.url");
         String user = getProperty("jdbc.user");
         String password = getProperty("jdbc.password");
-
-        try {
-            // JDBCドライバをロードする
-            Class.forName(driver);
-        } catch(ClassNotFoundException cnfe) {
-            throw new RuntimeException(cnfe);
-        }
 
         // IDatabaseTesterを初期化する
         databaseTester = new JdbcDatabaseTester(driver, url, user, password);
@@ -59,10 +52,18 @@ public class SetUpTruncateTest {
         // Connectionを取得する
         jdbcConnection = databaseConnection.getConnection();
 
+        // データを初期化する
+        initData();
+    }
+
+    /*
+     * データを初期化する
+     */
+    private void initData() throws Exception {
         // 空のデータセットを生成する
         IDataSet emptyDataSet = new DefaultDataSet(new DefaultTable("EMPLOYEE"));
 
-        // テーブルを初期化（全件削除）する
+        // データベースの対象テーブルを初期化（全件削除）する
         databaseTester.setDataSet(emptyDataSet);
         databaseTester.setSetUpOperation(DatabaseOperation.TRUNCATE_TABLE);
         databaseTester.onSetup();

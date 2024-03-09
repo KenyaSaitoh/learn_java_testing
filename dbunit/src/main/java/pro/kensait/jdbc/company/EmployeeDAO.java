@@ -20,23 +20,17 @@ public class EmployeeDAO {
         this.conn = conn;
     }
 
-    // 検索（主キーから）
+    // 主キー検索
     public Employee selectEmployee(int employeeId) {
         // PreparedStatementに渡すSQL文を定義する
         String sqlStr = "SELECT EMPLOYEE_ID, EMPLOYEE_NAME, DEPARTMENT_NAME, "
                 + "ENTRANCE_DATE, JOB_NAME, SALARY FROM EMPLOYEE "
                 + "WHERE EMPLOYEE_ID = ?";
-        try (
-                // PreparedStatementを生成する
-                PreparedStatement pstmt = conn.prepareStatement(sqlStr);
-                ) {
-
+        try (PreparedStatement pstmt = conn.prepareStatement(sqlStr)) {
             // パラメータをセットする
             pstmt.setInt(1, employeeId);
-
             // 検索を実行する
             ResultSet rset = pstmt.executeQuery();
-
             // 検索結果（1つ）からEmployeeを生成する
             Employee employee = null;
             if (rset.next()) {
@@ -48,44 +42,36 @@ public class EmployeeDAO {
                         rset.getInt("SALARY"));
             }
             return employee;
-
         } catch (SQLException sqle) {
             throw new RuntimeException(sqle);
         }
     }
 
-    // 検索（月給の範囲で検索）
+    // 条件検索（月給の範囲で検索）
     public List<Employee> selectEmployeesBySalary(int lowerSalary, int upperSalary) {
         // PreparedStatementに渡すSQL文を定義する
         String sqlStr = "SELECT EMPLOYEE_ID, EMPLOYEE_NAME, DEPARTMENT_NAME, "
                 + "ENTRANCE_DATE, JOB_NAME, SALARY FROM EMPLOYEE "
                 + "WHERE ? <= SALARY AND SALARY <= ?";
-            try (
-                    // PreparedStatementを生成する
-                    PreparedStatement pstmt = conn.prepareStatement(sqlStr);
-                    ) {
-
-                // パラメータをセットする
-                pstmt.setInt(1, lowerSalary);
-                pstmt.setInt(2, upperSalary);
-
-                // 検索を実行する
-                ResultSet rset = pstmt.executeQuery();
-
-                // 検索結果（複数）からEmployeeのリストを生成する
-                List<Employee> resultList = new ArrayList<Employee>();
-                while (rset.next()) {
-                    Employee employee = new Employee(rset.getInt("EMPLOYEE_ID"),
-                            rset.getString("EMPLOYEE_NAME"),
-                            rset.getString("DEPARTMENT_NAME"),
-                            rset.getDate("ENTRANCE_DATE").toLocalDate(),
-                            rset.getString("JOB_NAME"),
-                            rset.getInt("SALARY"));
-                    resultList.add(employee);
-                }
-                return resultList;
-
-            } catch (SQLException sqle) {
+        try (PreparedStatement pstmt = conn.prepareStatement(sqlStr)) {
+            // パラメータをセットする
+            pstmt.setInt(1, lowerSalary);
+            pstmt.setInt(2, upperSalary);
+            // 検索を実行する
+            ResultSet rset = pstmt.executeQuery();
+            // 検索結果（複数）からEmployeeのリストを生成する
+            List<Employee> resultList = new ArrayList<Employee>();
+            while (rset.next()) {
+                Employee employee = new Employee(rset.getInt("EMPLOYEE_ID"),
+                        rset.getString("EMPLOYEE_NAME"),
+                        rset.getString("DEPARTMENT_NAME"),
+                        rset.getDate("ENTRANCE_DATE").toLocalDate(),
+                        rset.getString("JOB_NAME"),
+                        rset.getInt("SALARY"));
+                resultList.add(employee);
+            }
+            return resultList;
+        } catch (SQLException sqle) {
             throw new RuntimeException(sqle);
         }
     }
@@ -94,11 +80,7 @@ public class EmployeeDAO {
     public void insertEmployee(Employee employee) {
         // PreparedStatementに渡すSQL文を定義する
         String sqlStr = "INSERT INTO EMPLOYEE VALUES(?, ?, ?, ?, ?, ?, ?)";
-        try (
-                // PreparedStatementを生成する
-                PreparedStatement pstmt = conn.prepareStatement(sqlStr);
-                ) {
-
+        try (PreparedStatement pstmt = conn.prepareStatement(sqlStr)) {
             // パラメータをセットする
             pstmt.setInt(1, employee.getEmployeeId());
             pstmt.setString(2, employee.getEmployeeName());
@@ -107,10 +89,8 @@ public class EmployeeDAO {
             pstmt.setString(5, employee.getJobName());
             pstmt.setInt(6, employee.getSalary());
             pstmt.setNull(7, Types.BINARY);
-            
             // 更新を実行する
             pstmt.executeUpdate();
-
         } catch (SQLException sqle) {
             throw new RuntimeException(sqle);
         }
@@ -120,17 +100,11 @@ public class EmployeeDAO {
     public void deleteEmployee(Integer employeeId) {
         // PreparedStatementに渡すSQL文を定義する
         String sqlStr = "DELETE FROM EMPLOYEE WHERE EMPLOYEE_ID = ?";
-        try (
-                // PreparedStatementを生成する
-                PreparedStatement pstmt = conn.prepareStatement(sqlStr);
-                ) {
-
+        try (PreparedStatement pstmt = conn.prepareStatement(sqlStr)) {
             // パラメータをセットする
             pstmt.setInt(1, employeeId);
-
             // 更新を実行する
             pstmt.executeUpdate();
-
         } catch (SQLException sqle) {
             throw new RuntimeException(sqle);
         }
@@ -141,18 +115,12 @@ public class EmployeeDAO {
         // PreparedStatementに渡すSQL文を定義する
         String sqlStr = "UPDATE EMPLOYEE SET SALARY = SALARY + ? "
                 + "WHERE DEPARTMENT_NAME = ?";
-        try (
-                // PreparedStatementを生成する
-                PreparedStatement pstmt = conn.prepareStatement(sqlStr);
-                ) {
-
+        try (PreparedStatement pstmt = conn.prepareStatement(sqlStr)) {
             // パラメータをセットする
             pstmt.setInt(1, increase);
             pstmt.setString(2, departmentName);
-
             // 更新を実行する
             pstmt.executeUpdate();
-
         } catch (SQLException sqle) {
             throw new RuntimeException(sqle);
         }

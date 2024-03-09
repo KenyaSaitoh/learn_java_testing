@@ -53,7 +53,7 @@ public class ShippingServiceDBTest {
     IDatabaseTester databaseTester;
     IDatabaseConnection databaseConnection;
 
-    // その他の各テストメソッドで共通的なフィクスチャ
+    // その他の各テストメソッドで共通的なテストフィクスチャ
     LocalDateTime orderDateTime;
     LocalDate receiveDate;
 
@@ -78,7 +78,9 @@ public class ShippingServiceDBTest {
         receiveDate = LocalDate.of(2023, 11, 30);
     }
 
-    // データベースやDBUnitを初期化する
+    /*
+     * DBUnitのテストフィクスチャやデータベース上のデータを初期化する
+     */
     @BeforeEach
     void setUpDatabase() throws Exception {
         // プロパティファイルよりデータベース情報を取得する
@@ -97,10 +99,18 @@ public class ShippingServiceDBTest {
         DatabaseConfig config = databaseConnection.getConfig();
         config.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new MySqlDataTypeFactory());
 
+        // データを初期化する
+        initData();
+    }
+
+    /*
+     * データを初期化する
+     */
+    private void initData() throws Exception {
         // 空のデータセットを生成する
         IDataSet emptyDataSet = new DefaultDataSet(new DefaultTable("SHIPPING"));
 
-        // テーブルを初期化（全件削除）する
+        // データベースの対象テーブルを初期化（全件削除）する
         databaseTester.setDataSet(emptyDataSet);
         databaseTester.setSetUpOperation(DatabaseOperation.TRUNCATE_TABLE);
         databaseTester.onSetup();
@@ -135,23 +145,23 @@ public class ShippingServiceDBTest {
             // 引数である荷物リストを生成する（テストメソッド毎に個数が異なる）
             List<Baggage> baggageList = Arrays.asList(baggage);
 
-            // テスト実行
+            // テストを実行する
             shippingService.orderShipping(client, receiveDate, baggageList);
 
             // ORDER_DATE_TIME列を検証の対象外にするために、配列を用意する
             String[] excludedColumns = new String[]{"ORDER_DATE_TIME"};
 
-            // 期待値となるテーブル（ORDER_DATE_TIME列除く）を取得する
+            // DBUnitのAPIで、期待値テーブルをCSVファイルから取得する（ORDER_DATE_TIME列除く）
             IDataSet expectedDataSet = new CsvDataSet(new File(EXPECTED_DATA_DIR));
             ITable expectedTable = DefaultColumnFilter.excludedColumnsTable(
                     expectedDataSet.getTable("SHIPPING"), excludedColumns);
 
-            // 実測値となるテーブル（ORDER_DATE_TIME列除く）を取得する
-            IDataSet databaseDataSet = databaseTester.getConnection().createDataSet();
+            // DBUnitのAPIで、実測値テーブルをデータベースから取得する（ORDER_DATE_TIME列除く）
+            IDataSet databaseDataSet = databaseConnection.createDataSet();
             ITable actualTable = DefaultColumnFilter.excludedColumnsTable(
                     databaseDataSet.getTable("SHIPPING"), excludedColumns);
 
-            // 期待値と実測値が一致しているかを検証する
+            // DBUnitのAPIで、期待値テーブルと実測値テーブルが一致しているかを検証する
             assertEquals(expectedTable, actualTable);
         }
     }
