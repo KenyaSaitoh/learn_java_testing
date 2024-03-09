@@ -30,7 +30,7 @@ public class ShippingDAO {
     public static void save(Shipping shipping) {
         // PreparedStatementに渡すSQL文を定義する
         String sqlStr = "INSERT INTO SHIPPING "
-                + "(ORDER_DATE_TIME, CLIENT_NAME, RECEIVE_DATE, BAGGAGE_COUNT, TOTAL_PRICE) "
+                + "(ORDER_DATE_TIME, CLIENT_ID, RECEIVE_DATE, BAGGAGE_COUNT, TOTAL_PRICE) "
                 + "VALUES(?, ?, ?, ?, ?)";
         try (
                 // データベースに接続し、Connectionを取得する
@@ -40,7 +40,7 @@ public class ShippingDAO {
 
             // パラメータをセットする
             pstmt.setTimestamp(1, Timestamp.valueOf(shipping.orderDateTime()));
-            pstmt.setString(2, shipping.client().name());
+            pstmt.setInt(2, shipping.client().id());
             pstmt.setDate(3, Date.valueOf(shipping.receiveDate()));
             pstmt.setInt(4, shipping.baggageList().size());
             pstmt.setInt(5, shipping.totalPrice());

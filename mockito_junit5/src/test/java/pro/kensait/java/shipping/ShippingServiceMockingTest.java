@@ -19,7 +19,7 @@ import org.mockito.MockitoAnnotations;
 /*
  * ShippingServiceを対象にしたテストクラス
  */
-public class ShippingServiceTest {
+public class ShippingServiceMockingTest {
     // テスト対象クラス
     ShippingService shippingService;
 
@@ -73,12 +73,13 @@ public class ShippingServiceTest {
             // モックを初期化する（@Mockが付与されたフィールドをモック化する）
             MockitoAnnotations.openMocks(this);
 
-            // モック化されたClientの振る舞いを決める（ゴールド会員）
+            // モック化されたClientの振る舞いを決める（ID:30001のゴールド会員とする）
+            when(client.id()).thenReturn(30001);
             when(client.clientType()).thenReturn(ClientType.GOLD);
         }
 
         @Test
-        @DisplayName("割引なしの場合の更新結果をテストする")
+        @DisplayName("割引なしの場合の更新をテストする")
         void test_OrderShipping_NoDiscount() {
             // 引数である荷物リストを生成する（テストケース毎に個数が異なる）
             List<Baggage> baggageList = Arrays.asList(baggage);
@@ -98,7 +99,7 @@ public class ShippingServiceTest {
         }
 
         @Test
-        @DisplayName("割引になった場合（ただし下限に到達）の更新結果をテストする")
+        @DisplayName("割引になった場合（ただし下限に到達）の更新をテストする")
         void test_OrderShipping_Discount_ReachLimit() {
             // 引数である荷物リストを生成する（テストケース毎に個数が異なる）
             List<Baggage> baggageList = Arrays.asList(baggage, baggage);
@@ -118,7 +119,7 @@ public class ShippingServiceTest {
         }
 
         @Test
-        @DisplayName("割引になった場合（下限に到達せず）の更新結果をテストする")
+        @DisplayName("割引になった場合（下限に到達せず）の更新をテストする")
         void test_OrderShipping_Discount_NoLimit() {
             // 引数である荷物リストを生成する（テストケース毎に個数が異なる）
             List<Baggage> baggageList = Arrays.asList(baggage, baggage, baggage);
@@ -152,12 +153,13 @@ public class ShippingServiceTest {
             // モックを初期化する（@Mockが付与されたフィールドをモック化する）
             MockitoAnnotations.openMocks(this);
 
-            // モック化されたClientの振る舞いを決める（ダイヤモンド会員）
+            // モック化されたClientの振る舞いを決める（ID:40001のダイヤモンド会員とする）
+            when(client.id()).thenReturn(40001);
             when(client.clientType()).thenReturn(ClientType.DIAMOND);
         }
 
         @Test
-        @DisplayName("割引なしの場合の更新結果をテストする")
+        @DisplayName("割引なしの場合の更新をテストする")
         void test_OrderShipping_NoDiscount() {
             // 引数である荷物リストを生成する（テストメソッド毎に個数が異なる）
             List<Baggage> baggageList = Arrays.asList(baggage);
@@ -177,7 +179,7 @@ public class ShippingServiceTest {
         }
 
         @Test
-        @DisplayName("割引になった場合（ただし下限に到達）の更新結果をテストする")
+        @DisplayName("割引になった場合（ただし下限に到達）の更新をテストする")
         void test_OrderShipping_Discount_ReachLimit() {
             // 引数である荷物リストを生成する（テストメソッド毎に個数が異なる）
             List<Baggage> baggageList = Arrays.asList(baggage, baggage);
@@ -197,7 +199,7 @@ public class ShippingServiceTest {
         }
 
         @Test
-        @DisplayName("割引になった場合（下限に到達せず）の更新結果をテストする")
+        @DisplayName("割引になった場合（下限に到達せず）の更新をテストする")
         void test_OrderShipping_Discount_NoLimit() {
             // 引数である荷物リストを生成する（テストメソッド毎に個数が異なる）
             List<Baggage> baggageList = Arrays.asList(baggage, baggage, baggage);

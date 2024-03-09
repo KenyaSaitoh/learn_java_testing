@@ -60,7 +60,7 @@ public class ShippingServiceTest {
         }
 
         @Test
-        @DisplayName("割引なしの場合の更新結果をテストする")
+        @DisplayName("割引なしの場合の更新をテストする")
         void test_OrderShipping_NoDiscount() {
             // 引数である荷物リストを生成する（テストケース毎に個数が異なる）
             List<Baggage> baggageList = Arrays.asList(baggage);
@@ -80,7 +80,7 @@ public class ShippingServiceTest {
         }
 
         @Test
-        @DisplayName("割引になった場合（ただし下限に到達）の更新結果をテストする")
+        @DisplayName("割引になった場合（ただし下限に到達）の更新をテストする")
         void test_OrderShipping_Discount_ReachLimit() {
             // 引数である荷物リストを生成する（テストケース毎に個数が異なる）
             List<Baggage> baggageList = Arrays.asList(baggage, baggage);
@@ -100,7 +100,7 @@ public class ShippingServiceTest {
         }
 
         @Test
-        @DisplayName("割引になった場合（下限に到達せず）の更新結果をテストする")
+        @DisplayName("割引になった場合（下限に到達せず）の更新をテストする")
         void test_OrderShipping_Discount_NoLimit() {
             // 引数である荷物リストを生成する（テストケース毎に個数が異なる）
             List<Baggage> baggageList = Arrays.asList(baggage, baggage, baggage);
@@ -135,7 +135,7 @@ public class ShippingServiceTest {
         }
 
         @Test
-        @DisplayName("割引なしの場合の更新結果をテストする")
+        @DisplayName("割引なしの場合の更新をテストする")
         void test_OrderShipping_NoDiscount() {
             // 引数である荷物リストを生成する（テストケース毎に個数が異なる）
             List<Baggage> baggageList = Arrays.asList(baggage);
@@ -155,7 +155,7 @@ public class ShippingServiceTest {
         }
 
         @Test
-        @DisplayName("割引になった場合（ただし下限に到達）の更新結果をテストする")
+        @DisplayName("割引になった場合（ただし下限に到達）の更新をテストする")
         void test_OrderShipping_Discount_ReachLimit() {
             // 引数である荷物リストを生成する（テストケース毎に個数が異なる）
             List<Baggage> baggageList = Arrays.asList(baggage, baggage);
@@ -175,7 +175,7 @@ public class ShippingServiceTest {
         }
 
         @Test
-        @DisplayName("割引になった場合（下限に到達せず）の更新結果をテストする")
+        @DisplayName("割引になった場合（下限に到達せず）の更新をテストする")
         void test_OrderShipping_Discount_NoLimit() {
             // 引数である荷物リストを生成する（テストケース毎に個数が異なる）
             List<Baggage> baggageList = Arrays.asList(baggage, baggage, baggage);

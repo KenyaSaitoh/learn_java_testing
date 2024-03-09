@@ -34,7 +34,7 @@ import org.mockito.MockitoAnnotations;
  * ShippingServiceを対象にしたテストクラス
  * データベースアクセスあり
  */
-public class ShippingServiceTest {
+public class ShippingServiceDBTest {
     // DBUnitが使用するデータ格納ディレクトリ
     private static final String EXPECTED_DATA_DIR = "src/test/resources/EXPECTED_DATA";
 
@@ -107,9 +107,9 @@ public class ShippingServiceTest {
     }
 
     @Nested
-    @DisplayName("ダイヤモンド会員のテスト")
-    class DiamondCustomerTest {
-        // DiamondCustomerTestクラス内の各テストケースで共通的なフィクスチャ
+    @DisplayName("ゴールド会員のテスト")
+    class GoldCustomerTest {
+        // GoldCustomerTestクラス内の各テストケースで共通的なフィクスチャ
         // テスト対象クラスの引数（モック化対象）
         @Mock
         Client client;
@@ -120,19 +120,20 @@ public class ShippingServiceTest {
             // モックを初期化する（@Mockが付与されたフィールドをモック化する）
             MockitoAnnotations.openMocks(this);
 
-            // モック化されたClientの振る舞いを決める（ダイヤモンド会員）
-            when(client.clientType()).thenReturn(ClientType.DIAMOND);
+            // モック化されたClientの振る舞いを決める（ID:30001のゴールド会員とする）
+            when(client.id()).thenReturn(30001);
+            when(client.clientType()).thenReturn(ClientType.GOLD);
         }
 
         @Test
-        @DisplayName("ダイヤモンド会員で、割引になった場合（下限に到達せず）の更新結果をテストする")
-        void test_OrderShipping_DiamondCustomer_Discount_NoLimit() throws Exception {
+        @DisplayName("割引なしの場合の更新をテストする")
+        void test_OrderShipping_NoDiscount() throws Exception {
             // モック化されたCostCalculatorの振る舞いを決める
             when(costCalculator.calcShippingCost(
                     any(BaggageType.class), any(RegionType.class))).thenReturn(1600);
 
             // 引数である荷物リストを生成する（テストメソッド毎に個数が異なる）
-            List<Baggage> baggageList = Arrays.asList(baggage, baggage, baggage);
+            List<Baggage> baggageList = Arrays.asList(baggage);
 
             // テスト実行
             shippingService.orderShipping(client, receiveDate, baggageList);
