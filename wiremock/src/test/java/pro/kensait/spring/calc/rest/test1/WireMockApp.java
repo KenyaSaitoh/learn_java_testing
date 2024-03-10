@@ -16,7 +16,7 @@ public class WireMockApp {
                 .withQueryParam("param2", equalTo("10.0"))
                 .willReturn(aResponse()
                         .withStatus(200)
-                        .withHeader("Content-Type", "application/json") // コンテンツタイプを設定
+                        .withHeader("Content-Type", "application/json") // MIMEタイプを設定
                         .withBody("40.0"))); // ここでレスポンスのボディを適宜変更
 
         stubFor(post(urlPathEqualTo("/calc/add2"))
@@ -24,7 +24,7 @@ public class WireMockApp {
                 .withFormParam("param2", matching("\\d+\\.?\\d*"))
                 .willReturn(aResponse()
                         .withStatus(200)
-                        .withHeader("Content-Type", "application/json") // コンテンツタイプを設定
+                        .withHeader("Content-Type", "application/json") // MIMEタイプを設定
                         .withBody("40.0"))); // ここでレスポンスのボディを適宜変更
     }
 }

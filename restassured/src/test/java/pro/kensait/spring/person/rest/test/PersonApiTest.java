@@ -1,6 +1,7 @@
 package pro.kensait.spring.person.rest.test;
 
 import static io.restassured.RestAssured.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -22,13 +23,17 @@ public class PersonApiTest {
     // 特定のpersonIdに対応するPersonを取得するテスト
     @Test
     void test_GetPerson() {
+        Person expectedPerson = new Person(1, "Alice", 25, "female");
         Integer personId = 1; // テスト対象のpersonId
-        given()
+        Person actualPerson = given()
                 .pathParam("personId", personId) // パスパラメータを設定
                 .when()
                 .get("/{personId}") // GETリクエストを実行
                 .then()
-                .statusCode(200); // ステータスコードが200であることを検証
+                .statusCode(200) // ステータスコードが200であることを検証
+                .extract()
+                .as(Person.class);
+        assertEquals(expectedPerson, actualPerson);
     }
 
     // 全Personのリストを取得するテスト
@@ -62,7 +67,7 @@ public class PersonApiTest {
         // リクエストボディを生成する
         Person person = new Person("Frank", 36, "male");
         given()
-                .contentType(ContentType.JSON) // コンテンツタイプをJSONに設定
+                .contentType(ContentType.JSON) // MIMEタイプをJSONに設定
                 .body(person) // リクエストボディを設定
                 .when()
                 .post() // POSTリクエストを実行
@@ -76,7 +81,7 @@ public class PersonApiTest {
         Integer personId = 6; // テスト対象のpersonId
         Person person = new Person(personId, "Frank", 36, "male");
         given()
-                .contentType(ContentType.JSON) // コンテンツタイプをJSONに設定
+                .contentType(ContentType.JSON) // MIMEタイプをJSONに設定
                 .body(person) // リクエストボディを設定
                 .pathParam("personId", personId) // パスパラメータを設定
                 .when()
