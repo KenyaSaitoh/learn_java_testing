@@ -15,9 +15,10 @@ import org.dbunit.ext.mysql.MySqlDataTypeFactory;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 @DisplayName("EmployeeDAOを対象に、テーブルの初期化だけを行うテストクラス")
-public class SetUpTruncateTest {
+public class InitDataTest_Truncate {
     // テスト対象クラス
     EmployeeDAO employeeDAO;
 
@@ -52,12 +53,12 @@ public class SetUpTruncateTest {
         // Connectionを取得する
         jdbcConnection = databaseConnection.getConnection();
 
-        // データを初期化する
+        // 初期データをセットアップする
         initData();
     }
 
     /*
-     * データを初期化する
+     * 初期データをセットアップする
      */
     private void initData() throws Exception {
         // 空のデータセットを生成する
@@ -67,5 +68,9 @@ public class SetUpTruncateTest {
         databaseTester.setDataSet(emptyDataSet);
         databaseTester.setSetUpOperation(DatabaseOperation.TRUNCATE_TABLE);
         databaseTester.onSetup();
+    }
+
+    @Test
+    void test() {
     }
 }

@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,7 +78,7 @@ public class EmployeeDAO {
     // 挿入
     public void insertEmployee(Employee employee) {
         // PreparedStatementに渡すSQL文を定義する
-        String sqlStr = "INSERT INTO EMPLOYEE VALUES(?, ?, ?, ?, ?, ?, ?)";
+        String sqlStr = "INSERT INTO EMPLOYEE VALUES(?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sqlStr)) {
             // パラメータをセットする
             pstmt.setInt(1, employee.getEmployeeId());
@@ -88,7 +87,6 @@ public class EmployeeDAO {
             pstmt.setDate(4, Date.valueOf(employee.getEntranceDate()));
             pstmt.setString(5, employee.getJobName());
             pstmt.setInt(6, employee.getSalary());
-            pstmt.setNull(7, Types.BINARY);
             // 更新を実行する
             pstmt.executeUpdate();
         } catch (SQLException sqle) {

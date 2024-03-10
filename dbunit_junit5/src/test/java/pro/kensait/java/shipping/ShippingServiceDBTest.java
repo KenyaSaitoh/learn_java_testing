@@ -99,12 +99,12 @@ public class ShippingServiceDBTest {
         DatabaseConfig config = databaseConnection.getConfig();
         config.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new MySqlDataTypeFactory());
 
-        // データを初期化する
+        // 初期データをセットアップする
         initData();
     }
 
     /*
-     * データを初期化する
+     * 初期データをセットアップする
      */
     private void initData() throws Exception {
         // 空のデータセットを生成する

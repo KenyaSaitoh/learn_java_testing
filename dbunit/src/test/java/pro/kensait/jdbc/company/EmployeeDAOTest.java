@@ -66,12 +66,12 @@ public class EmployeeDAOTest {
         // Connectionを取得する
         jdbcConnection = databaseConnection.getConnection();
 
-        // データを初期化する
+        // 初期データをセットアップする
         initData();
     }
 
     /*
-     * データを初期化する
+     * 初期データをセットアップする
      */
     private void initData() throws Exception {
         // CSVファイルから初期データを読み込む
