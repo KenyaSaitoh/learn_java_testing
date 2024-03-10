@@ -15,7 +15,7 @@ public class CalcApiTest {
 
     // テストクラス全体の前処理
     @BeforeAll
-    public static void initAll() {
+    static void initAll() {
         RestAssured.port = 8080; // ポート番号
         RestAssured.baseURI = "http://localhost"; // APIのホスト
         RestAssured.basePath = "/calc"; // ベースパス
@@ -23,7 +23,7 @@ public class CalcApiTest {
 
     @Test
     @DisplayName("POSTメソッドで加算処理を呼び出し、ステータスコード200であることを検証する")
-    public void test_Add_Post_StatusCode200() {
+    void test_Add_Post_StatusCode200() {
         // パラメータを生成する
         CalcParam param = new CalcParam(30.0, 10.0);
 
@@ -43,7 +43,7 @@ public class CalcApiTest {
 
     @Test
     @DisplayName("POSTメソッドで加算処理を呼び出し、ステータスコード400であることを検証する")
-    public void test_Add_Post_StatusCode400() {
+    void test_Add_Post_StatusCode400() {
         // パラメータを生成する
         CalcParam param = new CalcParam(30.0, -1000.0);
         System.out.println(param);

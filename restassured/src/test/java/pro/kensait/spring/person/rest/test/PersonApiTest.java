@@ -13,7 +13,7 @@ public class PersonApiTest {
 
     // テストクラス全体の前処理
     @BeforeAll
-    public static void initAll() {
+    static void initAll() {
         RestAssured.port = 8080; // APIサーバーのポート
         RestAssured.baseURI = "http://localhost"; // APIサーバーのベースURI
         RestAssured.basePath = "/persons"; // APIのベースパス
@@ -21,7 +21,7 @@ public class PersonApiTest {
 
     // 特定のpersonIdに対応するPersonを取得するテスト
     @Test
-    public void test_GetPerson() {
+    void test_GetPerson() {
         Integer personId = 1; // テスト対象のpersonId
         given()
                 .pathParam("personId", personId) // パスパラメータを設定
@@ -33,7 +33,7 @@ public class PersonApiTest {
 
     // 全Personのリストを取得するテスト
     @Test
-    public void test_GetAllPersons() {
+    void test_GetAllPersons() {
         Response response = given()
                 .when()
                 .get() // 正しいエンドポイントを指定
@@ -46,7 +46,7 @@ public class PersonApiTest {
 
     // 特定の年齢以下のPersonのリストを取得するテスト
     @Test
-    public void test_QueryByLowerAge() {
+    void test_QueryByLowerAge() {
         Integer lowerAge = 30; // テスト対象の年齢
         given()
                 .queryParam("lowerAge", lowerAge) // クエリパラメータを設定
@@ -58,7 +58,7 @@ public class PersonApiTest {
 
     // 新しいPersonを作成するテスト
     @Test
-    public void test_CreatePerson() {
+    void test_CreatePerson() {
         // リクエストボディを生成する
         Person person = new Person("Frank", 36, "male");
         given()
@@ -72,7 +72,7 @@ public class PersonApiTest {
 
     // 特定のPersonを更新するテスト
     @Test
-    public void test_ReplacePerson() {
+    void test_ReplacePerson() {
         Integer personId = 6; // テスト対象のpersonId
         Person person = new Person(personId, "Frank", 36, "male");
         given()

@@ -14,7 +14,7 @@ public class GreetApiTest {
 
     // テストクラス全体の前処理
     @BeforeAll
-    public static void initAll() {
+    static void initAll() {
         RestAssured.port = 8080;
         RestAssured.baseURI = "http://localhost";
         RestAssured.basePath = "/greet";
@@ -22,7 +22,7 @@ public class GreetApiTest {
 
     @Test
     @DisplayName("REST APIを呼び出し、パスパラメータに応じて、Hello 〇〇という応答を検証する")
-    public void test_Say_Hello() {
+    void test_Say_Hello() {
         String response = given()
                 .pathParam("personName", "Alice")
                 .when()
@@ -35,7 +35,7 @@ public class GreetApiTest {
 
     @Test
     @DisplayName("REST APIを呼び出し、パスパラメータに応じて、Goodbye 〇〇という応答を検証する")
-    public void test_Say_Goodbye() {
+    void test_Say_Goodbye() {
         String response = given()
                 .pathParam("personName", "Bob")
                 .when()
@@ -48,7 +48,7 @@ public class GreetApiTest {
 
     @Test
     @DisplayName("REST APIを呼び出し、クエリパラメータに応じて、Good Morning 〇〇という応答を検証する")
-    public void test_Say_GoodMorning() {
+    void test_Say_GoodMorning() {
         String response = given()
                 .queryParam("personName", "Carol")
                 .when()
@@ -61,7 +61,7 @@ public class GreetApiTest {
 
     @Test
     @DisplayName("REST APIを呼び出し、フォームエンコーデッドパラメータに応じて、Good Afternoon 〇〇という応答を検証する")
-    public void test_Say_GoodAfternoon() {
+    void test_Say_GoodAfternoon() {
         String response = given()
                 .contentType(ContentType.URLENC)
                 .formParam("personName", "Dave")
@@ -75,7 +75,7 @@ public class GreetApiTest {
 
     @Test
     @DisplayName("REST APIを呼び出し、JSONパラメータに応じて、Good Evening 〇〇という応答を検証する")
-    public void test_Say_GoodEvening() {
+    void test_Say_GoodEvening() {
         String jsonBody = "{\"personName\": \"Ellen\"}";
         String response = given()
                 .contentType(ContentType.JSON)
@@ -90,7 +90,7 @@ public class GreetApiTest {
 
     @Test
     @DisplayName("REST APIを呼び出し、HTTPヘッダに応じて、Good Night 〇〇という応答を検証する")
-    public void test_Say_GoodNight() {
+    void test_Say_GoodNight() {
         String response = given()
                 .header("personName", "Frank")
                 .when()

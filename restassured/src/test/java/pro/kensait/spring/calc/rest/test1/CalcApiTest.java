@@ -15,7 +15,7 @@ public class CalcApiTest {
 
     // テストクラス全体の前処理
     @BeforeAll
-    public static void initAll() {
+    static void initAll() {
         RestAssured.port = 8080; // ポート番号
         RestAssured.baseURI = "http://localhost"; // APIのホスト
         RestAssured.basePath = "/calc"; // ベースパス
@@ -23,7 +23,7 @@ public class CalcApiTest {
 
     @Test
     @DisplayName("GETメソッドで加算処理を呼び出す")
-    public void test_Add_Get() {
+    void test_Add_Get() {
         // RestAssuredを使用してAPIをテストし、レスポンスを取得する
         Response response = given()
                 .queryParam("param1", 30.0)
@@ -41,7 +41,7 @@ public class CalcApiTest {
 
     @Test
     @DisplayName("POSTメソッドで加算処理を呼び出す")
-    public void test_Add_Post() {
+    void test_Add_Post() {
         // RestAssuredを使用してAPIをテストし、レスポンスを取得する
         Response response = given()
                 .contentType(ContentType.URLENC)
