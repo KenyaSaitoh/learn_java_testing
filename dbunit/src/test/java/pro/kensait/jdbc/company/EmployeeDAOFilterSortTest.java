@@ -4,7 +4,6 @@ import static org.dbunit.Assertion.*; // これを先にimportすることが重
 import static pro.kensait.jdbc.util.DatabaseUtil.*;
 
 import java.io.File;
-import java.sql.Connection;
 import java.time.LocalDate;
 
 import org.dbunit.IDatabaseTester;
@@ -35,9 +34,6 @@ public class EmployeeDAOFilterSortTest {
     IDatabaseTester databaseTester;
     IDatabaseConnection databaseConnection;
 
-    // 各テストメソッドで共通的なテストフィクスチャ
-    Connection jdbcConnection; // EmployeeDAOを動作させるためにjava.sql.Connectionが必要
-
     /*
      *  DBUnitのテストフィクスチャやデータベース上のデータを初期化する
      */
@@ -59,8 +55,8 @@ public class EmployeeDAOFilterSortTest {
         DatabaseConfig config = databaseConnection.getConfig();
         config.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new MySqlDataTypeFactory());
 
-        // Connectionを取得する
-        jdbcConnection = databaseConnection.getConnection();
+        // IDatabaseConnectionからJDBCコネクションを取り出し、EmployeeDAOを初期化する
+        employeeDAO = new EmployeeDAO(databaseConnection.getConnection());
 
         // 初期データをセットアップする
         initData();
@@ -83,8 +79,7 @@ public class EmployeeDAOFilterSortTest {
     @DisplayName("挿入の結果をテストする（ソートして全件検証）")
     void test_InsertEmployee() throws Exception {
         // テストを実行する
-        EmployeeDAO employeeDAO = new EmployeeDAO(jdbcConnection);
-        Employee employee = new Employee(10021, "Steve", "SALES", LocalDate.of(2017, 10, 1),
+        Employee employee = new Employee(10006, "Frank", "SALES", LocalDate.of(2017, 10, 1),
                 null, 380000);
         employeeDAO.insertEmployee(employee);
 

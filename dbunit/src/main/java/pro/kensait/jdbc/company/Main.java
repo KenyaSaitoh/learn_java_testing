@@ -45,7 +45,7 @@ public class Main {
 
             // 挿入
             System.out.println("***** 挿入 *****");
-            Employee emp2 = new Employee(10021, "Steve", "SALES", LocalDate.of(2017, 10, 1),
+            Employee emp2 = new Employee(10021, "Frank", "SALES", LocalDate.of(2017, 10, 1),
                     null, 380000);
             employeeDAO.insertEmployee(emp2);
 

@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static pro.kensait.jdbc.util.DatabaseUtil.*;
 
 import java.io.File;
-import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
@@ -39,9 +38,6 @@ public class EmployeeDAOTest {
     IDatabaseTester databaseTester;
     IDatabaseConnection databaseConnection;
 
-    // 各テストメソッドで共通的なテストフィクスチャ
-    Connection jdbcConnection; // EmployeeDAOを動作させるためにjava.sql.Connectionが必要
-
     /*
      *  DBUnitのテストフィクスチャやデータベース上のデータを初期化する
      */
@@ -63,8 +59,8 @@ public class EmployeeDAOTest {
         DatabaseConfig config = databaseConnection.getConfig();
         config.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new MySqlDataTypeFactory());
 
-        // Connectionを取得する
-        jdbcConnection = databaseConnection.getConnection();
+        // IDatabaseConnectionからJDBCコネクションを取り出し、EmployeeDAOを初期化する
+        employeeDAO = new EmployeeDAO(databaseConnection.getConnection());
 
         // 初期データをセットアップする
         initData();
@@ -86,12 +82,11 @@ public class EmployeeDAOTest {
     @Test
     @DisplayName("主キー検索の結果をテストする")
     void test_SelectEmployee() {
-        // テスト実行し、実測値を取得する
-        EmployeeDAO employeeDAO = new EmployeeDAO(jdbcConnection);
+        // テストを実行し、実測値を取得する
         Employee actual = employeeDAO.selectEmployee(10001);
 
         // 期待値を生成する
-        Employee expected = new Employee(10001, "Alice", "SALES" ,LocalDate.of(2012, 4, 1),
+        Employee expected = new Employee(10001, "Alice", "SALES" ,LocalDate.of(2015, 4, 1),
                 "MANAGER", 500000);
 
         // 期待値と実測値が一致しているかを検証する
@@ -101,19 +96,17 @@ public class EmployeeDAOTest {
     @Test
     @DisplayName("条件検索の結果をテストする")
     void test_SelectEmployeesBySalary() throws Exception {
-        // テスト実行し、実測値リストを取得する
-        EmployeeDAO employeeDAO = new EmployeeDAO(jdbcConnection);
+        // テストを実行し、実測値リストを取得する
         List<Employee> actualList = employeeDAO.selectEmployeesBySalary(300000, 400000);
 
         // 期待値リストのサイズと実測値リストのサイズが一致しているかを検証する
-        assertEquals(4, actualList.size());
+        assertEquals(3, actualList.size());
 
         // 期待値リストを生成する
         List<Employee> expectedList = List.of(
-                new Employee(10003, "Carol", "HR" ,LocalDate.of(2012, 4, 1), "CHIEF", 350000),
-                new Employee(10004, "Dave", "SALES" ,LocalDate.of(2012, 4, 1), "LEADER", 400000),
-                new Employee(10005, "Ellen", "SALES" ,LocalDate.of(2013, 4, 1), "CHIEF", 300000),
-                new Employee(10011, "Oscar", "PRODUCT" ,LocalDate.of(2015, 11, 1), "CHIEF", 320000));
+                new Employee(10003, "Carol", "HR" ,LocalDate.of(2015, 4, 1), "CHIEF", 350000),
+                new Employee(10004, "Dave", "SALES" ,LocalDate.of(2015, 4, 1), "LEADER", 400000),
+                new Employee(10005, "Ellen", "SALES" ,LocalDate.of(2017, 4, 1), "CHIEF", 300000));
 
         // 実測値リストをソートする
         Collections.sort(actualList, (e1, e2) -> {
@@ -130,8 +123,7 @@ public class EmployeeDAOTest {
     @DisplayName("挿入の結果をテストする")
     void test_InsertEmployee() throws Exception {
         // テストを実行する
-        EmployeeDAO employeeDAO = new EmployeeDAO(jdbcConnection);
-        Employee employee = new Employee(10021, "Steve", "SALES", LocalDate.of(2017, 10, 1),
+        Employee employee = new Employee(10006, "Frank", "SALES", LocalDate.of(2019, 10, 1),
                 null, 380000);
         employeeDAO.insertEmployee(employee);
 
@@ -151,7 +143,6 @@ public class EmployeeDAOTest {
     @DisplayName("削除の結果をテストする")
     void test_DeleteEmployee() throws Exception {
         // テストを実行する
-        EmployeeDAO employeeDAO = new EmployeeDAO(jdbcConnection);
         employeeDAO.deleteEmployee(10004);
 
         // DBUnitのAPIで、期待値テーブルをCSVファイルから取得する
@@ -170,7 +161,6 @@ public class EmployeeDAOTest {
     @DisplayName("一括更新の結果をテストする")
     void test_UpdateSalary() throws Exception {
         // テストを実行する
-        EmployeeDAO employeeDAO = new EmployeeDAO(jdbcConnection);
         employeeDAO.updateEmployeeSalary("SALES", 3000);
 
         // DBUnitのAPIで、期待値テーブルをCSVファイルから取得する
