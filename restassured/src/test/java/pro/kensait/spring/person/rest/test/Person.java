@@ -1,5 +1,7 @@
 package pro.kensait.spring.person.rest.test;
 
+import java.util.Objects;
+
 public class Person {
     private Integer personId;
     private String personName;
@@ -60,5 +62,24 @@ public class Person {
     public String toString() {
         return "Person [personId=" + personId + ", personName=" + personName + ", age="
                 + age + ", gender=" + gender + "]";
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(age, gender, personId, personName);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Person other = (Person) obj;
+        return Objects.equals(age, other.age) && Objects.equals(gender, other.gender)
+                && Objects.equals(personId, other.personId)
+                && Objects.equals(personName, other.personName);
     }
 }

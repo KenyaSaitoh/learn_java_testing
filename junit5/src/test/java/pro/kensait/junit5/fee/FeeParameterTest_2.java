@@ -18,7 +18,7 @@ public class FeeParameterTest_2 {
     @DisplayName("CSVファイルからパラメータを取得するテストメソッド")
     void test_CalcFee(String bankCode, int amount, int expectedFee) {
         FeeService feeService = new FeeService();
-        int actual = feeService.calcFee(bankCode, amount);
-        assertEquals(expectedFee, actual);
+        int actualFee = feeService.calcFee(bankCode, amount);
+        assertEquals(expectedFee, actualFee);
     }
 }

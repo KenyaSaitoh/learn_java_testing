@@ -20,8 +20,8 @@ public class FeeParameterTest_1 {
         String[] param = paramStr.split(",");
         FeeService feeService = new FeeService();
         // 実行フェーズ
-        int actual = feeService.calcFee(param[0], Integer.parseInt(param[1]));
+        int actualFee = feeService.calcFee(param[0], Integer.parseInt(param[1]));
         // 検証フェーズ
-        assertEquals(Integer.parseInt(param[2]), actual);
+        assertEquals(Integer.parseInt(param[2]), actualFee);
     }
 }

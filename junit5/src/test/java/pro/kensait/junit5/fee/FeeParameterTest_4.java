@@ -26,7 +26,7 @@ public class FeeParameterTest_4 {
 
         // テスト続行
         FeeService feeService = new FeeService();
-        int actual = feeService.calcFee(bankCode, amount);
-        assertEquals(expectedFee, actual);
+        int actualFee = feeService.calcFee(bankCode, amount);
+        assertEquals(expectedFee, actualFee);
     }
 }

@@ -22,8 +22,8 @@ public class FeeParameterTest_3 {
     @DisplayName("スタティックメソッドからパラメータを取得するテストメソッド")
     void test_CalcFee(FeeParam param) {
         FeeService feeService = new FeeService();
-        int actual = feeService.calcFee(param.bankCode, param.amount);
-        assertEquals(param.expectedFee, actual);
+        int actualFee = feeService.calcFee(param.bankCode, param.amount);
+        assertEquals(param.expectedFee, actualFee);
     }
 
     // パラメータを提供するスタティックメソッド
