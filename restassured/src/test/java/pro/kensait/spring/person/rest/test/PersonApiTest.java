@@ -8,9 +8,6 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
@@ -30,8 +27,12 @@ public class PersonApiTest {
     // 特定のpersonIdに対応するPersonを取得するテスト
     @Test
     void test_GetPerson() {
+        // 期待値を生成する
         Person expectedPerson = new Person(1, "Alice", 25, "female");
+
         Integer personId = 1; // テスト対象のpersonId
+
+        // RestAssuredを使用してRest APIサーバーを呼び出す
         Response response = given()
                 .pathParam("personId", personId) // パスパラメータを設定する
                 .when()
@@ -40,13 +41,18 @@ public class PersonApiTest {
                 .statusCode(200) // ステータスコードが200であることを検証する
                 .extract()
                 .response(); // レスポンスを抽出する
-        Person actualPerson = response.getBody().as(Person.class);
+
+        // レスポンスボディをPerson型で取り出す
+        Person actualPerson = response.body().as(Person.class);
+
+        // レスポンスボディを検証する
         assertEquals(expectedPerson, actualPerson);
     }
 
     // 全Personのリストを取得するテスト
     @Test
     void test_GetAllPersons() {
+        // RestAssuredを使用してRest APIサーバーを呼び出す
         Response response = given()
                 .when()
                 .get() // GETメソッドでサーバーを呼び出す
@@ -60,11 +66,15 @@ public class PersonApiTest {
     // 特定の年齢以下のPersonのリストを取得するテスト
     @Test
     void test_QueryByLowerAge() throws Exception {
+        // 期待値リストを生成する
         List<Person> expectedList = List.of(
                 new Person(2, "Bob", 35, "male"),
                 new Person(3, "Carol", 30, "female"),
                 new Person(5, "Ellen", 33, "male"));
+
         Integer lowerAge = 30; // テスト対象の年齢
+
+        // RestAssuredを使用してRest APIサーバーを呼び出す
         Response response = given()
                 .queryParam("lowerAge", lowerAge) // クエリ文字列を設定する
                 .when()
@@ -73,9 +83,11 @@ public class PersonApiTest {
                 .statusCode(200) // ステータスコードが200であることを検証する
                 .extract()
                 .response(); // レスポンスを抽出する
-        ObjectMapper objectMapper = new ObjectMapper();
-        List<Person> actualList = objectMapper.readValue(response.getBody().asString(),
-                new TypeReference<List<Person>>(){});
+
+        // レスポンスボディをList<Person>型で取り出す
+        List<Person> actualList = response.jsonPath().getList("", Person.class);
+
+        // レスポンスボディを検証する
         assertIterableEquals(expectedList, actualList);
     }
 
@@ -93,11 +105,14 @@ public class PersonApiTest {
                 .statusCode(200); // ステータスコードが200であることを検証する
     }
 
-    // 特定のPersonを更新するテスト
+    // 特定のPersonを置換するテスト
     @Test
     void test_ReplacePerson() {
+        // リクエストボディを生成する
         Integer personId = 6; // テスト対象のpersonId
         Person person = new Person(personId, "Frank", 36, "male");
+
+        // RestAssuredを使用してRest APIサーバーを呼び出す
         given()
                 .contentType(ContentType.JSON) // MIMEタイプにJSONを設定する
                 .body(person) // リクエストボディを設定する
@@ -112,6 +127,8 @@ public class PersonApiTest {
     @Test
     public void test_DeletePerson() {
         Integer personId = 6; // テスト対象のpersonId
+
+        // RestAssuredを使用してRest APIサーバーを呼び出す
         given()
                 .pathParam("personId", personId) // パスパラメータを設定する
                 .when()

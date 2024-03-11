@@ -27,7 +27,7 @@ public class CalcApiTest {
         // パラメータを生成する
         CalcParam param = new CalcParam(30.0, 10.0);
 
-        // RestAssuredを使用してAPIをテストし、レスポンスを取得する
+        // RestAssuredを使用してRest APIサーバーを呼び出す
         Response response = given()
                 .contentType(ContentType.JSON) // MIMEタイプにJSONを設定する
                 .body(param) // リクエストボディを設定する
@@ -39,7 +39,7 @@ public class CalcApiTest {
                 .response(); // レスポンスを抽出する
 
         // レスポンスボディを検証する
-        assertEquals("40.0", response.getBody().asString());
+        assertEquals("40.0", response.body().asString());
     }
 
     @Test
@@ -48,15 +48,13 @@ public class CalcApiTest {
         // パラメータを生成する
         CalcParam param = new CalcParam(30.0, -1000.0);
 
-        // RestAssuredを使用してAPIをテストし、レスポンスを取得する
+        // RestAssuredを使用してRest APIサーバーを呼び出す
         given()
                 .contentType(ContentType.JSON) // MIMEタイプにJSONを設定する
                 .body(param) // リクエストボディを設定する
                 .when()
                 .post("/add") // POSTメソッドでサーバーを呼び出す
                 .then()
-                .statusCode(400) // ステータスコードが400であることを検証する
-                .extract()
-                .response(); // レスポンスを抽出する
+                .statusCode(400); // ステータスコードが400であることを検証する
     }
 }

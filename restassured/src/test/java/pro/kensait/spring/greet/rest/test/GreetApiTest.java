@@ -33,8 +33,8 @@ public class GreetApiTest {
                 .extract()
                 .response(); // レスポンスを抽出する
 
-        String actualResponse = response.getBody().asString();
-        assertEquals("Hello Alice!", actualResponse);
+        // レスポンスボディを検証する
+        assertEquals("Hello Alice!", response.body().asString());
     }
 
     @Test
@@ -49,8 +49,8 @@ public class GreetApiTest {
                 .extract()
                 .response(); // レスポンスを抽出する
 
-        String actualResponse = response.getBody().asString();
-        assertEquals("Goodbye Bob!", actualResponse);
+        // レスポンスボディを検証する
+        assertEquals("Goodbye Bob!", response.body().asString());
     }
 
     @Test
@@ -65,8 +65,8 @@ public class GreetApiTest {
                 .extract()
                 .response(); // レスポンスを抽出する
 
-        String actualResponse = response.getBody().asString();
-        assertEquals("Good Morning Carol!", actualResponse);
+        // レスポンスボディを検証する
+        assertEquals("Good Morning Carol!", response.body().asString());
     }
 
     @Test
@@ -82,8 +82,8 @@ public class GreetApiTest {
                 .extract()
                 .response(); // レスポンスを抽出する
 
-        String actualResponse = response.getBody().asString();
-        assertEquals("Good Afternoon Dave!", actualResponse);
+        // レスポンスボディを検証する
+        assertEquals("Good Afternoon Dave!", response.body().asString());
     }
 
     @Test
@@ -99,8 +99,8 @@ public class GreetApiTest {
                 .extract()
                 .response(); // レスポンスを抽出する
 
-        String actualResponse = response.getBody().asString();
-        assertEquals("Good Evening Ellen!", actualResponse);
+        // レスポンスボディを検証する
+        assertEquals("Good Evening Ellen!", response.body().asString());
     }
 
     @Test
@@ -115,7 +115,7 @@ public class GreetApiTest {
                 .extract()
                 .response(); // レスポンスを抽出する
 
-        String actualResponse = response.getBody().asString();
-        assertEquals("Good Night Frank!", actualResponse);
+        // レスポンスボディを検証する
+        assertEquals("Good Night Frank!", response.body().asString());
     }
 }

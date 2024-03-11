@@ -24,7 +24,7 @@ public class CalcApiTest {
     @Test
     @DisplayName("GETメソッドで加算処理を呼び出す")
     void test_Add_Get() {
-        // RestAssuredを使用してAPIをテストし、レスポンスを取得する
+        // RestAssuredを使用してRest APIサーバーを呼び出す
         Response response = given()
                 .queryParam("param1", 30.0) // クエリ文字列を設定する
                 .queryParam("param2", 10.0) // クエリ文字列を設定する
@@ -35,14 +35,21 @@ public class CalcApiTest {
                 .extract()
                 .response(); // レスポンスを抽出する
 
+        // レスポンスの情報を表示する
+        System.out.println("ボディ => " + response.body().asString());
+        System.out.println("HTTPヘッダ => " + response.headers());
+        System.out.println("ステータスコード => " + response.statusCode());
+        System.out.println("MIMEタイプ => " + response.contentType());
+        System.out.println("応答時間 => " + response.time());
+
         // レスポンスボディを検証する
-        assertEquals("40.0", response.getBody().asString());
+        assertEquals("40.0", response.body().asString());
     }
 
     @Test
     @DisplayName("POSTメソッドで加算処理を呼び出す")
     void test_Add_Post() {
-        // RestAssuredを使用してAPIをテストし、レスポンスを取得する
+        // RestAssuredを使用してRest APIサーバーを呼び出す
         Response response = given()
                 .contentType(ContentType.URLENC) // MIMEタイプにURLエンコーデッドを設定する
                 .formParam("param1", 30.0) // フォームパラメータを設定する
@@ -55,6 +62,6 @@ public class CalcApiTest {
                 .response(); // レスポンスを抽出する
 
         // レスポンスボディを検証する
-        assertEquals("40.0", response.getBody().asString());
+        assertEquals("40.0", response.body().asString());
     }
 }
