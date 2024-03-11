@@ -23,7 +23,7 @@ public class GreetApiTest {
 
     @Test
     @DisplayName("REST APIを呼び出し、パスパラメータに応じて、Hello 〇〇という応答を検証する")
-    void test_Say_Hello() {
+    void test_SayHello() {
         Response response = given()
                 .pathParam("personName", "Alice") // パスパラメータを設定する
                 .when()
@@ -33,12 +33,13 @@ public class GreetApiTest {
                 .extract()
                 .response(); // レスポンスを抽出する
 
-        assertEquals("Hello Alice!", response.asString());
+        String actualResponse = response.getBody().asString();
+        assertEquals("Hello Alice!", actualResponse);
     }
 
     @Test
     @DisplayName("REST APIを呼び出し、パスパラメータに応じて、Goodbye 〇〇という応答を検証する")
-    void test_Say_Goodbye() {
+    void test_SayGoodbye() {
         Response response = given()
                 .pathParam("personName", "Bob") // パスパラメータを設定する
                 .when()
@@ -48,12 +49,13 @@ public class GreetApiTest {
                 .extract()
                 .response(); // レスポンスを抽出する
 
-        assertEquals("Goodbye Bob!", response.asString());
+        String actualResponse = response.getBody().asString();
+        assertEquals("Goodbye Bob!", actualResponse);
     }
 
     @Test
     @DisplayName("REST APIを呼び出し、クエリパラメータに応じて、Good Morning 〇〇という応答を検証する")
-    void test_Say_GoodMorning() {
+    void test_SayGoodMorning() {
         Response response = given()
                 .queryParam("personName", "Carol") // クエリ文字列を設定する
                 .when()
@@ -63,12 +65,13 @@ public class GreetApiTest {
                 .extract()
                 .response(); // レスポンスを抽出する
 
-        assertEquals("Good Morning Carol!", response.asString());
+        String actualResponse = response.getBody().asString();
+        assertEquals("Good Morning Carol!", actualResponse);
     }
 
     @Test
     @DisplayName("REST APIを呼び出し、フォームエンコーデッドパラメータに応じて、Good Afternoon 〇〇という応答を検証する")
-    void test_Say_GoodAfternoon() {
+    void test_SayGoodAfternoon() {
         Response response = given()
                 .contentType(ContentType.URLENC) // MIMEタイプにURLエンコーデッドを設定する
                 .formParam("personName", "Dave") // フォームパラメータを設定する
@@ -78,12 +81,14 @@ public class GreetApiTest {
                 .statusCode(200) // ステータスコードが200であることを検証する
                 .extract()
                 .response(); // レスポンスを抽出する
-        assertEquals("Good Afternoon Dave!", response.asString());
+
+        String actualResponse = response.getBody().asString();
+        assertEquals("Good Afternoon Dave!", actualResponse);
     }
 
     @Test
     @DisplayName("REST APIを呼び出し、JSONパラメータに応じて、Good Evening 〇〇という応答を検証する")
-    void test_Say_GoodEvening() {
+    void test_SayGoodEvening() {
         String jsonBody = "{\"personName\": \"Ellen\"}";
         Response response = given()
                 .contentType(ContentType.JSON) // MIMEタイプにJSONを設定する
@@ -94,12 +99,13 @@ public class GreetApiTest {
                 .extract()
                 .response(); // レスポンスを抽出する
 
-        assertEquals("Good Evening Ellen!", response.asString());
+        String actualResponse = response.getBody().asString();
+        assertEquals("Good Evening Ellen!", actualResponse);
     }
 
     @Test
     @DisplayName("REST APIを呼び出し、HTTPヘッダに応じて、Good Night 〇〇という応答を検証する")
-    void test_Say_GoodNight() {
+    void test_SayGoodNight() {
         Response response = given()
                 .header("personName", "Frank") // HTTPヘッダを設定する
                 .when()
@@ -109,6 +115,7 @@ public class GreetApiTest {
                 .extract()
                 .response(); // レスポンスを抽出する
 
-        assertEquals("Good Night Frank!", response.asString());
+        String actualResponse = response.getBody().asString();
+        assertEquals("Good Night Frank!", actualResponse);
     }
 }

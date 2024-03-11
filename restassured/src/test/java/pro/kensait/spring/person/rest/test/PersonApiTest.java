@@ -40,7 +40,7 @@ public class PersonApiTest {
                 .statusCode(200) // ステータスコードが200であることを検証する
                 .extract()
                 .response(); // レスポンスを抽出する
-        Person actualPerson = response.as(Person.class);
+        Person actualPerson = response.getBody().as(Person.class);
         assertEquals(expectedPerson, actualPerson);
     }
 
@@ -54,7 +54,7 @@ public class PersonApiTest {
                 .statusCode(200) // ステータスコードが200であることを検証する
                 .extract()
                 .response(); // レスポンスを抽出する
-        System.out.println(response.asString());
+        System.out.println(response.getBody().asString());
     }
 
     // 特定の年齢以下のPersonのリストを取得するテスト
@@ -74,9 +74,9 @@ public class PersonApiTest {
                 .extract()
                 .response(); // レスポンスを抽出する
         ObjectMapper objectMapper = new ObjectMapper();
-        List<Person> actualList = objectMapper.readValue(response.asString(),
+        List<Person> actualList = objectMapper.readValue(response.getBody().asString(),
                 new TypeReference<List<Person>>(){});
-        assertEquals(expectedList, actualList);
+        assertIterableEquals(expectedList, actualList);
     }
 
     // 新しいPersonを作成するテスト
