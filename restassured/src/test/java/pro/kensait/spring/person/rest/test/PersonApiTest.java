@@ -25,14 +25,15 @@ public class PersonApiTest {
     void test_GetPerson() {
         Person expectedPerson = new Person(1, "Alice", 25, "female");
         Integer personId = 1; // テスト対象のpersonId
-        Person actualPerson = given()
-                .pathParam("personId", personId) // パスパラメータを設定
+        Response response = given()
+                .pathParam("personId", personId) // パスパラメータを設定する
                 .when()
-                .get("/{personId}") // GETリクエストを実行
+                .get("/{personId}") // GETメソッドでサーバーを呼び出す
                 .then()
-                .statusCode(200) // ステータスコードが200であることを検証
+                .statusCode(200) // ステータスコードが200であることを検証する
                 .extract()
-                .as(Person.class);
+                .response(); // レスポンスを抽出する
+        Person actualPerson = response.as(Person.class);
         assertEquals(expectedPerson, actualPerson);
     }
 
@@ -41,11 +42,11 @@ public class PersonApiTest {
     void test_GetAllPersons() {
         Response response = given()
                 .when()
-                .get() // 正しいエンドポイントを指定
+                .get() // GETメソッドでサーバーを呼び出す
                 .then()
-                .statusCode(200) // ステータスコードが200であることを検証
+                .statusCode(200) // ステータスコードが200であることを検証する
                 .extract()
-                .response(); // レスポンスを抽出
+                .response(); // レスポンスを抽出する
         System.out.println(response.asString());
     }
 
@@ -54,11 +55,11 @@ public class PersonApiTest {
     void test_QueryByLowerAge() {
         Integer lowerAge = 30; // テスト対象の年齢
         given()
-                .queryParam("lowerAge", lowerAge) // クエリパラメータを設定
+                .queryParam("lowerAge", lowerAge) // クエリ文字列を設定する
                 .when()
-                .get("/query_by_age") // GETリクエストを実行
+                .get("/query_by_age") // GETメソッドでサーバーを呼び出す
                 .then()
-                .statusCode(200); // ステータスコードが200であることを検証
+                .statusCode(200); // ステータスコードが200であることを検証する
     }
 
     // 新しいPersonを作成するテスト
@@ -67,12 +68,12 @@ public class PersonApiTest {
         // リクエストボディを生成する
         Person person = new Person("Frank", 36, "male");
         given()
-                .contentType(ContentType.JSON) // MIMEタイプをJSONに設定
-                .body(person) // リクエストボディを設定
+                .contentType(ContentType.JSON) // MIMEタイプにJSONを設定する
+                .body(person) // リクエストボディを設定する
                 .when()
-                .post() // POSTリクエストを実行
+                .post() // POSTメソッドでサーバーを呼び出す
                 .then()
-                .statusCode(200); // ステータスコードが200であることを検証
+                .statusCode(200); // ステータスコードが200であることを検証する
     }
 
     // 特定のPersonを更新するテスト
@@ -81,13 +82,13 @@ public class PersonApiTest {
         Integer personId = 6; // テスト対象のpersonId
         Person person = new Person(personId, "Frank", 36, "male");
         given()
-                .contentType(ContentType.JSON) // MIMEタイプをJSONに設定
-                .body(person) // リクエストボディを設定
-                .pathParam("personId", personId) // パスパラメータを設定
+                .contentType(ContentType.JSON) // MIMEタイプにJSONを設定する
+                .body(person) // リクエストボディを設定する
+                .pathParam("personId", personId) // パスパラメータを設定する
                 .when()
-                .put("/{personId}") // PUTリクエストを実行
+                .put("/{personId}") // PUTメソッドでサーバーを呼び出す
                 .then()
-                .statusCode(200); // ステータスコードが200であることを検証
+                .statusCode(200); // ステータスコードが200であることを検証する
     }
 
     // 特定のPersonを削除するテスト
@@ -95,10 +96,10 @@ public class PersonApiTest {
     public void test_DeletePerson() {
         Integer personId = 1; // テスト対象のpersonId
         given()
-                .pathParam("personId", personId) // パスパラメータを設定
+                .pathParam("personId", personId) // パスパラメータを設定する
                 .when()
-                .delete("/{personId}") // DELETEリクエストを実行
+                .delete("/{personId}") // DELETEメソッドでサーバーを呼び出す
                 .then()
-                .statusCode(200); // ステータスコードが200であることを検証
+                .statusCode(200); // ステータスコードが200であることを検証する
     }
 }

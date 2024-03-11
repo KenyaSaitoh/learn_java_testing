@@ -29,16 +29,17 @@ public class CalcApiTest {
 
         // RestAssuredを使用してAPIをテストし、レスポンスを取得する
         Response response = given()
-                .contentType(ContentType.JSON)
-                .body(param)
+                .contentType(ContentType.JSON) // MIMEタイプにJSONを設定する
+                .body(param) // リクエストボディを設定する
                 .when()
-                .post("/add")
+                .post("/add") // POSTメソッドでサーバーを呼び出す
                 .then()
+                .statusCode(200) // ステータスコードが200であることを検証する
                 .extract()
-                .response();
+                .response(); // レスポンスを抽出する
 
-        // ステータスコードとレスポンスボディを検証する
-        assertEquals(200, response.getStatusCode());
+        // レスポンスボディを検証する
+        assertEquals("40.0", response.getBody().asString());
     }
 
     @Test
@@ -46,19 +47,16 @@ public class CalcApiTest {
     void test_Add_Post_StatusCode400() {
         // パラメータを生成する
         CalcParam param = new CalcParam(30.0, -1000.0);
-        System.out.println(param);
-        
-        // RestAssuredを使用してAPIをテストし、レスポンスを取得する
-        Response response = given()
-                .contentType(ContentType.JSON)
-                .body(param)
-                .when()
-                .post("/add")
-                .then()
-                .extract()
-                .response();
 
-        // ステータスコードとレスポンスボディを検証する
-        assertEquals(400, response.getStatusCode());
+        // RestAssuredを使用してAPIをテストし、レスポンスを取得する
+        given()
+                .contentType(ContentType.JSON) // MIMEタイプにJSONを設定する
+                .body(param) // リクエストボディを設定する
+                .when()
+                .post("/add") // POSTメソッドでサーバーを呼び出す
+                .then()
+                .statusCode(400) // ステータスコードが400であることを検証する
+                .extract()
+                .response(); // レスポンスを抽出する
     }
 }

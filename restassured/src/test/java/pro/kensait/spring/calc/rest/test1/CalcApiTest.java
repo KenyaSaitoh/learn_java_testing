@@ -26,16 +26,16 @@ public class CalcApiTest {
     void test_Add_Get() {
         // RestAssuredを使用してAPIをテストし、レスポンスを取得する
         Response response = given()
-                .queryParam("param1", 30.0)
-                .queryParam("param2", 10.0)
+                .queryParam("param1", 30.0) // クエリ文字列を設定する
+                .queryParam("param2", 10.0) // クエリ文字列を設定する
                 .when()
-                .get("/add1")
+                .get("/add1") // GETメソッドでサーバーを呼び出す
                 .then()
+                .statusCode(200) // ステータスコードが200であることを検証する
                 .extract()
-                .response();
+                .response(); // レスポンスを抽出する
 
-        // ステータスコードとレスポンスボディを検証する
-        assertEquals(200, response.getStatusCode());
+        // レスポンスボディを検証する
         assertEquals("40.0", response.getBody().asString());
     }
 
@@ -44,17 +44,17 @@ public class CalcApiTest {
     void test_Add_Post() {
         // RestAssuredを使用してAPIをテストし、レスポンスを取得する
         Response response = given()
-                .contentType(ContentType.URLENC)
-                .param("param1", 30.0)
-                .param("param2", 10.0)
+                .contentType(ContentType.URLENC) // MIMEタイプにURLエンコーデッドを設定する
+                .formParam("param1", 30.0) // フォームパラメータを設定する
+                .formParam("param2", 10.0) // フォームパラメータを設定する
                 .when()
-                .post("/add2")
+                .post("/add2") // POSTメソッドでサーバーを呼び出す
                 .then()
+                .statusCode(200) // ステータスコードが200であることを検証する
                 .extract()
-                .response();
+                .response(); // レスポンスを抽出する
 
-        // ステータスコードとレスポンスボディを検証する
-        assertEquals(200, response.getStatusCode());
+        // レスポンスボディを検証する
         assertEquals("40.0", response.getBody().asString());
     }
 }
