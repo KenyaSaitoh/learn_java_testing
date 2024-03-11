@@ -54,12 +54,14 @@ public class PersonApiTest {
     @Test
     void test_QueryByLowerAge() {
         Integer lowerAge = 30; // テスト対象の年齢
-        given()
+        Response response = given()
                 .queryParam("lowerAge", lowerAge) // クエリ文字列を設定する
                 .when()
                 .get("/query_by_age") // GETメソッドでサーバーを呼び出す
                 .then()
-                .statusCode(200); // ステータスコードが200であることを検証する
+                .statusCode(200) // ステータスコードが200であることを検証する
+                .extract()
+                .response(); // レスポンスを抽出する
     }
 
     // 新しいPersonを作成するテスト
@@ -67,13 +69,15 @@ public class PersonApiTest {
     void test_CreatePerson() {
         // リクエストボディを生成する
         Person person = new Person("Frank", 36, "male");
-        given()
+        Response response = given()
                 .contentType(ContentType.JSON) // MIMEタイプにJSONを設定する
                 .body(person) // リクエストボディを設定する
                 .when()
                 .post() // POSTメソッドでサーバーを呼び出す
                 .then()
-                .statusCode(200); // ステータスコードが200であることを検証する
+                .statusCode(200) // ステータスコードが200であることを検証する
+                .extract()
+                .response(); // レスポンスを抽出する
     }
 
     // 特定のPersonを更新するテスト
@@ -81,25 +85,29 @@ public class PersonApiTest {
     void test_ReplacePerson() {
         Integer personId = 6; // テスト対象のpersonId
         Person person = new Person(personId, "Frank", 36, "male");
-        given()
+        Response response = given()
                 .contentType(ContentType.JSON) // MIMEタイプにJSONを設定する
                 .body(person) // リクエストボディを設定する
                 .pathParam("personId", personId) // パスパラメータを設定する
                 .when()
                 .put("/{personId}") // PUTメソッドでサーバーを呼び出す
                 .then()
-                .statusCode(200); // ステータスコードが200であることを検証する
+                .statusCode(200) // ステータスコードが200であることを検証する
+                .extract()
+                .response(); // レスポンスを抽出する
     }
 
     // 特定のPersonを削除するテスト
     @Test
     public void test_DeletePerson() {
         Integer personId = 1; // テスト対象のpersonId
-        given()
+        Response response = given()
                 .pathParam("personId", personId) // パスパラメータを設定する
                 .when()
                 .delete("/{personId}") // DELETEメソッドでサーバーを呼び出す
                 .then()
-                .statusCode(200); // ステータスコードが200であることを検証する
+                .statusCode(200) // ステータスコードが200であることを検証する
+                .extract()
+                .response(); // レスポンスを抽出する
     }
 }

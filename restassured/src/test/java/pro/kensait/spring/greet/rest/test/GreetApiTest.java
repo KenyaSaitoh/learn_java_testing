@@ -25,7 +25,7 @@ public class GreetApiTest {
     @DisplayName("REST APIを呼び出し、パスパラメータに応じて、Hello 〇〇という応答を検証する")
     void test_Say_Hello() {
         Response response = given()
-                .pathParam("personName", "Alice")
+                .pathParam("personName", "Alice") // パスパラメータを設定する
                 .when()
                 .get("/hello/{personName}") // GETメソッドでサーバーを呼び出す
                 .then()
@@ -40,7 +40,7 @@ public class GreetApiTest {
     @DisplayName("REST APIを呼び出し、パスパラメータに応じて、Goodbye 〇〇という応答を検証する")
     void test_Say_Goodbye() {
         Response response = given()
-                .pathParam("personName", "Bob")
+                .pathParam("personName", "Bob") // パスパラメータを設定する
                 .when()
                 .get("/goodbye/{personName}") // GETメソッドでサーバーを呼び出す
                 .then()
@@ -101,7 +101,7 @@ public class GreetApiTest {
     @DisplayName("REST APIを呼び出し、HTTPヘッダに応じて、Good Night 〇〇という応答を検証する")
     void test_Say_GoodNight() {
         Response response = given()
-                .header("personName", "Frank")
+                .header("personName", "Frank") // HTTPヘッダを設定する
                 .when()
                 .get("/night") // GETメソッドでサーバーを呼び出す
                 .then()
