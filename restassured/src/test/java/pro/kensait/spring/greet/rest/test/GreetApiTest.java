@@ -16,106 +16,106 @@ public class GreetApiTest {
     // テストクラス全体の前処理
     @BeforeAll
     static void initAll() {
-        RestAssured.port = 8080;
-        RestAssured.baseURI = "http://localhost";
-        RestAssured.basePath = "/greet";
+        RestAssured.baseURI = "http://localhost"; // ベースURI
+        RestAssured.port = 8080; // ポート番号
+        RestAssured.basePath = "/greet"; // ベースパス
     }
 
     @Test
-    @DisplayName("REST APIを呼び出し、パスパラメータに応じて、Hello 〇〇という応答を検証する")
+    @DisplayName("RESTサービスを呼び出し、パスパラメータに応じて、Hello 〇〇という応答を検証する")
     void test_SayHello() {
         Response response = given()
                 .pathParam("personName", "Alice") // パスパラメータを設定する
                 .when()
-                .get("/hello/{personName}") // GETメソッドでサーバーを呼び出す
+                .get("/hello/{personName}") // GETメソッドでRESTサービスを呼び出す
                 .then()
                 .statusCode(200) // ステータスコードが200であることを検証する
                 .extract()
                 .response(); // レスポンスを抽出する
 
         // レスポンスボディを検証する
-        assertEquals("Hello Alice!", response.body().asString());
+        assertEquals("Hello Alice!", response.asString());
     }
 
     @Test
-    @DisplayName("REST APIを呼び出し、パスパラメータに応じて、Goodbye 〇〇という応答を検証する")
+    @DisplayName("RESTサービスを呼び出し、パスパラメータに応じて、Goodbye 〇〇という応答を検証する")
     void test_SayGoodbye() {
         Response response = given()
                 .pathParam("personName", "Bob") // パスパラメータを設定する
                 .when()
-                .get("/goodbye/{personName}") // GETメソッドでサーバーを呼び出す
+                .get("/goodbye/{personName}") // GETメソッドでRESTサービスを呼び出す
                 .then()
                 .statusCode(200) // ステータスコードが200であることを検証する
                 .extract()
                 .response(); // レスポンスを抽出する
 
         // レスポンスボディを検証する
-        assertEquals("Goodbye Bob!", response.body().asString());
+        assertEquals("Goodbye Bob!", response.asString());
     }
 
     @Test
-    @DisplayName("REST APIを呼び出し、クエリパラメータに応じて、Good Morning 〇〇という応答を検証する")
+    @DisplayName("RESTサービスを呼び出し、クエリパラメータに応じて、Good Morning 〇〇という応答を検証する")
     void test_SayGoodMorning() {
         Response response = given()
                 .queryParam("personName", "Carol") // クエリ文字列を設定する
                 .when()
-                .get("/morning") // GETメソッドでサーバーを呼び出す
+                .get("/morning") // GETメソッドでRESTサービスを呼び出す
                 .then()
                 .statusCode(200) // ステータスコードが200であることを検証する
                 .extract()
                 .response(); // レスポンスを抽出する
 
         // レスポンスボディを検証する
-        assertEquals("Good Morning Carol!", response.body().asString());
+        assertEquals("Good Morning Carol!", response.asString());
     }
 
     @Test
-    @DisplayName("REST APIを呼び出し、フォームエンコーデッドパラメータに応じて、Good Afternoon 〇〇という応答を検証する")
+    @DisplayName("RESTサービスを呼び出し、フォームエンコーデッドパラメータに応じて、Good Afternoon 〇〇という応答を検証する")
     void test_SayGoodAfternoon() {
         Response response = given()
-                .contentType(ContentType.URLENC) // MIMEタイプにURLエンコーデッドを設定する
+                .contentType(ContentType.URLENC) // コンテンツタイプにURLエンコーデッドを設定する
                 .formParam("personName", "Dave") // フォームパラメータを設定する
                 .when()
-                .post("/afternoon") // POSTメソッドでサーバーを呼び出す
+                .post("/afternoon") // POSTメソッドでRESTサービスを呼び出す
                 .then()
                 .statusCode(200) // ステータスコードが200であることを検証する
                 .extract()
                 .response(); // レスポンスを抽出する
 
         // レスポンスボディを検証する
-        assertEquals("Good Afternoon Dave!", response.body().asString());
+        assertEquals("Good Afternoon Dave!", response.asString());
     }
 
     @Test
-    @DisplayName("REST APIを呼び出し、JSONパラメータに応じて、Good Evening 〇〇という応答を検証する")
+    @DisplayName("RESTサービスを呼び出し、JSONパラメータに応じて、Good Evening 〇〇という応答を検証する")
     void test_SayGoodEvening() {
         String jsonBody = "{\"personName\": \"Ellen\"}";
         Response response = given()
-                .contentType(ContentType.JSON) // MIMEタイプにJSONを設定する
+                .contentType(ContentType.JSON) // コンテンツタイプにJSONを設定する
                 .body(jsonBody) // リクエストボディを設定する
                 .when()
-                .post("/evening") // POSTメソッドでサーバーを呼び出す
+                .post("/evening") // POSTメソッドでRESTサービスを呼び出す
                 .then()
                 .extract()
                 .response(); // レスポンスを抽出する
 
         // レスポンスボディを検証する
-        assertEquals("Good Evening Ellen!", response.body().asString());
+        assertEquals("Good Evening Ellen!", response.asString());
     }
 
     @Test
-    @DisplayName("REST APIを呼び出し、HTTPヘッダに応じて、Good Night 〇〇という応答を検証する")
+    @DisplayName("RESTサービスを呼び出し、HTTPヘッダに応じて、Good Night 〇〇という応答を検証する")
     void test_SayGoodNight() {
         Response response = given()
                 .header("personName", "Frank") // HTTPヘッダを設定する
                 .when()
-                .get("/night") // GETメソッドでサーバーを呼び出す
+                .get("/night") // GETメソッドでRESTサービスを呼び出す
                 .then()
                 .statusCode(200) // ステータスコードが200であることを検証する
                 .extract()
                 .response(); // レスポンスを抽出する
 
         // レスポンスボディを検証する
-        assertEquals("Good Night Frank!", response.body().asString());
+        assertEquals("Good Night Frank!", response.asString());
     }
 }

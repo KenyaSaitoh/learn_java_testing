@@ -7,10 +7,8 @@ import com.github.tomakehurst.wiremock.WireMockServer;
 public class WireMockApp {
 
     public static void main(String[] args) {
-        WireMockServer wireMockServer = new WireMockServer(8080); // ポート番号を指定
-        wireMockServer.start();
-
-        configureFor("localhost", 8080);
+        WireMockServer server = new WireMockServer(8080); // ポート番号を指定
+        server.start();
 
         stubFor(post(urlPathEqualTo("/calc/add"))
                 .withRequestBody(containing("param1"))
