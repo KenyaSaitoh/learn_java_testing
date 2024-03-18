@@ -1,5 +1,6 @@
 package pro.kensait.selenium.bookstore;
 
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,6 +18,11 @@ class BookStoreTest_2 {
     // テストクラス全体の前処理
     @BeforeAll
     static void initAll() {
+        // WebブラウザをChromeに設定する
+        Configuration.browser = "chrome";
+        // ベースURLを設定する
+        Configuration.baseUrl = "http://localhost:8080";
+
         // 現在日付と時刻をyyyyMMddHHmmssのフォーマットで取得する
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
@@ -28,14 +34,12 @@ class BookStoreTest_2 {
 
     @Test
     void test_BookStoreOperations() {
-        Configuration.baseUrl = "http://localhost:8080";
-
         // 1. オープン
         open("http://localhost:8080");
 
-        // 2. ページのタイトル検証: BookSelectPage
+        // 2. ページのタイトル検証: TopPage
         assertEquals("TopPage", title());
-        Selenide.screenshot("1-TopPage");
+        screenshot("1-TopPage");
 
         // 3. 入力: email
         $("#email").setValue("alice@gmail.com");
@@ -52,15 +56,13 @@ class BookStoreTest_2 {
 
         // 7. ページのタイトル検証: BookSelectPage
         assertEquals("BookSelectPage", title());
-        Selenide.screenshot("7-BookSelectPage");
+        screenshot("7-BookSelectPage");
 
         // 8. テーブルの1行目の1列目の検証
-        String bookTitle = $$("#bookstore-table tbody tr").first().$$("td").first().text();
-        assertEquals("Java SEディープダイブ", bookTitle);
+        $$("#bookstore-table tbody tr").first().$$("td").first().shouldHave(text("Java SEディープダイブ"));
 
         // 9. テーブルの行数検証
-        int rowCount = $$("#bookstore-table tbody tr").size();
-        assertEquals(34, rowCount);
+        assertEquals(34, $$("#bookstore-table tbody tr").size());
 
         // 10. クリック: button-3
         $("#button-3").click();
@@ -81,21 +83,21 @@ class BookStoreTest_2 {
 
         // 15. ページのタイトル検証: CartViewPage
         assertEquals("CartViewPage", title());
-        Selenide.screenshot("15-CartViewPage");
+        screenshot("15-CartViewPage");
 
         // 16. クリック: toSelectLink
         $("#toSelectLink").click();
 
         // 17. ページのタイトル検証: BookSelectPage
         assertEquals("BookSelectPage", title());
-        Selenide.screenshot("17-BookSelectPage");
+        screenshot("17-BookSelectPage");
 
         // 18. クリック: toSearchLink
         $("#toSearchLink").click();
 
         // 19. ページのタイトル検証: BookSearchPage
         assertEquals("BookSearchPage", title());
-        Selenide.screenshot("19-BookSearchPage");
+        screenshot("19-BookSearchPage");
 
         // 20. 選択: category
         $("#category").selectOptionByValue("2");
@@ -108,14 +110,14 @@ class BookStoreTest_2 {
 
         // 23. ページのタイトル検証: BookSelectPage
         assertEquals("BookSelectPage", title());
-        Selenide.screenshot("23-BookSelectPage");
+        screenshot("23-BookSelectPage");
 
         // 24. クリック: button-11
         $("#button-11").click();
 
         // 25. ページのタイトル検証: CartViewPage
         assertEquals("CartViewPage", title());
-        Selenide.screenshot("27-CartViewPage");
+        screenshot("27-CartViewPage");
 
         // 26. クリック: check-3
         $("#check-3").click();
@@ -125,14 +127,26 @@ class BookStoreTest_2 {
 
         // 28. ページのタイトル検証: CartViewPage
         assertEquals("CartViewPage", title());
-        Selenide.screenshot("28-CartViewPage");
+        screenshot("28-CartViewPage");
 
         // 29. クリック: fixButton
         $("#fixButton").click();
 
         // 30. ページのタイトル検証: BookOrderPage
         assertEquals("BookOrderPage", title());
-        Selenide.screenshot("30-BookOrderPage");
+        screenshot("30-BookOrderPage");
+
+        // 機能確認：#orderButton1が表示されていることの検証
+        $("#orderButton1").shouldBe(visible);
+
+        // 機能確認：#orderButton3が表示されていないことの検証
+        $("#orderButton3").shouldBe(hidden);
+
+        // 機能確認：#orderButton1が属性名"formaction"、属性値"/order1"を持っていることの検証
+        $("#orderButton1").shouldHave(attribute("formaction", "/order1"));
+
+        // 機能確認：#bankTransferが選択されていないことの検証
+        $("#bankTransfer").shouldNotBe(selected);
 
         // 31. クリック: bankTransfer
         $("#bankTransfer").click();
@@ -151,13 +165,13 @@ class BookStoreTest_2 {
 
         // 36. ページのタイトル検証: OrderSuccessPage
         assertEquals("OrderSuccessPage", title());
-        Selenide.screenshot("36-OrderSuccessPage");
+        screenshot("37-OrderSuccessPage");
 
         // 37. クリック: logoutButton
         $("#logoutButton").click();
 
         // 38. ページのタイトル検証: FinishPage
         assertEquals("FinishPage", title());
-        Selenide.screenshot("38-FinishPage");
+        screenshot("38-FinishPage");
     }
 }

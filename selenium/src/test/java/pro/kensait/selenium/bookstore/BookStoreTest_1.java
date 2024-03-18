@@ -2,6 +2,7 @@ package pro.kensait.selenium.bookstore;
 
 import static com.codeborne.selenide.Selenide.*;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Configuration;
@@ -9,10 +10,17 @@ import com.codeborne.selenide.Selenide;
 
 class BookStoreTest_1 {
 
+    // テストクラス全体の前処理
+    @BeforeAll
+    static void initAll() {
+        // WebブラウザをChromeに設定する
+        Configuration.browser = "chrome";
+        // ベースURLを設定する
+        Configuration.baseUrl = "http://localhost:8080";
+    }
+
     @Test
     void test_BookStoreOperations() {
-        Configuration.baseUrl = "http://localhost:8080";
-
         // 1. オープン
         open("/");
 
@@ -45,7 +53,8 @@ class BookStoreTest_1 {
         $("#toSearchLink").click();
 
         // 11. 選択: category
-        $("#category").selectOptionByValue("2");
+        // $("#category").selectOptionByValue("2");
+        $("#category").selectOption("SpringBoot");
 
         // 12. 入力: keyword
         $("#keyword").setValue("Cloud");

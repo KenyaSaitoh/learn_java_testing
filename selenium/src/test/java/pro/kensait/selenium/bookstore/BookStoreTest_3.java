@@ -2,16 +2,24 @@ package pro.kensait.selenium.bookstore;
 
 import static com.codeborne.selenide.Selenide.*;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Configuration;
 
 class BookStoreTest_3 {
 
+    // テストクラス全体の前処理
+    @BeforeAll
+    static void initAll() {
+        // WebブラウザをChromeに設定する
+        Configuration.browser = "chrome";
+        // ベースURLを設定する
+        Configuration.baseUrl = "http://localhost:8080";
+    }
+
     @Test
     void test_BookStoreOperations() {
-        Configuration.baseUrl = "http://localhost:8080";
-
         // 1. オープン
         open("/");
 
