@@ -28,8 +28,8 @@ Seleniumのコードを、Java（Selenide）で生成してください。
 |5|クリック|loginButton||loginButton|
 |6|リダイレクト|||/toSelect|
 |7|検証||title()|BookSelectPage|
-|8|検証|bookstore-table|ボディ内の1行目の1列目|Java SEディープダイブ|
-|9|検証|bookstore-table|ボディの行数|34|
+|8|検証|book-table|ボディ内の1行目の1列目|Java SEディープダイブ|
+|9|検証|book-table|ボディの行数|34|
 |10|クリック|button-3||3|
 |11|検証||title()|CartViewPage|
 |12|クリック|toSelectLink|||

@@ -6,15 +6,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
-
 class CalcTest {
 
     @Test
     void testCalculation() {
         // Step 1: Open the specified URL
-        Selenide.open("http://localhost:8080/");
+        open("http://localhost:8080");
 
         // Step 2: Input 30 into the element with ID 'param1'
         $("#param1").setValue("30");
@@ -32,7 +29,7 @@ class CalcTest {
         $("#result").shouldHave(text("40"));
 
         // Step 7: Go back to the previous page
-        Selenide.back();
+        back();
 
         // Step 8: Input 500 into the element with ID 'param1'
         $("#param1").setValue("500");
@@ -47,6 +44,6 @@ class CalcTest {
         assertEquals("CalcInputPage", title());
 
         // Step 12: Verify that an error exists in any location under 'globalErrors'
-        $$("#globalErrors").find(Condition.exist);
+        $$("#globalErrors").first().shouldBe(exist);
     }
 }
