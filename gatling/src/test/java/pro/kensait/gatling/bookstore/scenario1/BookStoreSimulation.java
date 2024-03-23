@@ -10,7 +10,8 @@ import io.gatling.javaapi.http.HttpProtocolBuilder;
 
 public class BookStoreSimulation extends Simulation {
 
-    private HttpProtocolBuilder httpProtocol = http
+    // HTTPに関する共通情報を設定する
+    HttpProtocolBuilder httpProtocol = http
             // ベースURLを設定
             .baseUrl("http://localhost:8080")
             // Acceptヘッダ（一般的なWebブラウザの想定）
@@ -25,12 +26,14 @@ public class BookStoreSimulation extends Simulation {
             .userAgentHeader("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
                     + "(KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
 
-    private FeederBuilder.Batchable<String> feeder = csv("data/users.csv");
+    // CSVファイルからテストデータを読み込むためのフィーダーを設定する
+    FeederBuilder.Batchable<String> feeder = csv("data/users.csv").circular();
 
-    private ScenarioBuilder scn = scenario("BookStoreTest")
+    // シナリオを構築する
+    ScenarioBuilder scn = scenario("BookStoreTest")
             .forever().on(
                     pace(30)
-                    .feed(feeder.circular())
+                    .feed(feeder)
                     .exec(
                             http("Open")
                             .get("/")
@@ -189,13 +192,13 @@ public class BookStoreSimulation extends Simulation {
                     )
             ;
 
-    // イニシャライザーでセットアップする
+    // シミュレーション全体の設定
     {
         setUp(
-                scn.injectOpen(
+                scn.injectOpen( // 既出のシナリオ（ScenarioBuilder）をオープンし、ワークロードモデルを設定する
                         rampUsers(5).during(100) // 100秒かけてユーザー数を5まで増やす
                 )
-                .protocols(httpProtocol))
-        .maxDuration(200); // シミュレーションの最大持続時間を200秒に設定する
+                .protocols(httpProtocol)) // 既出のHTTP共通情報（HttpProtocolBuilder）を指定する
+        .maxDuration(200); // 最大持続時間を200秒に設定する
     }
 }

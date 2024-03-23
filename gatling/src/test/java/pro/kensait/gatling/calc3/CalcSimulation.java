@@ -9,6 +9,7 @@ import io.gatling.javaapi.http.HttpProtocolBuilder;
 
 public class CalcSimulation extends Simulation {
 
+    // HTTPに関する共通情報を設定する
     HttpProtocolBuilder httpProtocol = http
             // ベースURLを設定
             .baseUrl("http://localhost:8080")
@@ -24,6 +25,7 @@ public class CalcSimulation extends Simulation {
             .userAgentHeader("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
                     + "(KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
 
+    // シナリオを構築する
     ScenarioBuilder scn = scenario("Calculation Scenario")
             .exec(http("Open TopPage")
                     .get("/")
@@ -54,10 +56,12 @@ public class CalcSimulation extends Simulation {
                     )
             ;
 
-    // イニシャライザーでセットアップする
+    // シミュレーション全体の設定
     {
         setUp(scn.injectOpen(
-                rampUsers(3).during(30)).protocols(httpProtocol))
-                        .maxDuration(50);
+                rampUsers(3).during(30) // 30秒かけてユーザー数を3まで増やす
+                )
+                .protocols(httpProtocol))
+        .maxDuration(50); // 最大持続時間を50秒に設定する
     }
 }
