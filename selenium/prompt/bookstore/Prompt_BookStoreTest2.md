@@ -1,19 +1,16 @@
-以下の「打鍵指示書」に従って画面テストを行います。
-Seleniumのコードを、Java（Selenide）で生成してください。
+以下の[制約条件]および[打鍵指示書]に従い、WebブラウザのUIテストを行います。
+SelenideとJUnit5によるJavaのテストコードを、生成してください。
 
 ［制約条件］
 
-* 生成するコードは、pro.kensait.selenium.bookstoreパッケージ配下のBookStoreTest_2クラスという名前で、
-  JUnit5のテストクラスとして出力してください。
-* URLは、最初にアクセスしたURLとポート番号をベースとして定義してください。
+* パッケージ名は`pro.kensait.selenium.bookstore`、クラス名は`BookStoreTest`とします。
+* ベースURLとしてhttp://localhost:8080を設定してください。
 * リダイレクトは、1秒程度待ってから、テストプログラム内でGETしてください。
 * リンクはID属性を指定してクリックしてください。
-
-［検証方法］
-
-* 検証は、JUnit5のassert文を使ってください。
 * ID属性は、"#"で表現してください。
 * 要素（HTMLタグ）は、Selenideの"$$"を使って取得してください。
+* タイトルの検証には、JUnit5のアサーションAPIを使ってください。
+* タイトル以外の検証には、Selenideの検証API（`shouldHave()`、`shouldBe()`など）を使ってください。
 * タイトルの検証した直後に、ページのスクリーンショットを保存してください。
   保存名は、"番号-ページタイトル"とします。
 
@@ -21,7 +18,7 @@ Seleniumのコードを、Java（Selenide）で生成してください。
 
 |番号|指示|ID|場所|VALUE|
 |:--|--|--|--|--|
-|1|オープン|||http://localhost:8080/|
+|1|オープン||||
 |2|検証||title()|TopPage|
 |3|入力|email||alice@gmail.com|
 |4|入力|password||password|
@@ -59,5 +56,3 @@ Seleniumのコードを、Java（Selenide）で生成してください。
 |36|検証||title()|OrderSuccessPage|
 |37|クリック|logoutButton|||
 |38|検証||title()|FinishPage|
-
-

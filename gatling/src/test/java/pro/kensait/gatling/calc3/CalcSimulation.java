@@ -36,7 +36,7 @@ public class CalcSimulation extends Simulation {
 
             .forever().on(      // 永遠に繰り返す（ただしmaxDurationが優先される）
             // .repeat(100).on( // 最大100回繰り返す（ただしmaxDurationが優先される）
-                    pace(5) // 一時停止時間に関わらず、5秒ごとに実行される
+                    pace(5) // 5秒ごとに実行される
                     .exec(http("Add Operation")
                             .post("/add")
                             .formParam("param1", "30")

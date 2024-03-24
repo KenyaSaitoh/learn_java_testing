@@ -34,28 +34,29 @@ public class BookStoreSimulation extends Simulation {
             .forever().on(
                     pace(30)
                     .feed(feeder)
+                    // Step1：Open
                     .exec(
                             http("Open")
                             .get("/")
                             .check(
                                     status().is(200),
                                     css("title").is("TopPage"),
-                                    css("#csrfToken", "value").saveAs("csrfToken")
+                                    css("#csrfToken", "value").saveAs("sessionCsrfToken")
                                     )
                             )
                     .pause(2)
-
+                    // Step2：Login
                     .exec(
                             http("Login")
                             .post("/processLogin")
                             .formParam("email", "#{userId}")
                             .formParam("password", "#{password}")
-                            .formParam("_csrf", "#{csrfToken}")
+                            .formParam("_csrf", "#{sessionCsrfToken}")
                             .check(
                                     // リダイレクトは自動的に行われるため、リダイレクト後にcheckする
                                     status().is(200),
                                     css("title").is("BookSelectPage"),
-                                    css("#csrfToken", "value").saveAs("csrfToken")
+                                    css("#csrfToken", "value").saveAs("sessionCsrfToken")
                                     )
                             )
 
@@ -67,44 +68,44 @@ public class BookStoreSimulation extends Simulation {
                     })
 
                     .pause(2)
-
+                    // Step3：Add Book
                     .exec(
-                            http("Add Book 1")
+                            http("Add Book")
                             .post("/addBook")
                             .formParam("bookId", "3")
-                            .formParam("_csrf", "#{csrfToken}")
+                            .formParam("_csrf", "#{sessionCsrfToken}")
                             .check(
                                     status().is(200),
                                     css("title").is("CartViewPage"),
-                                    css("#csrfToken", "value").saveAs("csrfToken")
+                                    css("#csrfToken", "value").saveAs("sessionCsrfToken")
                                     )
                             )
                     .pause(2)
-
+                    // Step4：To Select
                     .exec(
-                            http("To Select 2")
+                            http("To Select")
                             .get("/toSelect")
                             .check(
                                     status().is(200),
                                     css("title").is("BookSelectPage"),
-                                    css("#csrfToken", "value").saveAs("csrfToken")
+                                    css("#csrfToken", "value").saveAs("sessionCsrfToken")
                                     )
                             )
                     .pause(2)
-
-                    .exec(http("Add Book 2")
+                    // Step5：Add Book
+                    .exec(http("Add Book")
                             .post("/addBook")
                             .formParam("bookId", "5")
-                            .formParam("_csrf", "#{csrfToken}")
+                            .formParam("_csrf", "#{sessionCsrfToken}")
                             .check(
                                     status().is(200),
                                     css("title").is("CartViewPage"),
-                                    css("#csrfToken", "value").saveAs("csrfToken")
+                                    css("#csrfToken", "value").saveAs("sessionCsrfToken")
                                     )
                             )
                     .pause(2)
-
-                    .exec(http("To Select 3")
+                    // Step6：To Select
+                    .exec(http("To Select")
                             .get("/toSelect")
                             .check(
                                     status().is(200),
@@ -112,7 +113,7 @@ public class BookStoreSimulation extends Simulation {
                                     )
                             )
                     .pause(2)
-
+                    // Step7：To Search
                     .exec(http("To Search")
                             .get("/toSearch")
                             .check(
@@ -121,7 +122,7 @@ public class BookStoreSimulation extends Simulation {
                                     )
                             )
                     .pause(2)
-
+                    // Step8：Search
                     .exec(http("Search")
                             .get("/search")
                             .queryParam("categoryId", "2")
@@ -129,61 +130,61 @@ public class BookStoreSimulation extends Simulation {
                             .check(
                                     status().is(200),
                                     css("title").is("BookSelectPage"),
-                                    css("#csrfToken", "value").saveAs("csrfToken")
+                                    css("#csrfToken", "value").saveAs("sessionCsrfToken")
                                     )
                             )
                     .pause(2)
-
-                    .exec(http("Add Book 3")
+                    // Step9：Add Book
+                    .exec(http("Add Book")
                             .post("/addBook")
                             .formParam("bookId", "11")
-                            .formParam("_csrf", "#{csrfToken}")
+                            .formParam("_csrf", "#{sessionCsrfToken}")
                             .check(
                                     status().is(200),
                                     css("title").is("CartViewPage"),
-                                    css("#csrfToken", "value").saveAs("csrfToken")
+                                    css("#csrfToken", "value").saveAs("sessionCsrfToken")
                                     )
                             )
                     .pause(2)
-
+                    // Step10：Remove Book
                     .exec(http("Remove Book")
                             .post("/removeBook")
                             .formParam("removeBookIdList", "3")
-                            .formParam("_csrf", "#{csrfToken}")
+                            .formParam("_csrf", "#{sessionCsrfToken}")
                             .check(
                                     status().is(200),
                                     css("title").is("CartViewPage"),
-                                    css("#csrfToken", "value").saveAs("csrfToken")
+                                    css("#csrfToken", "value").saveAs("sessionCsrfToken")
                                     )
                             )
                     .pause(2)
-
+                    // Step11：Fix
                     .exec(http("Fix")
                             .post("/fix")
-                            .formParam("_csrf", "#{csrfToken}")
+                            .formParam("_csrf", "#{sessionCsrfToken}")
                             .check(
                                     status().is(200),
                                     css("title").is("BookOrderPage"),
-                                    css("#csrfToken", "value").saveAs("csrfToken")
+                                    css("#csrfToken", "value").saveAs("sessionCsrfToken")
                                     )
                             )
                     .pause(2)
-
+                    // Step12：Order
                     .exec(http("Order")
                             .post("/order1")
                             .formParam("settlementType", "1")
-                            .formParam("_csrf", "#{csrfToken}")
+                            .formParam("_csrf", "#{sessionCsrfToken}")
                             .check(
                                     status().is(200),
                                     css("title").is("OrderSuccessPage"),
-                                    css("#csrfToken", "value").saveAs("csrfToken")
+                                    css("#csrfToken", "value").saveAs("sessionCsrfToken")
                                     )
                             )
                     .pause(2)
-
+                    // Step13：Logout
                     .exec(http("Logout")
                             .post("/processLogout")
-                            .formParam("_csrf", "#{csrfToken}")
+                            .formParam("_csrf", "#{sessionCsrfToken}")
                             .check(
                                     status().is(200),
                                     css("title").is("FinishPage")
@@ -195,10 +196,10 @@ public class BookStoreSimulation extends Simulation {
     // シミュレーション全体の設定
     {
         setUp(
-                scn.injectOpen( // 既出のシナリオ（ScenarioBuilder）をオープンし、ワークロードモデルを設定する
+                scn.injectOpen( // 設定済みのシナリオをオープンし、ワークロードモデルを設定する
                         rampUsers(5).during(100) // 100秒かけてユーザー数を5まで増やす
                 )
-                .protocols(httpProtocol)) // 既出のHTTP共通情報（HttpProtocolBuilder）を指定する
+                .protocols(httpProtocol)) // 設定済みのHTTP共通情報を指定する
         .maxDuration(200); // 最大持続時間を200秒に設定する
     }
 }
