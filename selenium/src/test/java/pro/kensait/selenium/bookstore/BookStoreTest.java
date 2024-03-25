@@ -29,7 +29,7 @@ class BookStoreTest_2 {
         String dateTime = now.format(formatter);
 
         // スクリーンショットの保存先ディレクトリを設定する
-        Configuration.reportsFolder = "build/reports/screenshots/BookStoreTest_2/" + dateTime;
+        Configuration.reportsFolder = "build/reports/screenshots/BookStoreTest/" + dateTime;
     }
 
     @Test
