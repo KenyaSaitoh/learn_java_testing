@@ -91,7 +91,7 @@ public class ShippingService {
 }
 ```
 
-# 関連クラス
+# 依存クラス
 
 ```
 public record Baggage (

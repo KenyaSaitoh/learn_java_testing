@@ -1,7 +1,7 @@
-以下の［制約条件］および［負荷テストシナリオ］に従い、負荷テストを行います。
-Gatlingのシミュレーションクラスを、概念的なJavaコードとして生成してください。
+以下の［負荷テストシナリオ］および［シミュレーションの全体設定］に従い、負荷テストを行います。
+Gatlingのシミュレーションクラスを、以下の［制約条件］に基づき、概念的なJavaコードとして生成してください。
 
-［制約条件］
+# 制約条件
 
 * パッケージ名は`pro.kensait.gatling.bookstore.scenario1`、クラス名は`BookStoreSimulation`とします。
 * シミュレーションクラスは、`io.gatling.javaapi.core.Simulation`を継承してください。
@@ -16,12 +16,10 @@ Gatlingのシミュレーションクラスを、概念的なJavaコードとし
 * シナリオは、`pace()`メソッドによって、シナリオ番号1～12の間を、30秒間のペースに調整してください。
 * シナリオは、`forever()`メソッドによって、無限に繰り返してください。
 * 個々のユーザー操作には、2秒間の休止時間を入れてください。
-* 最初は1ユーザから始め、100秒かけて最大5ユーザーまで増加させてください。
-* 起動してから200秒経過したら、シミュレーション全体を終了してください。
 
-［負荷テストシナリオ］
+# 負荷テストシナリオ
 
-|Num|Step|Action|Endpoint|Parameters|Checks|
+|番号|アクション|メソッド|URL|パラメータ|検証|
 |:--|:--|:--|:--|:--|:--|
 |1|Open|GET|/||Status: 200, Title: "TopPage", Save CSRF|
 |2|Login|POST|/processLogin|email: "#{userId}", password: "#{password}", _csrf: #{sessionCsrfToken}|Status: 200, Title: "BookSelectPage", Save CSRF|
@@ -36,3 +34,8 @@ Gatlingのシミュレーションクラスを、概念的なJavaコードとし
 |11|Fix|POST|/fix|_csrf: #{sessionCsrfToken}|Status: 200, Title: "BookOrderPage", Save CSRF|
 |12|Order|POST|/order1|settlementType: "1", _csrf: #{sessionCsrfToken}|Status: 200, Title: "OrderSuccessPage", Save CSRF|
 |13|Logout|POST|/processLogout|_csrf: #{sessionCsrfToken}|Status: 200, Title: "FinishPage"|
+
+# シミュレーションの全体設定
+
+* 最初は1ユーザから始め、100秒かけて最大5ユーザーまで増加させてください。
+* 起動してから200秒経過したら、シミュレーション全体を終了してください。
