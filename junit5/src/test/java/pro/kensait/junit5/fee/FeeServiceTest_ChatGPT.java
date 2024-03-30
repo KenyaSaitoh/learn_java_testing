@@ -44,4 +44,3 @@ public class FeeServiceTest_ChatGPT {
         assertEquals(500, feeService.calcFee("B999", 39999), "他の銀行への振込で40000円未満の場合、手数料は500円であるべき");
     }
 }
-

@@ -75,7 +75,7 @@ public class PersonApiTest {
 
         // RestAssuredを使用してRESTサービスを呼び出す
         Response response = given()
-                .queryParam("lowerAge", lowerAge) // クエリ文字列を設定する
+                .queryParam("lowerAge", lowerAge) // クエリパラメータを設定する
                 .when()
                 .get("/query_by_age") // GETメソッドでRESTサービスを呼び出す
                 .then()

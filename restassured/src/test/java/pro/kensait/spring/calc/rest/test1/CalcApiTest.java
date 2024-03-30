@@ -26,8 +26,8 @@ public class CalcApiTest {
     void test_Add_Get() {
         // RestAssuredを使用してRESTサービスを呼び出す
         Response response = given()
-                .queryParam("param1", 30.0) // クエリ文字列を設定する
-                .queryParam("param2", 10.0) // クエリ文字列を設定する
+                .queryParam("param1", 30.0) // クエリパラメータを設定する
+                .queryParam("param2", 10.0) // クエリパラメータを設定する
                 .when()
                 .get("/add1") // GETメソッドでRESTサービスを呼び出す
                 .then()

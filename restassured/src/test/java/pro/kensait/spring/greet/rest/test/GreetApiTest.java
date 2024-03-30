@@ -57,7 +57,7 @@ public class GreetApiTest {
     @DisplayName("RESTサービスを呼び出し、クエリパラメータに応じて、Good Morning 〇〇という応答を検証する")
     void test_SayGoodMorning() {
         Response response = given()
-                .queryParam("personName", "Carol") // クエリ文字列を設定する
+                .queryParam("personName", "Carol") // クエリパラメータを設定する
                 .when()
                 .get("/morning") // GETメソッドでRESTサービスを呼び出す
                 .then()
