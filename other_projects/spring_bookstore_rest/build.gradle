@@ -1,0 +1,139 @@
+import groovy.io.FileType
+import groovy.sql.Sql
+
+// 初期化処理
+buildscript {
+    ext {
+        springBootVer = "3.2.2"
+        jeeVer = "10.0.0"
+        mariaDbConnectorVer = "3.3.2"
+        junitVer = "5.10.1"
+        junitPlatformVer = "1.10.1"
+    }
+    // リポジトリ設定
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-dependencies:${springBootVer}"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVer}"
+        classpath "org.mariadb.jdbc:mariadb-java-client:${mariaDbConnectorVer}"
+    }
+}
+
+// プラグイン読み込み
+plugins {
+    id "java"
+    id "org.springframework.boot" version "${springBootVer}" 
+    id "io.spring.dependency-management" version "1.0.15.RELEASE"
+    id "eclipse"
+    id "jacoco"
+}
+
+// リポジトリ設定
+repositories {
+    mavenCentral()
+}
+
+// 文字コード設定
+def defaultEncoding = "UTF-8"
+tasks.withType(AbstractCompile).each { it.options.encoding = defaultEncoding }
+
+// リソース競合時の処理を設定（Gradle7.x対応）
+tasks.withType(ProcessResources) {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+// 依存関係設定
+dependencies {
+    implementation "org.springframework.boot:spring-boot-autoconfigure:${springBootVer}"
+    implementation "org.springframework.boot:spring-boot-starter-web:${springBootVer}"
+    implementation "org.springframework.boot:spring-boot-starter-actuator:${springBootVer}"
+    implementation "org.springframework.boot:spring-boot-starter-validation:${springBootVer}" // ないと効かない！
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVer}"
+    compileOnly "jakarta.platform:jakarta.jakartaee-api:${jeeVer}"
+    testImplementation "org.junit.jupiter:junit-jupiter:${junitVer}"
+    testImplementation "org.junit.platform:junit-platform-suite-api:${junitPlatformVer}"
+    testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVer}"
+    // MariaDB JDBCドライバ
+    runtimeOnly "org.mariadb.jdbc:mariadb-java-client:${mariaDbConnectorVer}"
+}
+
+// Javaプラグイン設定
+sourceCompatibility = 17
+targetCompatibility = 17
+
+// ソースフォルダの設定
+sourceSets {
+    main {
+        java {
+            srcDir "src/main/java"
+        }
+        resources {
+            srcDir "src/main/resources"
+        }
+    }
+    test {
+        java {
+            srcDir "src/test/java"
+        }
+        resources {
+            srcDir "src/test/resources"
+        }
+    }
+}
+
+// 初期データをセットアップする（ローカルMariaDB）
+task setupMariaDB doLast {
+    execSqlDir("$projectDir/sql/mariadb", envconf.mariadb.general.url,
+            envconf.mariadb.general.user, envconf.mariadb.general.password,
+            envconf.mariadb.driverClass)
+}
+
+// 設定情報の読み込み
+def envconf = {
+    def slurper = new ConfigSlurper()
+    slurper.binding = project.properties
+    def confLocation = System.properties["user.home"]
+    def file = new File(confLocation + "/env-conf.gradle")
+    if (!file.exists()) {
+        file = new File("$projectDir/env-conf.gradle")
+        if (!file.exists()) return null
+    }
+    return new ConfigSlurper().parse(file.toURL())
+}()
+
+// 設定情報を拡張プロパティにセット
+ext.envconf = envconf
+
+// SQLを発行するメソッド
+def execSqlDir(dir, url, user, password, driverClass) {
+    new File(dir).listFiles().sort{a, b -> a.name <=> b.name}.each{ File f ->
+        ant.sql(url: url,
+            userid: user,
+            password: password,
+            driver: driverClass,
+            classpath: buildscript.configurations.classpath.asPath,
+            encoding: "UTF-8",
+            onerror: "continue") {
+                fileset(file: f)
+            }
+    }
+}
+
+// SQLを発行するメソッド（ファイル指定）
+def execSql(file, url, user, password, driverClass) {
+    ant.sql(
+        driver: driverClass,
+        url: url,
+        userid: user,
+        password: password,
+        classpath: buildscript.configurations.classpath.asPath,
+        encoding: "UTF-8",
+        onerror: "continue") {
+            fileset(file: file)
+        }
+}
+
+// タスクをグループ化する
+[setupMariaDB]*.group = "setup-init-data"

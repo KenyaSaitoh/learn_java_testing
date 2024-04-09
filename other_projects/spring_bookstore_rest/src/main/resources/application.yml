@@ -1,0 +1,30 @@
+server:
+  port: 8081
+
+spring:
+  session:
+    timeout: 3600
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    cache: false
+  datasource:
+    url: jdbc:mariadb://localhost:3306/TESTDB
+    username: TESTUSER
+    password: PASSWORD
+    driver-class-name: org.mariadb.jdbc.Driver
+# Spring Data JPA
+# これがないと、以下の例外が出てしまう
+# Unable to determine Dialect without JDBC metadata
+  jpa:
+    properties:
+      hibernate:
+# これがないとテーブル名が小文字になってしまい、RDSでエラーになる
+        naming:
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+logging:
+  level:
+    root: INFO

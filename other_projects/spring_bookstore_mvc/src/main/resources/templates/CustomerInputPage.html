@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>CustomerInputPage</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+  <h2>お客様の情報を登録します</h2>
+  <hr />
+  <form method="POST" th:object="${customerParam}" class="customer">
+    <table>
+      <tr>
+        <td>顧客名（必須）</td>
+        <td><input type="text" th:field="*{customerName}" id="customerName" /></td>
+        <td><span th:if="${#fields.hasErrors('customerName')}"
+          th:errors="*{customerName}" class="error"></span></td>
+      </tr>
+      <tr>
+        <td>メールアドレス（必須）</td>
+        <td><input type="email" th:field="*{email}" id="email" /></td>
+        <td><span th:if="${#fields.hasErrors('email')}"
+          th:errors="*{email}" class="error"></span></td>
+      </tr>
+      <tr>
+        <td>パスワード（必須）</td>
+        <td><input type="password" th:field="*{password}" id="password" /></td>
+        <td><span th:if="${#fields.hasErrors('password')}"
+                  th:errors="*{password}" class="error"></span></td>
+      </tr>
+      <tr>
+        <td>生年月日（任意）</td>
+        <td><input type="text" th:field="*{birthday}" id="birthday" /></td>
+        <td><span th:if="${#fields.hasErrors('birthday')}"
+                  th:errors="*{birthday}" class="error"></span></td>
+      </tr>
+      <tr>
+        <td>住所（任意）</td>
+        <td><input type="text" th:field="*{address}" id="address" /></td>
+        <td><span th:if="${#fields.hasErrors('address')}"
+                  th:errors="*{address}" class="error"></span></td>
+      </tr>
+    </table>
+    <button type="submit" th:formaction="@{/register}" id="registerButton">
+      お客様の情報を登録する
+    </button>
+    <br />
+    <a th:href="@{/}" id="toTopLink">トップページへ戻る</a>
+    <br />
+    <div th:if="${#fields.hasGlobalErrors()}">
+      <div th:each="err : ${#fields.globalErrors()}" th:text="${err}" class="error"></div>
+    </div>
+    <input type="hidden" id="csrfToken" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+  </form>
+</body>
+</html>

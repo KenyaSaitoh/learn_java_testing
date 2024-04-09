@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>OrderErrorPage</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+<h2>注文処理でエラーが発生しました</h2>
+<hr />
+<div th:text="${errorMessage}" class="error"></div>
+<hr />
+<a th:href="@{/toSelect}" id="continueLink">買い物を続ける</a>
+</body>
+</html>

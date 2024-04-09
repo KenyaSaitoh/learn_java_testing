@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>BookOrderPage</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function () {
+    var orderButton1 = document.getElementById('orderButton1');
+    var orderButton2 = document.getElementById('orderButton2');
+
+    orderButton1.addEventListener('click', function (event) {
+        if (!confirm('注文します。よろしいですか？')) {
+            event.preventDefault();
+        }
+    });
+
+    orderButton2.addEventListener('click', function (event) {
+        if (!confirm('注文します。よろしいですか？')) {
+            event.preventDefault();
+        }
+    });
+});
+</script>
+<body>
+  <h2>以下の内容で注文します</h2>
+  <hr />
+  <form method="POST">
+    <table>
+      <tr>
+        <td>顧客名</td>
+        <td th:text="${session.customer.customerName} + ' 様'"></td>
+      </tr>
+      <tr>
+        <td>注文内容</td>
+        <td>
+          <table>
+            <thead>
+              <tr>
+                <th>書籍名</th>
+                <th>金額</th>
+                <th>注文数</th>
+              </tr>
+            </thead>
+            <tbody th:each="cartItem : ${cartSession.cartItems}" th:object="${cartItem}">
+              <tr>
+                <td th:text="*{bookName}"></td>
+                <td th:text="*{#numbers.formatInteger(price, 3, 'COMMA')}"></td>
+                <td th:text="*{count}"></td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>注文金額合計</td>
+        <td
+          th:text="${#numbers.formatInteger(cartSession.totalPrice, 3, 'COMMA')}"></td>
+      </tr>
+      <tr>
+        <td>配送料金</td>
+        <td
+          th:text="${#numbers.formatInteger(cartSession.deliveryPrice, 3, 'COMMA')}"></td>
+      </tr>
+      <tr>
+        <td>配送先住所</td>
+        <td><input type="text" th:field="${cartSession.deliveryAddress}"
+                   maxlength="40" required />
+          <div th:if="${#fields.hasErrors('cartSession.deliveryAddress')}"
+               th:errors="${cartSession.deliveryAddress}" class="error"></div></td>
+      </tr>
+      <tr>
+        <td>決済方法</td>
+        <td>
+            <label class="custom-radio">
+              <input type="radio" name="settlementType"
+                     th:field="${cartSession.settlementType}" th:value="1" />
+              <span>銀行振り込み</span>
+            </label>
+            <label class="custom-radio">
+              <input type="radio" name="settlementType"
+                     th:field="${cartSession.settlementType}" th:value="2" />
+              <span>着払い</span>
+            </label>
+          <div th:if="${#fields.hasErrors('cartSession.settlementType')}"
+               th:errors="${cartSession.settlementType}" style="color: red;"></div></td>
+      </tr>
+    </table>
+    <br />
+    <button type="submit" th:formaction="@{/order1}" id="orderButton1">注文する（方式1）</button>
+    <button type="submit" th:formaction="@{/order2}" id="orderButton2">注文する（方式2）</button>
+    <br />
+    <a th:href="@{/toSelect}" id="continueLink">買い物を続ける</a>
+    <input type="hidden" id="csrfToken" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+  </form>
+</body>
+</html>

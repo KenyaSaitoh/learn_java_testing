@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>OrderSuccessPage</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+<h2>注文が成功しました</h2>
+<hr />
+<div th:text="|注文ID：${orderTran.orderTranId}|"></div>
+<div th:text="|合計金額：${orderTran.totalPrice}|"></div>
+<table class="book-table">
+  <thead>
+    <tr>
+      <th>書籍名</th>
+      <th>注文数</th>
+      <th>価格</th>
+    </tr>
+  </thead>
+  <tbody th:each="orderDetail : ${orderTran.orderDetails}" th:object="${orderDetail}">
+    <tr>
+      <td th:text="*{book.bookName}"></td>
+      <td th:text="*{count}"></td>
+      <td th:text="*{#numbers.formatInteger(price, 3, 'COMMA')}"></td>
+    </tr>
+  </tbody>
+</table>
+<a th:href="@{/viewHistory}">注文履歴を表示する</a>
+<br />
+<a th:href="@{/toSelect}">書籍の選択ページへ</a>
+<br />
+<hr />
+<form method="POST">
+  <button type="submit" th:formaction="@{/processLogout}" id="logoutButton">ログアウト</button>
+  <input type="hidden" id="csrfToken" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+</form>
+</body>
+</html>

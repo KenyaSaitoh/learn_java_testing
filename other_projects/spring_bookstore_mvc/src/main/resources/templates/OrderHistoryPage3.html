@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>OrderHistoryPage3</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+  <h2>注文履歴</h2>
+  <hr />
+  <table class="book-table">
+    <thead>
+      <tr>
+        <th>注文日</th>
+        <th>注文ID</th>
+        <th>書籍名</th>
+        <th>出版社名</th>
+        <th>価格</th>
+        <th>個数</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody th:each="orderTran : ${orderList}" th:object="${orderTran}">
+      <tr th:each="orderDetail : *{orderDetails}" th:object="${orderDetail}">
+        <td th:text="*{orderTran.orderDate}"></td>
+        <td th:text="*{orderTran.orderTranId}"></td>
+        <td th:text="*{book.bookName}"></td>
+        <td th:text="*{book.publisher.publisherName}"></td>
+        <td th:text="*{#numbers.formatInteger(price, 3, 'COMMA')}"></td>
+        <td th:text="*{count}"></td>
+        <td>
+          <a th:href="@{/viewOrderDetail(tranId=*{orderTran.orderTranId},detailId=*{orderDetailId})}"
+             class="order-link">
+             書籍情報
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <a th:href="@{/toSelect}" id="toSelectLink">書籍の選択ページへ</a>
+  <br />
+  <a th:href="@{/toSearch}" id="toSearchLink">書籍の検索ページへ</a>
+  <br />
+  <a th:href="@{/viewCart}" id="viewCartLink">現在の買い物カゴの内容を表示する</a>
+</body>
+</html>

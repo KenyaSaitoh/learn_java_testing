@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>TopPage</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+  <h2>ようこそ！テックブックストアへ</h2>
+  <hr />
+  <div>登録済みのお客様</div> 
+  <form method="POST" th:object="${loginParam}" class="login">
+    <table>
+      <tr>
+        <td>メールアドレス</td>
+        <td><input type="text" th:field="*{email}" /></td>
+        <td><span th:if="${#fields.hasErrors('email')}"
+                  th:errors="*{email}" class="error"></span>
+        </td>
+      </tr>
+      <tr>
+        <td>パスワード</td>
+        <td><input type="password" th:field="*{password}" /></td>
+        <td><span th:if="${#fields.hasErrors('password')}"
+                  th:errors="*{password}" class="error"></span></td>
+      </tr>
+    </table>
+    <button type="submit" th:formaction="@{/processLogin}" id="loginButton">ログイン</button>
+    <div th:if="${#fields.hasGlobalErrors()}">
+      <div th:each="err : ${#fields.globalErrors()}" th:text="${err}" class="error"></div>
+    </div>
+    <input type="hidden" id="csrfToken" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+  </form>
+  <hr />
+  <div>新規のお客様</div>
+  <a th:href="@{/toRegister}" id="newCustomerLink">お客様のご登録</a>
+</body>
+</html>

@@ -1,0 +1,17 @@
+// MariaDB
+mariadb {
+    driverClass = "org.mariadb.jdbc.Driver"
+    datasourceClass = "org.mariadb.jdbc.MariaDbDataSource"
+    hostName = "localhost"
+    port = "3306"
+    rootPassword = ""
+    general {
+        user = "TESTUSER"
+        password = "PASSWORD"
+        db = "TESTDB"
+        baseUrl = "jdbc:mariadb://localhost:${port}"
+        url = "${baseUrl}/${general.db}"
+        connPoolName = "MariaDBPool"
+        datasourceJndiName = "jdbc/MariaDB"
+    }
+}
