@@ -20,13 +20,13 @@ rootProject.name = 'java_testing'
 rootProject.projectDir = new File(settingsDir, 'java_testing')
 
 includeFlat \
-'junit5',
-'junit5_dependency',
-'mockito',
-'mockito_junit5',
-'dbunit',
-'dbunit_junit5',
-'restassured',
-'wiremock',
-'selenium',
-'gatling'
+'21_junit5',
+'22_junit5_dependency',
+'31_mockito',
+'31_mockito_junit5',
+'41_dbunit',
+'41_dbunit_junit5',
+'51_restassured',
+'52_wiremock',
+'61_selenium',
+'71_gatling'
