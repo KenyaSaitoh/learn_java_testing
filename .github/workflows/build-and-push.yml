@@ -29,8 +29,8 @@ jobs:
  
     - name: Build with Gradle
       run: |
-        chmod +x ./learn_java_testing/spring_projects/spring_mvc_calc/gradlew
-        ./learn_java_testing/spring_projects/spring_mvc_calc/gradlew build -p ./spring_projects/spring_mvc_person -x test
+        chmod +x ./spring_projects/spring_mvc_calc/gradlew
+        ./spring_projects/spring_mvc_calc/gradlew build -p ./spring_projects/spring_mvc_person -x test
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
