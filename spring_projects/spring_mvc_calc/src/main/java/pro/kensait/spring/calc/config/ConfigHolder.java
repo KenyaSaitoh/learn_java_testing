@@ -11,7 +11,7 @@ public class ConfigHolder {
     @Value("${calc.result.scale}")
     private Integer calcResultScale;
 
-    // 計算結果の極度
+     // 計算結果の極度
     @Value("${calc.result.limit}")
     private Integer calcResultLimit;
 
