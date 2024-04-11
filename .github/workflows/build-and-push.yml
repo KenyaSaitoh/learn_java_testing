@@ -26,7 +26,7 @@ jobs:
       with:
         java-version: '21'
         distribution: 'adopt'
-
+ 
     - name: Build with Gradle
       run: |
         chmod +x ./learn_java_testing/spring_projects/spring_mvc_calc/gradlew
