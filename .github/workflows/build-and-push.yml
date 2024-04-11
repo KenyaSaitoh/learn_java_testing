@@ -29,13 +29,13 @@ jobs:
 
     - name: Build with Gradle
       run: |
-        chmod +x ./gradlew
-        ./gradlew build -p ./spring_mvc_person -x test
+        chmod +x ./spring_projects/spring_mvc_calc/gradlew
+        ./spring_projects/spring_mvc_calc/gradlew build -p ./spring_mvc_person -x test
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
       with:
         context: .
-        file: ./spring_mvc_person/Dockerfile
+        file: ./spring_projects/spring_mvc_person/Dockerfile
         push: true
         tags: ghcr.io/kenyasaitoh/spring_mvc_person:latest

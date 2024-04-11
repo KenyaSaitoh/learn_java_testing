@@ -10,7 +10,7 @@ public class ConfigHolder {
     // 計算結果の小数点以下桁数
     @Value("${calc.result.scale}")
     private Integer calcResultScale;
-
+ 
     // 計算結果の極度
     @Value("${calc.result.limit}")
     private Integer calcResultLimit;
