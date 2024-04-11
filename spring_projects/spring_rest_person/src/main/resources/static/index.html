@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Person Manager App</title>
+  <!-- ReactとReactDOMの読み込み（CDNから）-->
+  <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+  <!-- Babelの読み込み（オプショナル、開発目的でのみ必要） -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <!-- Reactコンポーネントのマウントポイント -->
+  <div id="app"></div>
+
+  <!-- Reactコンポーネントのスクリプト -->
+  <script type="text/babel" src="Person.jsx"></script>
+  <script type="text/babel">
+    // Reactコンポーネントをマウントポイントにレンダリング
+    ReactDOM.render(<PersonManager />, document.getElementById('app'));
+  </script>
+</body>
+</html>
