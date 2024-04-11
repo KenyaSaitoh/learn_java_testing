@@ -1,7 +1,7 @@
-FROM openjdk:17-jdk-alpine
+FROM openjdk:21-jdk-alpine
 VOLUME /tmp
 
-ARG projectName="spring_cicd_person"
+ARG projectName="spring_mvc_calc"
 ARG springProfile="default"
 
 ENV JAVA_OPTS=""
