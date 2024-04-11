@@ -26,6 +26,11 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
+			<name>org.eclipse.xtext.ui.shared.xtextBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
 			<name>org.springframework.ide.eclipse.boot.validation.springbootbuilder</name>
 			<arguments>
 			</arguments>
@@ -38,24 +43,4 @@
 		<nature>org.eclipse.jem.workbench.JavaEMFNature</nature>
 		<nature>org.eclipse.buildship.core.gradleprojectnature</nature>
 	</natures>
-	<filteredResources>
-		<filter>
-			<id>1</id>
-			<name></name>
-			<type>26</type>
-			<matcher>
-				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-projectRelativePath-matches-false-false-build</arguments>
-			</matcher>
-		</filter>
-		<filter>
-			<id>2</id>
-			<name></name>
-			<type>26</type>
-			<matcher>
-				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-projectRelativePath-matches-false-false-.gradle</arguments>
-			</matcher>
-		</filter>
-	</filteredResources>
 </projectDescription>
