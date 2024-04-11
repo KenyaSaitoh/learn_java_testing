@@ -1,0 +1,5 @@
+### spring_rs_calc
+curl -i -X POST localhost:8080/calc/add -H "Content-Type: application/json" -d {\"param1\":100.0,\"param2\":200.0}
+
+※Eclipseのターミナルだと、上記をコピペした際に"\"が"/"に変わってしまうので注意。
+あくまでも"\"なので、書き換える必要がある。
