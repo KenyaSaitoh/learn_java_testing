@@ -25,7 +25,7 @@ public class ShippingServiceTest_1 {
     // テスト対象クラス
     ShippingService shippingService;
 
-    // テスト対象クラスの呼び出し先
+    // テスト対象クラスの呼び出し先（モック化対象）
     @Mock
     CostCalculatorIF costCalculator;
 
