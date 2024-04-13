@@ -7,8 +7,6 @@ buildscript {
         springBootVer = "3.2.2"
         jeeVer = "10.0.0"
         mariaDbConnectorVer = "3.3.2"
-        junitVer = "5.10.1"
-        junitPlatformVer = "1.10.1"
     }
     // リポジトリ設定
     repositories {
@@ -56,9 +54,6 @@ dependencies {
     implementation "org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE"
     implementation "org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.2.RELEASE"
     compileOnly "jakarta.platform:jakarta.jakartaee-api:${jeeVer}"
-    testImplementation "org.junit.jupiter:junit-jupiter:${junitVer}"
-    testImplementation "org.junit.platform:junit-platform-suite-api:${junitPlatformVer}"
-    testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVer}"
     // MariaDB JDBCドライバ
     runtimeOnly "org.mariadb.jdbc:mariadb-java-client:${mariaDbConnectorVer}"
 }

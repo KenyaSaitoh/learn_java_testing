@@ -7,8 +7,6 @@ buildscript {
         springBootVer = "3.2.2"
         jeeVer = "10.0.0"
         mariaDbConnectorVer = "3.3.2"
-        junitVer = "5.10.1"
-        junitPlatformVer = "1.10.1"
     }
     // リポジトリ設定
     repositories {
@@ -52,9 +50,6 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-validation:${springBootVer}" // ないと効かない！
     implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVer}"
     compileOnly "jakarta.platform:jakarta.jakartaee-api:${jeeVer}"
-    testImplementation "org.junit.jupiter:junit-jupiter:${junitVer}"
-    testImplementation "org.junit.platform:junit-platform-suite-api:${junitPlatformVer}"
-    testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVer}"
     // MariaDB JDBCドライバ
     runtimeOnly "org.mariadb.jdbc:mariadb-java-client:${mariaDbConnectorVer}"
 }
