@@ -33,7 +33,7 @@ public class VerifyTest {
         List<Integer> keyList = Arrays.asList(0);
         MapUtil.printEntry(mock, keyList, "test_Case_1");
 
-        // `get(0)`が一度だけ呼び出されたかを検証する
+        // モック（Map）の`get(0)`が一度だけ呼び出されたことを検証する
         verify(mock).get(0);
     }
 
@@ -52,7 +52,7 @@ public class VerifyTest {
         List<Integer> keyList = Arrays.asList(0, 0, 0);
         MapUtil.printEntry(mock, keyList, "test_Case_2");
 
-        // `get(0)`の呼び出し回数を検証する
+        // モック（Map）の`get(0)`が3回呼び出されたことを検証する
         verify(mock, times(3)).get(0);
     }
 
@@ -71,7 +71,7 @@ public class VerifyTest {
         List<Integer> keyList = Arrays.asList(0, 0, 0);
         MapUtil.printEntry(mock, keyList, "test_Case_3");
 
-        // `get(0)`の呼び出し回数が最大でも5回であることを検証する
+        // モック（Map）の`get(0)`呼び出しが最大でも5回であることを検証する
         verify(mock, atMost(5)).get(0);
     }
 
@@ -90,7 +90,7 @@ public class VerifyTest {
         List<Integer> keyList = Arrays.asList(0, 0, 0);
         MapUtil.printEntry(mock, keyList, "test_Case_4");
 
-        // `get(1)`の呼び出しが一度も行われていないことを検証する
+        // モック（Map）の`get(1)`が一度も呼び出されていないことを検証する
         verify(mock, never()).get(1);
     }
 
@@ -109,7 +109,7 @@ public class VerifyTest {
         List<Integer> keyList = Arrays.asList(0, 1, 2);
         MapUtil.printEntry(mock, keyList, "test_Case_5");
 
-        // `get(0)`、`get(1)`、`get(2)`という順番に呼び出されていることを検証する
+        // モック（Map）の`get(0)`、`get(1)`、`get(2)`がこの順番で呼び出されたことを検証する
         InOrder inOrder = inOrder(mock);
         inOrder.verify(mock).get(0);
         inOrder.verify(mock).get(1);
