@@ -11,7 +11,7 @@ dependencies {
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVer}"
 }
 
-// JUnit5設定
+// ビルドテストの設定
 test {
     // JUnit Platformの設定
     useJUnitPlatform {
@@ -35,13 +35,13 @@ test {
         html.outputLocation.set(layout.buildDirectory.dir("reports/junit5/html"))
         // XML形式レポートの出力先
         junitXml.outputLocation.set(layout.buildDirectory.dir("reports/junit5/xml"))
+    }
 
     // ビルドテスト後に、Jacocoテストレポートを生成する
     finalizedBy jacocoTestReport
-    }
 }
 
-// Jacocoテストレポート設定
+// Jacocoテストレポートの設定
 jacocoTestReport {
     reports {
         // HTML形式レポートの出力先

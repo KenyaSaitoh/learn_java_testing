@@ -13,7 +13,7 @@ dependencies {
     testImplementation "io.rest-assured:rest-assured:${restAssuredVer}"
 }
 
-// JUnit5設定
+// ビルドテストの設定
 test {
     // JUnit Platformの設定
     useJUnitPlatform {

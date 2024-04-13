@@ -22,7 +22,7 @@ dependencies {
     testImplementation "io.gatling.highcharts:gatling-charts-highcharts:${gatlingVersion}"
 }
 
-// JUnit5設定
+// ビルドテストの設定
 test {
     // JUnit Platformを使う設定
     useJUnitPlatform()

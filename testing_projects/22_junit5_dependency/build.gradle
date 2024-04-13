@@ -11,7 +11,7 @@ dependencies {
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVer}"
 }
 
-// JUnit5設定
+// ビルドテストの設定
 test {
     // JUnit Platformの設定
     useJUnitPlatform {
@@ -41,7 +41,7 @@ test {
     finalizedBy jacocoTestReport
 }
 
-// Jacocoテストレポート設定
+// Jacocoテストレポートの設定
 jacocoTestReport {
     reports {
         // HTML形式レポートの出力先

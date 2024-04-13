@@ -14,7 +14,7 @@ dependencies {
     testImplementation "com.google.guava:guava:${guavaVer}"
 }
 
-// JUnit5設定
+// ビルドテストの設定
 test {
     // JUnit Platformの設定
     useJUnitPlatform {
