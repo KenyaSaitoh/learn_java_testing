@@ -26,7 +26,8 @@ includeFlat \
 '31_mockito_junit5',
 '41_dbunit',
 '41_dbunit_junit5',
-'51_restassured',
-'52_wiremock',
-'61_selenium',
-'71_gatling'
+'51_springboot_test',
+'61_restassured',
+'62_wiremock',
+'71_selenium',
+'81_gatling'

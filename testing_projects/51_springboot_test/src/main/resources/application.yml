@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    cache: false
+    servlet:
+      content-type: text/html
+
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO
+    pro.kensait.spring.person: INFO
