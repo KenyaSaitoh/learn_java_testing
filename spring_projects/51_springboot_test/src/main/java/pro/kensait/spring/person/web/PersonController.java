@@ -1,10 +1,12 @@
 package pro.kensait.spring.person.web;
 
 import java.util.List;
+import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,6 +31,10 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
+    // インジェクションポイント
+    @Autowired
+    private MessageSource messageSource;
+    
     @ModelAttribute("personSession") // @SessionAttributesと名前を一致させる
     public PersonSession initSession(){
         logger.info("[ PersonController#initSession ]");
@@ -54,10 +60,13 @@ public class PersonController {
     // 確認画面に遷移する
     @PostMapping("/toConfirm")
     public String toConfirm(@Validated PersonSession personSession,
-            BindingResult errors) {
+            BindingResult errors, Model model) {
         logger.info("[ PersonController#toConfirm ]");
         if (errors.hasErrors()) {
-            return "PersonInputPage";
+            // メッセージソースよりエラーメッセージを取得し、Modelに格納する
+            String errorMessage = messageSource.getMessage("error.occured", null,
+                    Locale.JAPANESE);
+            model.addAttribute("errorMessage", errorMessage);
         }
         return "PersonUpdatePage";
     }

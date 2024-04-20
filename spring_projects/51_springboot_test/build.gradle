@@ -1,0 +1,109 @@
+buildscript {
+    ext {
+        springBootVer = "3.2.4"
+        jeeVer = "10.0.0"
+        junitVer = "5.10.1"
+        junitPlatformVer = "1.10.1"
+    }
+    // リポジトリ設定
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-dependencies:${springBootVer}"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVer}"
+    }
+}
+
+// プラグイン読み込み
+apply plugin: "java"
+apply plugin: "org.springframework.boot"
+apply plugin: "io.spring.dependency-management"
+apply plugin: "eclipse"
+apply plugin: "jacoco"
+
+// リポジトリ設定
+repositories {
+    mavenCentral()
+}
+
+// 文字コード設定
+def defaultEncoding = "UTF-8"
+tasks.withType(AbstractCompile).each { it.options.encoding = defaultEncoding }
+
+// リソース競合時の処理を設定（Gradle7.x対応）
+tasks.withType(ProcessResources) {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+// Javaプラグイン設定
+sourceCompatibility = 17
+targetCompatibility = 17
+
+// ソースフォルダの設定
+sourceSets {
+    main {
+        java {
+            srcDir "src/main/java"
+        }
+        resources {
+            srcDir "src/main/resources"
+        }
+    }
+    test {
+        java {
+            srcDir "src/test/java"
+        }
+        resources {
+            srcDir "src/test/resources"
+        }
+    }
+}
+
+// 依存関係設定
+dependencies {
+    implementation "org.springframework.boot:spring-boot-autoconfigure:${springBootVer}"
+    implementation "org.springframework.boot:spring-boot-starter-web:${springBootVer}"
+    implementation "org.springframework.boot:spring-boot-starter-thymeleaf:${springBootVer}"
+    implementation "org.springframework.boot:spring-boot-starter-validation:${springBootVer}"
+    compileOnly "jakarta.platform:jakarta.jakartaee-api:${jeeVer}"
+    testImplementation "org.junit.jupiter:junit-jupiter:${junitVer}"
+    testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVer}"
+}
+
+// ビルドテストの設定
+test {
+    // JUnit Platformの設定
+    useJUnitPlatform()
+
+    // ログ設定
+    testLogging {
+        // ビルドテスト時の標準出力と標準エラー出力を表示する
+        showStandardStreams true
+        // 指定されたイベントを表示する
+        events "passed", "failed", "skipped"
+        // 例外発生時はすべての情報を表示する
+        exceptionFormat "full"
+    }
+
+    // レポート設定
+    reports {
+        // HTML形式レポートの出力先
+        html.outputLocation.set(layout.buildDirectory.dir("reports/junit5/html"))
+        // XML形式レポートの出力先
+        junitXml.outputLocation.set(layout.buildDirectory.dir("reports/junit5/xml"))
+    }
+
+    // ビルドテスト後に、Jacocoテストレポートを生成する
+    finalizedBy jacocoTestReport
+}
+
+// Jacocoテストレポートの設定
+jacocoTestReport {
+    reports {
+        // HTML形式レポートの出力先
+        html.destination file("${buildDir}/reports/jacoco/html")
+        // XML形式レポートの出力先
+        xml.destination file("${buildDir}/reports/jacoco/xml")
+    }
+}

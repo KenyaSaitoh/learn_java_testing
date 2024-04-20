@@ -4,14 +4,6 @@ import groovy.sql.Sql
 // 初期化処理
 buildscript {
     ext {
-        springBootVer = "3.2.2"
-        thymeleafJava8timeVer = "3.0.4.RELEASE"
-        thymeleafSpringSec6Ver = "3.1.2.RELEASE"
-        springSecOauth2Ver = "6.1.5"
-        springTxVer = "6.0.11"
-        jeeVer = "10.0.0"
-        jeeTxVer = "2.0.1"
-        mybatisStarterVer = "3.0.2"
         mariaDbConnectorVer = "3.3.2"
         log4jVer = "2.22.1"
         junitVer = "5.10.2"
