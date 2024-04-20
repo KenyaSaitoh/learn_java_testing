@@ -67,6 +67,7 @@ public class PersonController {
             String errorMessage = messageSource.getMessage("error.occured", null,
                     Locale.JAPANESE);
             model.addAttribute("errorMessage", errorMessage);
+            return "PersonInputPage";
         }
         return "PersonUpdatePage";
     }
