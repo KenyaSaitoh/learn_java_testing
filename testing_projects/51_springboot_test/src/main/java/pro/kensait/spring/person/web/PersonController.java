@@ -27,14 +27,14 @@ public class PersonController {
     private static final Logger logger = LoggerFactory.getLogger(
             PersonController.class);
 
-    // インジェクションポイント
+    // サービス（インジェクション）
     @Autowired
     private PersonService personService;
 
-    // インジェクションポイント
+    // メッセージソース（インジェクション）
     @Autowired
     private MessageSource messageSource;
-    
+
     @ModelAttribute("personSession") // @SessionAttributesと名前を一致させる
     public PersonSession initSession(){
         logger.info("[ PersonController#initSession ]");

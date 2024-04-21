@@ -18,7 +18,7 @@
         <td><input type="text" th:field="*{personName}" /></td>
         <td>
         <span th:if="${#fields.hasErrors('personName')}"
-              th:errors="*{personName}" style="color: red">Name error</span>
+              th:errors="*{personName}" style="color: red"></span>
         </td>
       </tr>
       <tr>
@@ -26,7 +26,7 @@
         <td><input type="text" th:field="*{age}" /></td>
         <td>
         <span th:if="${#fields.hasErrors('age')}"
-              th:errors="*{age}" style="color: red">Age error</span>
+              th:errors="*{age}" style="color: red"></span>
         </td>
       </tr>
       <tr>
@@ -39,11 +39,12 @@
         </td>
         <td>
         <span th:if="${#fields.hasErrors('gender')}"
-              th:errors="*{gender}" style="color: red">Gender error</span>
+              th:errors="*{gender}" style="color: red"></span>
         </td>
       </tr>
     </table>
-    <div th:text="${errorMessage}" style="color: red"></div>
+    <div th:if="${errorMessage != null and not #strings.isEmpty(errorMessage)}"
+         th:text="${errorMessage}" style="color: red"></div>
     <div>
       <input type="submit" value="確認画面へ" />
     </div>

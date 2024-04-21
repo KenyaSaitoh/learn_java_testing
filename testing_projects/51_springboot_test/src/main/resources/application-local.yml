@@ -10,9 +10,14 @@ spring:
     cache: false
     servlet:
       content-type: text/html
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: password
 
 logging:
   level:
     root: INFO
     org.springframework: INFO
     pro.kensait.spring.person: INFO
+    

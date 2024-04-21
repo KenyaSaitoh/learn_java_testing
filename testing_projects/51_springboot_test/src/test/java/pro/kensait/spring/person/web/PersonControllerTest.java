@@ -20,11 +20,11 @@ import pro.kensait.spring.person.service.Person;
 import pro.kensait.spring.person.service.PersonService;
 
 /*
- * PersonControllerを対象にした結合テストクラス
+ * PersonControllerを対象にした単体テストクラス
  */
 @WebMvcTest(PersonController.class)
 public class PersonControllerTest {
-    // インジェクションポイント
+    // MockMvoをインジェクションする
     @Autowired
     private MockMvc mockMvc;
 
@@ -68,38 +68,46 @@ public class PersonControllerTest {
     @Test
     @DisplayName("新規人物作成と確認画面への遷移をテストする")
     public void test_toConfirm() throws Exception {
-        // 入力値をセットアップする
-        PersonSession personSession = new PersonSession();
-        personSession.setPersonName("Dave");
-        personSession.setAge(23);
-        personSession.setGender("male");
-
         // テストを実行し、検証する
         mockMvc.perform(post("/toConfirm")
-                .sessionAttr("personSession", personSession)
+                .param("personName", "Dave")
+                .param("age", "23")
+                .param("gender", "male")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk())
                 .andExpect(view().name("PersonUpdatePage"));
     }
 
     @Test
-    @DisplayName("新規人物作成におけるバリデーションエラーのテスト")
-    public void test_toConfirm_ValidationError() throws Exception {
-        // 入力値をセットアップする
-        PersonSession personSession = new PersonSession();
-        personSession.setPersonName("DaveDaveDaveDaveDaveDave"); // 20字超
-        personSession.setAge(10); // 20未満
-        personSession.setGender(""); // 空文字
-
+    @DisplayName("新規人物作成におけるバリデーションエラーのテスト1")
+    public void test_toConfirm_ValidationError_1() throws Exception {
         // テストを実行し、検証する
         mockMvc.perform(post("/toConfirm")
-                .sessionAttr("personSession", personSession)
+                .param("personName", "DaveDaveDaveDaveDaveDave") // 20字超
+                .param("age", "10") // 20未満
+                .param("gender", "") // 空文字
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk())
                 .andExpect(view().name("PersonInputPage"))
                 .andExpect(model().hasErrors());
     }
-    
+
+    @Test
+    @DisplayName("新規人物作成におけるバリデーションエラーのテスト2")
+    public void test_toConfirm_ValidationError_2() throws Exception {
+        // テストを実行し、検証する
+        mockMvc.perform(post("/toConfirm")
+                .param("personName", "DaveDaveDaveDaveDaveDave") // 20字超
+                .param("age", "10") // 20未満
+                .param("gender", "") // 空文字
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(status().isOk())
+                .andExpect(view().name("PersonInputPage"))
+                .andExpect(model().attributeHasFieldErrors(
+                        "personSession", "personName", "age", "gender"))
+                .andExpect(model().errorCount(3)); // エラー数が3つであることを検証
+    }
+
     @Test
     @DisplayName("人物の更新をテストする")
     void test_UpdatePerson() throws Exception {
@@ -119,8 +127,7 @@ public class PersonControllerTest {
 
         // テストを実行し、検証する
         mockMvc.perform(post("/update")
-                .sessionAttr("personSession", personSession)
-                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .sessionAttr("personSession", personSession))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/viewList"))
                 .andExpect(redirectedUrl("/viewList"));
@@ -155,8 +162,7 @@ public class PersonControllerTest {
 
         // テストを実行し、検証する
         mockMvc.perform(post("/update")
-                .sessionAttr("personSession", personSession)
-                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .sessionAttr("personSession", personSession))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/viewList"))
                 .andExpect(redirectedUrl("/viewList"));
@@ -182,7 +188,8 @@ public class PersonControllerTest {
 
         // テストを実行し、検証する
         mockMvc.perform(post("/edit")
-                .param("personId", String.valueOf(1)))
+                .param("personId", "1")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk())
                 .andExpect(view().name("PersonInputPage"))
                 .andExpect(model().attributeExists("personSession"));
@@ -199,7 +206,8 @@ public class PersonControllerTest {
 
         // テストを実行し、検証する
         mockMvc.perform(post("/remove")
-                .param("personId", String.valueOf(3)))
+                .param("personId", "3")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/viewList"))
                 .andExpect(redirectedUrl("/viewList"));

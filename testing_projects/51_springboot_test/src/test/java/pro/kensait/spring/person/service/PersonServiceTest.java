@@ -11,19 +11,16 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /*
  * PersonServiceを対象にした単体テストクラス
  */
 @SpringBootTest
-@ExtendWith(SpringExtension.class)
 public class PersonServiceTest {
-    // テスト対象クラス（インジェクション対象）
+    // テスト対象クラス（インジェクション）
     @Autowired
     private PersonService personService;
 
