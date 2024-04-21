@@ -26,25 +26,25 @@ public class PersonServiceTest {
 
     // テスト対象クラスの呼び出し先（モック化対象）
     @MockBean
-    private PersonRepos personRepos;
+    private PersonDAO personDao;
 
     @BeforeEach
     void setUp() {
-        // モック化されたPersonReposの振る舞いを設定する
+        // モック化されたPersonDaoの振る舞いを設定する
         Person alice = new Person(1, "Alice", 25, "female");
         Person bob = new Person(2, "Bob", 35, "male");
         Person carol = new Person(3, "Carol", 30, "female");
         List<Person> all = Arrays.asList(alice, bob, carol);
-        when(personRepos.find(anyInt())).thenReturn(alice);
-        when(personRepos.findAll()).thenReturn(all);
-        when(personRepos.findByLowerAge(anyInt())).thenAnswer(i -> {
+        when(personDao.find(anyInt())).thenReturn(alice);
+        when(personDao.findAll()).thenReturn(all);
+        when(personDao.findByLowerAge(anyInt())).thenAnswer(i -> {
             int age = i.getArgument(0);
             return all.stream().filter(p -> age <= p.getAge()).collect(Collectors.toList());
         });
-        when(personRepos.save(any(Person.class))).thenReturn(4); // 新しいIDを返す
-        when(personRepos.delete(anyInt())).thenReturn(1); // 1件削除されたと返す
-        when(personRepos.update(any(Person.class))).thenReturn(1); // 1件更新されたと返す
-        when(personRepos.updateAge(anyInt(), anyInt())).thenReturn(1); // 年齢が更新されたと返す
+        when(personDao.save(any(Person.class))).thenReturn(4); // 新しいIDを返す
+        when(personDao.delete(anyInt())).thenReturn(1); // 1件削除されたと返す
+        when(personDao.update(any(Person.class))).thenReturn(1); // 1件更新されたと返す
+        when(personDao.updateAge(anyInt(), anyInt())).thenReturn(1); // 年齢が更新されたと返す
     }
 
     @Test
@@ -99,7 +99,7 @@ public class PersonServiceTest {
         personService.createPerson(dave);
 
         // モックの指定されたメソッド呼び出しが一度だけ行われたことを検証する
-        verify(personRepos).save(dave);
+        verify(personDao).save(dave);
     }
 
     @Test
@@ -112,7 +112,7 @@ public class PersonServiceTest {
         assertEquals(1, actual); 
 
         // モックの指定されたメソッド呼び出しが一度だけ行われたことを検証する
-        verify(personRepos).delete(3);
+        verify(personDao).delete(3);
     }
 
     @Test
@@ -126,7 +126,7 @@ public class PersonServiceTest {
         assertEquals(1, actual); 
 
         // モックの指定されたメソッド呼び出しが一度だけ行われたことを検証する
-        verify(personRepos).update(alice);
+        verify(personDao).update(alice);
     }
 
     @Test
@@ -140,6 +140,6 @@ public class PersonServiceTest {
         assertEquals(1, actual); 
 
         // モックの指定されたメソッド呼び出しが一度だけ行われたことを検証する
-        verify(personRepos).updateAge(2, 36);
+        verify(personDao).updateAge(2, 36);
     }
 }

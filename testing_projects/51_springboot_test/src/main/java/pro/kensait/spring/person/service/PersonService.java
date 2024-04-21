@@ -17,60 +17,60 @@ public class PersonService {
 
     // DAO（インジェクション）
     @Autowired
-    private PersonRepos repos;
+    private PersonDAO personDao;
 
     // コンストラクタ
-    public PersonService(PersonRepos repos) {
-        this.repos = repos;
+    public PersonService(PersonDAO personDao) {
+        this.personDao = personDao;
     }
 
     // サービスメソッド：人物を取得する
     public Person getPerson(int personId) {
         logger.info("[ PersonService#getPerson ]");
-        Person person = repos.find(personId);
+        Person person = personDao.find(personId);
         return person;
     }
 
     // サービスメソッド：全人物を取得する
     public List<Person> getPersonsAll() {
         logger.info("[ PersonService#getPersonsAll ]");
-        List<Person> personList = repos.findAll();
+        List<Person> personList = personDao.findAll();
         return personList;
     }
 
     // サービスメソッド：人物を検索する（年齢下限をキーに）
     public List<Person> getPersonsByLowerAge(int lowerAge) {
         logger.info("[ PersonService#getPersonsByLowerAge ]");
-        List<Person> personList = repos.findByLowerAge(lowerAge);
+        List<Person> personList = personDao.findByLowerAge(lowerAge);
         return personList;
     }
 
     // サービスメソッド：人物を追加する
     public Person createPerson(Person person) {
         logger.info("[ PersonService#createPerson ]");
-        int maxPersonId = repos.getMaxPersonId();
+        int maxPersonId = personDao.getMaxPersonId();
         person.setPersonId(maxPersonId + 1);
-        repos.save(person);
+        personDao.save(person);
         return person;
     }
 
     // サービスメソッド：人物を削除する
     public int removePerson(Integer personId) {
         logger.info("[ PersonService#removePerson ]");
-        return repos.delete(personId);
+        return personDao.delete(personId);
     }
 
     // サービスメソッド：人物を更新する
     public int updatePerson(Person person) {
         logger.info("[ PersonService#updatePerson ]");
-        int result = repos.update(person);
+        int result = personDao.update(person);
         return result;
     }
 
     // サービスメソッド：人物の年齢を更新する
     public int updatePersonAge(Person person) {
         logger.info("[ PersonService#updatePersonAge ]");
-        int result = repos.updateAge(person.getPersonId(), person.getAge());
+        int result = personDao.updateAge(person.getPersonId(), person.getAge());
         return result;
     }
 }

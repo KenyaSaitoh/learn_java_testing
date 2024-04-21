@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PersonRepos {
+public class PersonDAO {
     // 主キー検索
     public Person find(int id) {
         return personMap.get(id);

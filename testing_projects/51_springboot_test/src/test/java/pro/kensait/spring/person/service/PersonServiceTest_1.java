@@ -21,7 +21,7 @@ public class PersonServiceTest_1 {
 
     // テスト対象クラスの呼び出し先（モック化対象）
     @MockBean
-    private PersonRepos personRepos;
+    private PersonDAO personRepos;
 
     @BeforeEach
     void setUp() {

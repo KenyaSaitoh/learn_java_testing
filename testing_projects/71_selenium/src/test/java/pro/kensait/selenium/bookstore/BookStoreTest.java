@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Configuration;
 
-class BookStoreTest_2 {
+public class BookStoreTest {
 
     // テストクラス全体の前処理
     @BeforeAll
