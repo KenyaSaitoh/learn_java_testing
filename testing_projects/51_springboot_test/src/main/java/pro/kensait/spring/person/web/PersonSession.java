@@ -1,5 +1,7 @@
 package pro.kensait.spring.person.web;
 
+import java.util.Objects;
+
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
@@ -82,5 +84,24 @@ public class PersonSession {
     public String toString() {
         return "Person [personId=" + personId + ", personName=" + personName
                 + ", age=" + age + ", gender=" + gender + "]";
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(age, gender, personId, personName);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        PersonSession other = (PersonSession) obj;
+        return Objects.equals(age, other.age) && Objects.equals(gender, other.gender)
+                && Objects.equals(personId, other.personId)
+                && Objects.equals(personName, other.personName);
     }
 }

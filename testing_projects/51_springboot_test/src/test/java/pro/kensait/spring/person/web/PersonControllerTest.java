@@ -4,6 +4,7 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
 import java.util.Arrays;
 import java.util.List;
@@ -62,12 +63,15 @@ public class PersonControllerTest {
         // テストを実行し、検証する
         mockMvc.perform(post("/toCreate"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("PersonInputPage"));
+                .andExpect(view().name("PersonInputPage"))
+                .andExpect(request().sessionAttributeDoesNotExist("personSession"));
     }
 
     @Test
     @DisplayName("新規人物作成と確認画面への遷移をテストする")
     public void test_toConfirm() throws Exception {
+        PersonSession personSession = new PersonSession("Dave", 23, "male");
+
         // テストを実行し、検証する
         mockMvc.perform(post("/toConfirm")
                 .param("personName", "Dave")
@@ -75,7 +79,9 @@ public class PersonControllerTest {
                 .param("gender", "male")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk())
-                .andExpect(view().name("PersonUpdatePage"));
+                .andExpect(view().name("PersonUpdatePage"))
+                .andExpect(model().hasNoErrors())
+                .andExpect(request().sessionAttribute("personSession", personSession));
     }
 
     @Test
@@ -119,11 +125,7 @@ public class PersonControllerTest {
         when(personService.getPersonsAll()).thenReturn(personList);
 
         // 入力値をセットアップする
-        PersonSession personSession = new PersonSession();
-        personSession.setPersonId(1);
-        personSession.setPersonName("Alice");
-        personSession.setAge(26);
-        personSession.setGender("female");
+        PersonSession personSession = new PersonSession(1, "Alice", 26, "female");
 
         // テストを実行し、検証する
         mockMvc.perform(post("/update")
@@ -141,6 +143,10 @@ public class PersonControllerTest {
 
         // モックの指定されたメソッド呼び出しが一度だけ行われたことを検証する
         verify(personService).updatePerson(any(Person.class));
+
+        // 新規作成画面に移動したとき、セッション属性が削除されていることを検証する
+        mockMvc.perform(post("/toCreate"))
+               .andExpect(request().sessionAttributeDoesNotExist("personSession"));
     }
 
     @Test
@@ -155,10 +161,7 @@ public class PersonControllerTest {
         when(personService.getPersonsAll()).thenReturn(personList);
 
         // 入力値をセットアップする
-        PersonSession personSession = new PersonSession();
-        personSession.setPersonName("Dave");
-        personSession.setAge(23);
-        personSession.setGender("male");
+        PersonSession personSession = new PersonSession("Dave", 23, "male");
 
         // テストを実行し、検証する
         mockMvc.perform(post("/update")
@@ -177,6 +180,10 @@ public class PersonControllerTest {
         // モックの指定されたメソッド呼び出しが一度だけ行われたことを検証する
         Person dave2 = new Person("Dave", 23, "male");
         verify(personService).createPerson(dave2);
+
+        // 新規作成画面に移動したとき、セッション属性が削除されていることを検証する
+        mockMvc.perform(post("/toCreate"))
+                .andExpect(request().sessionAttributeDoesNotExist("personSession"));
     }
 
     @Test
@@ -192,7 +199,7 @@ public class PersonControllerTest {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk())
                 .andExpect(view().name("PersonInputPage"))
-                .andExpect(model().attributeExists("personSession"));
+                .andExpect(model().attributeHasNoErrors("personSession"));
     }
 
     @Test
