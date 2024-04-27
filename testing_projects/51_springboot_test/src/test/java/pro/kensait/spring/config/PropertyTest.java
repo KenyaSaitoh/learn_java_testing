@@ -25,7 +25,7 @@ public class PropertyTest {
     @Test
     @DisplayName("テスト用プロパティの読み込みテスト")
     void test_Read_TestProperty() {
-        System.out.println(propsHolder.getProp1());
-        System.out.println(propsHolder.getProp2());
+        System.out.println("property.value.1 => " + propsHolder.getProp1());
+        System.out.println("property.value.2 => " + propsHolder.getProp2());
     }
 }

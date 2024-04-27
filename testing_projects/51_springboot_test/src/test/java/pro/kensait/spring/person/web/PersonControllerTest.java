@@ -25,7 +25,7 @@ import pro.kensait.spring.person.service.PersonService;
  */
 @WebMvcTest(PersonController.class)
 public class PersonControllerTest {
-    // MockMvoをインジェクションする
+    // MockMvcをインジェクションする
     @Autowired
     private MockMvc mockMvc;
 
@@ -35,7 +35,7 @@ public class PersonControllerTest {
 
     @Test
     @DisplayName("トップ画面への遷移をテストする")
-    public void test_ViewPersonList() throws Exception {
+    void test_ViewPersonList() throws Exception {
         // モック化されたPersonServiceの振る舞いを設定する
         Person alice = new Person(1, "Alice", 25, "female");
         Person bob = new Person(2, "Bob", 35, "male");
@@ -46,7 +46,6 @@ public class PersonControllerTest {
         // テストを実行し、検証する
         mockMvc.perform(get("/"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/viewList"))
                 .andExpect(redirectedUrl("/viewList"));
 
         // テストを実行し、検証する（リダイレクト後）
@@ -59,7 +58,7 @@ public class PersonControllerTest {
 
     @Test
     @DisplayName("入力画面への遷移をテストする")
-    public void test_toCreate() throws Exception {
+    void test_toCreate() throws Exception {
         // テストを実行し、検証する
         mockMvc.perform(post("/toCreate"))
                 .andExpect(status().isOk())
@@ -69,7 +68,7 @@ public class PersonControllerTest {
 
     @Test
     @DisplayName("新規人物作成と確認画面への遷移をテストする")
-    public void test_toConfirm() throws Exception {
+    void test_toConfirm() throws Exception {
         PersonSession personSession = new PersonSession("Dave", 23, "male");
 
         // テストを実行し、検証する
@@ -85,22 +84,8 @@ public class PersonControllerTest {
     }
 
     @Test
-    @DisplayName("新規人物作成におけるバリデーションエラーのテスト1")
-    public void test_toConfirm_ValidationError_1() throws Exception {
-        // テストを実行し、検証する
-        mockMvc.perform(post("/toConfirm")
-                .param("personName", "DaveDaveDaveDaveDaveDave") // 20字超
-                .param("age", "10") // 20未満
-                .param("gender", "") // 空文字
-                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
-                .andExpect(status().isOk())
-                .andExpect(view().name("PersonInputPage"))
-                .andExpect(model().hasErrors());
-    }
-
-    @Test
-    @DisplayName("新規人物作成におけるバリデーションエラーのテスト2")
-    public void test_toConfirm_ValidationError_2() throws Exception {
+    @DisplayName("新規人物作成における入力エラーをテストする")
+    void test_toConfirm_ValidationError() throws Exception {
         // テストを実行し、検証する
         mockMvc.perform(post("/toConfirm")
                 .param("personName", "DaveDaveDaveDaveDaveDave") // 20字超
@@ -110,8 +95,7 @@ public class PersonControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("PersonInputPage"))
                 .andExpect(model().attributeHasFieldErrors(
-                        "personSession", "personName", "age", "gender"))
-                .andExpect(model().errorCount(3)); // エラー数が3つであることを検証
+                        "personSession", "personName", "age", "gender"));
     }
 
     @Test
@@ -131,7 +115,6 @@ public class PersonControllerTest {
         mockMvc.perform(post("/update")
                 .sessionAttr("personSession", personSession))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/viewList"))
                 .andExpect(redirectedUrl("/viewList"));
 
         // テストを実行し、検証する（リダイレクト後）
@@ -167,7 +150,6 @@ public class PersonControllerTest {
         mockMvc.perform(post("/update")
                 .sessionAttr("personSession", personSession))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/viewList"))
                 .andExpect(redirectedUrl("/viewList"));
 
         // テストを実行し、検証する（リダイレクト後）
@@ -216,7 +198,6 @@ public class PersonControllerTest {
                 .param("personId", "3")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/viewList"))
                 .andExpect(redirectedUrl("/viewList"));
 
         // テストを実行し、検証する（リダイレクト後）

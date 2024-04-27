@@ -33,7 +33,7 @@ public class PersonControllerTest_1 {
      */
     @Test
     @DisplayName("トップ画面への遷移をテストする")
-    public void test_ViewPersonList() throws Exception {
+    void test_ViewPersonList() throws Exception {
         // 期待値を生成する
         Person alice = new Person(1, "Alice", 25, "female");
         Person bob = new Person(2, "Bob", 35, "male");
