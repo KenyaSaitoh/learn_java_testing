@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>spring_bookstore_rest</name>
+	<name>spring-rest-person</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -22,6 +22,11 @@
 		</buildCommand>
 		<buildCommand>
 			<name>org.eclipse.wst.validation.validationbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>javafx.eclipse.f3editor.builder.F3Builder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
