@@ -107,12 +107,6 @@ public class PersonDAO {
         // Carol
         Person person3 = new Person(3, "Carol", 30, "female");
         personMap.put(3, person3);
-        // Dave
-        Person person4 = new Person(4, "Dave", 23, "male");
-        personMap.put(4, person4);
-        // Ellen
-        Person person5 = new Person(5, "Ellen", 33, "male");
-        personMap.put(5, person5);
     }
 
     private static void dumpPersonMap() {

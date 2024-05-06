@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "JUnit Test",
+            "type": "java",
+            "request": "launch",
+            "mainClass": "",
+            "projectName": "21_junit",
+            "preLaunchTask": "compile",
+            "sourcePaths": [
+                "${workspaceFolder}/src/main",
+                "${workspaceFolder}/src/test"
+            ],
+            "classpath": [
+                "${workspaceFolder}/bin"
+            ],
+            "env": {},
+            "args": ""
+        }
+    ]
+}
