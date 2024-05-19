@@ -30,4 +30,5 @@ includeFlat \
 '61_restassured',
 '62_wiremock',
 '71_selenium',
-'81_gatling'
+'81_gatling',
+'a2_junit5_chatgpt'

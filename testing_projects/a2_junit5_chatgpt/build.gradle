@@ -1,0 +1,55 @@
+// 依存関係設定
+dependencies {
+    // Log4j
+    implementation "org.apache.logging.log4j:log4j-slf4j-impl:${log4jVer}"
+    implementation "org.apache.logging.log4j:log4j-core:${log4jVer}"
+    // JUnit5
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVer}"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:${junitVer}"
+    testImplementation "org.junit.platform:junit-platform-launcher:${junitPlatformVer}"
+    testImplementation "org.junit.platform:junit-platform-suite:${junitPlatformVer}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVer}"
+    // Mockito
+    testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVer}"
+    testImplementation "org.mockito:mockito-inline:${mockitoInlineVer}"
+}
+
+// ビルドテストの設定
+test {
+    // JUnit Platformの設定
+    useJUnitPlatform {
+        // 特定のタグが指定されたテストクラスを、ビルドテストの対象外とする
+        excludeTags "excludeFromBuild"
+    }
+
+    // ログ設定
+    testLogging {
+        // ビルドテスト時の標準出力と標準エラー出力を表示する
+        showStandardStreams true
+        // 指定されたイベントを表示する
+        events "passed", "failed", "skipped"
+        // 例外発生時はすべての情報を表示する
+        exceptionFormat "full"
+    }
+
+    // レポート設定
+    reports {
+        // HTML形式レポートの出力先
+        html.outputLocation.set(layout.buildDirectory.dir("reports/junit5/html"))
+        // XML形式レポートの出力先
+        junitXml.outputLocation.set(layout.buildDirectory.dir("reports/junit5/xml"))
+    }
+
+    // ビルドテスト後に、Jacocoテストレポートを生成する
+    finalizedBy jacocoTestReport
+}
+
+// Jacocoテストレポートの設定
+jacocoTestReport {
+    reports {
+        // HTML形式レポートの出力先
+        html.destination file("${buildDir}/reports/jacoco/html")
+        // XML形式レポートの出力先
+        xml.destination file("${buildDir}/reports/jacoco/xml")
+    }
+}
