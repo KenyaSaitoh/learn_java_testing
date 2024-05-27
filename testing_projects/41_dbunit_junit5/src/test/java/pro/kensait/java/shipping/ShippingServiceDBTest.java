@@ -49,7 +49,7 @@ public class ShippingServiceDBTest {
     @Mock
     Baggage baggage;
 
-    // DBユニットのためのフィクスチャ
+    // DBUnitのためのフィクスチャ
     IDatabaseTester databaseTester;
     IDatabaseConnection databaseConnection;
 
