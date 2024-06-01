@@ -1,0 +1,20 @@
+[
+    {
+        "personId": 1,
+        "personName": "Alice",
+        "age": 25,
+        "gender": "female"
+    },
+    {
+        "personId": 2,
+        "personName": "Bob",
+        "age": 35,
+        "gender": "male"
+    },
+    {
+        "personId": 3,
+        "personName": "Carol",
+        "age": 30,
+        "gender": "female"
+    }
+]

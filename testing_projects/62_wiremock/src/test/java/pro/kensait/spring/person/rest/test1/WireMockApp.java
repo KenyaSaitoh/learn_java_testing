@@ -1,4 +1,4 @@
-package pro.kensait.spring.person.rest.test;
+package pro.kensait.spring.person.rest.test1;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 
@@ -22,13 +22,6 @@ public class WireMockApp {
                     .withStatus(200) // HTTPステータス200
                     .withHeader("Content-Type", "application/json")
                     .withJsonBody(mapper.valueToTree(alice))));
-
-        // GET /personsのURLに対する疑似的な振る舞いを設定
-        stubFor(get(urlPathEqualTo("/persons"))
-                .willReturn(aResponse()
-                    .withStatus(200)
-                    .withHeader("Content-Type", "application/json")
-                    .withBody(jsonPersonList)));
 
         // GET /persons/query_by_ageのURLに対する疑似的な振る舞いを設定
         stubFor(get(urlPathEqualTo("/persons/query_by_age"))
@@ -64,30 +57,6 @@ public class WireMockApp {
                     .withStatus(200)
                     .withHeader("Content-Type", "application/json")));
     }
-
-    // 静的なJSONレスポンスのデータ
-    static final String jsonPersonList = """
-            [
-                {
-                    "personId": 1,
-                    "personName": "Alice",
-                    "age": 25,
-                    "gender": "female"
-                },
-                {
-                    "personId": 2,
-                    "personName": "Bob",
-                    "age": 35,
-                    "gender": "male"
-                },
-                {
-                    "personId": 3,
-                    "personName": "Carol",
-                    "age": 30,
-                    "gender": "female"
-                }
-            ]
-            """;
 
     static Person alice = new Person(1, "Alice", 25, "female");
     static Person frank = new Person(6, "Frank", 36, "male");

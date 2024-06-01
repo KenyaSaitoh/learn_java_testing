@@ -39,6 +39,9 @@ test {
 
     // ビルドテスト後に、Jacocoテストレポートを生成する
     finalizedBy jacocoTestReport
+
+    // "IT"で始まるテストクラスを除外する
+    exclude '**/IT*.class'
 }
 
 // Jacocoテストレポートの設定
@@ -51,9 +54,9 @@ jacocoTestReport {
     }
 }
 
-task testCalcTestSuite(type: Test) {
+task integrationTest(type: Test) {
+    group = 'verification'
     useJUnitPlatform()
-    filter {
-        includeTestsMatching "pro.kensait.junit5.calc.suite.CalcTestSuite"
-    }
+    // "IT"で始まるテストクラスのみを対象にする
+    include '**/IT*.class'
 }

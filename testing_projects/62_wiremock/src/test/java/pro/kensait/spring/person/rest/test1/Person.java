@@ -1,4 +1,4 @@
-package pro.kensait.spring.person.rest.test;
+package pro.kensait.spring.person.rest.test1;
 
 public class Person {
     private Integer personId;
