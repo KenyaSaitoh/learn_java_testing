@@ -59,7 +59,7 @@ public class BookStoreTest {
         screenshot("7-BookSelectPage");
 
         // 8. テーブルの1行目の1列目の検証
-        //SelenideElement elem = $$("#book-table tbody tr").first().$$("td").first();
+        // SelenideElement elem = $$("#book-table tbody tr").first().$$("td").first();
         $$("#book-table tbody tr").first().$$("td").first().shouldHave(text("Java SEディープダイブ"));
 
         // 9. テーブルの行数検証

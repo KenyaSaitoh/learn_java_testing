@@ -34,7 +34,7 @@ public class BookStoreSimulation extends Simulation {
             .forever().on(
                     pace(30)
                     .feed(feeder)
-                    // Step1：Open
+                    // Action 1：Open
                     .exec(
                             http("Open")
                             .get("/")
@@ -45,7 +45,7 @@ public class BookStoreSimulation extends Simulation {
                                     )
                             )
                     .pause(2)
-                    // Step2：Login
+                    // Action 2：Login
                     .exec(
                             http("Login")
                             .post("/processLogin")
@@ -68,7 +68,7 @@ public class BookStoreSimulation extends Simulation {
                     })
 
                     .pause(2)
-                    // Step3：Add Book
+                    // Action 3：Add Book
                     .exec(
                             http("Add Book")
                             .post("/addBook")
@@ -81,7 +81,7 @@ public class BookStoreSimulation extends Simulation {
                                     )
                             )
                     .pause(2)
-                    // Step4：To Select
+                    // Action 4：To Select
                     .exec(
                             http("To Select")
                             .get("/toSelect")
@@ -92,7 +92,7 @@ public class BookStoreSimulation extends Simulation {
                                     )
                             )
                     .pause(2)
-                    // Step5：Add Book
+                    // Action 5：Add Book
                     .exec(http("Add Book")
                             .post("/addBook")
                             .formParam("bookId", "5")
@@ -104,7 +104,7 @@ public class BookStoreSimulation extends Simulation {
                                     )
                             )
                     .pause(2)
-                    // Step6：To Select
+                    // Action 6：To Select
                     .exec(http("To Select")
                             .get("/toSelect")
                             .check(
@@ -113,7 +113,7 @@ public class BookStoreSimulation extends Simulation {
                                     )
                             )
                     .pause(2)
-                    // Step7：To Search
+                    // Action 7：To Search
                     .exec(http("To Search")
                             .get("/toSearch")
                             .check(
@@ -122,7 +122,7 @@ public class BookStoreSimulation extends Simulation {
                                     )
                             )
                     .pause(2)
-                    // Step8：Search
+                    // Action 8：Search
                     .exec(http("Search")
                             .get("/search")
                             .queryParam("categoryId", "2")
@@ -134,7 +134,7 @@ public class BookStoreSimulation extends Simulation {
                                     )
                             )
                     .pause(2)
-                    // Step9：Add Book
+                    // Action 9：Add Book
                     .exec(http("Add Book")
                             .post("/addBook")
                             .formParam("bookId", "11")
@@ -146,7 +146,7 @@ public class BookStoreSimulation extends Simulation {
                                     )
                             )
                     .pause(2)
-                    // Step10：Remove Book
+                    // Action 10：Remove Book
                     .exec(http("Remove Book")
                             .post("/removeBook")
                             .formParam("removeBookIdList", "3")
@@ -158,7 +158,7 @@ public class BookStoreSimulation extends Simulation {
                                     )
                             )
                     .pause(2)
-                    // Step11：Fix
+                    // Action 11：Fix
                     .exec(http("Fix")
                             .post("/fix")
                             .formParam("_csrf", "#{sessionCsrfToken}")
@@ -169,7 +169,7 @@ public class BookStoreSimulation extends Simulation {
                                     )
                             )
                     .pause(2)
-                    // Step12：Order
+                    // Action 12：Order
                     .exec(http("Order")
                             .post("/order1")
                             .formParam("settlementType", "1")
@@ -181,7 +181,7 @@ public class BookStoreSimulation extends Simulation {
                                     )
                             )
                     .pause(2)
-                    // Step13：Logout
+                    // Action 13：Logout
                     .exec(http("Logout")
                             .post("/processLogout")
                             .formParam("_csrf", "#{sessionCsrfToken}")

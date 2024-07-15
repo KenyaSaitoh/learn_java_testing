@@ -20,7 +20,7 @@ import pro.kensait.junit5.assertion.Person2;
 public class InstanceTest {
 
     // 実測値と期待値を比較し、同じ値であること（等価性）を検証する
-    // 比較対象であるPerson2クラスの等価性判定（equals()）には、最終更新時間は含まれない
+    // 比較対象であるPersonクラスの等価性判定（equals()）には、最終更新時間は含まれない
     @Test
     void test_Equals_ConsideringLastUpdateTime() throws Exception {
         Person expected = new Person("Alice", 25, LocalDateTime.now());
@@ -80,7 +80,7 @@ public class InstanceTest {
         Collections.sort(actual.getHobbies());
         assertIterableEquals(expected.getHobbies(), actual.getHobbies());
 
-        // リストをソート後、Person3同士を検証する
+        // リストをソート後、Person2同士を検証する
         assertEquals(expected, actual);
     }
 
