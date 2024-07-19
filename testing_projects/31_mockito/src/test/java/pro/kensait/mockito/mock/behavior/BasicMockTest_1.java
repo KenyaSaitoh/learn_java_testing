@@ -19,13 +19,6 @@ import pro.kensait.mockito.util.MapUtil;
 public class BasicMockTest_1 {
 
     @Test
-    void test_Case_0() {
-        Map<Integer, String> mock = mock(HashMap.class);
-        mock.put(0, "foo");
-        System.out.println(mock.get(0));
-    }
-
-    @Test
     @DisplayName("when-then方式：モックの基本的な挙動を確認する（インタフェース）")
     void test_Case_1() {
         // Mapインタフェースをモック化する

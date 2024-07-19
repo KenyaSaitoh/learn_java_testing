@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
  */
 public class ExceptionTest {
 
+    private static final String ERROR_MESSAGE = "ERROR!";
+
     // RuntimeExceptionの送出を検証する
     @Test
     void test_Throw_Exceptiopn() {
@@ -21,10 +23,10 @@ public class ExceptionTest {
     @Test
     void test_Throw_Exceptiopn_Message() {
         RuntimeException thrown = assertThrows(RuntimeException.class, () -> {
-            throw new RuntimeException("ERROR!");
+            throw new RuntimeException(ERROR_MESSAGE);
         });
         // 加えて、例外メッセージも検証する
-        assertEquals("ERROR!", thrown.getMessage());
+        assertEquals(ERROR_MESSAGE, thrown.getMessage());
     }
 
     // RuntimeExceptionが送出されないことを検証する
