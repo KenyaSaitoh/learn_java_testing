@@ -29,6 +29,6 @@ includeFlat \
 '51_springboot_test',
 '61_restassured',
 '62_wiremock',
-'71_selenium',
+'71_selenide',
 '81_gatling',
 'a2_junit5_chatgpt'
