@@ -25,6 +25,8 @@ public class CalcApi {
         // ここではサービスに処理を委譲せず、直接実装
         double result = param1 + param2;
 
+        System.out.println("[ CalcApi#add1 ] result => " + result);
+        
         // ステータスが200でボディに計算結果を保持するResponseEntityを生成し、返す
         return ResponseEntity.ok().body(result);
 
