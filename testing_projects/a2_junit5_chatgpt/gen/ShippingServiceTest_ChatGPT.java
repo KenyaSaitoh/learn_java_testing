@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-public class ShippingServiceTest2 {
+public class ShippingServiceTest_ChatGPT {
     private ShippingService shippingService;
 
     @Mock
@@ -161,7 +161,7 @@ public class ShippingServiceTest2 {
         when(baggage2.baggageType()).thenReturn(BaggageType.MIDDLE);
         when(costCalculator.calcShippingCost(BaggageType.SMALL, RegionType.HONSHU)).thenReturn(3000);
         when(costCalculator.calcShippingCost(BaggageType.MIDDLE, RegionType.HONSHU)).thenReturn(1000);
-        
+
         List<Baggage> baggageList = Arrays.asList(baggage1, baggage2);
 
         // テスト実行
