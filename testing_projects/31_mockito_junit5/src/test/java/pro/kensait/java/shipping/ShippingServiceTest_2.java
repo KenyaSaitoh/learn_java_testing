@@ -19,7 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 /*
  * ShippingServiceを対象にしたテストクラス
- * ShippingServiceTest3との相違点
+ * ShippingServiceMockingTestとの相違点
  * openMocks()の代わりに、@ExtendWith(MockitoExtension.class)を指定する点
  */
 @ExtendWith(MockitoExtension.class)

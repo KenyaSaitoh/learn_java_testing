@@ -18,7 +18,7 @@ import org.mockito.MockitoAnnotations;
 
 /*
  * ShippingServiceを対象にしたテストクラス
- * ShippingServiceTestとの相違点
+ * ShippingServiceMockingTestとの相違点
  * 引数であるBaggage、Clientはモック化しない
  */
 public class ShippingServiceTest_1 {
